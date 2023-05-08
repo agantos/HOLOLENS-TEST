@@ -1,0 +1,52 @@
+{
+  "baseCharacterPreset": {
+    "name": "Human",
+    "statistics": [
+      {
+        "name": "strength",
+        "staticValue": 10,
+        "statRelations": []
+      },
+      {
+        "name": "dexterity",
+        "staticValue": 12,
+        "statRelations": []
+      },
+      {
+        "name": "constitution",
+        "staticValue": 14,
+        "statRelations": []
+      },
+      {
+        "name": "intelligence",
+        "staticValue": 8,
+        "statRelations": []
+      },
+      {
+        "name": "wisdom",
+        "staticValue": 16,
+        "statRelations": []
+      },
+      {
+        "name": "charisma",
+        "staticValue": 18,
+        "statRelations": []
+      },
+      {
+        "name": "ProficiencyBonus",
+        "staticValue": 3,
+        "statRelations": []
+      },
+      {
+        "name": "Attack Bonus",
+        "staticValue": 0,
+        "statRelations": ["strength", "ProficiencyBonus"]
+      },
+      {
+        "name": "Attack Damage",
+        "staticValue": 0,
+        "statRelations": ["strength"]
+      }
+    ]
+  }
+}
