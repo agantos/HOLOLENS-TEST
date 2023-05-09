@@ -40,12 +40,12 @@
       {
         "name": "Attack Bonus",
         "staticValue": 0,
-        "statRelations": ["strength", "ProficiencyBonus"]
+        "statRelations": ["+ | 0,2 | dexterity", "+ | 1 | ProficiencyBonus"]
       },
       {
         "name": "Attack Damage",
         "staticValue": 0,
-        "statRelations": ["strength"]
+        "statRelations": ["+ | 1,5 | strength"]
       }
     ]
   }

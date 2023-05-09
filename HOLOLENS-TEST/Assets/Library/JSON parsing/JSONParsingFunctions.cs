@@ -64,7 +64,6 @@ public class JSONParser
         JSONBaseCharacterPresetWrapper wrapper;
         TextAsset jsonFile = Resources.Load<TextAsset>(jsonPath);
         wrapper = JsonUtility.FromJson<JSONBaseCharacterPresetWrapper>(jsonFile.text);
-        Debug.Log(wrapper.baseCharacterPreset.statistics.Length);
         return wrapper;
     }
 }
@@ -81,6 +80,27 @@ public class FromJSONtoEngine
             instance = new FromJSONtoEngine();
         }
         return instance;
+    }
+
+    public static void CreateStatRelation(string input, out string statName, out StatFunctor fun)
+    {
+        float value;
+        string op;
+        // Split the input string by the separator "|"
+        string[] parts = input.Split('|');
+
+        // Get the operator part
+        op = parts[0].Trim();
+
+        // Get the value part and parse it to a float
+        if (!float.TryParse(parts[1].Trim(), out value))
+        {
+            Debug.LogError("Parsing Relation Stat Error: This does not contain a float");
+        }
+
+        // Get the whatever part
+        statName = parts[2].Trim();
+        fun = new StatFunctor(op, value);
     }
 
     //Creation of CharacterStat from JSONstat is done in 2 steps    
@@ -100,7 +120,10 @@ public class FromJSONtoEngine
             {
                 foreach (string statRelation in stat.statRelations)
                 {
-                    stats.AddStatRelation(stat.name, statRelation);
+                    string affectorStatName;
+                    StatFunctor fun;
+                    CreateStatRelation(statRelation, out affectorStatName, out fun);
+                    stats.AddStatRelation(stat.name, affectorStatName, fun);
                 }
             }
         }

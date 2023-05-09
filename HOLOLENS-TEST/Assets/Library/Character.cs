@@ -14,12 +14,63 @@ class StatEffects
         effects.Add(effectName, (statName, value));
     }
 }
+
+public class StatFunctor{
+    public string op;
+    public float value;
+
+    public StatFunctor(string type, float operand)
+    {
+        this.op = type;
+        this.value = operand;
+    }
+}
+
+public class CharacterStatRelation
+{
+    public CharacterStat stat;
+    public StatFunctor fun;
+
+    public CharacterStatRelation(CharacterStat stat, StatFunctor fun)
+    {
+        this.stat = stat;
+        this.fun = fun;
+    }
+
+    public int CalculateRelation()
+    {
+        float relationAdd = 0;      
+        switch (fun.op)
+        {
+            case "+":
+                relationAdd += fun.value * stat.GetCurrentValue();
+                break;
+            case "-":
+                relationAdd -= fun.value * stat.GetCurrentValue();    
+                break;
+            default:
+                Assert.IsTrue(false, "Invalid Operand");
+                break;
+
+        }
+        return (int)relationAdd;
+    }
+
+    public override string ToString()
+    {
+        string s = "";
+        s += fun.op + " | ";
+        s += fun.value.ToString()+" | ";
+        return s;
+    }
+}
+
 public class CharacterStat {
     string name;
     //A stat is given by the formula:
     //currentValue = staticValue + statRelations + permanentEffects + currentEffect 
     int staticValue = 0;
-    Dictionary<string, CharacterStat> statRelations;
+    Dictionary<string, CharacterStatRelation> statRelations;
     Dictionary<string, int> permanentEffects;
     Dictionary<string, int> temporalEffects;
 
@@ -30,16 +81,16 @@ public class CharacterStat {
         this.name = name;
         this.staticValue = staticValue;
 
-        statRelations = new Dictionary<string, CharacterStat>();
+        statRelations = new Dictionary<string, CharacterStatRelation>();
         permanentEffects = new Dictionary<string, int>();
         temporalEffects = new Dictionary<string, int>();
     }
 
     //Stat Relations:
     //  -a stat can be affected by the value of another stat
-    public void AddStatRelation(CharacterStat stat)
+    public void AddStatRelation(CharacterStat stat, StatFunctor fun)
     {
-        statRelations.Add(stat.GetName(), stat);
+        statRelations.Add(stat.name, new CharacterStatRelation(stat, fun));
     }
 
     int CalculateStatRelations()
@@ -47,9 +98,9 @@ public class CharacterStat {
         int sum = 0;
         if (statRelations != null && statRelations.Count > 0 )
         {
-            foreach (string statName in statRelations.Keys)
+            foreach (CharacterStatRelation relation in statRelations.Values)
             {
-                sum += statRelations[statName].GetCurrentValue();
+                sum += relation.CalculateRelation();
             }
         }
         return sum;
@@ -167,14 +218,14 @@ public class CharacterStat {
         s += tab + "statRelations: [ ";
         if (statRelations.Count != 0)
         {
-
             foreach(string name in statRelations.Keys)
             {
-                s += name + ", ";
-            }
-            
+                s += "  '";
+                s += statRelations[name].ToString() + name ;
+                s += "'";
+            }            
         }
-        s += outerTab + "]\n";
+        s += " ]\n";
 
         //Current Value
         s += tab + "currentValue: " + currentValue + "\n";
@@ -251,10 +302,10 @@ public class CharacterStatistics
         statistics.Add(name, new CharacterStat(name, staticValue));
     }
 
-    public void AddStatRelation(string statName, string relationName)
+    public void AddStatRelation(string affectedStatName, string affectorStatName, StatFunctor fun)
     {
-        if (GetStat(relationName) != null)
-            statistics[statName].AddStatRelation(GetStat(relationName));
+        if (GetStat(affectorStatName) != null)
+            statistics[affectedStatName].AddStatRelation(GetStat(affectorStatName), fun);
         else
             Assert.IsTrue(false, "The stat you are trying to relate to does not exist.");
     }
