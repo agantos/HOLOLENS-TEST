@@ -1,52 +1,104 @@
 {
-  "baseCharacterPreset": {
-    "name": "Human",
-    "statistics": [
+  "baseCharacterPresets": [
       {
-        "name": "strength",
-        "staticValue": 10,
-        "statRelations": []
-      },
-      {
-        "name": "dexterity",
-        "staticValue": 12,
-        "statRelations": []
-      },
-      {
-        "name": "constitution",
-        "staticValue": 14,
-        "statRelations": []
-      },
-      {
-        "name": "intelligence",
-        "staticValue": 8,
-        "statRelations": []
-      },
-      {
-        "name": "wisdom",
-        "staticValue": 16,
-        "statRelations": []
-      },
-      {
-        "name": "charisma",
-        "staticValue": 18,
-        "statRelations": []
-      },
-      {
-        "name": "ProficiencyBonus",
-        "staticValue": 3,
-        "statRelations": []
-      },
-      {
-        "name": "Attack Bonus",
-        "staticValue": 0,
-        "statRelations": ["+ | 0,2 | dexterity", "+ | 1 | ProficiencyBonus"]
-      },
-      {
-        "name": "Attack Damage",
-        "staticValue": 0,
-        "statRelations": ["+ | 1,5 | strength"]
-      }
-    ]
-  }
+      "name": "Dwarf",
+      "statistics": [
+        {
+          "name": "strength",
+          "staticValue": 10,
+          "statRelations": []
+        },
+        {
+          "name": "dexterity",
+          "staticValue": 12,
+          "statRelations": []
+        },
+        {
+          "name": "constitution",
+          "staticValue": 14,
+          "statRelations": []
+        },
+        {
+          "name": "intelligence",
+          "staticValue": 8,
+          "statRelations": []
+        },
+        {
+          "name": "wisdom",
+          "staticValue": 16,
+          "statRelations": []
+        },
+        {
+          "name": "charisma",
+          "staticValue": 18,
+          "statRelations": []
+        },
+        {
+          "name": "ProficiencyBonus",
+          "staticValue": 3,
+          "statRelations": []
+        },
+        {
+          "name": "Attack Bonus",
+          "staticValue": 0,
+          "statRelations": ["+ | 0,2 | dexterity", "+ | 1 | ProficiencyBonus"]
+        },
+        {
+          "name": "Attack Damage",
+          "staticValue": 0,
+          "statRelations": ["+ | 1,5 | strength"]
+        }
+      ]
+    },
+    {
+      "name": "Human",
+      "statistics": [
+        {
+          "name": "strength",
+          "staticValue": 8,
+          "statRelations": []
+        },
+        {
+          "name": "dexterity",
+          "staticValue": 10,
+          "statRelations": []
+        },
+        {
+          "name": "constitution",
+          "staticValue": 12,
+          "statRelations": []
+        },
+        {
+          "name": "intelligence",
+          "staticValue": 14,
+          "statRelations": []
+        },
+        {
+          "name": "wisdom",
+          "staticValue": 16,
+          "statRelations": []
+        },
+        {
+          "name": "charisma",
+          "staticValue": 18,
+          "statRelations": []
+        },
+        {
+          "name": "ProficiencyBonus",
+          "staticValue": 2,
+          "statRelations": []
+        },
+        {
+          "name": "Attack Bonus",
+          "staticValue": 0,
+          "statRelations": ["+ | 0,1 | dexterity", "+ | 1 | ProficiencyBonus"]
+        },
+        {
+          "name": "Attack Damage",
+          "staticValue": 0,
+          "statRelations": ["+ | 1 | strength"]
+        }
+      ]
+    }
+  ]
 }

@@ -17,7 +17,7 @@ public class JSONstats
 }
 
 [System.Serializable]
-public class JSONstatsEncapsulator
+public class JSONstatsWrapper
 {
     public JSONstats JSONstats;
     public void Parse(string jsonPath)
@@ -43,6 +43,13 @@ public class JSONBaseCharacterPresetWrapper
     public string GetName() { return baseCharacterPreset.name; }
 }
 
+[System.Serializable]
+public class JSONBaseCharacterPresetsWrapper
+{
+    public JSONBaseCharacterPreset[] baseCharacterPresets;
+
+}
+
 // A singleton class that takes json filepaths and
 //  1. parses the json files
 //  2. returns the JSONClasses filled with the parsed data
@@ -64,6 +71,13 @@ public class JSONParser
         JSONBaseCharacterPresetWrapper wrapper;
         TextAsset jsonFile = Resources.Load<TextAsset>(jsonPath);
         wrapper = JsonUtility.FromJson<JSONBaseCharacterPresetWrapper>(jsonFile.text);
+        return wrapper;
+    }
+
+    public static JSONBaseCharacterPresetsWrapper ParseBaseCharacterPresets(string jsonPath) {
+        JSONBaseCharacterPresetsWrapper wrapper;
+        TextAsset jsonFile = Resources.Load<TextAsset>(jsonPath);
+        wrapper = JsonUtility.FromJson<JSONBaseCharacterPresetsWrapper>(jsonFile.text);
         return wrapper;
     }
 }
@@ -136,5 +150,24 @@ public class FromJSONtoEngine
         preset.SetStats(CreateCharacterStats(JSONpreset.GetStatistics()));
         preset.SetName(JSONpreset.GetName());
         return preset;
+    }
+
+    public static BaseCharacterPreset CreateBaseCharacterPreset(JSONBaseCharacterPreset JSONpreset)
+    {
+        BaseCharacterPreset preset = new BaseCharacterPreset();
+        preset.SetStats(CreateCharacterStats(JSONpreset.statistics));
+        preset.SetName(JSONpreset.name);
+        return preset;
+    }
+
+    public static Dictionary<string, BaseCharacterPreset> BaseCharacterPresetsTranslation(JSONBaseCharacterPreset[] basePresets)
+    {
+        Dictionary<string, BaseCharacterPreset> list = new Dictionary<string, BaseCharacterPreset>();
+        foreach (JSONBaseCharacterPreset preset in basePresets)
+        {
+            list.Add(preset.name, CreateBaseCharacterPreset(preset));
+        }
+
+        return list;
     }
 }

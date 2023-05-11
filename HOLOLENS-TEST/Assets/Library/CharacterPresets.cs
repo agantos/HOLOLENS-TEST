@@ -36,6 +36,14 @@ public class BaseCharacterPreset : CharacterPreset
 
     public void SetStats(CharacterStatistics s){ stats = s; }
     public void SetName(string name) { this.name = name; }
+
+    public override string ToString()
+    {
+        string s = "Preset " + this.name + "\n";
+        s += stats.ToString();
+
+        return s;
+    }
 }
 
 //AdditionalCharacterPresets
