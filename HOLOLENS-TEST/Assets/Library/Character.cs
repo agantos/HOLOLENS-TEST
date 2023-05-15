@@ -64,12 +64,12 @@ public class CharacterStatRelation
         return s;
     }
 }
-
 public class CharacterStat {
     string name;
     //A stat is given by the formula:
-    //currentValue = staticValue + statRelations + permanentEffects + currentEffect 
+    //currentValue = staticValue + statRelations + permanentEffects + currentEffect - currentDamage 
     int staticValue = 0;
+    int damage = 0;
     Dictionary<string, CharacterStatRelation> statRelations;
     Dictionary<string, int> permanentEffects;
     Dictionary<string, int> temporalEffects;
@@ -84,6 +84,14 @@ public class CharacterStat {
         statRelations = new Dictionary<string, CharacterStatRelation>();
         permanentEffects = new Dictionary<string, int>();
         temporalEffects = new Dictionary<string, int>();
+    }
+
+    public void DealDamage(int damage) { this.damage += damage; }
+
+    public void HealDamage(int damage)
+    {
+        this.damage -= damage;
+        if (damage < 0) damage = 0;
     }
 
     //Stat Relations:
