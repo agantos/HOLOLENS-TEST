@@ -1,49 +1,35 @@
 {
   "range": 50,
   "targeting": {
-    "number":"any, 1, 2 etc",
-    "type":"all, enemies, allies"
+    "number": "any, 1, 2 etc",
+    "type": "all, enemies, allies"
   },
-  "AOE": {
-    "shape":"rect, sphere, cube, cone",
+  "areaOfEffect": {
+    "shape": "rect, sphere, cube, cone",
     "radius": "30, 10"
   },
   "succeedsOn": {
-    "type": "automatic success, saving throw, attack roll, comparison",
-    "stats": {
+    "type": "automatic_success, attack_static, defence_static, comparison",
+    "comparisonStats": {
       "defenderStat": {
         "name": "defense",
-        "multiplier": 0.5,
+        "multiplier": 1,
         "bonus": "12, 1d6"
       },
       "attackerStat": {
         "name": "attack",
-        "multiplier": 0.5,
+        "multiplier": 1,
         "bonus": "12, 1d6"
       }
     },
-    "numberToSave": 12
+    "againstStatic": "12, 1d6"
   },
   "damage": {
     "damagedStat": "dexterity, strength",
     "amount": {
-      "staticValue": "1, 4d6, 1d8 + 5",
-      "damageFromStat": "statName"
+      "base": "1, 4d6, 1d8 + 5",
+      "statsAffecting": ["name1", "name2"]
     },
-    "whenSaved": "0, 0.5, 1",
-    "damageFunctor": "fire resistance, cold vulnerability"
-  },
-  "complementaryEffects":[
-    {
-      "damage": {
-        "damagedStat": "dexterity, strength",
-        "amount": {
-          "staticValue": "1, 4d6, 1d8 + 5",
-          "damageFromStat": "statName"
-        },
-        "whenSaved": "0, 0.5, 1",
-        "damageFunctor": "fire resistance, cold vulnerability"
-      }
-    }
-  ]
+    "onSavedMultiplier": "0, 0.5, 1"
+  }
 }

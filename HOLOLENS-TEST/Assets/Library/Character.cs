@@ -337,7 +337,7 @@ public class CharacterStatistics
         return s;
     }
 }
-class Character
+public class Character
 {
     List<(string actionTypeName, int numPerTurn)> turnEconomy;
     Dictionary<string, Ability> abilities;
