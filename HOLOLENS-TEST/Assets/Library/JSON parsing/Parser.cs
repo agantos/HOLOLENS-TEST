@@ -2,61 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class JSONstat
-{
-    public string name;
-    public int staticValue;
-    public string[] statRelations;
-}
-
-[System.Serializable]
-public class JSONstats
-{
-    public JSONstat[] statistics;
-}
-
-[System.Serializable]
-public class JSONstatsWrapper
-{
-    public JSONstats JSONstats;
-    public void Parse(string jsonPath)
-    {
-        TextAsset jsonFile = Resources.Load<TextAsset>(jsonPath);
-        JSONstats = JsonUtility.FromJson<JSONstats>(jsonFile.text);
-    }
-}
-
-[System.Serializable]
-public class JSONBaseCharacterPreset
-{
-    public string name;
-    public JSONstat[] statistics;
-}
-
-[System.Serializable]
-public class JSONBaseCharacterPresetWrapper
-{
-    public JSONBaseCharacterPreset baseCharacterPreset;
-
-    public JSONstat[] GetStatistics() { return baseCharacterPreset.statistics; }
-    public string GetName() { return baseCharacterPreset.name; }
-}
-
-[System.Serializable]
-public class JSONBaseCharacterPresetsWrapper
-{
-    public JSONBaseCharacterPreset[] baseCharacterPresets;
-
-}
-
 // A singleton class that takes json filepaths and
 //  1. parses the json files
 //  2. returns the JSONClasses filled with the parsed data
 public class JSONParser
 {
-    private JSONParser() { }
+    private JSONParser() {}
     private static JSONParser instance = null;
+
+    public static JSONBaseCharacterPresetWrapper presetWrapper;
+    public static JSONBaseCharacterPresetsWrapper presetsWrapper;
+
     public static JSONParser GetInstance()
     {
         if (instance == null)
@@ -65,7 +21,6 @@ public class JSONParser
         }
         return instance;
     }
-
     public static JSONBaseCharacterPresetWrapper ParseBaseCharacterPreset(string jsonPath)
     {
         JSONBaseCharacterPresetWrapper wrapper;
@@ -73,13 +28,14 @@ public class JSONParser
         wrapper = JsonUtility.FromJson<JSONBaseCharacterPresetWrapper>(jsonFile.text);
         return wrapper;
     }
-
     public static JSONBaseCharacterPresetsWrapper ParseBaseCharacterPresets(string jsonPath) {
         JSONBaseCharacterPresetsWrapper wrapper;
         TextAsset jsonFile = Resources.Load<TextAsset>(jsonPath);
         wrapper = JsonUtility.FromJson<JSONBaseCharacterPresetsWrapper>(jsonFile.text);
         return wrapper;
     }
+
+
 }
 
 //A singleton class that takes JSONClasses and forms the engine classes

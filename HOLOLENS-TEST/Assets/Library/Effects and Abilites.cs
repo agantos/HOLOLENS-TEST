@@ -48,10 +48,11 @@ public class GameplayCalculatorFunctions
     }
 }
 
+enum EffectType { INDEPENDENT, DEPENDENT}
 enum TargetType { SELF, ALLY, ENEMY, CREATURE, CREATURE_NOT_SELF, AREA, TYPED}
 enum TargetNumber {NUMBERED, IN_RADIUS}
 enum AreaShape { CUBE, CONE, SPHERE, LINE, NONE}
-enum EffectSuccessCondition {AUTOMATIC, COMPARISON}
+public enum EffectSuccessCondition {AUTOMATIC, ATTACKER_ROLLS, DEFENDER_ROLLS, COMPARISON}
 
 public class TargettingStatistics
 {
@@ -69,9 +70,9 @@ public class AreaOfEffect
 
 public class ComparisonStat
 {
-    string statName;
-    float multiplier;
-    string bonus;
+    public string statName;
+    public float multiplier;
+    public string bonus;
 }
 
 public class EffectSucceeds
@@ -82,16 +83,65 @@ public class EffectSucceeds
     string staticNumberToPass;
     float onSavedMultiplier;
 
+    Dictionary<EffectSuccessCondition, Func<CharacterStatistics, CharacterStatistics, bool>> rollSuccess;
+
+    private void CreateSuccessConditions()
+    {
+        rollSuccess = new Dictionary<EffectSuccessCondition, Func<CharacterStatistics, CharacterStatistics, bool>>();
+        rollSuccess.Add(EffectSuccessCondition.AUTOMATIC, AutomaticSuccess);
+        rollSuccess.Add(EffectSuccessCondition.ATTACKER_ROLLS, AttackStatic);
+        rollSuccess.Add(EffectSuccessCondition.DEFENDER_ROLLS, DefenseStatic);
+        rollSuccess.Add(EffectSuccessCondition.COMPARISON, Comparison);
+    }
+
+    public EffectSucceeds() {
+        CreateSuccessConditions();
+    }
+
+    private bool AutomaticSuccess(CharacterStatistics defenderStats, CharacterStatistics attackerStats)
+    {
+        return true;
+    }
+
+    private bool AttackStatic(CharacterStatistics attackerStats, CharacterStatistics defenderStats)
+    {
+        int attackRoll = (int)((attackerStats.GetStat(attackerStat.statName).GetCurrentValue() + GameplayCalculatorFunctions.CalculateDiceRoll(attackerStat.statName)) * attackerStat.multiplier);
+        int passNumber = GameplayCalculatorFunctions.CalculateDiceRoll(staticNumberToPass);
+
+        return (attackRoll > passNumber); 
+        
+    }
+
+    private bool DefenseStatic(CharacterStatistics attackerStats, CharacterStatistics defenderStats)
+    {
+        int defenceRoll = (int)((defenderStats.GetStat(defenderStat.statName).GetCurrentValue() + GameplayCalculatorFunctions.CalculateDiceRoll(defenderStat.statName)) * defenderStat.multiplier);
+        int passNumber = GameplayCalculatorFunctions.CalculateDiceRoll(staticNumberToPass);
+
+        return (passNumber > defenceRoll);
+    }
+
+    private bool Comparison(CharacterStatistics attackerStats, CharacterStatistics defenderStats)
+    {
+        int attackRoll = (int)((attackerStats.GetStat(attackerStat.statName).GetCurrentValue() + GameplayCalculatorFunctions.CalculateDiceRoll(attackerStat.statName)) * attackerStat.multiplier);
+        int defenceRoll = (int)((defenderStats.GetStat(defenderStat.statName).GetCurrentValue() + GameplayCalculatorFunctions.CalculateDiceRoll(defenderStat.statName)) * defenderStat.multiplier);
+
+        return (attackRoll > defenceRoll);
+    }
+
+    public bool GetSuccess(CharacterStatistics defenderStats = null, CharacterStatistics attackerStats = null)
+    {
+        return rollSuccess[onCondition](defenderStats, attackerStats);
+    }
 
 }
 
 public class EffectDamage
 {
-    string damagedStatName;
+    public string damagedStatName;
     string baseValue;
     List<string> statsAffecting;
 
-    int CalculateDamage(List<int> statBonuses)
+    public int RollDamage(List<int> statBonuses)
     {
         int sum = 0;
         sum += GameplayCalculatorFunctions.CalculateDiceRoll(baseValue);
@@ -119,22 +169,41 @@ public class EffectDamage
         return statBonuses;
     }
 
-
-    //Transport to Effect class
-    public void DealDamage(CharacterStatistics targetStats, CharacterStatistics attackerStats)
+    public int GetDamage(CharacterStatistics attackerStats)
     {
-        targetStats.GetStat(damagedStatName).DealDamage(CalculateDamage(GetStatBonuses(attackerStats)));
+        return RollDamage(GetStatBonuses(attackerStats));
     }
 }
 
-class Effect
+
+public class Effect
 {
-    int range;
-    TargettingStatistics targetting;
-    AreaOfEffect areaOfEffect;
     EffectSucceeds effectSucceeds;
     EffectDamage damage;
+    public bool EffectSucceeds(CharacterStatistics defenderStats = null, CharacterStatistics attackerStats = null)
+    {
+        return effectSucceeds.GetSuccess(defenderStats, attackerStats);
+    }
+
+    public void DealDamage(CharacterStatistics defenderStats, CharacterStatistics attackerStats)
+    {
+        CharacterStat damagedStat = defenderStats.GetStat(damage.damagedStatName);
+        damagedStat.DealDamage(damage.GetDamage(attackerStats));
+    }
+}
+public class PrimaryEffect : Effect
+{
+    TargettingStatistics targetting;
+    AreaOfEffect areaOfEffect;
+    FollowUpEffect[] followUpEffects;
+}
+public class FollowUpEffect : Effect
+{
 
 }
-
-public class Ability { }
+public class Ability 
+{
+    public string name;
+    public string description;
+    public Effect[] effects;
+}

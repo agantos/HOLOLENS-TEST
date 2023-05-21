@@ -628,7 +628,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectToken: {fileID: 4701887471863925201, guid: a5064ba5d7220a248907e3406fe50bcd, type: 3}
   radius: 30
-  baseRadius: 0.05
+  baseRadiusX: 0.05
+  baseRadiusY: 0.0003
+  baseRadiusZ: 0.05
 --- !u!54 &924168513
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -1,10 +1,10 @@
 {
-  "range": 50,
-  "targeting": {
+  "targetting": {
     "number": "any, 1, 2 etc",
     "type": "all, enemies, allies"
   },
   "areaOfEffect": {
+    "range": 50,
     "shape": "rect, sphere, cube, cone",
     "radius": "30, 10"
   },
@@ -27,7 +27,7 @@
   "damage": {
     "damagedStat": "dexterity, strength",
     "amount": {
-      "base": "1, 4d6, 1d8 + 5",
+      "baseAmount": "1, 4d6, 1d8 + 5",
       "statsAffecting": ["name1", "name2"]
     },
     "onSavedMultiplier": "0, 0.5, 1"

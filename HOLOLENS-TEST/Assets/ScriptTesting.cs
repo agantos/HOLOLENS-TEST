@@ -12,15 +12,15 @@ public class ScriptTesting : MonoBehaviour
 
     //Variables
     Dictionary<string, BaseCharacterPreset> basePresets;
-    public JSONBaseCharacterPresetsWrapper basePresetsWrapper;
+    public JSONBaseCharacterPresetsWrapper parsedBasePresets;
 
   
     void Start()
-    {        
-        basePresetsWrapper = JSONParser.ParseBaseCharacterPresets("JSONs/StatisticsExample");
+    {
+        parsedBasePresets = JSONParser.ParseBaseCharacterPresets("JSONs/StatisticsExample");
+        basePresets = FromJSONtoEngine.BaseCharacterPresetsTranslation(parsedBasePresets.baseCharacterPresets);
 
-        basePresets = FromJSONtoEngine.BaseCharacterPresetsTranslation(basePresetsWrapper.baseCharacterPresets);
-        foreach(BaseCharacterPreset preset in basePresets.Values)
+        foreach (BaseCharacterPreset preset in basePresets.Values)
         {
             Debug.Log(preset.ToString());
         }
