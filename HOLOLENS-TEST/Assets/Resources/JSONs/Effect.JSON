@@ -1,35 +1,36 @@
 {
+  "isPrimary": true,
   "targetting": {
-    "number": "any, 1, 2 etc",
-    "type": "all, enemies, allies"
+    "number": 1,
+    "type": "all"
   },
   "areaOfEffect": {
     "range": 50,
-    "shape": "rect, sphere, cube, cone",
-    "radius": "30, 10"
+    "shape": "cube",
+    "radius": 30
   },
   "succeedsOn": {
-    "type": "automatic_success, attack_static, defence_static, comparison",
+    "type": "comparison",
+    "againstStatic": "",
     "comparisonStats": {
       "defenderStat": {
         "name": "defense",
         "multiplier": 1,
-        "bonus": "12, 1d6"
+        "bonus": "0"
       },
       "attackerStat": {
-        "name": "attack",
+        "name": "attack_roll_charisma",
         "multiplier": 1,
-        "bonus": "12, 1d6"
+        "bonus": "1d20"
       }
-    },
-    "againstStatic": "12, 1d6"
+    }
   },
   "damage": {
-    "damagedStat": "dexterity, strength",
+    "damagedStat": "HP",
     "amount": {
-      "baseAmount": "1, 4d6, 1d8 + 5",
-      "statsAffecting": ["name1", "name2"]
+      "baseAmount": "1d8",
+      "statsAffecting": ["damage_roll_charisma"]
     },
-    "onSavedMultiplier": "0, 0.5, 1"
+    "onSavedMultiplier": 0.5
   }
 }

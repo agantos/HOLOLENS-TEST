@@ -12,6 +12,7 @@ public class RadiusSelectScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         SetScale();
     }
 
@@ -30,8 +31,10 @@ public class RadiusSelectScript : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            GameObject token = Object.Instantiate(selectToken);
-            token.transform.SetParent(other.transform, false);
+            GameObject token = Object.Instantiate(selectToken);            
+            token.transform.SetParent(other.transform.parent.transform, false);
+            float playerHeight = other.transform.localPosition.y + other.transform.localScale.y / 2;
+            token.transform.localPosition += new Vector3(0, playerHeight + 0.1f, 0);
         }
 
     }
@@ -40,7 +43,7 @@ public class RadiusSelectScript : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            Destroy(other.gameObject.transform.Find("IsSelected(Clone)").gameObject);
+            Destroy(other.gameObject.transform.parent.transform.Find("IsSelected(Clone)").gameObject);
         }
         
     }
