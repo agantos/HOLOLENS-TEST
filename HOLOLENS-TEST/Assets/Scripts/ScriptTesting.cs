@@ -41,6 +41,7 @@ public class ScriptTesting : MonoBehaviour
     void Start()
     {
         LoadFromJsons();
+
         basePresets["Human"].AddAbility(charismaAttackAbility);
         basePresets["Dwarf"].AddAbility(charismaAttackAbility);
 
