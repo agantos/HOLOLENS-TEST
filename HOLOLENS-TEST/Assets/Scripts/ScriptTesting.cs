@@ -14,32 +14,48 @@ public class ScriptTesting : MonoBehaviour
     //Variables
     Dictionary<string, BaseCharacterPreset> basePresets;
     public JSONBaseCharacterPresetsWrapper parsedBasePresets;
-    public JSONEffect parsedEffect;
-    public PrimaryEffectStats charismaAttack;
 
     public JSONAbility parsedAbility;
     public Ability charismaAttackAbility;
 
-    void Start()
+    public Character human, dwarf;
+
+    void LoadFromJsons()
     {
         parsedBasePresets = JSONParser.ParseBaseCharacterPresets("JSONs/StatisticsExample");
         basePresets = FromJSONtoEngine.BaseCharacterPresetsTranslation(parsedBasePresets.baseCharacterPresets);
 
-        parsedEffect = JSONParser.ParseEffect("JSONs/Effect");
-        charismaAttack = FromJSONtoEngine.CreatePrimaryEffectSkeleton(parsedEffect);
-
         parsedAbility = JSONParser.ParseAbility("JSONs/Ability");
         charismaAttackAbility = FromJSONtoEngine.CreateAbility(parsedAbility);
 
-        foreach(PrimaryEffectStats stat in charismaAttackAbility.effects)
-        {
-            Debug.Log(stat.ToString(""));
-        }
+        //foreach (PrimaryEffectStats stat in charismaAttackAbility.effects)
+        //{
+        //    Debug.Log(stat.ToString(""));
+        //}
 
-        foreach (BaseCharacterPreset preset in basePresets.Values)
-        {
-            Debug.Log(preset.ToString());
-        }
+        //foreach (BaseCharacterPreset preset in basePresets.Values)
+        //{
+        //    Debug.Log(preset.ToString());
+        //}
+    }
+    void Start()
+    {
+        LoadFromJsons();
+        basePresets["Human"].AddAbility(charismaAttackAbility);
+        basePresets["Dwarf"].AddAbility(charismaAttackAbility);
+
+        human = new Character();
+        dwarf = new Character();        
+
+        basePresets["Human"].AddPresetToCharacter(human);
+        basePresets["Dwarf"].AddPresetToCharacter(dwarf);
+
+        human.GetStats().CalculateAllStats();
+        dwarf.GetStats().CalculateAllStats();
+
+        Debug.Log(human.GetStats().ToString());
+
+        EffectSucceedsChecker.GetSuccess(charismaAttackAbility.effects[0], human, dwarf);
     }
 
 }

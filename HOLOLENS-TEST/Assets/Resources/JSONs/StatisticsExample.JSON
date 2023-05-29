@@ -1,31 +1,16 @@
 {
   "baseCharacterPresets": [
-      {
+    {
       "name": "Dwarf",
       "statistics": [
         {
-          "name": "strength",
-          "staticValue": 10,
+          "name": "HP",
+          "staticValue": 50,
           "statRelations": []
         },
         {
-          "name": "dexterity",
-          "staticValue": 12,
-          "statRelations": []
-        },
-        {
-          "name": "constitution",
-          "staticValue": 14,
-          "statRelations": []
-        },
-        {
-          "name": "intelligence",
-          "staticValue": 8,
-          "statRelations": []
-        },
-        {
-          "name": "wisdom",
-          "staticValue": 16,
+          "name": "defense",
+          "staticValue": 20,
           "statRelations": []
         },
         {
@@ -34,19 +19,29 @@
           "statRelations": []
         },
         {
-          "name": "ProficiencyBonus",
+          "name": "charisma_modifier",
+          "staticValue": 0,
+          "statRelations": ["+ | 0,2 | charisma"]
+        },
+        {
+          "name": "attack_bonus",
           "staticValue": 3,
           "statRelations": []
         },
         {
-          "name": "Attack Bonus",
+          "name": "attack_roll_charisma",
           "staticValue": 0,
-          "statRelations": ["+ | 0,2 | dexterity", "+ | 1 | ProficiencyBonus"]
+          "statRelations": ["+ | 1 | charisma_modifier", "+ | 1 | attack_bonus"]
         },
         {
-          "name": "Attack Damage",
+          "name": "damage_roll_charisma",
           "staticValue": 0,
-          "statRelations": ["+ | 1,5 | strength"]
+          "statRelations": ["+ | 1 | charisma_modifier"]
+        },
+        {
+          "name": "dexterity_saving_throw",
+          "staticValue": 5,
+          "statRelations": []
         }
       ]
     },
@@ -54,49 +49,44 @@
       "name": "Human",
       "statistics": [
         {
-          "name": "strength",
-          "staticValue": 8,
+          "name": "HP",
+          "staticValue": 30,
           "statRelations": []
         },
         {
-          "name": "dexterity",
-          "staticValue": 10,
-          "statRelations": []
-        },
-        {
-          "name": "constitution",
-          "staticValue": 12,
-          "statRelations": []
-        },
-        {
-          "name": "intelligence",
-          "staticValue": 14,
-          "statRelations": []
-        },
-        {
-          "name": "wisdom",
-          "staticValue": 16,
+          "name": "defense",
+          "staticValue": 15,
           "statRelations": []
         },
         {
           "name": "charisma",
-          "staticValue": 18,
+          "staticValue": 25,
           "statRelations": []
         },
         {
-          "name": "ProficiencyBonus",
-          "staticValue": 2,
+          "name": "charisma_modifier",
+          "staticValue": 0,
+          "statRelations": ["+ | 0,2 | charisma"]
+        },
+        {
+          "name": "attack_bonus",
+          "staticValue": 3,
           "statRelations": []
         },
         {
-          "name": "Attack Bonus",
+          "name": "attack_roll_charisma",
           "staticValue": 0,
-          "statRelations": ["+ | 0,1 | dexterity", "+ | 1 | ProficiencyBonus"]
+          "statRelations": ["+ | 1 | charisma_modifier", "+ | 1 | attack_bonus"]
         },
         {
-          "name": "Attack Damage",
+          "name": "damage_roll_charisma",
           "staticValue": 0,
-          "statRelations": ["+ | 1 | strength"]
+          "statRelations": ["+ | 1 | charisma_modifier"]
+        },
+        {
+          "name": "dexterity_saving_throw",
+          "staticValue": 8,
+          "statRelations": []
         }
       ]
     }

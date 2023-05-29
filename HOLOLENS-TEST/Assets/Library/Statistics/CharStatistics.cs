@@ -181,7 +181,7 @@ public class CharacterStat {
 
     public void CalculateCurrentValue()
     {
-        currentValue = staticValue + CalculateStatRelations()+ CalculatePermanentEffects() + CalculateTemporalEffects();
+        currentValue = staticValue + CalculateStatRelations() + CalculatePermanentEffects() + CalculateTemporalEffects();
     }
 
     public int GetCurrentValue()
@@ -331,7 +331,7 @@ public class CharacterStatistics
 
         foreach (CharacterStat stat in statistics.Values)
         {
-            s += stat.ToString("        ");
+            s += stat.ToString("  ");
         }
         s += "]\n";
         return s;

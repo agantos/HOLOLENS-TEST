@@ -5,26 +5,39 @@ using UnityEngine;
 public class CharacterPreset
 {
     protected string name;
-    protected Dictionary<string, Ability> presetAbilities;
+    protected Dictionary<string, Ability> presetAbilities = new Dictionary<string, Ability>();
 
-    void AddPresetToCharacter(Character character)
+    public void AddPresetToCharacter(Character character)
     {
         AddStatisticsToCharacter(character);
         AddAbilitiesToCharacter(character);
     }
 
-    void AddStatisticsToCharacter(Character character) {}
+    void AddStatisticsToCharacter(Character character) {
+        Debug.Log("Base Class");
+    }
 
-    void AddAbilitiesToCharacter(Character character){}
+    protected void AddAbilitiesToCharacter(Character character){
+        foreach(Ability ability in presetAbilities.Values)
+        {
+            character.abilities.Add(ability.name, ability);
+        }
+    }
 
 }
 
-//PreliminaryCharacterPresets
+//BaseCharacterPreset
 //  add their statistics to the character statitstics
 //  add their abilities to the character abilities
 public class BaseCharacterPreset : CharacterPreset
 {
-    public CharacterStatistics stats;
+    public CharacterStatistics stats = new CharacterStatistics();
+    public new void AddPresetToCharacter(Character character)
+    {
+        AddStatisticsToCharacter(character);
+        AddAbilitiesToCharacter(character);
+    }
+
     void AddStatisticsToCharacter(Character character)
     {
         if (stats.GetStatistics() != null)
@@ -36,6 +49,11 @@ public class BaseCharacterPreset : CharacterPreset
 
     public void SetStats(CharacterStatistics s){ stats = s; }
     public void SetName(string name) { this.name = name; }
+
+    public void AddAbility(Ability ability)
+    {
+        presetAbilities.Add(ability.name, ability);
+    }
 
     public override string ToString()
     {

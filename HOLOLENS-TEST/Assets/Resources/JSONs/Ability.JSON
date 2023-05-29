@@ -15,7 +15,7 @@
       },
       "succeedsOn": {
         "type": "comparison",
-        "againstStatic": "",
+        "againstStatic": "-1",
         "comparisonStats": {
           "defenderStat": {
             "name": "defense",

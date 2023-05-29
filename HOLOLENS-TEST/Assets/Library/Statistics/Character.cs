@@ -6,8 +6,8 @@ using UnityEngine.Assertions;
 public class Character
 {
     List<(string actionTypeName, int numPerTurn)> turnEconomy;
-    Dictionary<string, Ability> abilities;
-    CharacterStatistics stats;
+    public Dictionary<string, Ability> abilities = new Dictionary<string, Ability>();
+    CharacterStatistics stats = new CharacterStatistics();
 
     public void AddStat(CharacterStat stat) { stats.GetStatistics().Add(stat.GetName(), stat); }
 

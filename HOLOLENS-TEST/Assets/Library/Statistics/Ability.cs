@@ -15,3 +15,4 @@ public class Ability
         this.effects = effects;
     }
 }
+
