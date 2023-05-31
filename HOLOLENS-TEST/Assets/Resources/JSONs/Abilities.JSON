@@ -1,0 +1,161 @@
+{
+  "abilities": [
+    {
+      "name": "Charisma_Melee_Attack_Poisoned",
+      "description": "A melee attack",
+      "effects": [
+        {
+          "isPrimary": true,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 5,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "defense",
+                "multiplier": 1,
+                "bonus": "0"
+              },
+              "attackerStat": {
+                "name": "attack_roll_charisma",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "1d8",
+              "statsAffecting": ["damage_roll_charisma"]
+            },
+            "onSavedMultiplier": 0
+          }
+        },
+        {
+          "isPrimary": false,
+          "succeedsOn": {
+            "type": "automatic"
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "1d8",
+              "statsAffecting": [""]
+            },
+            "onSavedMultiplier": 0
+          }
+        },
+        {
+          "isPrimary": false,
+          "succeedsOn": {
+            "type": "defender_rolls",
+            "againstStatic": "17",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "dexterity_saving_throw",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "1d8",
+              "statsAffecting": ["damage_roll_charisma"]
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dexterity_Ranged_Attack_Roll",
+      "description": "A ranged dexterity attack",
+      "effects": [
+        {
+          "isPrimary": true,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 60,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "defense",
+                "multiplier": 1,
+                "bonus": "0"
+              },
+              "attackerStat": {
+                "name": "attack_roll_dexterity",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "1d8",
+              "statsAffecting": ["dexterity_modifier"]
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fireball",
+      "description": "An explosion of fire",
+      "effects": [
+        {
+          "isPrimary": true,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 60,
+            "shape": "sphere",
+            "radius": 30
+          },
+          "succeedsOn": {
+            "type": "defender_rolls",
+            "againstStatic": "15",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "dexterity_saving_throw",
+                "multiplier": 1,
+                "bonus": "0"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "10d6",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0.5
+          }
+        }
+      ]
+    }
+  ]
+}

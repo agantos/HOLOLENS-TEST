@@ -1,6 +1,6 @@
 {
-  "turnEconomy": [],
-  "abilities": ["name1", "name2"],
-  "baseCharacterPresets": ["name1", "name2"],
-  "additionalCharacterPresets": ["name1", "name2"]
+  "name": "Josh",
+  "abilities": ["Charisma_Melee_Attack_Poisoned"],
+  "basePresets": ["Human"],
+  "additionalPresets": []
 }

@@ -7,6 +7,7 @@ public class JSONBaseCharacterPreset
 {
     public string name;
     public JSONstat[] statistics;
+    public string[] abilities;
 }
 
 [System.Serializable]

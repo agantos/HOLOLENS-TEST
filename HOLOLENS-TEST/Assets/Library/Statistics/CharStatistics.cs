@@ -211,19 +211,18 @@ public class CharacterStat {
         }      
     }
 
-    public string ToString(string outerTab)
+    public string ToString(string prevTab)
     {
-        string tab = outerTab + "    ";
+        string tab = "  ";
+        string currTab = tab + prevTab;
 
-        string s = outerTab + "";
-        s += outerTab + name + ": {";
-        s += tab + "\n";
+        string s = currTab + name + ": {\n";
         
         //Static Value
-        s += tab + "staticValue: " + staticValue + "\n";
+        s += currTab + tab + "staticValue: " + staticValue + "\n";
         
         //Stat Relations
-        s += tab + "statRelations: [ ";
+        s += currTab + tab + "statRelations: [ ";
         if (statRelations.Count != 0)
         {
             foreach(string name in statRelations.Keys)
@@ -236,10 +235,9 @@ public class CharacterStat {
         s += " ]\n";
 
         //Current Value
-        s += tab + "currentValue: " + currentValue + "\n";
+        s += currTab + tab + "currentValue: " + currentValue + "\n";
 
-        s += outerTab + "}\n";
-
+        s += currTab + "}\n";
         return s;
     }
 } 
@@ -325,15 +323,17 @@ public class CharacterStatistics
             stat.CalculateCurrentValue();
         }
     }
-    public override string ToString()
+    public string ToString(string prevTab)
     {
-        string s = "statList: [ \n";
+        string tab = "  ";
+        string currTab = tab + prevTab;
+        string s = prevTab + "statList: [ \n";
 
         foreach (CharacterStat stat in statistics.Values)
         {
-            s += stat.ToString("  ");
+            s += stat.ToString(currTab);
         }
-        s += "]\n";
+        s += prevTab + "]";
         return s;
     }
 }

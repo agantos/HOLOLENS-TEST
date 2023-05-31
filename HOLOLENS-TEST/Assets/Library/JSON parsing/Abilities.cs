@@ -10,4 +10,7 @@ public class JSONAbility
     public JSONEffect[] effects;
 }
 
-
+public class JSONAbilities
+{
+    public JSONAbility[] abilities;
+}

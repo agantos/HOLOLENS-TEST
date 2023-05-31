@@ -48,6 +48,21 @@ public class JSONParser
         wrapper = JsonUtility.FromJson<JSONAbility>(jsonFile.text);
         return wrapper;
     }
+    public static JSONAbilities ParseAbilities(string jsonPath)
+    {
+        JSONAbilities wrapper;
+        TextAsset jsonFile = Resources.Load<TextAsset>(jsonPath);
+        wrapper = JsonUtility.FromJson<JSONAbilities>(jsonFile.text);
+        return wrapper;
+    }
+
+    public static JSONCharacter ParseCharacter(string jsonPath)
+    {
+        JSONCharacter wrapper;
+        TextAsset jsonFile = Resources.Load<TextAsset>(jsonPath);
+        wrapper = JsonUtility.FromJson<JSONCharacter>(jsonFile.text);
+        return wrapper;
+    }
 
 }
 
@@ -127,6 +142,7 @@ public class FromJSONtoEngine
     {
         BaseCharacterPreset preset = new BaseCharacterPreset();
         preset.SetStats(CreateCharacterStats(JSONpreset.statistics));
+        preset.SetAbilities(JSONpreset.abilities);
         preset.SetName(JSONpreset.name);
         return preset;
     }
@@ -222,8 +238,22 @@ public class FromJSONtoEngine
         return new Ability(jsonAbility.name, jsonAbility.description, CreatePrimaryEffects(jsonAbility.effects));
     }
 
+    //Create a dictionary of Abilities from the parsed JSON
+    public static Dictionary<string, Ability> CreateAbilitiesDictionary(JSONAbilities jsonAbilities)
+    {
+        Dictionary<string, Ability> abilities = new Dictionary<string, Ability>();
+        
+        foreach(JSONAbility jsonAbility in jsonAbilities.abilities)
+        {
+            Ability tempAbility = CreateAbility(jsonAbility);
+            abilities.Add(tempAbility.name, tempAbility);
+        }
+        
+        return abilities;
+    }
+
     //Create a dictionary of BaseCharacterPresets from the parsed JSON 
-    public static Dictionary<string, BaseCharacterPreset> BaseCharacterPresetsTranslation(JSONBaseCharacterPreset[] basePresets)
+    public static Dictionary<string, BaseCharacterPreset> CreateBaseCharacterPresetDictionary(JSONBaseCharacterPreset[] basePresets)
     {
         Dictionary<string, BaseCharacterPreset> list = new Dictionary<string, BaseCharacterPreset>();
         foreach (JSONBaseCharacterPreset preset in basePresets)
@@ -232,5 +262,29 @@ public class FromJSONtoEngine
         }
 
         return list;
+    }
+
+    public static Character CreateCharacter(JSONCharacter jsonCharacter)
+    {
+        Character character = new Character();
+
+        character.name = jsonCharacter.name;
+
+        foreach(string ability in jsonCharacter.abilities)
+        {
+            character.abilities.Add(ability);
+        }
+        
+        foreach(string basePresetName in jsonCharacter.basePresets)
+        {
+            character.basePresets.Add(basePresetName);
+        }
+
+        foreach(string additionalPresetName in jsonCharacter.additionalPresets)
+        {
+            character.additionalPresets.Add(additionalPresetName);
+        }
+
+        return character;
     }
 }

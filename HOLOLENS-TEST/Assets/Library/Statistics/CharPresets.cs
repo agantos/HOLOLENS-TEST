@@ -5,7 +5,7 @@ using UnityEngine;
 public class CharacterPreset
 {
     protected string name;
-    protected Dictionary<string, Ability> presetAbilities = new Dictionary<string, Ability>();
+    protected List<string> presetAbilities = new List<string>();
 
     public void AddPresetToCharacter(Character character)
     {
@@ -18,9 +18,9 @@ public class CharacterPreset
     }
 
     protected void AddAbilitiesToCharacter(Character character){
-        foreach(Ability ability in presetAbilities.Values)
+        foreach(string ability in presetAbilities)
         {
-            character.abilities.Add(ability.name, ability);
+            character.abilities.Add(ability);
         }
     }
 
@@ -50,16 +50,31 @@ public class BaseCharacterPreset : CharacterPreset
     public void SetStats(CharacterStatistics s){ stats = s; }
     public void SetName(string name) { this.name = name; }
 
-    public void AddAbility(Ability ability)
+    public void SetAbilities(string[] abilities)
     {
-        presetAbilities.Add(ability.name, ability);
+        foreach(string ability in abilities)
+        {
+            presetAbilities.Add(ability);
+        }
     }
 
-    public override string ToString()
+    public void AddAbility(string ability)
     {
-        string s = "Preset " + this.name + "\n";
-        s += stats.ToString();
+        presetAbilities.Add(ability);
+    }
 
+    public string ToString(string prevTab)
+    {
+        string tab = "  ";
+        string currTab = tab + prevTab;
+        string s = prevTab + "Preset " + name + "\n";
+        s += stats.ToString(currTab) + "\n";
+        s += prevTab + "Abilities: [  ";
+        foreach(string ability in presetAbilities)
+        {
+            s += ability + "  |  ";
+        }
+        s += "]";
         return s;
     }
 }
