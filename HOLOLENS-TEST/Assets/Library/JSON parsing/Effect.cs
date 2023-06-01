@@ -59,6 +59,7 @@ public class JSONEffectDamage
 public class JSONEffect
 {
     public bool isPrimary;
+    public bool appliesIfPrimaryFailed;
     public JSONEffectTargetting targetting;
     public JSONEffectAreaOfEffect areaOfEffect;
     public JSONEffectSucceedsOn succeedsOn;

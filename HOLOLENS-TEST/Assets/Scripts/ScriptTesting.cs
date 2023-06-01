@@ -6,10 +6,11 @@ using UnityEngine;
 
 public class ScriptTesting : MonoBehaviour
 {
-    //Initialize Singletons
-    FromJSONtoEngine fromJSONtoEngineInstance = FromJSONtoEngine.GetInstance();
-    JSONParser JSONParserInstance = JSONParser.GetInstance();
-    EffectSucceedsChecker effectSuccessChecker = EffectSucceedsChecker.GetInstance();
+    ////Initialize Singletons
+    //FromJSONtoEngine fromJSONtoEngineInstance = FromJSONtoEngine.GetInstance();
+    //JSONParser JSONParserInstance = JSONParser.GetInstance();
+    //EffectSucceedsChecker effectSuccessChecker = EffectSucceedsChecker.GetInstance();
+    //AbilityManager abilityManager = AbilityManager.GetInstance();
 
     //Variables
     Dictionary<string, BaseCharacterPreset> basePresets;
@@ -19,11 +20,18 @@ public class ScriptTesting : MonoBehaviour
     public Ability charismaAttackAbility;
 
     public JSONAbilities jsonAbilities;
-    public Dictionary<string, Ability> abilities;
 
     public JSONCharacter JSONjosh;
     public Character josh;
 
+
+    void InitializeSingletons()
+    {
+        FromJSONtoEngine fromJSONtoEngineInstance = FromJSONtoEngine.GetInstance();
+        JSONParser JSONParserInstance = JSONParser.GetInstance();
+        EffectSucceedsChecker effectSuccessChecker = EffectSucceedsChecker.GetInstance();
+        AbilityManager abilityManager = AbilityManager.GetInstance();
+    }
 
     void LoadFromJsons()
     {
@@ -34,7 +42,7 @@ public class ScriptTesting : MonoBehaviour
         charismaAttackAbility = FromJSONtoEngine.CreateAbility(jsonAbility);
 
         jsonAbilities = JSONParser.ParseAbilities("JSONs/Abilities");
-        abilities = FromJSONtoEngine.CreateAbilitiesDictionary(jsonAbilities);
+        FromJSONtoEngine.CreateAbilitiesDictionary(jsonAbilities);
 
         JSONjosh = JSONParser.ParseCharacter("JSONs/CharacterExample");
         josh = FromJSONtoEngine.CreateCharacter(JSONjosh);
@@ -59,13 +67,14 @@ public class ScriptTesting : MonoBehaviour
     }
     void Start()
     {
+        InitializeSingletons();
         LoadFromJsons();
 
         josh.LoadCharacterBasicPresets(basePresets);
         josh.GetStats().CalculateAllStats();
         Debug.Log(josh.ToString("  "));
 
-        EffectSucceedsChecker.GetSuccess(charismaAttackAbility.effects[0], josh, josh);
+        josh.ActivateOwnedAbility("Charisma_Melee_Attack_Poisoned", josh, josh);
     }
 
 }

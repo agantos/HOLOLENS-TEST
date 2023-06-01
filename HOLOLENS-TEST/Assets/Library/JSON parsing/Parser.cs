@@ -239,17 +239,13 @@ public class FromJSONtoEngine
     }
 
     //Create a dictionary of Abilities from the parsed JSON
-    public static Dictionary<string, Ability> CreateAbilitiesDictionary(JSONAbilities jsonAbilities)
-    {
-        Dictionary<string, Ability> abilities = new Dictionary<string, Ability>();
-        
+    public static void CreateAbilitiesDictionary(JSONAbilities jsonAbilities)
+    {        
         foreach(JSONAbility jsonAbility in jsonAbilities.abilities)
         {
             Ability tempAbility = CreateAbility(jsonAbility);
-            abilities.Add(tempAbility.name, tempAbility);
-        }
-        
-        return abilities;
+            AbilityManager.abilityPool.Add(tempAbility.name, tempAbility);
+        }     
     }
 
     //Create a dictionary of BaseCharacterPresets from the parsed JSON 
@@ -272,7 +268,7 @@ public class FromJSONtoEngine
 
         foreach(string ability in jsonCharacter.abilities)
         {
-            character.abilities.Add(ability);
+            character.abilities.Add(ability, ability);
         }
         
         foreach(string basePresetName in jsonCharacter.basePresets)

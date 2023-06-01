@@ -7,7 +7,7 @@ public class Character
 {
     public string name;
     List<(string actionTypeName, int numPerTurn)> turnEconomy;
-    public List<string> abilities = new List<string>();
+    public Dictionary<string, string> abilities = new Dictionary<string, string>();
     public List<string> basePresets = new List<string>();
     public List<string> additionalPresets = new List<string>();
     CharacterStatistics stats = new CharacterStatistics();
@@ -21,9 +21,21 @@ public class Character
         return stats.GetStat(name);
     }
 
-    public Ability GetCharacterAbility(string name, Dictionary<string, Ability> globalAbilityPool)
+    public Ability GetCharacterAbility(string name)
     {
-        return globalAbilityPool[name];
+        return AbilityManager.abilityPool[name];
+    }
+
+    public void ActivateOwnedAbility(string abilityName, Character defender = null, Character attacker = null)
+    {
+        if(abilities.TryGetValue(abilityName, out abilityName))
+        {
+            AbilityManager.ActivateAbility(abilityName, defender, attacker);
+        }
+        else
+        {
+            Assert.IsFalse(true, "Character " + name + " does not have the ability " + abilityName);
+        }
     }
 
     public void LoadCharacterBasicPresets(Dictionary<string, BaseCharacterPreset> presets)
@@ -43,7 +55,7 @@ public class Character
         s += stats.ToString(currTab) + "\n";
         
         s += currTab + "Abilities: [  ";
-        foreach (string ability in abilities)
+        foreach (string ability in abilities.Values)
         {
             s += ability + "  |  ";
         }

@@ -12,9 +12,8 @@ public class GameplayCalculatorFunctions
         System.Random roll = new System.Random();
         int sum = 0;
         int diceNumber, diceSides, staticValue;
-        ParseDiceString(value, out diceNumber, out diceSides, out staticValue);        
-
-        for(int i = 0; i < diceNumber; i++)
+        ParseDiceString(value, out diceNumber, out diceSides, out staticValue);
+        for (int i = 0; i < diceNumber; i++)
         {
             sum += roll.Next(1, diceSides);
         }
@@ -45,7 +44,12 @@ public class GameplayCalculatorFunctions
             if (match.Groups.Count > 3 && !string.IsNullOrEmpty(match.Groups[3].Value))
             {
                 staticValue = int.Parse(match.Groups[3].Value);
-            }
+            }            
+        }
+        else
+        {
+            // If the input is not in the dice format, assume it's a plain number
+            staticValue = int.Parse(input);
         }
     }
 }
@@ -194,7 +198,6 @@ public class EffectSucceedsStats
         this.attackerStat = attackerStat;
         this.defenderStat = defenderStat;
         this.staticNumberToPass = againstStatic;
-
         switch (type)
         {
             case "automatic":
@@ -396,7 +399,7 @@ public class PrimaryEffectStats : EffectStats
 //Effects that happen after a primary effect to the same targets
 public class FollowupEffectStats : EffectStats
 {
-    bool appliesIfPrimaryFailed;
+    public bool appliesIfPrimaryFailed;
 }
 
 //Singleton that is responsible for calculating whether an effect suceeds or not.
@@ -430,7 +433,7 @@ public class EffectSucceedsChecker
 
     private bool AutomaticSuccess(EffectStats effectSucceedsStats, Character defenderStats, Character attackerStats)
     {
-        Debug.Log("Effect Suceeds");
+        Debug.Log("Automatic Effect Suceeds");
         return true;
     }
 
@@ -442,18 +445,21 @@ public class EffectSucceedsChecker
         int attackRoll = (int)((statBonusAttacker + attackerDiceRoll) * effect.effectSucceedsStats.attackerStat.multiplier);
         int passNumber = GameplayCalculatorFunctions.CalculateDiceRoll(effect.effectSucceedsStats.staticNumberToPass);
 
-        Debug.Log("ToBeat: " + passNumber.ToString() + "\n");
-        Debug.Log(
-             "Attacker Roll: " +
+        string tab = "  ";
+        string s = "ATTACK EFFECT\n";
+        s+= tab + "ToBeat: " + passNumber.ToString() + "\n";
+        s+= 
+            tab + "Attacker Roll: " +
              effect.effectSucceedsStats.attackerStat.bonus + " + " +
              statBonusAttacker.ToString() + " = " + attackerDiceRoll.ToString() + " + " +
-             statBonusAttacker.ToString() + " = " + attackRoll
-        );
+             statBonusAttacker.ToString() + " = " + attackRoll + "\n";
 
         if (attackRoll > passNumber)
-            Debug.Log("Effect Suceceds");
+            s+= tab + "Effect Suceceds";
         else 
-            Debug.Log("Effect Fails");
+            s += tab + "Effect Fails";
+
+        Debug.Log(s);
 
         return (attackRoll > passNumber);
     }
@@ -464,20 +470,24 @@ public class EffectSucceedsChecker
         int statBonusDefender = defender.GetStats().GetStat(effect.effectSucceedsStats.defenderStat.statName).GetCurrentValue();
 
         int defenceRoll = (int)((statBonusDefender + defenderDiceRoll) * effect.effectSucceedsStats.defenderStat.multiplier);
+        
         int passNumber = GameplayCalculatorFunctions.CalculateDiceRoll(effect.effectSucceedsStats.staticNumberToPass);
 
-        Debug.Log("DC: " + passNumber.ToString() + "\n");
-        Debug.Log(
-            "Defender Roll: " + 
-            effect.effectSucceedsStats.defenderStat.bonus + " + " + 
-            statBonusDefender.ToString() + " = " + defenderDiceRoll.ToString() + " + " + 
-            statBonusDefender.ToString() + " = " + defenceRoll + "\n"
-        );
+        string tab = "  ";
+        string s = "DEFENSE EFFECT\n";
+        s += tab + "ToBeat: " + passNumber.ToString() + "\n";
+        s +=
+            tab + "DC: " +
+              effect.effectSucceedsStats.defenderStat.bonus + " + " +
+            statBonusDefender.ToString() + " = " + defenderDiceRoll.ToString() + " + " +
+            statBonusDefender.ToString() + " = " + defenceRoll + "\n";
 
         if (passNumber > defenceRoll)
-            Debug.Log("Effect Suceeds");
+            s += tab + "Effect Suceceds";
         else
-            Debug.Log("Effect Fails");
+            s += tab + "Effect Fails";
+
+        Debug.Log(s);
 
         return (passNumber > defenceRoll);
     }
@@ -493,23 +503,23 @@ public class EffectSucceedsChecker
         int attackRoll = (int)((statBonusAttacker + attackerDiceRoll) * effect.effectSucceedsStats.attackerStat.multiplier);
         int defenceRoll = (int)((statBonusDefender + defenderDiceRoll) * effect.effectSucceedsStats.defenderStat.multiplier);
 
-        Debug.Log(
-            "Attacker Roll: " + 
-            effect.effectSucceedsStats.attackerStat.bonus + " + " + 
-            statBonusAttacker.ToString() + " = " + attackerDiceRoll.ToString() + " + " + 
-            statBonusAttacker.ToString() + " = " + attackRoll
-        );
-        Debug.Log(
-            "Defender Roll: " +
+        string tab = "  ";
+        string s = "COMPARISON EFFECT\n";
+        s += tab + "Attacker Roll: " +
+            effect.effectSucceedsStats.attackerStat.bonus + " + " +
+            statBonusAttacker.ToString() + " = " + attackerDiceRoll.ToString() + " + " +
+            statBonusAttacker.ToString() + " = " + attackRoll + "\n";
+
+        s += tab + "Defender Roll: " +
             effect.effectSucceedsStats.defenderStat.bonus + " + " +
             statBonusDefender.ToString() + " = " + defenderDiceRoll.ToString() + " + " +
-            statBonusDefender.ToString() + " = " + defenceRoll
-        );
+            statBonusDefender.ToString() + " = " + defenceRoll + "\n";
 
         if (attackRoll > defenceRoll)
-            Debug.Log("Effect Suceeds");
+            s += tab + "Effect Suceeds";
         else
-            Debug.Log("Effect Fails");
+            s += tab + "Effect Fails";
+        Debug.Log(s);
 
         return (attackRoll > defenceRoll);
     }

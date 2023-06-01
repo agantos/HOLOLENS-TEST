@@ -20,7 +20,7 @@ public class CharacterPreset
     protected void AddAbilitiesToCharacter(Character character){
         foreach(string ability in presetAbilities)
         {
-            character.abilities.Add(ability);
+            character.abilities.Add(ability, ability);
         }
     }
 
