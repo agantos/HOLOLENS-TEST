@@ -36,22 +36,25 @@ public class AbilityManager
         return instance;
     }
 
-    public static void ActivateAbility(string name, Character defender = null, Character attacker = null)
-    {
+    //Calculates success of an ability and applies its damage to a character.
+    public static void ActivateAbilityEffect(string name, Character defender = null, Character attacker = null)
+    {        
         Ability toActivate = abilityPool[name];
-        foreach(PrimaryEffectStats effect in toActivate.effects)
+
+        foreach (PrimaryEffectStats primaryEffect in toActivate.effects)
         {
-            bool primarySucceeds = EffectSucceedsChecker.GetSuccess(effect, defender, attacker);
-            foreach (FollowupEffectStats followup in effect.followUpEffects)
+            //Calculate primary success and damage
+            bool primarySucceeds = EffectSucceedsChecker.GetSuccess(primaryEffect, defender, attacker);
+            primaryEffect.DealDamage(primarySucceeds, defender, attacker);
+            
+            //Calculate only the appropriate follow-up effects' success and damage
+            foreach (FollowupEffectStats followup in primaryEffect.followUpEffects)
             {
                 if (primarySucceeds || followup.appliesIfPrimaryFailed)
                 {
-                    EffectSucceedsChecker.GetSuccess(followup, defender, attacker);
+                    followup.DealDamage(EffectSucceedsChecker.GetSuccess(followup, defender, attacker), defender, attacker);
                 }
             }
         }
-
     }
-
-
 }

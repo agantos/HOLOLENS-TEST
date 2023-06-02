@@ -182,7 +182,7 @@ public class FromJSONtoEngine
         effect.CreateEffectSucceedsStats(jsonEffect.succeedsOn.type, jsonEffect.succeedsOn.againstStatic, attacker, defender);
 
         //Damage Statistics
-        effect.CreateDamageStatistics(jsonEffect.damage.amount.baseAmount, jsonEffect.damage.amount.statsAffecting, jsonEffect.damage.damagedStat);
+        effect.CreateDamageStatistics(jsonEffect.damage.amount.baseAmount, jsonEffect.damage.amount.statsAffecting, jsonEffect.damage.damagedStat, jsonEffect.damage.onSavedMultiplier);
 
         //Follow-Up Effects
         return effect;
@@ -204,7 +204,6 @@ public class FromJSONtoEngine
             jsonAttacker = jsonEffect.succeedsOn.comparisonStats.attackerStat;
             attacker = new ComparisonStat(jsonAttacker.name, jsonAttacker.multiplier, jsonAttacker.bonus);
         }
-
         if (jsonEffect.succeedsOn.comparisonStats.defenderStat != null)
         {
             jsonDefender = jsonEffect.succeedsOn.comparisonStats.defenderStat;
@@ -214,7 +213,7 @@ public class FromJSONtoEngine
         effect.CreateEffectSucceedsStats(jsonEffect.succeedsOn.type, jsonEffect.succeedsOn.againstStatic, attacker, defender);
 
         //Damage Statistics
-        effect.CreateDamageStatistics(jsonEffect.damage.amount.baseAmount, jsonEffect.damage.amount.statsAffecting, jsonEffect.damage.damagedStat);
+        effect.CreateDamageStatistics(jsonEffect.damage.amount.baseAmount, jsonEffect.damage.amount.statsAffecting, jsonEffect.damage.damagedStat, jsonEffect.damage.onSavedMultiplier);
         
         return effect;
     }

@@ -74,7 +74,7 @@ public class ScriptTesting : MonoBehaviour
         josh.GetStats().CalculateAllStats();
         Debug.Log(josh.ToString("  "));
 
-        josh.ActivateOwnedAbility("Charisma_Melee_Attack_Poisoned", josh, josh);
+        josh.ActivateOwnedAbility("Fireball", josh, josh);
     }
 
 }

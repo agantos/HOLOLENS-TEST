@@ -30,7 +30,7 @@ public class Character
     {
         if(abilities.TryGetValue(abilityName, out abilityName))
         {
-            AbilityManager.ActivateAbility(abilityName, defender, attacker);
+            AbilityManager.ActivateAbilityEffect(abilityName, defender, attacker);
         }
         else
         {

@@ -181,7 +181,7 @@ public class CharacterStat {
 
     public void CalculateCurrentValue()
     {
-        currentValue = staticValue + CalculateStatRelations() + CalculatePermanentEffects() + CalculateTemporalEffects();
+        currentValue = staticValue + CalculateStatRelations() + CalculatePermanentEffects() + CalculateTemporalEffects() - damage;
     }
 
     public int GetCurrentValue()

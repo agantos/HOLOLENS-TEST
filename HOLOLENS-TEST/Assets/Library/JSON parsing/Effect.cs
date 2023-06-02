@@ -37,6 +37,7 @@ public class JSONEffectSucceedsOn
 {
     public string type;
     public string againstStatic;
+    public float onSavedMultiplier;
     public JSONEffectComparisonStats comparisonStats;
 }
 
@@ -52,7 +53,7 @@ public class JSONEffectDamage
 {
     public string damagedStat;
     public JSONEffectDamageAmount amount;
-    public string onSavedMultiplier;
+    public float onSavedMultiplier;
 }
 
 [System.Serializable]

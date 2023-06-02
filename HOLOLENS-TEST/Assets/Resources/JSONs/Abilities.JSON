@@ -142,7 +142,7 @@
               "defenderStat": {
                 "name": "dexterity_saving_throw",
                 "multiplier": 1,
-                "bonus": "0"
+                "bonus": "1d20"
               }
             }
           },

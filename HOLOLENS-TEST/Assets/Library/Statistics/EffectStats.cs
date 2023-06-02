@@ -191,7 +191,6 @@ public class EffectSucceedsStats
     public ComparisonStat attackerStat;
     public ComparisonStat defenderStat;
     public string staticNumberToPass;
-    public float onSavedMultiplier;
 
     public EffectSucceedsStats(string type, string againstStatic, ComparisonStat attackerStat, ComparisonStat defenderStat)
     {
@@ -247,12 +246,14 @@ public class EffectDamageStats
     public string damagedStatName;
     string baseValue;
     List<string> statsAffecting;
+    public float onSavedMultiplier;
 
-    public EffectDamageStats(string baseAmount, string[] statsAffecting, string damagedStat)
+    public EffectDamageStats(string baseAmount, string[] statsAffecting, string damagedStat, float onSavedMultiplier)
     {
         baseValue = baseAmount;
         damagedStatName = damagedStat;
         this.statsAffecting = new List<string>();
+        this.onSavedMultiplier = onSavedMultiplier;
 
         foreach(string stat in statsAffecting)
         {
@@ -263,12 +264,20 @@ public class EffectDamageStats
     public int RollDamage(List<int> statBonuses)
     {
         int sum = 0;
-        sum += GameplayCalculatorFunctions.CalculateDiceRoll(baseValue);
-
-        foreach(int bonus in statBonuses)
+        int diceRoll = GameplayCalculatorFunctions.CalculateDiceRoll(baseValue);
+        sum += diceRoll;
+        
+        string s = "Damage = " + baseValue + " ";
+        
+        foreach (int bonus in statBonuses)
         {
+            s += "+" + bonus.ToString() + " ";
             sum += bonus;
         }
+        s += "\n";
+        s += "Rolled " + diceRoll.ToString();
+
+        Debug.Log(s);
 
         return sum;
     }
@@ -288,7 +297,7 @@ public class EffectDamageStats
         return statBonuses;
     }
 
-    public int GetDamage(CharacterStatistics attackerStats)
+    public int GetBaseDamage(CharacterStatistics attackerStats)
     {
         return RollDamage(GetStatBonuses(attackerStats));
     }
@@ -321,7 +330,7 @@ public class EffectDamageStats
 public class EffectStats
 {
     public EffectSucceedsStats effectSucceedsStats;
-    public EffectDamageStats damage;
+    public EffectDamageStats damageStats;
 
     public bool EffectSucceeds(Character defender = null, Character attacker = null)
     {
@@ -333,15 +342,36 @@ public class EffectStats
         effectSucceedsStats = new EffectSucceedsStats(type, againstStatic, attackerStat, defenderStat);
     }
 
-    public void CreateDamageStatistics(string baseAmount, string[] statsAffecting, string damagedStat)
+    public void CreateDamageStatistics(string baseAmount, string[] statsAffecting, string damagedStat, float onSavedMultiplier)
     {
-        damage = new EffectDamageStats(baseAmount, statsAffecting, damagedStat);
+        damageStats = new EffectDamageStats(baseAmount, statsAffecting, damagedStat, onSavedMultiplier);
     }
 
-    public void DealDamage(CharacterStatistics defenderStats, CharacterStatistics attackerStats)
+    public void DealDamage(bool effectSucceeds, Character defender, Character attacker)
     {
-        CharacterStat damagedStat = defenderStats.GetStat(damage.damagedStatName);
-        damagedStat.DealDamage(damage.GetDamage(attackerStats));
+        CharacterStat damagedStat = defender.GetStats().GetStat(damageStats.damagedStatName);
+        damagedStat.DealDamage(CalculateEffectDamage(effectSucceeds, defender, attacker));
+        damagedStat.CalculateCurrentValue();
+    }
+
+    private int CalculateEffectDamage(bool effectSucceeds, Character defender = null, Character attacker = null)
+    {
+        float damage = damageStats.GetBaseDamage(attacker.GetStats());
+
+        //if an effect is saved get the recalculated damage
+        if (!effectSucceeds)
+            damage *= damageStats.onSavedMultiplier;
+
+        string s = "Effect Damage\n";
+        s += "Character " + attacker.name + " deals damage to " + defender.name + "\n";
+        s += "Damaged Stat: " + damageStats.damagedStatName + "\n";
+        s += "Damage = " + damage.ToString();
+        Debug.Log(s);
+
+        //Include other damage multipliers such as critical, resistance, vulnerabilities etc.
+
+
+        return (int)damage;
     }
 
     public string ToString(string prevTab)
@@ -351,7 +381,7 @@ public class EffectStats
         string s = prevTab + "EFFECT { \n";
         
         s += effectSucceedsStats.ToString(currTab);
-        s += damage.ToString(currTab);
+        s += damageStats.ToString(currTab);
         s += prevTab + "}\n";
 
         return s;
@@ -384,7 +414,7 @@ public class PrimaryEffectStats : EffectStats
         s += targetting.ToString(currTab);
         s += areaOfEffect.ToString(currTab);
         s += effectSucceedsStats.ToString(currTab);
-        s += damage.ToString(currTab);
+        s += damageStats.ToString(currTab);
 
         foreach(FollowupEffectStats stat in followUpEffects)
         {
@@ -475,9 +505,9 @@ public class EffectSucceedsChecker
 
         string tab = "  ";
         string s = "DEFENSE EFFECT\n";
-        s += tab + "ToBeat: " + passNumber.ToString() + "\n";
+        s += tab + "DC: " + passNumber.ToString() + "\n";
         s +=
-            tab + "DC: " +
+            tab + "Rolled: " +
               effect.effectSucceedsStats.defenderStat.bonus + " + " +
             statBonusDefender.ToString() + " = " + defenderDiceRoll.ToString() + " + " +
             statBonusDefender.ToString() + " = " + defenceRoll + "\n";
