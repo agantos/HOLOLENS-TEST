@@ -14,37 +14,47 @@
           "statRelations": []
         },
         {
-          "name": "charisma",
+          "name": "strength",
           "staticValue": 18,
           "statRelations": []
         },
         {
-          "name": "charisma_modifier",
+          "name": "strength_modifier",
           "staticValue": 0,
-          "statRelations": ["+ | 0,2 | charisma"]
+          "statRelations": ["+ | 0,2 | strength"]
         },
         {
-          "name": "attack_bonus",
+          "name": "dexterity",
+          "staticValue": 14,
+          "statRelations": []
+        },
+        {
+          "name": "dexterity_modifier",
+          "staticValue": 0,
+          "statRelations": ["+ | 0,2 | dexterity"]
+        },
+        {
+          "name": "proficiency_bonus",
           "staticValue": 3,
           "statRelations": []
         },
         {
-          "name": "attack_roll_charisma",
+          "name": "attack_bonus_strength",
           "staticValue": 0,
-          "statRelations": ["+ | 1 | charisma_modifier", "+ | 1 | attack_bonus"]
+          "statRelations": ["+ | 1 | strength_modifier", "+ | 1 | proficiency_bonus"]
         },
         {
-          "name": "damage_roll_charisma",
+          "name": "damage_bonus_strength",
           "staticValue": 0,
-          "statRelations": ["+ | 1 | charisma_modifier"]
+          "statRelations": ["+ | 1 | strength_modifier"]
         },
         {
           "name": "dexterity_saving_throw",
-          "staticValue": 5,
-          "statRelations": []
+          "staticValue": 0,
+          "statRelations": ["+ | 1 | dexterity_modifier", "+ | 1 | proficiency_bonus"]
         }
       ],
-      "abilities": ["Charisma_Melee_Attack_Poisoned"]
+      "abilities": ["Melee_Strength_Attack"]
     },
     {
       "name": "Human",

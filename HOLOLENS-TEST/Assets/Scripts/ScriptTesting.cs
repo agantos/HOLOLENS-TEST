@@ -13,7 +13,8 @@ public class ScriptTesting : MonoBehaviour
     //AbilityManager abilityManager = AbilityManager.GetInstance();
 
     //Variables
-    Dictionary<string, BaseCharacterPreset> basePresets;
+    public static Dictionary<string, BaseCharacterPreset> basePresetPool;
+    public static Dictionary<string, Character> characterPool;
     public JSONBaseCharacterPresetsWrapper parsedBasePresets;
 
     public JSONAbility jsonAbility;
@@ -21,7 +22,7 @@ public class ScriptTesting : MonoBehaviour
 
     public JSONAbilities jsonAbilities;
 
-    public JSONCharacter JSONjosh;
+    public JSONCharacters JSONcharacters;
     public Character josh;
 
 
@@ -36,7 +37,7 @@ public class ScriptTesting : MonoBehaviour
     void LoadFromJsons()
     {
         parsedBasePresets = JSONParser.ParseBaseCharacterPresets("JSONs/BaseCharacterPresets");
-        basePresets = FromJSONtoEngine.CreateBaseCharacterPresetDictionary(parsedBasePresets.baseCharacterPresets);
+        basePresetPool = FromJSONtoEngine.CreateBaseCharacterPresetDictionary(parsedBasePresets.baseCharacterPresets);
 
         jsonAbility = JSONParser.ParseAbility("JSONs/Ability");
         charismaAttackAbility = FromJSONtoEngine.CreateAbility(jsonAbility);
@@ -44,37 +45,24 @@ public class ScriptTesting : MonoBehaviour
         jsonAbilities = JSONParser.ParseAbilities("JSONs/Abilities");
         FromJSONtoEngine.CreateAbilitiesDictionary(jsonAbilities);
 
-        JSONjosh = JSONParser.ParseCharacter("JSONs/CharacterExample");
-        josh = FromJSONtoEngine.CreateCharacter(JSONjosh);
-        
-
-        //foreach(string ab in abilities.Keys)
-        //{
-        //    Debug.Log("Ability: " + ab);
-        //}
-
-        //foreach (PrimaryEffectStats stat in charismaAttackAbility.effects)
-        //{
-        //    Debug.Log(stat.ToString(""));
-        //}
-
-        //foreach (BaseCharacterPreset preset in basePresets.Values)
-        //{
-        //    Debug.Log(preset.ToString("  "));
-        //}
-
-        
+        JSONcharacters = JSONParser.ParseCharacters("JSONs/CharacterExample");
+        FromJSONtoEngine.FillCharacterPool(JSONcharacters);            
     }
     void Start()
     {
         InitializeSingletons();
         LoadFromJsons();
-
-        josh.LoadCharacterBasicPresets(basePresets);
-        josh.GetStats().CalculateAllStats();
-        Debug.Log(josh.ToString("  "));
-
-        josh.ActivateOwnedAbility("Fireball", josh, josh);
+        CreateCharacters();       
     }
 
+
+    void CreateCharacters()
+    {
+        foreach(Character c in characterPool.Values)
+        {
+            c.LoadCharacterBasicPresetsFromPool(basePresetPool);
+            c.GetStats().CalculateAllStats();
+            //Debug.Log(c.ToString("  "));
+        }
+    }
 }

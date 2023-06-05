@@ -57,7 +57,7 @@ public class GameplayCalculatorFunctions
 enum EffectType { INDEPENDENT, DEPENDENT}
 enum TargetType { SELF, ALLY, ENEMY, ALL, ALL_NOT_SELF, AREA, TYPED}
 enum TargetNumber {NUMBERED, IN_RADIUS}
-enum AreaShape { CUBE, CONE, SPHERE, LINE, SELECT }
+public enum AreaShape { CUBE, CONE, SPHERE, LINE, SELECT, CIRCLE }
 public enum EffectSuccessCondition {AUTOMATIC, ATTACKER_ROLLS, DEFENDER_ROLLS, COMPARISON}
 
 public class TargettingStats
@@ -113,9 +113,9 @@ public class TargettingStats
 
 public class AreaOfEffectStats
 {
-    AreaShape shape;
-    int radius;
-    int range;
+    public AreaShape shape { get; }
+    public int radius { get; }
+    public int range { get; }
 
     public AreaOfEffectStats(int range, string shape, int radius)
     {
@@ -138,6 +138,9 @@ public class AreaOfEffectStats
                 break;
             case "select":
                 this.shape = AreaShape.SELECT;
+                break;
+            case "circle":
+                this.shape = AreaShape.CIRCLE;
                 break;
             default:
                 Assert.IsTrue(false, "The shape of the AOE is not correct");
@@ -391,8 +394,8 @@ public class EffectStats
 //Effects that will require selecting targets
 public class PrimaryEffectStats : EffectStats
 {
-    TargettingStats targetting;
-    AreaOfEffectStats areaOfEffect;
+    public TargettingStats targetting;
+    public AreaOfEffectStats areaOfEffect;
     public List<FollowupEffectStats> followUpEffects = new List<FollowupEffectStats>();
 
     public void CreateTargetting(string type, int number)

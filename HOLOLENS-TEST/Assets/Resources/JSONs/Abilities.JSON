@@ -132,8 +132,8 @@
           },
           "areaOfEffect": {
             "range": 60,
-            "shape": "sphere",
-            "radius": 30
+            "shape": "circle",
+            "radius": 40
           },
           "succeedsOn": {
             "type": "defender_rolls",
@@ -153,6 +153,48 @@
               "statsAffecting": []
             },
             "onSavedMultiplier": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Melee_Strength_Attack",
+      "description": "A melee strength attack",
+      "effects": [
+        {
+          "isPrimary": true,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 5,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "defense",
+                "multiplier": 1,
+                "bonus": "0"
+              },
+              "attackerStat": {
+                "name": "attack_bonus_strength",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "2d6",
+              "statsAffecting": ["damage_bonus_strength"]
+            },
+            "onSavedMultiplier": 0
           }
         }
       ]

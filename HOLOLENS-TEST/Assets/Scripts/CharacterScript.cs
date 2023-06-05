@@ -4,19 +4,24 @@ using UnityEngine;
 
 public class CharacterScript : MonoBehaviour
 {
-    public Character stats;
-    public new string name;
-
+    Character character;
+    public string charName;
+    public string HP;
     // Start is called before the first frame update
     void Start()
     {
-        stats = new Character();
-        stats.name = name;
+        character = ScriptTesting.characterPool[charName];
+        Debug.Log(character.ToString("  "));
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        HP = character.GetStats().GetStat("HP").GetCurrentValue().ToString();
+    }
+
+    public Character GetCharacter()
+    {
+        return character;
     }
 }

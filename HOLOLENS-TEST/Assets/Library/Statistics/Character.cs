@@ -38,11 +38,11 @@ public class Character
         }
     }
 
-    public void LoadCharacterBasicPresets(Dictionary<string, BaseCharacterPreset> presets)
+    public void LoadCharacterBasicPresetsFromPool(Dictionary<string, BaseCharacterPreset> basePresetsPool)
     {
         foreach(string presetName in basePresets)
         {
-            presets[presetName].AddPresetToCharacter(this);
+            basePresetsPool[presetName].AddPresetToCharacter(this);
         }
     }
 

@@ -64,6 +64,14 @@ public class JSONParser
         return wrapper;
     }
 
+    public static JSONCharacters ParseCharacters(string jsonPath)
+    {
+        JSONCharacters wrapper;
+        TextAsset jsonFile = Resources.Load<TextAsset>(jsonPath);
+        wrapper = JsonUtility.FromJson<JSONCharacters>(jsonFile.text);
+        return wrapper;
+    }
+
 }
 
 //A singleton class that takes JSONClasses and forms the engine classes
@@ -281,5 +289,15 @@ public class FromJSONtoEngine
         }
 
         return character;
+    }
+
+    public static void FillCharacterPool(JSONCharacters jsonCharacters)
+    {
+        ScriptTesting.characterPool = new Dictionary<string, Character>();
+        foreach(JSONCharacter jsonChar in jsonCharacters.characters)
+        {
+            Character temp = CreateCharacter(jsonChar);
+            ScriptTesting.characterPool.Add(temp.name, temp);
+        }
     }
 }
