@@ -17,36 +17,27 @@ public class ScriptTesting : MonoBehaviour
     public static Dictionary<string, Character> characterPool;
     public JSONBaseCharacterPresetsWrapper parsedBasePresets;
 
-    public JSONAbility jsonAbility;
-    public Ability charismaAttackAbility;
-
     public JSONAbilities jsonAbilities;
 
     public JSONCharacters JSONcharacters;
-    public Character josh;
-
-
     void InitializeSingletons()
     {
-        FromJSONtoEngine fromJSONtoEngineInstance = FromJSONtoEngine.GetInstance();
-        JSONParser JSONParserInstance = JSONParser.GetInstance();
+        JSONClass_to_EngineClass fromJSONtoEngineInstance = JSONClass_to_EngineClass.GetInstance();
+        JSONFile_to_JSONClass JSONParserInstance = JSONFile_to_JSONClass.GetInstance();
         EffectSucceedsChecker effectSuccessChecker = EffectSucceedsChecker.GetInstance();
         AbilityManager abilityManager = AbilityManager.GetInstance();
     }
 
     void LoadFromJsons()
     {
-        parsedBasePresets = JSONParser.ParseBaseCharacterPresets("JSONs/BaseCharacterPresets");
-        basePresetPool = FromJSONtoEngine.CreateBaseCharacterPresetDictionary(parsedBasePresets.baseCharacterPresets);
+        parsedBasePresets = JSONFile_to_JSONClass.ParseBaseCharacterPresets("JSONs/BaseCharacterPresets");
+        basePresetPool = JSONClass_to_EngineClass.CreateBaseCharacterPresetDictionary(parsedBasePresets.baseCharacterPresets);
 
-        jsonAbility = JSONParser.ParseAbility("JSONs/Ability");
-        charismaAttackAbility = FromJSONtoEngine.CreateAbility(jsonAbility);
+        jsonAbilities = JSONFile_to_JSONClass.ParseAbilities("JSONs/Abilities");
+        JSONClass_to_EngineClass.CreateAbilitiesDictionary(jsonAbilities);
 
-        jsonAbilities = JSONParser.ParseAbilities("JSONs/Abilities");
-        FromJSONtoEngine.CreateAbilitiesDictionary(jsonAbilities);
-
-        JSONcharacters = JSONParser.ParseCharacters("JSONs/CharacterExample");
-        FromJSONtoEngine.FillCharacterPool(JSONcharacters);            
+        JSONcharacters = JSONFile_to_JSONClass.ParseCharacters("JSONs/CharacterExample");
+        JSONClass_to_EngineClass.FillCharacterPool(JSONcharacters);            
     }
     void Start()
     {

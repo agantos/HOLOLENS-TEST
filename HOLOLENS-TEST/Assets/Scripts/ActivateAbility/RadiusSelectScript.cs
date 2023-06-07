@@ -71,7 +71,7 @@ public class RadiusSelectScript : MonoBehaviour
         //Activate the abilities
         foreach (Character defender in defenders)
         {
-            AbilityManager.ActivateAbilityEffect(ability.name, defender, attacker);
+            attacker.ActivateOwnedAbility(ability.name, defender, attacker);
         }
         
         //Destroy the spawned radius effect

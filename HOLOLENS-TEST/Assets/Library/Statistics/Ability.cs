@@ -7,12 +7,37 @@ public class Ability
     public string name;
     public string description;
     public List<PrimaryEffectStats> effects;
+    public Dictionary<string, int> turnEconomyCost;
+    public Dictionary<string, int> statCost;
 
     public Ability(string name, string description, List<PrimaryEffectStats> effects)
     {
         this.name = name;
         this.description = description;
         this.effects = effects;
+    }
+
+    public string ToString(string prevTab)
+    {
+        string tab = "  ";
+        string currTab = tab + prevTab;
+        string s = prevTab + "Ability: " + this.name + "\n";
+        
+        s += currTab + "Turn Economy Cost: {" + "\n";        
+        foreach (string economyCostName in turnEconomyCost.Keys)
+        {
+            s += currTab + tab + economyCostName + " " + turnEconomyCost[economyCostName] + "\n"; 
+        }
+        s += currTab + "}" + "\n";
+
+        s += currTab + "Stat Cost: {" + "\n";
+        foreach (string statCostName in turnEconomyCost.Keys)
+        {
+            s += currTab + tab + statCostName + " " + turnEconomyCost[statCostName] + "\n";
+        }
+        s += currTab + "}" + "\n";
+
+        return s;
     }
 }
 
@@ -34,6 +59,56 @@ public class AbilityManager
             instance = new AbilityManager();
         }
         return instance;
+    }
+
+    //Check if a character can pay the cost of an ability
+    public static bool Activate_CheckCost(string name, Character attacker)
+    {        
+        Ability toActivate = abilityPool[name];
+        bool canActivate = true;
+
+        //Check Turn Economy Cost
+        foreach(string costName in toActivate.turnEconomyCost.Keys)
+        {
+            int newValue = attacker.currentTurnEconomy[costName] - toActivate.turnEconomyCost[costName];
+            if (newValue < 0)
+            {
+                canActivate = false;
+                break;
+            }
+        }
+
+        if (!canActivate) return false;
+
+        //Check Stat Cost
+        foreach (string statName in toActivate.statCost.Keys)
+        {
+            int newValue = attacker.GetCharacterStat(statName).GetCurrentValue() - toActivate.statCost[statName];
+            if (newValue < 0)
+            {
+                canActivate = false;
+                break;
+            }
+        }
+        return canActivate;
+    }
+
+    //Apply the cost of an ability
+    public static void Activate_ApplyCost(string name, Character attacker)
+    {
+        Ability toActivate = abilityPool[name];
+        
+        //Apply Turn Economy Cost
+        foreach (string costName in toActivate.turnEconomyCost.Keys)
+        {            
+            attacker.currentTurnEconomy[costName] -= toActivate.turnEconomyCost[costName];
+        }
+
+        //Apply Stat Cost
+        foreach(string statName in toActivate.statCost.Keys)
+        {
+            attacker.GetCharacterStat(statName).DealDamage(toActivate.statCost[statName]);
+        }
     }
 
     //Calculates success of an ability and applies its damage to a character.

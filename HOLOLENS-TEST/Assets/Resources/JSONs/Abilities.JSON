@@ -3,6 +3,7 @@
     {
       "name": "Charisma_Melee_Attack_Poisoned",
       "description": "A melee attack",
+      "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
       "effects": [
         {
           "isPrimary": true,
@@ -81,6 +82,7 @@
     {
       "name": "Dexterity_Ranged_Attack_Roll",
       "description": "A ranged dexterity attack",
+      "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
       "effects": [
         {
           "isPrimary": true,
@@ -123,6 +125,8 @@
     {
       "name": "Fireball",
       "description": "An explosion of fire",
+      "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
+      "statCost": [{ "name": "spell_slot_3", "cost": 1 }],
       "effects": [
         {
           "isPrimary": true,
@@ -160,6 +164,7 @@
     {
       "name": "Melee_Strength_Attack",
       "description": "A melee strength attack",
+      "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
       "effects": [
         {
           "isPrimary": true,

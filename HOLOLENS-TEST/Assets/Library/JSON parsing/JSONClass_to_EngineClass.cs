@@ -1,89 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-// A singleton class that takes json filepaths and
-//  1. parses the json files
-//  2. returns the JSONClasses filled with the parsed data
-public class JSONParser
-{
-    private JSONParser() {}
-    private static JSONParser instance = null;
-
-    public static JSONBaseCharacterPresetWrapper presetWrapper;
-    public static JSONBaseCharacterPresetsWrapper presetsWrapper;
-
-    public static JSONParser GetInstance()
-    {
-        if (instance == null)
-        {
-            instance = new JSONParser();
-        }
-        return instance;
-    }
-    public static JSONBaseCharacterPresetWrapper ParseBaseCharacterPreset(string jsonPath)
-    {
-        JSONBaseCharacterPresetWrapper wrapper;
-        TextAsset jsonFile = Resources.Load<TextAsset>(jsonPath);
-        wrapper = JsonUtility.FromJson<JSONBaseCharacterPresetWrapper>(jsonFile.text);
-        return wrapper;
-    }
-    public static JSONBaseCharacterPresetsWrapper ParseBaseCharacterPresets(string jsonPath) {
-        JSONBaseCharacterPresetsWrapper wrapper;
-        TextAsset jsonFile = Resources.Load<TextAsset>(jsonPath);
-        wrapper = JsonUtility.FromJson<JSONBaseCharacterPresetsWrapper>(jsonFile.text);
-        return wrapper;
-    }
-    public static JSONEffect ParseEffect(string jsonPath)
-    {
-        JSONEffect wrapper;
-        TextAsset jsonFile = Resources.Load<TextAsset>(jsonPath);
-        wrapper = JsonUtility.FromJson<JSONEffect>(jsonFile.text);
-        return wrapper;
-    }
-    public static JSONAbility ParseAbility(string jsonPath)
-    {
-        JSONAbility wrapper;
-        TextAsset jsonFile = Resources.Load<TextAsset>(jsonPath);
-        wrapper = JsonUtility.FromJson<JSONAbility>(jsonFile.text);
-        return wrapper;
-    }
-    public static JSONAbilities ParseAbilities(string jsonPath)
-    {
-        JSONAbilities wrapper;
-        TextAsset jsonFile = Resources.Load<TextAsset>(jsonPath);
-        wrapper = JsonUtility.FromJson<JSONAbilities>(jsonFile.text);
-        return wrapper;
-    }
-
-    public static JSONCharacter ParseCharacter(string jsonPath)
-    {
-        JSONCharacter wrapper;
-        TextAsset jsonFile = Resources.Load<TextAsset>(jsonPath);
-        wrapper = JsonUtility.FromJson<JSONCharacter>(jsonFile.text);
-        return wrapper;
-    }
-
-    public static JSONCharacters ParseCharacters(string jsonPath)
-    {
-        JSONCharacters wrapper;
-        TextAsset jsonFile = Resources.Load<TextAsset>(jsonPath);
-        wrapper = JsonUtility.FromJson<JSONCharacters>(jsonFile.text);
-        return wrapper;
-    }
-
-}
+using UnityEngine.Assertions;
 
 //A singleton class that takes JSONClasses and forms the engine classes
-public class FromJSONtoEngine
+public class JSONClass_to_EngineClass
 {
-    private FromJSONtoEngine(){}
-    private static FromJSONtoEngine instance = null;
-    public static FromJSONtoEngine GetInstance()
+    private JSONClass_to_EngineClass() { }
+    private static JSONClass_to_EngineClass instance = null;
+    public static JSONClass_to_EngineClass GetInstance()
     {
         if (instance == null)
         {
-            instance = new FromJSONtoEngine();
+            instance = new JSONClass_to_EngineClass();
         }
         return instance;
     }
@@ -162,7 +91,7 @@ public class FromJSONtoEngine
         PrimaryEffectStats effect = new PrimaryEffectStats();
 
         //Targetting statistics
-        if(jsonEffect.targetting != null)
+        if (jsonEffect.targetting != null)
             effect.CreateTargetting(jsonEffect.targetting.type, jsonEffect.targetting.number);
 
         //Area of Effect statistics
@@ -172,20 +101,20 @@ public class FromJSONtoEngine
         //Success Statistics
         JSONEffectComparisonStat jsonAttacker;
         JSONEffectComparisonStat jsonDefender;
-        
+
         ComparisonStat attacker = null;
         ComparisonStat defender = null;
-        
+
         if (jsonEffect.succeedsOn.comparisonStats.attackerStat != null)
         {
             jsonAttacker = jsonEffect.succeedsOn.comparisonStats.attackerStat;
             attacker = new ComparisonStat(jsonAttacker.name, jsonAttacker.multiplier, jsonAttacker.bonus);
-        }             
+        }
         if (jsonEffect.succeedsOn.comparisonStats.defenderStat != null)
         {
             jsonDefender = jsonEffect.succeedsOn.comparisonStats.defenderStat;
-            defender = new ComparisonStat(jsonDefender.name, jsonDefender.multiplier, jsonDefender.bonus);       
-        }            
+            defender = new ComparisonStat(jsonDefender.name, jsonDefender.multiplier, jsonDefender.bonus);
+        }
 
         effect.CreateEffectSucceedsStats(jsonEffect.succeedsOn.type, jsonEffect.succeedsOn.againstStatic, attacker, defender);
 
@@ -222,7 +151,7 @@ public class FromJSONtoEngine
 
         //Damage Statistics
         effect.CreateDamageStatistics(jsonEffect.damage.amount.baseAmount, jsonEffect.damage.amount.statsAffecting, jsonEffect.damage.damagedStat, jsonEffect.damage.onSavedMultiplier);
-        
+
         return effect;
     }
 
@@ -230,29 +159,48 @@ public class FromJSONtoEngine
     public static List<PrimaryEffectStats> CreatePrimaryEffects(JSONEffect[] jsonEffects)
     {
         List<PrimaryEffectStats> effectsList = new List<PrimaryEffectStats>();
-        foreach(JSONEffect jsonEffect in jsonEffects)
+        foreach (JSONEffect jsonEffect in jsonEffects)
         {
             if (jsonEffect.isPrimary)
                 effectsList.Add(CreatePrimaryEffectSkeleton(jsonEffect));
-            else                
-                effectsList[effectsList.Count - 1].followUpEffects.Add(CreateFollowUpEffect(jsonEffect));        
+            else
+                effectsList[effectsList.Count - 1].followUpEffects.Add(CreateFollowUpEffect(jsonEffect));
         }
         return effectsList;
     }
 
     public static Ability CreateAbility(JSONAbility jsonAbility)
     {
-        return new Ability(jsonAbility.name, jsonAbility.description, CreatePrimaryEffects(jsonAbility.effects));
+        Ability toReturn = new Ability(jsonAbility.name, jsonAbility.description, CreatePrimaryEffects(jsonAbility.effects));
+
+        if (jsonAbility.turnEconomyCost != null)
+        {
+            toReturn.turnEconomyCost = new Dictionary<string, int>();
+            foreach (JSONCost turnEconomyCost in jsonAbility.turnEconomyCost)
+            {
+                toReturn.turnEconomyCost.Add(turnEconomyCost.name, turnEconomyCost.cost);
+            }
+        }
+
+        if (jsonAbility.statCost != null)
+        {
+            toReturn.statCost = new Dictionary<string, int>();
+            foreach (JSONCost statCost in jsonAbility.statCost)
+            {
+                toReturn.statCost.Add(statCost.name, statCost.cost);
+            }
+        }
+        return toReturn;
     }
 
     //Create a dictionary of Abilities from the parsed JSON
     public static void CreateAbilitiesDictionary(JSONAbilities jsonAbilities)
-    {        
-        foreach(JSONAbility jsonAbility in jsonAbilities.abilities)
+    {
+        foreach (JSONAbility jsonAbility in jsonAbilities.abilities)
         {
             Ability tempAbility = CreateAbility(jsonAbility);
             AbilityManager.abilityPool.Add(tempAbility.name, tempAbility);
-        }     
+        }
     }
 
     //Create a dictionary of BaseCharacterPresets from the parsed JSON 
@@ -271,22 +219,41 @@ public class FromJSONtoEngine
     {
         Character character = new Character();
 
+        Debug.Log(jsonCharacter.turnEconomy + "  " + jsonCharacter.name);
+
         character.name = jsonCharacter.name;
+        character.turnEconomy = new Dictionary<string, int>();
+        character.currentTurnEconomy = new Dictionary<string, int>();
+        foreach (JSONTurnEconomy actionEconomy in jsonCharacter.turnEconomy)
+        {
+            character.turnEconomy.Add(actionEconomy.name, actionEconomy.number);
+        }
+        character.RefreshTurnEconomy();
 
-        foreach(string ability in jsonCharacter.abilities)
-        {
-            character.abilities.Add(ability, ability);
-        }
-        
-        foreach(string basePresetName in jsonCharacter.basePresets)
-        {
-            character.basePresets.Add(basePresetName);
-        }
+        //Its optional to have character abilities
+        if (jsonCharacter.abilities != null)
+            foreach (string ability in jsonCharacter.abilities)
+            {
+                character.abilities.Add(ability, ability);
+            }
 
-        foreach(string additionalPresetName in jsonCharacter.additionalPresets)
+        //Its mandatory to have a Base Preset
+        if (jsonCharacter.basePresets == null)
         {
-            character.additionalPresets.Add(additionalPresetName);
+            Assert.IsFalse(true, "A character should always have a Base Preset");
         }
+        else
+            foreach (string basePresetName in jsonCharacter.basePresets)
+            {
+                character.basePresets.Add(basePresetName);
+            }
+
+        //Its optional to have additionaly Presets
+        if (jsonCharacter.additionalPresets != null)
+            foreach (string additionalPresetName in jsonCharacter.additionalPresets)
+            {
+                character.additionalPresets.Add(additionalPresetName);
+            }
 
         return character;
     }
@@ -294,7 +261,7 @@ public class FromJSONtoEngine
     public static void FillCharacterPool(JSONCharacters jsonCharacters)
     {
         ScriptTesting.characterPool = new Dictionary<string, Character>();
-        foreach(JSONCharacter jsonChar in jsonCharacters.characters)
+        foreach (JSONCharacter jsonChar in jsonCharacters.characters)
         {
             Character temp = CreateCharacter(jsonChar);
             ScriptTesting.characterPool.Add(temp.name, temp);

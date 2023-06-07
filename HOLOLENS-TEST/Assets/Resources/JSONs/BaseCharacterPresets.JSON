@@ -52,6 +52,11 @@
           "name": "dexterity_saving_throw",
           "staticValue": 0,
           "statRelations": ["+ | 1 | dexterity_modifier", "+ | 1 | proficiency_bonus"]
+        },
+        {
+          "name": "spell_slot_3",
+          "staticValue": 1,
+          "statRelations": []
         }
       ],
       "abilities": ["Melee_Strength_Attack"]
@@ -97,6 +102,11 @@
         {
           "name": "dexterity_saving_throw",
           "staticValue": 8,
+          "statRelations": []
+        },
+        {
+          "name": "spell_slot_3",
+          "staticValue": 1,
           "statRelations": []
         }
       ],

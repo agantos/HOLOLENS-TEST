@@ -2,18 +2,60 @@
   "characters": [
     {
       "name": "Josh",
+      "turnEconomy": [
+        {
+          "name": "Action",
+          "number": 1
+        },
+        {
+          "name": "Bonus Action",
+          "number": 1
+        },
+        {
+          "name": "Move Action",
+          "number": 1
+        }
+      ],
       "abilities": ["Charisma_Melee_Attack_Poisoned"],
       "basePresets": ["Human"],
       "additionalPresets": []
     },
     {
       "name": "Jarnathan",
+      "turnEconomy": [
+        {
+          "name": "Action",
+          "number": 1
+        },
+        {
+          "name": "Bonus Action",
+          "number": 1
+        },
+        {
+          "name": "Move Action",
+          "number": 1
+        }
+      ],
       "abilities": [""],
       "basePresets": ["Dwarf"],
       "additionalPresets": []
     },
     {
       "name": "Vanoth",
+      "turnEconomy": [
+        {
+          "name": "Action",
+          "number": 1
+        },
+        {
+          "name": "Bonus Action",
+          "number": 1
+        },
+        {
+          "name": "Move Action",
+          "number": 1
+        }
+      ],
       "abilities": ["Fireball"],
       "basePresets": ["Dwarf"],
       "additionalPresets": []
