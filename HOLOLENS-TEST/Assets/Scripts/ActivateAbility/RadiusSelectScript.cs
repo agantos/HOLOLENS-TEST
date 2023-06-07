@@ -5,6 +5,7 @@ using UnityEngine;
 public class RadiusSelectScript : MonoBehaviour
 {
     public GameObject selectToken;
+    public List<GameObject> tokensCreated;
     public int radius;
     //should represent what 1 feet is in the game
     public float baseRadiusX, baseRadiusY, baseRadiusZ;
@@ -25,6 +26,8 @@ public class RadiusSelectScript : MonoBehaviour
             token.transform.SetParent(other.transform.parent.transform, false);
             float playerHeight = other.transform.localPosition.y + other.transform.localScale.y / 2;
             token.transform.localPosition += new Vector3(0, playerHeight + 0.1f, 0);
+            tokensCreated.Add(token);
+
 
             //Add character to the selected characters
             SelectTarget(other.gameObject.transform.parent.gameObject);
@@ -39,7 +42,9 @@ public class RadiusSelectScript : MonoBehaviour
         //Destroy spawned selection token
         if(other.gameObject.tag == "Player")
         {
-            Destroy(other.gameObject.transform.parent.transform.Find("IsSelected(Clone)").gameObject);
+            GameObject obj = other.gameObject.transform.parent.transform.Find("IsSelected(Clone)").gameObject;
+            tokensCreated.Remove(obj);
+            Destroy(obj);
         }
 
         //Remove character from the selected characters
@@ -56,18 +61,6 @@ public class RadiusSelectScript : MonoBehaviour
         defenders.Add(target.GetComponent<CharacterScript>().GetCharacter());
     }
 
-    void SelectTarget(Collider other)
-    {
-        //Add character to the selected characters
-        defenders.Add(other.gameObject.transform.parent.gameObject.GetComponent<CharacterScript>().GetCharacter());
-
-        //Spawn selection token on top of player model.
-        GameObject token = Object.Instantiate(selectToken);
-        token.transform.SetParent(other.transform.parent.transform, false);
-        float playerHeight = other.transform.localPosition.y + other.transform.localScale.y / 2;
-        token.transform.localPosition += new Vector3(0, playerHeight + 0.1f, 0);
-    }
-
     void UnselectTarget(GameObject target)
     {
         defenders.Remove(target.GetComponent<CharacterScript>().GetCharacter());
@@ -75,11 +68,19 @@ public class RadiusSelectScript : MonoBehaviour
 
     public void Activate()
     {
+        //Activate the abilities
         foreach (Character defender in defenders)
         {
             AbilityManager.ActivateAbilityEffect(ability.name, defender, attacker);
         }
+        
+        //Destroy the spawned radius effect
         Destroy(gameObject);
-    }
 
+        //Despawn select marker
+        foreach(GameObject obj in tokensCreated)
+        {
+            Destroy(obj);
+        }
+    }
 }
