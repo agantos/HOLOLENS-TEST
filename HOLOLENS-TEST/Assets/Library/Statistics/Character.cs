@@ -22,7 +22,6 @@ public class Character
         }
     }
     public void AddStat(CharacterStat stat) { stats.GetStatistics().Add(stat.GetName(), stat); }   
-
     public Ability GetCharacterAbility(string name)
     {
         return AbilityManager.abilityPool[name];

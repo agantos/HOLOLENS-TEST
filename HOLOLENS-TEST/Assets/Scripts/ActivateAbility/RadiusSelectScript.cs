@@ -28,7 +28,6 @@ public class RadiusSelectScript : MonoBehaviour
             token.transform.localPosition += new Vector3(0, playerHeight + 0.1f, 0);
             tokensCreated.Add(token);
 
-
             //Add character to the selected characters
             SelectTarget(other.gameObject.transform.parent.gameObject);
         }
@@ -39,16 +38,17 @@ public class RadiusSelectScript : MonoBehaviour
     //- Removes collided from defenders
     void OnTriggerExit(Collider other)
     {
-        //Destroy spawned selection token
+        //Only on collisions with gameobject with the correct TAG
         if(other.gameObject.tag == "Player")
         {
+            //Destroy spawned selection token
             GameObject obj = other.gameObject.transform.parent.transform.Find("IsSelected(Clone)").gameObject;
             tokensCreated.Remove(obj);
             Destroy(obj);
-        }
 
-        //Remove character from the selected characters
-        UnselectTarget(other.gameObject.transform.parent.gameObject);
+            //Remove character from the selected characters
+            UnselectTarget(other.gameObject.transform.parent.gameObject);
+        }        
     }
 
     //Set the size the AOE selection

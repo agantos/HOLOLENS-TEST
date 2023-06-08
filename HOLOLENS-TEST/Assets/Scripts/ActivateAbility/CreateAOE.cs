@@ -11,6 +11,7 @@ public class CreateAOE : MonoBehaviour
 
     public void InstantiateObject(Ability ability, Character attacker)
     {
+        //Check if the ability can be cast
         if (AbilityManager.Activate_CheckCost(ability.name, attacker))
         {
             switch (ability.effects[0].areaOfEffect.shape)
@@ -31,6 +32,7 @@ public class CreateAOE : MonoBehaviour
                     break;
             }
 
+            //Set the parameters of the radius selct script
             spawned.GetComponent<RadiusSelectScript>().attacker = attacker;
             spawned.GetComponent<RadiusSelectScript>().ability = ability;
 
