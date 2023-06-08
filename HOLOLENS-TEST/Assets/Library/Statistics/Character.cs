@@ -27,16 +27,15 @@ public class Character
     {
         return AbilityManager.abilityPool[name];
     }
-    public void ActivateOwnedAbility(string abilityName, Character defender = null, Character attacker = null)
+    public void ActivateOwnedAbility(string abilityName, List<Character> defenders = null, Character attacker = null)
     {
         if(abilities.TryGetValue(abilityName, out abilityName))
         {
-            if (AbilityManager.Activate_CheckCost(abilityName, attacker))
-            {
+            foreach(Character defender in defenders)
                 AbilityManager.ActivateAbilityEffect(abilityName, defender, attacker);
-                AbilityManager.Activate_ApplyCost(abilityName, attacker);
-            }
-    }
+
+            AbilityManager.Activate_ApplyCost(abilityName, attacker);
+        }
         else
         {
             Assert.IsFalse(true, "Character " + name + " does not have the ability " + abilityName);
