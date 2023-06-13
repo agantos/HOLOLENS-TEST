@@ -8,8 +8,8 @@ public class ActivateAbilityButton : Button
     // Start is called before the first frame update
     void Start()
     {
-        onClick.AddListener(delegate { 
-            FindFirstObjectByType<RadiusSelectScript>().Activate();
+        onClick.AddListener(delegate {
+            CastingAbilityManager.ActivateAbility();
             gameObject.SetActive(false);
         });
     }

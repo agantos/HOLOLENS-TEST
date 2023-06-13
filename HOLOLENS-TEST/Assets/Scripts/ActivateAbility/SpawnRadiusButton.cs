@@ -10,13 +10,17 @@ public class SpawnRadiusButton : Button
 
     public string abilityName;
     public string attackerName;
+
     // Start is called before the first frame update
     void Start()
     {
-        AreaOfEffectStats aoe = new AreaOfEffectStats(30, "cube", 10);
-        onClick.AddListener(delegate { 
-            SpawnRadius.GetComponent<CreateAOE>().InstantiateObject(AbilityManager.abilityPool[abilityName], ScriptTesting.characterPool[attackerName]);
-            ActivateButtonPrefab.SetActive(true);
+        onClick.AddListener(delegate {
+            if (SpawnRadius.GetComponent<CastingAbilityManager>().
+                    ActivateSelection(AbilityManager.abilityPool[abilityName], GameManager.characterPool[attackerName])
+            )
+            { 
+                ActivateButtonPrefab.SetActive(true); 
+            }
         });
     }
 

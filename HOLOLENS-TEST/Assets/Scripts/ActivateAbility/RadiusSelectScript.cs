@@ -10,11 +10,6 @@ public class RadiusSelectScript : MonoBehaviour
     //should represent what 1 feet is in the game
     public float baseRadiusX, baseRadiusY, baseRadiusZ;
 
-    //Variables for the activation of the ability
-    public Character attacker;
-    List<Character> defenders = new List<Character>();
-    public Ability ability;
-
     //- Adds collided Character to defenders
     //- Creates a token that indicates the collided is selected
     void OnTriggerEnter(Collider other)
@@ -63,19 +58,16 @@ public class RadiusSelectScript : MonoBehaviour
     }
 
     void SelectTarget(GameObject target) {
-        defenders.Add(target.GetComponent<CharacterScript>().GetCharacter());
+        CastingAbilityManager.defenders.Add(target.GetComponent<CharacterScript>().GetCharacter());
     }
 
     void UnselectTarget(GameObject target)
     {
-        defenders.Remove(target.GetComponent<CharacterScript>().GetCharacter());
+        CastingAbilityManager.defenders.Remove(target.GetComponent<CharacterScript>().GetCharacter());
     }
 
-    public void Activate()
+    public void OnActivate()
     {
-        //Activate the ability        
-        attacker.ActivateOwnedAbility(ability.name, defenders, attacker);       
-        
         //Destroy the spawned radius effect
         Destroy(gameObject);
 

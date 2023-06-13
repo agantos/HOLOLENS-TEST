@@ -527,6 +527,8 @@ GameObject:
   - component: {fileID: 274143886}
   - component: {fileID: 274143885}
   - component: {fileID: 274143884}
+  - component: {fileID: 274143892}
+  - component: {fileID: 274143891}
   m_Layer: 0
   m_Name: Josh
   m_TagString: Player
@@ -560,7 +562,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.3819609, z: 1}
+  m_Size: {x: 1, y: 1.3819609, z: 0.46218872}
   m_Center: {x: 0, y: -0.10901952, z: 0}
 --- !u!114 &274143885
 MonoBehaviour:
@@ -680,6 +682,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTetherWhenManipulating: 0
   IsBoundsHandles: 0
+--- !u!114 &274143891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274143882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ab55f672ad59b4499c0e55019580dcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectToken: {fileID: 4701887471863925201, guid: a5064ba5d7220a248907e3406fe50bcd, type: 3}
+--- !u!114 &274143892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274143882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98c748f3768ab714a8449b60fb9edc5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventsToReceive: 0
+  debounceThreshold: 0.01
+  localForward: {x: -0, y: -0, z: -1}
+  localUp: {x: 0, y: 1, z: 0}
+  localCenter: {x: 0, y: -0.10901952, z: 0}
+  bounds: {x: 1, y: 1.3819609}
+  touchableCollider: {fileID: 274143884}
 --- !u!1 &281559584 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4833279000401547824, guid: 97e4dcf8025517c42bf536ac2014e1c7, type: 3}
@@ -817,7 +851,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1915, y: 1265}
+  m_SizeDelta: {x: 1500, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &599464119
 GameObject:
@@ -1030,7 +1064,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fde0df030b09f2b449ae80f2f7d66543, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.044
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fde0df030b09f2b449ae80f2f7d66543, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1038,7 +1072,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fde0df030b09f2b449ae80f2f7d66543, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.055
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fde0df030b09f2b449ae80f2f7d66543, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1115,10 +1149,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 772d26e8c58d3d74b9d3510d52bc29b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parsedBasePresets:
-    baseCharacterPresets: []
-  JSONcharacters:
-    characters: []
 --- !u!4 &633065940
 Transform:
   m_ObjectHideFlags: 0
@@ -1708,6 +1738,8 @@ GameObject:
   - component: {fileID: 1186546222}
   - component: {fileID: 1186546220}
   - component: {fileID: 1186546221}
+  - component: {fileID: 1186546227}
+  - component: {fileID: 1186546228}
   m_Layer: 0
   m_Name: Vanoth
   m_TagString: Player
@@ -1755,8 +1787,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.3069041, z: 1}
-  m_Center: {x: 0, y: -0.14654791, z: 0}
+  m_Size: {x: 0.6237258, y: 1.3069041, z: 0.48905826}
+  m_Center: {x: -0.019718468, y: -0.14654791, z: 0}
 --- !u!114 &1186546222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1861,6 +1893,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTetherWhenManipulating: 0
   IsBoundsHandles: 0
+--- !u!114 &1186546227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186546218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98c748f3768ab714a8449b60fb9edc5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventsToReceive: 0
+  debounceThreshold: 0.01
+  localForward: {x: -0, y: -0, z: -1}
+  localUp: {x: 0, y: 1, z: 0}
+  localCenter: {x: -0.019718481, y: -0.14654791, z: 0}
+  bounds: {x: 0.6237258, y: 1.3069041}
+  touchableCollider: {fileID: 1186546221}
+--- !u!114 &1186546228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186546218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ab55f672ad59b4499c0e55019580dcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectToken: {fileID: 4701887471863925201, guid: a5064ba5d7220a248907e3406fe50bcd, type: 3}
 --- !u!4 &1188379504 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1132756220076275095, guid: 3fd4807e52cec1044829577e45522297, type: 3}
@@ -3526,6 +3590,8 @@ GameObject:
   - component: {fileID: 2095897216}
   - component: {fileID: 2095897215}
   - component: {fileID: 2095897214}
+  - component: {fileID: 2095897222}
+  - component: {fileID: 2095897221}
   m_Layer: 0
   m_Name: Jarnathan
   m_TagString: Player
@@ -3559,8 +3625,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.2056468, z: 0.75510216}
-  m_Center: {x: 0, y: 0, z: 0.053195}
+  m_Size: {x: 1.0344793, y: 1.2056468, z: 0.6339474}
+  m_Center: {x: -0.01723963, y: 0, z: -0.13684273}
 --- !u!114 &2095897215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3679,6 +3745,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTetherWhenManipulating: 0
   IsBoundsHandles: 0
+--- !u!114 &2095897221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2095897212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98c748f3768ab714a8449b60fb9edc5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventsToReceive: 0
+  debounceThreshold: 0.01
+  localForward: {x: -0, y: -0, z: -1}
+  localUp: {x: 0, y: 1, z: 0}
+  localCenter: {x: 0, y: 0, z: -0.15}
+  bounds: {x: 1.0344793, y: 1.2056468}
+  touchableCollider: {fileID: 2095897214}
+--- !u!114 &2095897222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2095897212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ab55f672ad59b4499c0e55019580dcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectToken: {fileID: 4701887471863925201, guid: a5064ba5d7220a248907e3406fe50bcd, type: 3}
 --- !u!4 &2103324056 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4570736968952628245, guid: aa2d79bd921b85c41a11071b76dec455, type: 3}

@@ -10,7 +10,11 @@ public class CharacterScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        character = ScriptTesting.characterPool[charName];
+        character = GameManager.characterPool[charName];
+
+        //Character registers itself in the GameManager list.
+        GameManager.characterGameObjects.Add(gameObject);
+
         Debug.Log(character.ToString("  "));
     }
 

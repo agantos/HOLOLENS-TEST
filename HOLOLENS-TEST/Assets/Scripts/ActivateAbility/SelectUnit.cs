@@ -6,7 +6,8 @@ using Microsoft.MixedReality.Toolkit.Input;
 public class SelectUnit : MonoBehaviour, IMixedRealityPointerHandler, IMixedRealityTouchHandler
 {
     public GameObject selectToken;
-    public List<GameObject> tokensCreated;
+    private bool isSelected;
+    private GameObject token;
 
     // Start is called before the first frame update
     void Start()
@@ -25,29 +26,72 @@ public class SelectUnit : MonoBehaviour, IMixedRealityPointerHandler, IMixedReal
 
     }
 
-    public void OnPointerClicked(MixedRealityPointerEventData eventData) {
-        //if (eventData.selectedObject.tag == "Player")
-        //{
-        //    //Spawn selection token on top of player model.
-        //    GameObject token = Object.Instantiate(selectToken);
-        //    token.transform.SetParent(eventData.selectedObject.transform.parent.transform, false);
-        //    float playerHeight = eventData.selectedObject.transform.localPosition.y + eventData.selectedObject.transform.localScale.y / 2;
-        //    token.transform.localPosition += new Vector3(0, playerHeight + 0.1f, 0);
-        //    tokensCreated.Add(token);
-        //}
-    }
+    public void OnPointerClicked(MixedRealityPointerEventData eventData) { }
 
-    public void OnTouchStarted(HandTrackingInputEventData eventData)
-    {
-    }
+    public void OnTouchStarted(HandTrackingInputEventData eventData) { }
+    public void OnTouchUpdated(HandTrackingInputEventData eventData) { }
+    public void OnPointerDragged(MixedRealityPointerEventData eventData) { }
+
+    //Selection with touch
     public void OnTouchCompleted(HandTrackingInputEventData eventData)
     {
-        Debug.Log("Select");
+        if(CastingAbilityManager.CurrentSelectionType == AbilitySelectType.SELECT)
+        {
+            if (!isSelected)
+            {
+                SpawnToken();
+                SelectCharacter();
+                isSelected = true;
+            }
+            else
+            {
+                Destroy(token);
+                UnselectCharacter();
+                isSelected = false;
+            }
+        }    
     }
-    public void OnTouchUpdated(HandTrackingInputEventData eventData) { }
-
-    public void OnPointerDragged(MixedRealityPointerEventData eventData) { }
+   
+    //Selection with point ray
     public void OnPointerUp(MixedRealityPointerEventData eventData) {
-        Debug.Log("Select");
+        if (CastingAbilityManager.CurrentSelectionType == AbilitySelectType.SELECT)
+        {
+            if (!isSelected)
+            {
+                SpawnToken();
+                SelectCharacter();
+                isSelected = true;
+            }
+            else
+            {
+                Destroy(token);
+                UnselectCharacter();
+                isSelected = false;
+            }
+        }
+    }
+
+    private void SpawnToken()
+    {
+        //Spawn selection token.
+        token = Object.Instantiate(selectToken);
+        token.transform.SetParent(gameObject.transform, false);
+
+        //Models may be rescaled but the scale will be uniform. Remove this scale from the token.
+        token.transform.localScale *= 1 / gameObject.transform.localScale.x;
+
+        //Place selection token on top of model.
+        float playerHeight = gameObject.transform.localPosition.y + 0.5f;
+        token.transform.localPosition += new Vector3(0, playerHeight + 0.3f, 0);
+    }
+
+    private void SelectCharacter()
+    {
+        CastingAbilityManager.defenders.Add(gameObject.GetComponent<CharacterScript>().GetCharacter());
+    }
+
+    private void UnselectCharacter()
+    {
+        CastingAbilityManager.defenders.Remove(gameObject.GetComponent<CharacterScript>().GetCharacter());
     }
 }
