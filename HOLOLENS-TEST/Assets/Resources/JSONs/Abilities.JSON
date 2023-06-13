@@ -136,7 +136,7 @@
           },
           "areaOfEffect": {
             "range": 60,
-            "shape": "cube",
+            "shape": "circle",
             "radius": 40
           },
           "succeedsOn": {

@@ -21,15 +21,20 @@ public class RadiusSelectScript : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            //Spawn selection token on top of player model.
-            GameObject token = Object.Instantiate(selectToken);            
-            token.transform.SetParent(other.transform.parent.transform, false);
-            float playerHeight = other.transform.localPosition.y + other.transform.localScale.y / 2;
-            token.transform.localPosition += new Vector3(0, playerHeight + 0.1f, 0);
+            //Spawn selection token.
+            GameObject token = Object.Instantiate(selectToken);                      
+            token.transform.SetParent(other.transform, false);
+                        
+            //Models may be rescaled but the scale will be uniform. Remove this scale from the token.
+            token.transform.localScale *= 1 / other.transform.localScale.x;
+
+            //Place selection token on top of model.
+            float playerHeight = other.transform.localPosition.y + 0.5f;
+            token.transform.localPosition += new Vector3(0, playerHeight + 0.3f, 0);
             tokensCreated.Add(token);
 
             //Add character to the selected characters
-            SelectTarget(other.gameObject.transform.parent.gameObject);
+            SelectTarget(other.gameObject);
         }
 
     }
@@ -42,12 +47,12 @@ public class RadiusSelectScript : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             //Destroy spawned selection token
-            GameObject obj = other.gameObject.transform.parent.transform.Find("IsSelected(Clone)").gameObject;
+            GameObject obj = other.transform.Find("IsSelected(Clone)").gameObject;
             tokensCreated.Remove(obj);
             Destroy(obj);
 
             //Remove character from the selected characters
-            UnselectTarget(other.gameObject.transform.parent.gameObject);
+            UnselectTarget(other.gameObject);
         }        
     }
 

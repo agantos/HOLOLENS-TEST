@@ -24,11 +24,11 @@ public class CreateAOE : MonoBehaviour
                 case AreaShape.SPHERE:
                     break;
                 case AreaShape.LINE:
-                    break;
-                case AreaShape.SELECT:
-                    break;
+                    break;                
                 case AreaShape.CIRCLE:
                     spawned = Instantiate(CircleSelectPrefab);
+                    break;
+                case AreaShape.SELECT:
                     break;
             }
 
@@ -46,5 +46,10 @@ public class CreateAOE : MonoBehaviour
         }
         else
             Debug.Log(attacker.name + " cannot cast ability " + ability.name);
+    }
+
+    public void InitiateSelect()
+    {
+
     }
 }
