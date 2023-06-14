@@ -15,7 +15,9 @@ public class CastingAbilityManager : MonoBehaviour
     //Variables for casting the ability
     public static bool SelectAbility;
     public static Character attacker;
-    public static List<Character> defenders = new List<Character>();
+
+    public static List<Character> defendersCharacter = new List<Character>();
+    public static List<GameObject> defendersGameObject = new List<GameObject>();
     public static Ability abilityToCast;
 
     public static AbilitySelectType CurrentSelectionType = AbilitySelectType.INACTIVE;
@@ -51,7 +53,6 @@ public class CastingAbilityManager : MonoBehaviour
                 case AreaShape.SELECT:
                     CurrentSelectionType = AbilitySelectType.SELECT;
                     return true;
-                    break;
             }       
 
             //Size the spawned selector
@@ -73,17 +74,25 @@ public class CastingAbilityManager : MonoBehaviour
 
     public static void ActivateAbility()
     {
-        attacker.ActivateOwnedAbility(abilityToCast.name, defenders, attacker);
+        attacker.ActivateOwnedAbility(abilityToCast.name, defendersCharacter, attacker);
 
         if(CastingAbilityManager.CurrentSelectionType == AbilitySelectType.SHAPE)
         {
             FindFirstObjectByType<RadiusSelectScript>().OnActivate();
         }
+        else if(CastingAbilityManager.CurrentSelectionType == AbilitySelectType.SELECT)
+        {
+            foreach(GameObject defender in defendersGameObject)
+            {
+                defender.GetComponent<SelectUnit>().OnActivate();
+            }
+        }
 
         //Clean State
         abilityToCast = null;
         attacker = null;
-        defenders.Clear();
+        defendersCharacter.Clear();
+        defendersGameObject.Clear();
         CurrentSelectionType = AbilitySelectType.INACTIVE;
     }
 }

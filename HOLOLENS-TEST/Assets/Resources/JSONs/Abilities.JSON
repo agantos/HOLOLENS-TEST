@@ -135,7 +135,7 @@
             "type": "all"
           },
           "areaOfEffect": {
-            "range": 60,
+            "range": 15,
             "shape": "select",
             "radius": 40
           },

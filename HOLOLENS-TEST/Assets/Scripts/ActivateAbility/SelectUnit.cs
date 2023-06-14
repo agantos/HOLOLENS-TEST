@@ -56,18 +56,35 @@ public class SelectUnit : MonoBehaviour, IMixedRealityPointerHandler, IMixedReal
     public void OnPointerUp(MixedRealityPointerEventData eventData) {
         if (CastingAbilityManager.CurrentSelectionType == AbilitySelectType.SELECT)
         {
-            if (!isSelected)
+            int defenderDistance = GameplayCalculatorFunctions.CalculateDistance(
+                GameManager.characterGameObjects[CastingAbilityManager.attacker.name].transform.position,
+                gameObject.transform.position
+            );
+
+            int abilityRange = CastingAbilityManager.abilityToCast.effects[0].areaOfEffect.range;
+
+            if (abilityRange > defenderDistance)
             {
-                SpawnToken();
-                SelectCharacter();
-                isSelected = true;
+                if (!isSelected)
+                {
+                    SpawnToken();
+                    SelectCharacter();
+                    isSelected = true;
+                }
+                else
+                {
+                    Destroy(token);
+                    UnselectCharacter();
+                    isSelected = false;
+                }
             }
             else
             {
-                Destroy(token);
-                UnselectCharacter();
-                isSelected = false;
+                Debug.Log("Defender " + gameObject.GetComponent<CharacterScript>().charName + 
+                    " is too far away from " + CastingAbilityManager.attacker.name
+                );
             }
+            
         }
     }
 
@@ -85,13 +102,20 @@ public class SelectUnit : MonoBehaviour, IMixedRealityPointerHandler, IMixedReal
         token.transform.localPosition += new Vector3(0, playerHeight + 0.3f, 0);
     }
 
+    public void OnActivate()
+    {
+        Destroy(token);
+    }
+
     private void SelectCharacter()
     {
-        CastingAbilityManager.defenders.Add(gameObject.GetComponent<CharacterScript>().GetCharacter());
+        CastingAbilityManager.defendersCharacter.Add(gameObject.GetComponent<CharacterScript>().GetCharacter());
+        CastingAbilityManager.defendersGameObject.Add(gameObject);
     }
 
     private void UnselectCharacter()
     {
-        CastingAbilityManager.defenders.Remove(gameObject.GetComponent<CharacterScript>().GetCharacter());
+        CastingAbilityManager.defendersCharacter.Remove(gameObject.GetComponent<CharacterScript>().GetCharacter());
+        CastingAbilityManager.defendersGameObject.Remove(gameObject);
     }
 }

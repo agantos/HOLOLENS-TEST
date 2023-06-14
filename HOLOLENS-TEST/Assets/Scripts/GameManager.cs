@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public static Dictionary<string, Character> characterPool;
 
     //List of GameObjects of all Characters
-    public static List<GameObject> characterGameObjects = new List<GameObject>();
+    public static Dictionary<string, GameObject> characterGameObjects = new Dictionary<string, GameObject>();
 
     void Start()
     {

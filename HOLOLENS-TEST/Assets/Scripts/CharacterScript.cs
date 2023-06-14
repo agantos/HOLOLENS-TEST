@@ -13,8 +13,7 @@ public class CharacterScript : MonoBehaviour
         character = GameManager.characterPool[charName];
 
         //Character registers itself in the GameManager list.
-        GameManager.characterGameObjects.Add(gameObject);
-
+        GameManager.characterGameObjects.Add(character.name, gameObject);
         Debug.Log(character.ToString("  "));
     }
 
