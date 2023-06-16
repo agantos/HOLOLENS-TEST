@@ -43,5 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dcf427c4068eb0479164e7e62a58904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RadiusMoveOnTouch: {fileID: 4786458243139136678, guid: 816af150d3ab12a45a2efc2a872f00c1, type: 3}
   CubeSelectPrefab: {fileID: 943730700960627608, guid: bb81895aa50d15c4ca1167546a792a7d, type: 3}
   CircleSelectPrefab: {fileID: 1669514898093321756, guid: e20410920b514e14ebc8ff2831cec6ce, type: 3}

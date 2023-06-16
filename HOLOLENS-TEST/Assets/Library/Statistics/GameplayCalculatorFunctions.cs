@@ -2,9 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text.RegularExpressions;
+using UnityEngine.Assertions;
 
 public class GameplayCalculatorFunctions
 {
+    private static GameplayCalculatorFunctions instance = null;
+    public static float localscale_1feet;
+    public static float gamespaceScale;
+
+    private GameplayCalculatorFunctions(GameObject gamespaceObject) {
+        //Set the gamespace Scale
+        Assert.AreEqual(gamespaceObject.transform.lossyScale, gamespaceObject.transform.localScale);
+        gamespaceScale = gamespaceObject.transform.localScale.x;
+
+        //Set 1_feet in local scale
+        localscale_1feet = 0.85f;
+    }
+
+    static public GameplayCalculatorFunctions GetInstance(GameObject gamespaceObject)
+    {
+        if (instance == null)
+        {
+            instance = new GameplayCalculatorFunctions(gamespaceObject);
+        }
+        return instance;
+    }
     public static int CalculateDiceRoll(string value)
     {
         System.Random roll = new System.Random();
@@ -51,13 +73,21 @@ public class GameplayCalculatorFunctions
         }
     }
 
-    public static int CalculateDistance(Vector3 object1, Vector3 object2)
+    //Takes an integer and returns a float that is the scale for unity.
+    public static float FeetToUnityMeasurement(float feet)
     {
-        float feetMultiplier = 0.3048f;
-        float realWorldDistanceInFeet = Vector3.Distance(object1, object2) / feetMultiplier;
-        //NOTE: size multiplier is calculated by the lossy scale of a character.
-        float sizeMultiplier = 0.1f;
-        float distance = realWorldDistanceInFeet / sizeMultiplier;
-        return (int)distance;
+        return feet * localscale_1feet;
+    }
+
+    public static float RealWorldToGameFeet(float realWorldMeasurementInMeters)
+    {
+        float realWorldMeasurementInFeet = realWorldMeasurementInMeters * 3.2808399f;
+        return realWorldMeasurementInFeet / gamespaceScale;
+    }
+
+    public static float CalculateDistanceInFeet(Vector3 object1, Vector3 object2)
+    {
+        float lossyDistanceInMeters = Vector3.Distance(object1, object2);
+        return RealWorldToGameFeet(lossyDistanceInMeters);
     }
 }

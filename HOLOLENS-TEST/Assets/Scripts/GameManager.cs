@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 public class GameManager : MonoBehaviour
 {
+    //Initialize Measurement
+    public GameObject gamespace;
+
     //Variables
     public static Dictionary<string, BaseCharacterPreset> basePresetPool;
     public static Dictionary<string, Character> characterPool;
@@ -20,6 +23,7 @@ public class GameManager : MonoBehaviour
 
     void InitializeSingletons()
     {
+        GameplayCalculatorFunctions gameplayCalculatorFunctionsInstance = GameplayCalculatorFunctions.GetInstance(gamespace);               
         JSONClass_to_EngineClass fromJSONtoEngineInstance = JSONClass_to_EngineClass.GetInstance();
         JSONFile_to_JSONClass JSONParserInstance = JSONFile_to_JSONClass.GetInstance();
         EffectSucceedsChecker effectSuccessChecker = EffectSucceedsChecker.GetInstance();

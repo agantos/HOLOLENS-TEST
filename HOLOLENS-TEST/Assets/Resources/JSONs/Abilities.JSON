@@ -135,9 +135,9 @@
             "type": "all"
           },
           "areaOfEffect": {
-            "range": 15,
-            "shape": "select",
-            "radius": 40
+            "range": 50,
+            "shape": "circle",
+            "radius": 20
           },
           "succeedsOn": {
             "type": "defender_rolls",

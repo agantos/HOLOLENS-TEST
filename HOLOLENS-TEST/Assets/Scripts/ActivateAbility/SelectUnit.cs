@@ -37,17 +37,35 @@ public class SelectUnit : MonoBehaviour, IMixedRealityPointerHandler, IMixedReal
     {
         if(CastingAbilityManager.CurrentSelectionType == AbilitySelectType.SELECT)
         {
-            if (!isSelected)
+
+            float defenderDistance = GameplayCalculatorFunctions.CalculateDistanceInFeet(
+                GameManager.characterGameObjects[CastingAbilityManager.attacker.name].transform.position,
+                gameObject.transform.position
+            );
+
+            Debug.Log("defender distance is" + defenderDistance);
+
+            int abilityRange = CastingAbilityManager.abilityToCast.effects[0].areaOfEffect.range;
+            if (abilityRange > defenderDistance)
             {
-                SpawnToken();
-                SelectCharacter();
-                isSelected = true;
+                if (!isSelected)
+                {
+                    SpawnToken();
+                    SelectCharacter();
+                    isSelected = true;
+                }
+                else
+                {
+                    Destroy(token);
+                    UnselectCharacter();
+                    isSelected = false;
+                }
             }
             else
             {
-                Destroy(token);
-                UnselectCharacter();
-                isSelected = false;
+                Debug.Log("Defender " + gameObject.GetComponent<CharacterScript>().charName +
+                    " is too far away from " + CastingAbilityManager.attacker.name
+                );
             }
         }    
     }
@@ -56,10 +74,12 @@ public class SelectUnit : MonoBehaviour, IMixedRealityPointerHandler, IMixedReal
     public void OnPointerUp(MixedRealityPointerEventData eventData) {
         if (CastingAbilityManager.CurrentSelectionType == AbilitySelectType.SELECT)
         {
-            int defenderDistance = GameplayCalculatorFunctions.CalculateDistance(
+            float defenderDistance = GameplayCalculatorFunctions.CalculateDistanceInFeet(
                 GameManager.characterGameObjects[CastingAbilityManager.attacker.name].transform.position,
                 gameObject.transform.position
             );
+
+            Debug.Log("defender distance is" + defenderDistance);
 
             int abilityRange = CastingAbilityManager.abilityToCast.effects[0].areaOfEffect.range;
 
@@ -78,13 +98,7 @@ public class SelectUnit : MonoBehaviour, IMixedRealityPointerHandler, IMixedReal
                     isSelected = false;
                 }
             }
-            else
-            {
-                Debug.Log("Defender " + gameObject.GetComponent<CharacterScript>().charName + 
-                    " is too far away from " + CastingAbilityManager.attacker.name
-                );
-            }
-            
+                       
         }
     }
 
@@ -95,11 +109,10 @@ public class SelectUnit : MonoBehaviour, IMixedRealityPointerHandler, IMixedReal
         token.transform.SetParent(gameObject.transform, false);
 
         //Models may be rescaled but the scale will be uniform. Remove this scale from the token.
-        token.transform.localScale *= 1 / gameObject.transform.localScale.x;
 
         //Place selection token on top of model.
-        float playerHeight = gameObject.transform.localPosition.y + 0.5f;
-        token.transform.localPosition += new Vector3(0, playerHeight + 0.3f, 0);
+        float playerHeight = gameObject.GetComponent<CharacterScript>().model.transform.localScale.y + 0.4f;
+        token.transform.localPosition += new Vector3(0, playerHeight + 0.1f, 0);
     }
 
     public void OnActivate()
