@@ -9,7 +9,7 @@ public enum AbilitySelectType { SHAPE, SELECT, INACTIVE }
 public class CastingAbilityManager : MonoBehaviour
 {
     //Prefabs to set in editor
-    public GameObject RadiusMoveOnTouch;
+    public GameObject radiusMoveOnTouch;
     public GameObject CubeSelectPrefab;
     public GameObject CircleSelectPrefab;
     
@@ -54,7 +54,7 @@ public class CastingAbilityManager : MonoBehaviour
                     break;
                 case AreaShape.SELECT:
                     CurrentSelectionType = AbilitySelectType.SELECT;
-                    RadiusMoveOnTouch.GetComponent<AbilityRangeDisplay>().Initialize();
+                    radiusMoveOnTouch.GetComponent<AbilityRangeDisplay>().Initialize();
                     return true;
             }       
 
@@ -67,8 +67,9 @@ public class CastingAbilityManager : MonoBehaviour
             spawned.transform.localPosition = this.transform.localPosition;
 
             //Set the AbilityRangeDisplay
-            RadiusMoveOnTouch.GetComponent<MoveGameobjectToTouchPoint>().movee = spawned;
-            RadiusMoveOnTouch.GetComponent<AbilityRangeDisplay>().Initialize();
+            radiusMoveOnTouch.SetActive(true);
+            radiusMoveOnTouch.GetComponent<MoveGameobjectToTouchPoint>().movee = spawned;
+            radiusMoveOnTouch.GetComponent<AbilityRangeDisplay>().Initialize();
 
             return true;          
         }

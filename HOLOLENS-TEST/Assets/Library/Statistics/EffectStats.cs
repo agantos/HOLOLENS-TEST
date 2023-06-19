@@ -429,21 +429,7 @@ public class EffectSucceedsChecker
         int attackRoll = (int)((statBonusAttacker + attackerDiceRoll) * effect.effectSucceedsStats.attackerStat.multiplier);
         int passNumber = GameplayCalculatorFunctions.CalculateDiceRoll(effect.effectSucceedsStats.staticNumberToPass);
 
-        string tab = "  ";
-        string s = "ATTACK EFFECT\n";
-        s+= tab + "ToBeat: " + passNumber.ToString() + "\n";
-        s+= 
-            tab + "Attacker Roll: " +
-             effect.effectSucceedsStats.attackerStat.bonus + " + " +
-             statBonusAttacker.ToString() + " = " + attackerDiceRoll.ToString() + " + " +
-             statBonusAttacker.ToString() + " = " + attackRoll + "\n";
-
-        if (attackRoll > passNumber)
-            s+= tab + "Effect Suceceds";
-        else 
-            s += tab + "Effect Fails";
-
-        Debug.Log(s);
+        Logger.Log_Effect(effect, attacker, attackerDiceRoll, true);
 
         return (attackRoll > passNumber);
     }
@@ -457,53 +443,23 @@ public class EffectSucceedsChecker
         
         int passNumber = GameplayCalculatorFunctions.CalculateDiceRoll(effect.effectSucceedsStats.staticNumberToPass);
 
-        string tab = "  ";
-        string s = "DEFENSE EFFECT\n";
-        s += tab + "DC: " + passNumber.ToString() + "\n";
-        s +=
-            tab + "Rolled: " +
-              effect.effectSucceedsStats.defenderStat.bonus + " + " +
-            statBonusDefender.ToString() + " = " + defenderDiceRoll.ToString() + " + " +
-            statBonusDefender.ToString() + " = " + defenceRoll + "\n";
-
-        if (passNumber > defenceRoll)
-            s += tab + "Effect Suceceds";
-        else
-            s += tab + "Effect Fails";
-
-        Debug.Log(s);
+        Logger.Log_Effect(effect, defender, defenderDiceRoll, false);
 
         return (passNumber > defenceRoll);
     }
 
     private bool Comparison(EffectStats effect, Character attacker, Character defender)
     {
-        int attackerDiceRoll = GameplayCalculatorFunctions.CalculateDiceRoll(effect.effectSucceedsStats.attackerStat.bonus);
-        int defenderDiceRoll = GameplayCalculatorFunctions.CalculateDiceRoll(effect.effectSucceedsStats.defenderStat.bonus);
+        int attackerDiceRollResult = GameplayCalculatorFunctions.CalculateDiceRoll(effect.effectSucceedsStats.attackerStat.bonus);
+        int defenderDiceRollResult = GameplayCalculatorFunctions.CalculateDiceRoll(effect.effectSucceedsStats.defenderStat.bonus);
 
         int statBonusAttacker = attacker.GetStats().GetStat(effect.effectSucceedsStats.attackerStat.statName).GetCurrentValue();
         int statBonusDefender = defender.GetStats().GetStat(effect.effectSucceedsStats.defenderStat.statName).GetCurrentValue();
 
-        int attackRoll = (int)((statBonusAttacker + attackerDiceRoll) * effect.effectSucceedsStats.attackerStat.multiplier);
-        int defenceRoll = (int)((statBonusDefender + defenderDiceRoll) * effect.effectSucceedsStats.defenderStat.multiplier);
+        int attackRoll = (int)((statBonusAttacker + attackerDiceRollResult) * effect.effectSucceedsStats.attackerStat.multiplier);
+        int defenceRoll = (int)((statBonusDefender + defenderDiceRollResult) * effect.effectSucceedsStats.defenderStat.multiplier);
 
-        string tab = "  ";
-        string s = "COMPARISON EFFECT\n";
-        s += tab + "Attacker Roll: " +
-            effect.effectSucceedsStats.attackerStat.bonus + " + " +
-            statBonusAttacker.ToString() + " = " + attackerDiceRoll.ToString() + " + " +
-            statBonusAttacker.ToString() + " = " + attackRoll + "\n";
-
-        s += tab + "Defender Roll: " +
-            effect.effectSucceedsStats.defenderStat.bonus + " + " +
-            statBonusDefender.ToString() + " = " + defenderDiceRoll.ToString() + " + " +
-            statBonusDefender.ToString() + " = " + defenceRoll + "\n";
-
-        if (attackRoll > defenceRoll)
-            s += tab + "Effect Suceeds";
-        else
-            s += tab + "Effect Fails";
-        Debug.Log(s);
+        Logger.Log_EffectComparison(effect, attacker, defender, attackerDiceRollResult, defenderDiceRollResult);
 
         return (attackRoll > defenceRoll);
     }
