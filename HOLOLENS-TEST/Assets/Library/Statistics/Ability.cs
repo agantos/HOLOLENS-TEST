@@ -108,6 +108,9 @@ public class AbilityManager
         foreach(string statName in toActivate.statCost.Keys)
         {
             attacker.GetCharacterStat(statName).DealDamage(toActivate.statCost[statName]);
+            
+            //MAY BE REMOVED TO BE ADDED ELSEWHERE
+            attacker.GetCharacterStat(statName).CalculateCurrentValue();
         }
     }
 

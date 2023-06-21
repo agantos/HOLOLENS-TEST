@@ -11,6 +11,7 @@ public class ActivateAbilityButton : Button
         onClick.AddListener(delegate {
             CastingAbilityManager.ActivateAbility();
             gameObject.SetActive(false);
+            FindFirstObjectByType<AbilityRangeDisplay>().Deactivate();
         });
     }
 }

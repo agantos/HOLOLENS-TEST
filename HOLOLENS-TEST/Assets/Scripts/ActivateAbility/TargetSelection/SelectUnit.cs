@@ -79,17 +79,27 @@ public class SelectUnit : MonoBehaviour, IMixedRealityPointerHandler, IMixedReal
                 gameObject.transform.position
             );
 
-            Debug.Log("defender distance is" + defenderDistance);
+            Debug.Log("Defender distance is" + defenderDistance);
 
             int abilityRange = CastingAbilityManager.abilityToCast.effects[0].areaOfEffect.range;
 
+            //(Un)Select a character only if they are within range
             if (abilityRange > defenderDistance)
             {
                 if (!isSelected)
                 {
-                    SpawnToken();
-                    SelectCharacter();
-                    isSelected = true;
+                    //Abide by the number of selectable characters
+                    if (CastingAbilityManager.defendersCharacter.Count < CastingAbilityManager.abilityToCast.effects[0].targetting.numberOfTargets)
+                    {
+                        SpawnToken();
+                        SelectCharacter();
+                        isSelected = true;
+                    }
+                    else
+                    {
+                        Debug.Log("Max number of selectable characters for these effect is " +
+                            CastingAbilityManager.abilityToCast.effects[0].targetting.numberOfTargets.ToString());
+                    }
                 }
                 else
                 {
@@ -98,6 +108,8 @@ public class SelectUnit : MonoBehaviour, IMixedRealityPointerHandler, IMixedReal
                     isSelected = false;
                 }
             }
+            else
+                Debug.Log("Subject is too far away");
                        
         }
     }

@@ -15,7 +15,7 @@ public class TargettingStats
 {
     TargetNumber numberType;
     TargetType targetType;
-    int numberOfTargets;
+    public int numberOfTargets;
 
     public TargettingStats(string type, int targets)
     {
@@ -324,6 +324,8 @@ public class EffectStats
 
         //Include other damage multipliers such as critical, resistance, vulnerabilities etc.
 
+        //Log the damage
+        Logger.Log_Damage((int)damage, damageStats.damagedStatName, defender, attacker);
 
         return (int)damage;
     }
@@ -443,6 +445,7 @@ public class EffectSucceedsChecker
         
         int passNumber = GameplayCalculatorFunctions.CalculateDiceRoll(effect.effectSucceedsStats.staticNumberToPass);
 
+        Debug.Log(defender.name);
         Logger.Log_Effect(effect, defender, defenderDiceRoll, false);
 
         return (passNumber > defenceRoll);
@@ -466,6 +469,6 @@ public class EffectSucceedsChecker
 
     public static bool GetSuccess(EffectStats effectSucceedsStats, Character defender = null, Character attacker = null)
     {
-        return rollSuccess[effectSucceedsStats.effectSucceedsStats.onCondition](effectSucceedsStats, defender, attacker);
+        return rollSuccess[effectSucceedsStats.effectSucceedsStats.onCondition](effectSucceedsStats, attacker, defender);
     }
 }

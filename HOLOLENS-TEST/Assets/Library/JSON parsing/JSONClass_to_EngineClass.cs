@@ -173,18 +173,18 @@ public class JSONClass_to_EngineClass
     {
         Ability toReturn = new Ability(jsonAbility.name, jsonAbility.description, CreatePrimaryEffects(jsonAbility.effects));
 
+        toReturn.turnEconomyCost = new Dictionary<string, int>();
         if (jsonAbility.turnEconomyCost != null)
-        {
-            toReturn.turnEconomyCost = new Dictionary<string, int>();
+        {            
             foreach (JSONCost turnEconomyCost in jsonAbility.turnEconomyCost)
             {
                 toReturn.turnEconomyCost.Add(turnEconomyCost.name, turnEconomyCost.cost);
             }
         }
 
+        toReturn.statCost = new Dictionary<string, int>();
         if (jsonAbility.statCost != null)
         {
-            toReturn.statCost = new Dictionary<string, int>();
             foreach (JSONCost statCost in jsonAbility.statCost)
             {
                 toReturn.statCost.Add(statCost.name, statCost.cost);

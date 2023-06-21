@@ -1,8 +1,8 @@
 {
   "abilities": [
     {
-      "name": "Charisma_Melee_Attack_Poisoned",
-      "description": "A melee attack",
+      "name": "Strength Ranged Attack",
+      "description": "A ranged Strength attack made with a Bow, Crossbow or different Strength ranged weapon",
       "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
       "effects": [
         {
@@ -12,7 +12,7 @@
             "type": "all"
           },
           "areaOfEffect": {
-            "range": 5,
+            "range": 80,
             "shape": "select",
             "radius": 0
           },
@@ -21,12 +21,12 @@
             "againstStatic": "",
             "comparisonStats": {
               "defenderStat": {
-                "name": "defense",
+                "name": "Defense",
                 "multiplier": 1,
                 "bonus": "0"
               },
               "attackerStat": {
-                "name": "attack_roll_charisma",
+                "name": "Strength",
                 "multiplier": 1,
                 "bonus": "1d20"
               }
@@ -36,43 +36,7 @@
             "damagedStat": "HP",
             "amount": {
               "baseAmount": "1d8",
-              "statsAffecting": ["damage_roll_charisma"]
-            },
-            "onSavedMultiplier": 0
-          }
-        },
-        {
-          "isPrimary": false,
-          "succeedsOn": {
-            "type": "automatic"
-          },
-          "damage": {
-            "damagedStat": "HP",
-            "amount": {
-              "baseAmount": "1d8",
-              "statsAffecting": [""]
-            },
-            "onSavedMultiplier": 0
-          }
-        },
-        {
-          "isPrimary": false,
-          "succeedsOn": {
-            "type": "defender_rolls",
-            "againstStatic": "17",
-            "comparisonStats": {
-              "defenderStat": {
-                "name": "dexterity_saving_throw",
-                "multiplier": 1,
-                "bonus": "1d20"
-              }
-            }
-          },
-          "damage": {
-            "damagedStat": "HP",
-            "amount": {
-              "baseAmount": "1d8",
-              "statsAffecting": ["damage_roll_charisma"]
+              "statsAffecting": ["Strength_Damage"]
             },
             "onSavedMultiplier": 0
           }
@@ -80,8 +44,8 @@
       ]
     },
     {
-      "name": "Dexterity_Ranged_Attack_Roll",
-      "description": "A ranged dexterity attack",
+      "name": "Strength Melee Attack",
+      "description": "A melee Strength attack made with a dagger, rapier or different Strength weapon",
       "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
       "effects": [
         {
@@ -91,7 +55,7 @@
             "type": "all"
           },
           "areaOfEffect": {
-            "range": 60,
+            "range": 10,
             "shape": "select",
             "radius": 0
           },
@@ -100,12 +64,12 @@
             "againstStatic": "",
             "comparisonStats": {
               "defenderStat": {
-                "name": "defense",
+                "name": "Defense",
                 "multiplier": 1,
                 "bonus": "0"
               },
               "attackerStat": {
-                "name": "attack_roll_dexterity",
+                "name": "Strength",
                 "multiplier": 1,
                 "bonus": "1d20"
               }
@@ -115,7 +79,93 @@
             "damagedStat": "HP",
             "amount": {
               "baseAmount": "1d8",
-              "statsAffecting": ["dexterity_modifier"]
+              "statsAffecting": ["Strength_Damage"]
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Finesse Ranged Attack",
+      "description": "A ranged finesse attack made with a Bow, Crossbow or different finesse ranged weapon",
+      "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 80,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Defense",
+                "multiplier": 1,
+                "bonus": "0"
+              },
+              "attackerStat": {
+                "name": "Finesse",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "1d8",
+              "statsAffecting": ["Finesse_Damage"]
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Finesse Melee Attack",
+      "description": "A melee finesse attack made with a dagger, rapier or different finesse weapon",
+      "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 10,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Defense",
+                "multiplier": 1,
+                "bonus": "0"
+              },
+              "attackerStat": {
+                "name": "Finesse",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "1d8",
+              "statsAffecting": ["Finesse_Damage"]
             },
             "onSavedMultiplier": 0
           }
@@ -126,7 +176,7 @@
       "name": "Fireball",
       "description": "An explosion of fire",
       "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
-      "statCost": [{ "name": "spell_slot_3", "cost": 1 }],
+      "statCost": [{ "name": "Magic_Points", "cost": 3 }],
       "effects": [
         {
           "isPrimary": true,
@@ -140,13 +190,18 @@
             "radius": 20
           },
           "succeedsOn": {
-            "type": "defender_rolls",
-            "againstStatic": "15",
+            "type": "comparison",
+            "againstStatic": "",
             "comparisonStats": {
               "defenderStat": {
-                "name": "dexterity_saving_throw",
+                "name": "Magic_Resistance",
                 "multiplier": 1,
                 "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "Magic_Power",
+                "multiplier": 1,
+                "bonus": "0"
               }
             }
           },
@@ -154,52 +209,9 @@
             "damagedStat": "HP",
             "amount": {
               "baseAmount": "10d6",
-              "statsAffecting": []
+              "statsAffecting": ["Magic Power"]
             },
             "onSavedMultiplier": 0.5
-          }
-        }
-      ]
-    },
-    {
-      "name": "Melee_Strength_Attack",
-      "description": "A melee strength attack",
-      "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
-      "effects": [
-        {
-          "isPrimary": true,
-          "targetting": {
-            "number": 1,
-            "type": "all"
-          },
-          "areaOfEffect": {
-            "range": 5,
-            "shape": "select",
-            "radius": 0
-          },
-          "succeedsOn": {
-            "type": "comparison",
-            "againstStatic": "",
-            "comparisonStats": {
-              "defenderStat": {
-                "name": "defense",
-                "multiplier": 1,
-                "bonus": "0"
-              },
-              "attackerStat": {
-                "name": "attack_bonus_strength",
-                "multiplier": 1,
-                "bonus": "1d20"
-              }
-            }
-          },
-          "damage": {
-            "damagedStat": "HP",
-            "amount": {
-              "baseAmount": "2d6",
-              "statsAffecting": ["damage_bonus_strength"]
-            },
-            "onSavedMultiplier": 0
           }
         }
       ]

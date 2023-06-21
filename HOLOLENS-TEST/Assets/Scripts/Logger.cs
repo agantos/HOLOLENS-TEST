@@ -80,7 +80,7 @@ public class Logger : MonoBehaviour
     }
 
     static void ScrollToBottom()
-    {
+    {        
         scrollRect.verticalNormalizedPosition = 0f;
     }
 
@@ -88,24 +88,27 @@ public class Logger : MonoBehaviour
     {
         int statBonus;
         int finalRoll;
+        string dice;
         if (attack)
         {
             statBonus = roller.GetStats().GetStat(effect.effectSucceedsStats.attackerStat.statName).GetCurrentValue();
             finalRoll = (int)((statBonus + rollerResult) * effect.effectSucceedsStats.attackerStat.multiplier);
+            dice = effect.effectSucceedsStats.attackerStat.bonus;
         }
         else
         {
             statBonus = roller.GetStats().GetStat(effect.effectSucceedsStats.defenderStat.statName).GetCurrentValue();
             finalRoll = (int)((statBonus + rollerResult) * effect.effectSucceedsStats.defenderStat.multiplier);
+            dice = effect.effectSucceedsStats.defenderStat.bonus;
         }
                     
         int passNumber = GameplayCalculatorFunctions.CalculateDiceRoll(effect.effectSucceedsStats.staticNumberToPass);
 
         AddToLine(GetColoredString(roller.name, ColorType.CHARACTER_1));
         AddToLine(" rolls ");
-        AddToLine(effect.effectSucceedsStats.attackerStat.bonus + " + " + statBonus.ToString());
+        AddToLine(dice + " + " + statBonus.ToString());
         AddToLine(" against ");
-        AddToLine(passNumber.ToString());
+        AddToLine(GetBoldedString(passNumber.ToString()));
         AddToLine(": ");
         AddToLine(rollerResult.ToString() + " + " + statBonus.ToString());
         AddToLine("\n Result is " + GetBoldedString(finalRoll.ToString()));
@@ -135,18 +138,18 @@ public class Logger : MonoBehaviour
         int finalAttackRoll = (int)((statBonusAttacker + attackerResult) * effect.effectSucceedsStats.attackerStat.multiplier);
 
         int statBonusDefender = defender.GetStats().GetStat(effect.effectSucceedsStats.defenderStat.statName).GetCurrentValue();
-        int finalDefenceRoll = (int)((statBonusDefender + attackerResult) * effect.effectSucceedsStats.defenderStat.multiplier);
+        int finalDefenceRoll = (int)((statBonusDefender + defenderResult) * effect.effectSucceedsStats.defenderStat.multiplier);
 
         AddToLine(GetColoredString(attacker.name, ColorType.CHARACTER_1));
         AddToLine(" rolls ");
         AddToLine(effect.effectSucceedsStats.attackerStat.bonus + " + " + statBonusAttacker.ToString());
         AddToLine(" against ");
         AddToLine(GetColoredString(defender.name, ColorType.CHARACTER_2) + ".");
-        AddToLine("Attack Roll: ");
+        AddToLine(" Comparison: ");
         AddToLine(GetColoredString(attackerResult.ToString() + " + " + statBonusAttacker.ToString(), ColorType.CHARACTER_1));
         AddToLine(" vs ");
         AddToLine(GetColoredString(defenderResult.ToString() + " + " + statBonusDefender.ToString(), ColorType.CHARACTER_2));
-        AddToLine("\n Results are ");
+        AddToLine("\nResults are ");
         AddToLine(GetBoldedString(GetColoredString(finalAttackRoll.ToString(), ColorType.CHARACTER_1)));
         AddToLine(" vs ");
         AddToLine(GetBoldedString(GetColoredString(finalDefenceRoll.ToString(), ColorType.CHARACTER_2)));
@@ -156,6 +159,18 @@ public class Logger : MonoBehaviour
             AddToLine(GetColoredString("Effect Succeeds", ColorType.SUCCESS));
         else
             AddToLine(GetColoredString("Effect Fails", ColorType.FAILURE));
+
+        AddLine();
+    }
+
+    public static void Log_Damage(int damage, string damagedStatName, Character defender, Character attacker)
+    {
+        AddToLine(GetColoredString(attacker.name, ColorType.CHARACTER_1));
+        AddToLine(" deals ");
+        AddToLine(GetBoldedString(damage.ToString()));
+        AddToLine(" damage to ");
+        AddToLine(GetColoredString(defender.name, ColorType.CHARACTER_2) + "'s ");
+        AddToLine(damagedStatName);
 
         AddLine();
     }

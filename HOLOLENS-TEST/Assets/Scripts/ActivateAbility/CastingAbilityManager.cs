@@ -54,7 +54,7 @@ public class CastingAbilityManager : MonoBehaviour
                     break;
                 case AreaShape.SELECT:
                     CurrentSelectionType = AbilitySelectType.SELECT;
-                    radiusMoveOnTouch.GetComponent<AbilityRangeDisplay>().Initialize();
+                    radiusMoveOnTouch.GetComponent<AbilityRangeDisplay>().Activate();
                     return true;
             }       
 
@@ -69,7 +69,7 @@ public class CastingAbilityManager : MonoBehaviour
             //Set the AbilityRangeDisplay
             radiusMoveOnTouch.SetActive(true);
             radiusMoveOnTouch.GetComponent<MoveGameobjectToTouchPoint>().movee = spawned;
-            radiusMoveOnTouch.GetComponent<AbilityRangeDisplay>().Initialize();
+            radiusMoveOnTouch.GetComponent<AbilityRangeDisplay>().Activate();
 
             return true;          
         }

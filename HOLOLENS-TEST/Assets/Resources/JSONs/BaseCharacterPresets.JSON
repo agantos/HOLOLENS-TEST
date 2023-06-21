@@ -9,108 +9,118 @@
           "statRelations": []
         },
         {
-          "name": "defense",
-          "staticValue": 20,
-          "statRelations": []
-        },
-        {
-          "name": "strength",
+          "name": "Defense",
           "staticValue": 18,
           "statRelations": []
         },
         {
-          "name": "strength_modifier",
-          "staticValue": 0,
-          "statRelations": ["+ | 0,2 | strength"]
-        },
-        {
-          "name": "dexterity",
-          "staticValue": 14,
+          "name": "Strength",
+          "staticValue": 5,
           "statRelations": []
         },
         {
-          "name": "dexterity_modifier",
-          "staticValue": 0,
-          "statRelations": ["+ | 0,2 | dexterity"]
+          "name": "Finesse",
+          "staticValue": 4,
+          "statRelations": []
         },
         {
-          "name": "proficiency_bonus",
+          "name": "Magic",
+          "staticValue": 4,
+          "statRelations": []
+        },
+        {
+          "name": "Strength_Damage",
+          "staticValue": 0,
+          "statRelations": ["+ | 2 | Strength"]
+        },
+        {
+          "name": "Finesse_Damage",
+          "staticValue": 0,
+          "statRelations": ["+ | 2 | Finesse"]
+        },
+        {
+          "name": "Magic_Damage",
+          "staticValue": 0,
+          "statRelations": ["+ | 2 | Magic"]
+        },
+        {
+          "name": "Magic_Power",
+          "staticValue": 2,
+          "statRelations": ["+ | 4 | Magic"]
+        },
+        {
+          "name": "Magic_Resistance",
+          "staticValue": 2,
+          "statRelations": ["+ | 0,5 | Magic"]
+        },
+        {
+          "name": "Magic_Points",
           "staticValue": 3,
-          "statRelations": []
-        },
-        {
-          "name": "attack_bonus_strength",
-          "staticValue": 0,
-          "statRelations": ["+ | 1 | strength_modifier", "+ | 1 | proficiency_bonus"]
-        },
-        {
-          "name": "damage_bonus_strength",
-          "staticValue": 0,
-          "statRelations": ["+ | 1 | strength_modifier"]
-        },
-        {
-          "name": "dexterity_saving_throw",
-          "staticValue": 0,
-          "statRelations": ["+ | 1 | dexterity_modifier", "+ | 1 | proficiency_bonus"]
-        },
-        {
-          "name": "spell_slot_3",
-          "staticValue": 1,
-          "statRelations": []
+          "statRelations": ["+ | 1 | Magic"]
         }
       ],
-      "abilities": ["Melee_Strength_Attack"]
+      "abilities": ["Strength Ranged Attack", "Strength Melee Attack"]
     },
     {
       "name": "Human",
       "statistics": [
         {
           "name": "HP",
-          "staticValue": 30,
+          "staticValue": 40,
           "statRelations": []
         },
         {
-          "name": "defense",
-          "staticValue": 15,
+          "name": "Defense",
+          "staticValue": 14,
           "statRelations": []
         },
         {
-          "name": "charisma",
-          "staticValue": 25,
-          "statRelations": []
-        },
-        {
-          "name": "charisma_modifier",
-          "staticValue": 0,
-          "statRelations": ["+ | 0,2 | charisma"]
-        },
-        {
-          "name": "attack_bonus",
+          "name": "Strength",
           "staticValue": 3,
           "statRelations": []
         },
         {
-          "name": "attack_roll_charisma",
-          "staticValue": 0,
-          "statRelations": ["+ | 1 | charisma_modifier", "+ | 1 | attack_bonus"]
-        },
-        {
-          "name": "damage_roll_charisma",
-          "staticValue": 0,
-          "statRelations": ["+ | 1 | charisma_modifier"]
-        },
-        {
-          "name": "dexterity_saving_throw",
-          "staticValue": 8,
+          "name": "Finesse",
+          "staticValue": 6,
           "statRelations": []
         },
         {
-          "name": "spell_slot_3",
-          "staticValue": 1,
+          "name": "Magic",
+          "staticValue": 6,
           "statRelations": []
+        },
+        {
+          "name": "Strength_Damage",
+          "staticValue": 0,
+          "statRelations": ["+ | 2 | Strength"]
+        },
+        {
+          "name": "Finesse_Damage",
+          "staticValue": 0,
+          "statRelations": ["+ | 2 | Finesse"]
+        },
+        {
+          "name": "Magic_Damage",
+          "staticValue": 0,
+          "statRelations": ["+ | 2 | Magic"]
+        },
+        {
+          "name": "Magic_Power",
+          "staticValue": 3,
+          "statRelations": ["+ | 2,5 | Magic"]
+        },
+        {
+          "name": "Magic_Resistance",
+          "staticValue": 3,
+          "statRelations": ["+ | 0,5 | Magic"]
+        },
+        {
+          "name": "Magic_Points",
+          "staticValue": 3,
+          "statRelations": ["+ | 1 | Magic"]
         }
       ],
-      "abilities": ["Dexterity_Ranged_Attack_Roll", "Fireball"]
+      "abilities": ["Finesse Ranged Attack", "Finesse Melee Attack", "Fireball"]
     }
   ]
 }

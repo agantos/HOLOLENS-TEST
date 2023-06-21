@@ -5,7 +5,7 @@
       "turnEconomy": [
         {
           "name": "Action",
-          "number": 1
+          "number": 15
         },
         {
           "name": "Bonus Action",
@@ -16,7 +16,7 @@
           "number": 1
         }
       ],
-      "abilities": ["Charisma_Melee_Attack_Poisoned"],
+      "abilities": [],
       "basePresets": ["Human"],
       "additionalPresets": []
     },

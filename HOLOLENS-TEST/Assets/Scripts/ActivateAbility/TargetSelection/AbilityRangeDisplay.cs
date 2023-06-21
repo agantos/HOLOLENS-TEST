@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class AbilityRangeDisplay : MonoBehaviour
 {
+    public void Deactivate()
+    {
+        gameObject.transform.localScale = new Vector3(0, 0.00003f, 0);
+    }
+
     void SetScale()
     {
         float scale = GameplayCalculatorFunctions.FeetToUnityMeasurement(CastingAbilityManager.abilityToCast.effects[0].areaOfEffect.range);
@@ -17,7 +22,7 @@ public class AbilityRangeDisplay : MonoBehaviour
         gameObject.transform.localPosition = new Vector3(attackerPosition.x, bottomOfAttacker, attackerPosition.z);
     }
 
-    public void Initialize()
+    public void Activate()
     {
         SetScale();
         SetPosition();
