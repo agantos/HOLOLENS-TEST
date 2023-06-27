@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class BeginAbilityActivationButton : Button
 {
     public GameObject spawnRadius;
-    public GameObject activateButtonPrefab;
 
     public string abilityName;
     public string attackerName;
@@ -15,8 +14,6 @@ public class BeginAbilityActivationButton : Button
     {
         this.abilityName = abilityName;
         this.attackerName = attackerName;
-        this.spawnRadius = spawnRadius;
-        this.activateButtonPrefab = activateButtonPrefab;
 
         gameObject.GetComponentInChildren<Text>().text = abilityName;
 
@@ -25,7 +22,12 @@ public class BeginAbilityActivationButton : Button
                     ActivateSelection(AbilityManager.abilityPool[abilityName], GameManager.characterPool[attackerName])
             )
             {
-                activateButtonPrefab.SetActive(true);
+                //Despawn window that displays the abilities
+                FindAnyObjectByType<CharacterAbilityButtons>(FindObjectsInactive.Include).Deactivate();
+
+                //Spawn the buttons for activation and canceling of the ability
+                FindAnyObjectByType<ActivateAbilityButton>(FindObjectsInactive.Include).Activate();
+                FindAnyObjectByType<CancelAbilityButton>(FindObjectsInactive.Include).Activate();
             }
         });
     }

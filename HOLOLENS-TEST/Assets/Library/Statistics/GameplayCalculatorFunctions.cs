@@ -16,7 +16,7 @@ public class GameplayCalculatorFunctions
         gamespaceScale = gamespaceObject.transform.localScale.x;
 
         //Set 1_feet in local scale
-        localscale_1feet = 1f;
+        localscale_1feet = 0.3048f;
     }
 
     static public GameplayCalculatorFunctions GetInstance(GameObject gamespaceObject)

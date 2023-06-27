@@ -56,7 +56,7 @@ public class RadiusSelectScript : MonoBehaviour
     {
         int abilityRadiusInFeet = CastingAbilityManager.abilityToCast.effects[0].areaOfEffect.radius;
         float abilityRadiusUnityScaled = GameplayCalculatorFunctions.FeetToUnityMeasurement(abilityRadiusInFeet);
-        gameObject.transform.localScale = new Vector3(abilityRadiusUnityScaled, 0.00005f, abilityRadiusUnityScaled);
+        gameObject.transform.localScale = new Vector3(abilityRadiusUnityScaled*2, 0.00005f, abilityRadiusUnityScaled*2);
     }
 
     void SelectTarget(GameObject target) {
@@ -70,13 +70,25 @@ public class RadiusSelectScript : MonoBehaviour
         CastingAbilityManager.defendersGameObject.Remove(target);
     }
 
-    public void OnActivate()
+    public void OnAbilityActivate()
     {
         //Destroy the spawned radius effect
         Destroy(gameObject);
 
         //Despawn select marker
         foreach(GameObject obj in tokensCreated)
+        {
+            Destroy(obj);
+        }
+    }
+
+    public void OnAbilityDeActivate()
+    {
+        //Destroy the spawned radius effect
+        Destroy(gameObject);
+
+        //Despawn select marker
+        foreach (GameObject obj in tokensCreated)
         {
             Destroy(obj);
         }

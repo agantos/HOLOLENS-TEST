@@ -9,6 +9,11 @@
           "statRelations": []
         },
         {
+          "name": "Speed",
+          "staticValue": 30,
+          "statRelations": []
+        },
+        {
           "name": "Defense",
           "staticValue": 18,
           "statRelations": []
@@ -67,6 +72,11 @@
         {
           "name": "HP",
           "staticValue": 40,
+          "statRelations": []
+        },
+        {
+          "name": "Speed",
+          "staticValue": 30,
           "statRelations": []
         },
         {

@@ -82,21 +82,51 @@ public class CastingAbilityManager : MonoBehaviour
 
     public static void ActivateAbility()
     {
+        //Activate the ability
         attacker.ActivateOwnedAbility(abilityToCast.name, defendersCharacter, attacker);
+        
+        //Deactivate any spawned objects related to the activation of the ability
+        DeactivateAbilityActivationObjects();
 
-        if(CastingAbilityManager.CurrentSelectionType == AbilitySelectType.SHAPE)
+        //Clean manager state
+        CleanState();
+
+        //Spawn the window that displays the abilities
+        FindAnyObjectByType<CharacterAbilityButtons>(FindObjectsInactive.Include).Activate();
+    }
+
+    public static void DeactivateAbility()
+    {
+        DeactivateAbilityActivationObjects();
+        CleanState();
+
+        FindAnyObjectByType<CharacterAbilityButtons>(FindObjectsInactive.Include).Activate();
+    }
+
+    //Deactivate Spawned Objects
+    static void DeactivateAbilityActivationObjects()
+    {
+        //Objects searched with ANYobjecttype are singletons
+        FindAnyObjectByType<AbilityRangeDisplay>().Deactivate();
+        FindAnyObjectByType<CancelAbilityButton>().Deactivate();
+        FindAnyObjectByType<ActivateAbilityButton>().Deactivate();
+
+        if (CastingAbilityManager.CurrentSelectionType == AbilitySelectType.SHAPE)
         {
-            FindFirstObjectByType<RadiusSelectScript>().OnActivate();
+            FindAnyObjectByType<RadiusSelectScript>().OnAbilityActivate();
         }
-        else if(CastingAbilityManager.CurrentSelectionType == AbilitySelectType.SELECT)
+        else if (CastingAbilityManager.CurrentSelectionType == AbilitySelectType.SELECT)
         {
-            foreach(GameObject defender in defendersGameObject)
+            foreach (GameObject defender in defendersGameObject)
             {
-                defender.GetComponent<SelectUnit>().OnActivate();
+                defender.GetComponent<SelectUnitManager>().OnAbilityActivate();
             }
         }
+    }
 
-        //Clean State
+    //Cleans Manager State
+    static void CleanState()
+    {
         abilityToCast = null;
         attacker = null;
         defendersCharacter.Clear();
