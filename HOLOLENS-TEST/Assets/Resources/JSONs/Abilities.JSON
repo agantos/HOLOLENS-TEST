@@ -55,7 +55,7 @@
             "type": "all"
           },
           "areaOfEffect": {
-            "range": 10,
+            "range": 5,
             "shape": "select",
             "radius": 0
           },
@@ -141,7 +141,7 @@
             "type": "all"
           },
           "areaOfEffect": {
-            "range": 10,
+            "range": 5,
             "shape": "select",
             "radius": 0
           },

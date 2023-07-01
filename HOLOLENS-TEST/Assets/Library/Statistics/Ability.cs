@@ -115,7 +115,7 @@ public class AbilityManager
     }
 
     //Calculates success of an ability and applies its damage to a character.
-    public static void ActivateAbilityEffect(string name, Character defender = null, Character attacker = null)
+    public static void Activate_PerformEffect(string name, Character defender = null, Character attacker = null)
     {        
         Ability toActivate = abilityPool[name];
 

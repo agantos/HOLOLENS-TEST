@@ -10,7 +10,7 @@ public class BeginAbilityActivationButton : Button
     public string abilityName;
     public string attackerName;
 
-    public void Initialize(string abilityName, string attackerName, GameObject spawnRadius, GameObject activateButtonPrefab)
+    public void Initialize(string abilityName, string attackerName, GameObject spawnRadius)
     {
         this.abilityName = abilityName;
         this.attackerName = attackerName;

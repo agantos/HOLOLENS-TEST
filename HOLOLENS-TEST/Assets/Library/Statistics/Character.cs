@@ -31,7 +31,7 @@ public class Character
         if(abilities.TryGetValue(abilityName, out abilityName))
         {
             foreach(Character defender in defenders)
-                AbilityManager.ActivateAbilityEffect(abilityName, defender, attacker);
+                AbilityManager.Activate_PerformEffect(abilityName, defender, attacker);
 
             AbilityManager.Activate_ApplyCost(abilityName, attacker);
         }

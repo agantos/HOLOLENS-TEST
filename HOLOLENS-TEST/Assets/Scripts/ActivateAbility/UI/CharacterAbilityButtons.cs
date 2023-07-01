@@ -8,19 +8,36 @@ public class CharacterAbilityButtons : MonoBehaviour
 {
 
     public GameObject SpawnRadius;
-    public GameObject ActivateButtonPrefab;
     public GameObject BeginActivationButtonPrefab;
-
+    public List<GameObject> buttonInstances = new List<GameObject>();
     public string characterName;
-    // Start is called before the first frame update
+
     void Start()
+    {
+        SpawnCharacterAbilityButtons();
+    }
+
+    void SpawnCharacterAbilityButtons()
     {
         foreach (string abilityName in GameManager.characterPool[characterName].abilities.Values)
         {
             GameObject instance = Instantiate(BeginActivationButtonPrefab, gameObject.transform);
-            instance.name = abilityName + "_Button";           
-            instance.GetComponentInChildren<BeginAbilityActivationButton>().Initialize(abilityName, characterName, SpawnRadius, ActivateButtonPrefab);
+            instance.name = abilityName + "_Button";
+            instance.GetComponentInChildren<BeginAbilityActivationButton>().Initialize(abilityName, characterName, SpawnRadius);
+            buttonInstances.Add(instance);
         }
+    }
+
+    public void OnChangeTurn(string newCharName)
+    {
+        foreach(GameObject instance in buttonInstances){
+            Destroy(instance);
+        }
+
+        buttonInstances.Clear();
+        
+        characterName = newCharName;
+        SpawnCharacterAbilityButtons();
     }
 
     public void Activate()

@@ -9,15 +9,7 @@ public class GameplayCalculatorFunctions
     private static GameplayCalculatorFunctions instance = null;
     public static float localscale_1feet;
     public static float gamespaceScale;
-
-    private GameplayCalculatorFunctions(GameObject gamespaceObject) {
-        //Set the gamespace Scale
-        Assert.AreEqual(gamespaceObject.transform.lossyScale, gamespaceObject.transform.localScale);
-        gamespaceScale = gamespaceObject.transform.localScale.x;
-
-        //Set 1_feet in local scale
-        localscale_1feet = 0.3048f;
-    }
+    public static System.Random random;
 
     static public GameplayCalculatorFunctions GetInstance(GameObject gamespaceObject)
     {
@@ -27,15 +19,25 @@ public class GameplayCalculatorFunctions
         }
         return instance;
     }
+
+    private GameplayCalculatorFunctions(GameObject gamespaceObject) {
+        //Set the gamespace Scale
+        Assert.AreEqual(gamespaceObject.transform.lossyScale, gamespaceObject.transform.localScale);
+        gamespaceScale = gamespaceObject.transform.localScale.x;
+        random = new System.Random();
+        //Set 1_feet in local scale
+        localscale_1feet = 0.3048f;
+    }
+
+
     public static int CalculateDiceRoll(string value)
     {
-        System.Random roll = new System.Random();
         int sum = 0;
         int diceNumber, diceSides, staticValue;
         ParseDiceString(value, out diceNumber, out diceSides, out staticValue);
         for (int i = 0; i < diceNumber; i++)
         {
-            sum += roll.Next(1, diceSides);
+            sum += random.Next(1, diceSides);
         }
         sum += staticValue;
         return sum;
