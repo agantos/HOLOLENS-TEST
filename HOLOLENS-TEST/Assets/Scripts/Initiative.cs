@@ -1,0 +1,96 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+class FloatDescendingComparer : IComparer<float>
+{
+    public int Compare(float x, float y)
+    {
+        // Compare in descending order
+        return y.CompareTo(x);
+    }
+}
+
+public class InitativeOrder
+{
+    SortedDictionary<float, string> initiativeOrder = new SortedDictionary<float, string>(new FloatDescendingComparer());
+
+    float currentInitiative;
+
+    public InitativeOrder(Dictionary<string, Character> characterPool)
+    {
+        InitializeInitiativeOrder(characterPool);
+        Debug.Log(ToString());
+    }
+
+    public void InitializeInitiativeOrder(Dictionary<string, Character> characterPool)
+    {
+        foreach (Character c in characterPool.Values)
+        {
+            AddToDictionary(CalculatePosition(c.GetStats()), c);
+        }
+
+        var enumerator = initiativeOrder.Keys.GetEnumerator();
+        enumerator.MoveNext();
+        currentInitiative = enumerator.Current;
+    }
+    public string GetCurrentTurn()
+    {
+        return initiativeOrder[currentInitiative];
+    }
+
+    public void AdvanceInitiative()
+    {
+        //The first initiative smaller than the currentInitative is the next initiative
+        foreach (float initiative in initiativeOrder.Keys)
+        {
+            if (initiative < currentInitiative)
+            {
+                currentInitiative = initiative;
+                return;
+            }
+        }
+
+        //If no such element exists start from the beggining.
+        var enumerator = initiativeOrder.Keys.GetEnumerator();
+        enumerator.MoveNext();
+        currentInitiative = enumerator.Current;
+    }
+
+    void AddToDictionary(float initiative, Character character)
+    {
+        if (initiativeOrder.ContainsKey(initiative))
+        {
+            float newPosition = SolveTie(character, GameManager.characterPool[initiativeOrder[initiative]], initiative);
+            AddToDictionary(newPosition, character);
+        }
+        else
+        {
+            initiativeOrder[initiative] = character.name;
+        }
+    }
+
+    //Change according to ruleset
+    float CalculatePosition(CharacterStatistics charStats)
+    {
+        return GameplayCalculatorFunctions.CalculateDiceRoll("1d20");
+    }
+
+    //Change according to ruleset
+    //Return the position of the entering character.
+    float SolveTie(Character entering, Character existing, float position)
+    {
+        return position + 0.01f;
+    }
+
+
+    public string ToString()
+    {
+        string s = "";
+        foreach (float position in initiativeOrder.Keys)
+        {
+            s += position.ToString() + ": " + initiativeOrder[position] + "\n";
+        }
+        return s;
+    }
+}
