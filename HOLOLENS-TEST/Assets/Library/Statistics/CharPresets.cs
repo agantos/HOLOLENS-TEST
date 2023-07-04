@@ -31,7 +31,7 @@ public class CharacterPreset
 //  add their abilities to the character abilities
 public class BaseCharacterPreset : CharacterPreset
 {
-    public CharacterStatistics stats = new CharacterStatistics();
+    public CharacterStats stats = new CharacterStats();
     public new void AddPresetToCharacter(Character character)
     {
         AddStatisticsToCharacter(character);
@@ -47,7 +47,7 @@ public class BaseCharacterPreset : CharacterPreset
         }
     }
 
-    public void SetStats(CharacterStatistics s){ stats = s; }
+    public void SetStats(CharacterStats s){ stats = s; }
     public void SetName(string name) { this.name = name; }
 
     public void SetAbilities(string[] abilities)

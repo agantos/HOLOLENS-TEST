@@ -69,7 +69,8 @@ public class CharacterStat {
     //A stat is given by the formula:
     //currentValue = staticValue + statRelations + permanentEffects + currentEffect - currentDamage 
     int staticValue = 0;
-    int damage = 0;
+    int damage = 0;    
+
     Dictionary<string, CharacterStatRelation> statRelations;
     Dictionary<string, int> permanentEffects;
     Dictionary<string, int> temporalEffects;
@@ -194,6 +195,11 @@ public class CharacterStat {
         return name;
     }
 
+    public int GetDamage()
+    {
+        return damage;
+    }
+
     public void AddToStaticValue(int val)
     {
         staticValue += val;
@@ -267,7 +273,7 @@ class Formula
 
     public void SetStaticValue(int value) { staticValue = value; }
 }
-public class CharacterStatistics
+public class CharacterStats
 {
     Dictionary<string, CharacterStat> statistics = new Dictionary<string, CharacterStat>();
 

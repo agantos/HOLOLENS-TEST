@@ -11,13 +11,13 @@ class FloatDescendingComparer : IComparer<float>
     }
 }
 
-public class InitativeOrder
+public class TurnManager
 {
     SortedDictionary<float, string> initiativeOrder = new SortedDictionary<float, string>(new FloatDescendingComparer());
 
     float currentInitiative;
 
-    public InitativeOrder(Dictionary<string, Character> characterPool)
+    public TurnManager(Dictionary<string, Character> characterPool)
     {
         InitializeInitiativeOrder(characterPool);
         Debug.Log(ToString());
@@ -71,7 +71,7 @@ public class InitativeOrder
     }
 
     //Change according to ruleset
-    float CalculatePosition(CharacterStatistics charStats)
+    float CalculatePosition(CharacterStats charStats)
     {
         return GameplayCalculatorFunctions.CalculateDiceRoll("1d20");
     }
@@ -83,6 +83,28 @@ public class InitativeOrder
         return position + 0.01f;
     }
 
+    public void GiveTurnToCharacter(string name)
+    {
+        Debug.Log("It's " + name + "'s turn");
+
+        //Refresh character as needed at the start of the turn
+        GameManager.characterPool[name].OnStartTurn();      
+
+        //Change UI to play the selected character
+        MonoBehaviour.FindAnyObjectByType<MoveCharacter>().OnChangeTurn(name);
+        MonoBehaviour.FindAnyObjectByType<CharacterAbilityButtons>().OnChangeTurn(name);
+    }
+
+    public void NextTurn()
+    {
+        AdvanceInitiative();
+        GiveTurnToCharacter(GetCurrentTurn());
+    }
+
+    public void FirstTurn()
+    {
+        GiveTurnToCharacter(GetCurrentTurn());
+    }
 
     public string ToString()
     {

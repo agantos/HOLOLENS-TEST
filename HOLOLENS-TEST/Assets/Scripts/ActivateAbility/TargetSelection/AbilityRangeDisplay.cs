@@ -35,7 +35,7 @@ public class AbilityRangeDisplay : MonoBehaviour
     {
         Vector3 attackerPosition = GameManager.characterGameObjects[CastingAbilityManager.attacker.name].transform.localPosition;
         float bottomOfAttacker = attackerPosition.y - GameManager.characterGameObjects[CastingAbilityManager.attacker.name].transform.localScale.y;
-        gameObject.transform.localPosition = new Vector3(attackerPosition.x, bottomOfAttacker + 0.5f, attackerPosition.z);
+        gameObject.transform.localPosition = new Vector3(attackerPosition.x, bottomOfAttacker + 1f, attackerPosition.z);
     }
 
     public void Activate()

@@ -23,8 +23,10 @@ public class MoveCharacter : MonoBehaviour, IMixedRealityPointerHandler, IMixedR
     //Write this function according to the game system
     bool MoveRequirements()
     {
-        float characterSpeed = movee.gameObject.GetComponent<CharacterScript>().GetCharacter().GetCharacterStat("Speed").GetCurrentValue();
+        float characterSpeed = movee.gameObject.GetComponent<CharacterScript>().GetCharacter().GetStat("Speed").GetCurrentValue();
         distance = CalculateDistance(newPosition);
+
+        Debug.Log("Move Speed is " + movee.gameObject.GetComponent<CharacterScript>().GetCharacter().GetStat("Speed").GetCurrentValue());
 
         return characterSpeed >= distance;
     }
@@ -58,10 +60,13 @@ public class MoveCharacter : MonoBehaviour, IMixedRealityPointerHandler, IMixedR
     }
     public void PerformMove()
     {
+        //Do the movement
         movee.isStopped = false;
         Character c = GameManager.characterPool[movee.gameObject.GetComponent<CharacterScript>().name];
-        c.GetCharacterStat("Speed").DealDamage((int)distance);
-        //Disable();
+
+        //Subtract the speed.
+        c.GetStat("Speed").DealDamage((int)distance);
+        c.GetStat("Speed").CalculateCurrentValue();
     }
     public void CancelMove()
     {

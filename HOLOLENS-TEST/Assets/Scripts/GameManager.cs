@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public static Dictionary<string, Character> characterPool;
     public static Dictionary<string, GameObject> characterGameObjects = new Dictionary<string, GameObject>();
 
-    public static InitativeOrder initiative;
+    public static TurnManager turnManager;
     
 
     void Start()
@@ -23,7 +23,9 @@ public class GameManager : MonoBehaviour
         InitializeSingletons();
         LoadFromJsons();
         CreateCharacters();
-        initiative = new InitativeOrder(characterPool);
+        turnManager = new TurnManager(characterPool);
+        Invoke("FirstTurn", 2.0f);
+
     }
 
     void InitializeSingletons()
@@ -56,16 +58,14 @@ public class GameManager : MonoBehaviour
         }
     }    
 
-    public void GiveTurnToCharacter(string name)
-    {
-        FindAnyObjectByType<MoveCharacter>().OnChangeTurn(name);
-        FindAnyObjectByType<CharacterAbilityButtons>().OnChangeTurn(name);
-    }
-
     public void NextTurn()
     {
-        initiative.AdvanceInitiative();
-        GiveTurnToCharacter(initiative.GetCurrentTurn());
+        turnManager.NextTurn();
+    }
+
+    public void FirstTurn()
+    {
+        turnManager.FirstTurn();
     }
 }
 

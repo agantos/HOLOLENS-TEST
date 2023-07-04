@@ -220,23 +220,12 @@ public class EffectDamageStats
         int sum = 0;
         int diceRoll = GameplayCalculatorFunctions.CalculateDiceRoll(baseValue);
         sum += diceRoll;
-        
-        string s = "Damage = " + baseValue + " ";
-        
-        foreach (int bonus in statBonuses)
-        {
-            s += "+" + bonus.ToString() + " ";
-            sum += bonus;
-        }
-        s += "\n";
-        s += "Rolled " + diceRoll.ToString();
-
-        Debug.Log(s);
+       
 
         return sum;
     }
 
-    List<int> GetStatBonuses(CharacterStatistics attackerStats)
+    List<int> GetStatBonuses(CharacterStats attackerStats)
     {
         List<int> statBonuses = new List<int>();
         
@@ -251,7 +240,7 @@ public class EffectDamageStats
         return statBonuses;
     }
 
-    public int GetBaseDamage(CharacterStatistics attackerStats)
+    public int GetBaseDamage(CharacterStats attackerStats)
     {
         return RollDamage(GetStatBonuses(attackerStats));
     }
@@ -315,12 +304,6 @@ public class EffectStats
         //if an effect is saved get the recalculated damage
         if (!effectSucceeds)
             damage *= damageStats.onSavedMultiplier;
-
-        string s = "Effect Damage\n";
-        s += "Character " + attacker.name + " deals damage to " + defender.name + "\n";
-        s += "Damaged Stat: " + damageStats.damagedStatName + "\n";
-        s += "Damage = " + damage.ToString();
-        Debug.Log(s);
 
         //Include other damage multipliers such as critical, resistance, vulnerabilities etc.
 
@@ -419,7 +402,6 @@ public class EffectSucceedsChecker
 
     private bool AutomaticSuccess(EffectStats effectSucceedsStats, Character defenderStats, Character attackerStats)
     {
-        Debug.Log("Automatic Effect Suceeds");
         return true;
     }
 
@@ -445,7 +427,6 @@ public class EffectSucceedsChecker
         
         int passNumber = GameplayCalculatorFunctions.CalculateDiceRoll(effect.effectSucceedsStats.staticNumberToPass);
 
-        Debug.Log(defender.name);
         Logger.Log_Effect(effect, defender, defenderDiceRoll, false);
 
         return (passNumber > defenceRoll);
