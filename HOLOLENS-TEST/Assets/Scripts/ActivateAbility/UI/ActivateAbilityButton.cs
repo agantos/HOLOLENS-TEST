@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 //Singleton Button that activates current selected ability
 public class ActivateAbilityButton : Button
@@ -18,8 +19,13 @@ public class ActivateAbilityButton : Button
         onClick.AddListener(delegate {
             CastingAbilityManager.ActivateAbility();        
         });
-
+        
         Deactivate();
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        CastingAbilityManager.ActivateAbility();
     }
 
     public void Deactivate()

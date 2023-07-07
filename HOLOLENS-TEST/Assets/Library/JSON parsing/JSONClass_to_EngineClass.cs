@@ -39,9 +39,9 @@ public class JSONClass_to_EngineClass
     }
 
     //Creation of CharacterStat from JSONstat is done in 2 steps    
-    private static CharacterStatistics CreateCharacterStats(JSONstat[] statistics)
+    private static CharacterStats CreateCharacterStats(JSONstat[] statistics)
     {
-        CharacterStatistics stats = new CharacterStatistics();
+        CharacterStats stats = new CharacterStats();
         //  1. Create all CharacterStats with name and staticValue
         foreach (JSONstat stat in statistics)
         {

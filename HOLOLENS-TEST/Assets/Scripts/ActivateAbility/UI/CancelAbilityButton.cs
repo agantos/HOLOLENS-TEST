@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 //Singleton Button that cancels the activation of current selected ability
 public class CancelAbilityButton : Button
@@ -12,11 +13,12 @@ public class CancelAbilityButton : Button
         #if UNITY_EDITOR
                 if (!UnityEditor.EditorApplication.isPlaying)
                     return;
-        #endif
+#endif
 
         onClick.AddListener(delegate {
             CastingAbilityManager.DeactivateAbility();
         });
+
         Deactivate();
     }
 
@@ -28,5 +30,10 @@ public class CancelAbilityButton : Button
     public void Activate()
     {
         this.gameObject.SetActive(true);
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        CastingAbilityManager.DeactivateAbility();
     }
 }

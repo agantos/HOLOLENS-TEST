@@ -83,7 +83,7 @@ public class AbilityManager
         //Check Stat Cost
         foreach (string statName in toActivate.statCost.Keys)
         {
-            int newValue = attacker.GetCharacterStat(statName).GetCurrentValue() - toActivate.statCost[statName];
+            int newValue = attacker.GetStat(statName).GetCurrentValue() - toActivate.statCost[statName];
             if (newValue < 0)
             {
                 canActivate = false;
@@ -107,10 +107,10 @@ public class AbilityManager
         //Apply Stat Cost
         foreach(string statName in toActivate.statCost.Keys)
         {
-            attacker.GetCharacterStat(statName).DealDamage(toActivate.statCost[statName]);
+            attacker.GetStat(statName).DealDamage(toActivate.statCost[statName]);
             
             //MAY BE REMOVED TO BE ADDED ELSEWHERE
-            attacker.GetCharacterStat(statName).CalculateCurrentValue();
+            attacker.GetStat(statName).CalculateCurrentValue();
         }
     }
 
