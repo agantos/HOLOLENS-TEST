@@ -10,15 +10,15 @@ public class MoveCharacter : MonoBehaviour, IMixedRealityPointerHandler, IMixedR
     public Material lineMaterial;
     public GameObject DestinationToken;
 
+    AnimationManager animationManager;
+
     Vector3 newPosition;
     float distance;
-
     void Update()
     {
         DrawPath();
-        DespawnDestinationToken();
+        MoveeNotMoving();
     }
-
 
     //Write this function according to the game system
     bool MoveRequirements()
@@ -28,7 +28,8 @@ public class MoveCharacter : MonoBehaviour, IMixedRealityPointerHandler, IMixedR
 
         Debug.Log("Move Speed is " + movee.gameObject.GetComponent<CharacterScript>().GetCharacter().GetStat("Speed").GetCurrentValue());
 
-        return characterSpeed >= distance;
+        return true;
+        //return characterSpeed >= distance;
     }
 
     float CalculateDistance(Vector3 newPosition)
@@ -43,10 +44,10 @@ public class MoveCharacter : MonoBehaviour, IMixedRealityPointerHandler, IMixedR
 
         return GameplayCalculatorFunctions.RealWorldToGameFeet(distance);
     }    
-
+   
     public void OnChangeTurn(string newCharName)
     {
-       movee = GameManager.characterGameObjects[newCharName].GetComponent<NavMeshAgent>();
+       movee = GameManager.characterGameObjects[newCharName].GetComponent<NavMeshAgent>();        
     }
 
     public void Enable()
@@ -61,12 +62,17 @@ public class MoveCharacter : MonoBehaviour, IMixedRealityPointerHandler, IMixedR
     public void PerformMove()
     {
         //Do the movement
+        InstantlyTurn();
         movee.isStopped = false;
+        
         Character c = GameManager.characterPool[movee.gameObject.GetComponent<CharacterScript>().name];
 
         //Subtract the speed.
         c.GetStat("Speed").DealDamage((int)distance);
         c.GetStat("Speed").CalculateCurrentValue();
+
+        //Start Moving Animation
+        movee.GetComponent<AnimationManager>().IdleToMoving();
     }
     public void CancelMove()
     {
@@ -79,11 +85,17 @@ public class MoveCharacter : MonoBehaviour, IMixedRealityPointerHandler, IMixedR
         DestinationToken.transform.position = movee.destination;
         //DestinationToken.transform.localPosition = new Vector3(DestinationToken.transform.localPosition.x, 0.5f, DestinationToken.transform.localPosition.z);
     }
-    void DespawnDestinationToken()
+    void MoveeNotMoving()
     {
         if(movee == null || movee.path.corners.Length == 1)
         {
-            DestinationToken.SetActive(false);
+            //Despawn Destination token
+            if(DestinationToken.activeSelf)
+                DestinationToken.SetActive(false);
+
+            //Move back to Idle animation
+            if (movee.GetComponent<AnimationManager>().GetHasMovingAnimation())
+                movee.GetComponent<AnimationManager>().MovingToIdle();
         }
     }
     void DrawPath()
@@ -120,7 +132,17 @@ public class MoveCharacter : MonoBehaviour, IMixedRealityPointerHandler, IMixedR
         Vector3 menuPosition = new Vector3(movee.destination.x, movee.destination.y + 0.02f, movee.destination.z);
         FindAnyObjectByType<ConfirmMoveCanvas>().MoveToPoint(menuPosition);
     }
+    private void InstantlyTurn()
+    {
+        float rotSpeed = 360f;
 
+        //When on target -> dont rotate!
+        if ((movee.destination - movee.transform.position).magnitude < 0.1f) return;
+
+        Vector3 direction = (movee.destination - movee.transform.position).normalized;
+        Quaternion qDir = Quaternion.LookRotation(direction);
+        movee.transform.rotation = Quaternion.Slerp(movee.transform.rotation, qDir, Time.deltaTime * rotSpeed);
+    }
 
     /* INTERFACE FUNCTIONS */
     public void OnPointerUp(MixedRealityPointerEventData eventData)
@@ -130,7 +152,6 @@ public class MoveCharacter : MonoBehaviour, IMixedRealityPointerHandler, IMixedR
             newPosition = new Vector3(eventData.Pointer.BaseCursor.Position.x, movee.transform.position.y, eventData.Pointer.BaseCursor.Position.z);
             if (MoveRequirements())
             {
-
                 movee.SetDestination(newPosition);
                 SpawnMoveMenu();
                 SpawnDestinationToken();

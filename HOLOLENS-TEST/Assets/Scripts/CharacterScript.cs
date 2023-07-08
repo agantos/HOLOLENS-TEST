@@ -15,7 +15,6 @@ public class CharacterScript : MonoBehaviour
 
         //Character registers itself in the GameManager list.
         GameManager.characterGameObjects.Add(character.name, gameObject);
-        Debug.Log(character.ToString("  "));
     }
 
     // Update is called once per frame

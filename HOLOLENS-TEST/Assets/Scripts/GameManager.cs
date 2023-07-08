@@ -23,8 +23,10 @@ public class GameManager : MonoBehaviour
         InitializeSingletons();
         LoadFromJsons();
         CreateCharacters();
+
+        //Start Counting Turns
         turnManager = new TurnManager(characterPool);
-        Invoke("FirstTurn", 2.0f);
+        //Invoke("FirstTurn", 2.0f);
 
     }
 

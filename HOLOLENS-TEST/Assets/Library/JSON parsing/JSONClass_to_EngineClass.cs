@@ -219,8 +219,6 @@ public class JSONClass_to_EngineClass
     {
         Character character = new Character();
 
-        Debug.Log(jsonCharacter.turnEconomy + "  " + jsonCharacter.name);
-
         character.name = jsonCharacter.name;
         character.turnEconomy = new Dictionary<string, int>();
         character.currentTurnEconomy = new Dictionary<string, int>();
