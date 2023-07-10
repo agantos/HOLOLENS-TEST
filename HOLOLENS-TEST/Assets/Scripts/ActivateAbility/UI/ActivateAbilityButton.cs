@@ -17,7 +17,7 @@ public class ActivateAbilityButton : Button
         #endif
 
         onClick.AddListener(delegate {
-            CastingAbilityManager.ActivateAbility();        
+            ActivateAbility();
         });
         
         Deactivate();
@@ -25,16 +25,50 @@ public class ActivateAbilityButton : Button
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        CastingAbilityManager.ActivateAbility();
+        ActivateAbility();
     }
 
     public void Deactivate()
     {
-        gameObject.SetActive(false);
+        gameObject.transform.localScale = new Vector3(0, 0, 0);
+        //gameObject.SetActive(false);
     }
 
     public void Activate()
     {
-        gameObject.SetActive(true);
+        gameObject.transform.localScale = new Vector3(1, 1, 1);
+        //gameObject.SetActive(true);
+    }
+
+    public void ActivateAbility()
+    {
+        //Deactivate any spawned objects related to the activation of the ability
+        CastingAbilityManager.DeactivateAbilityActivationObjects();
+
+        //Start Animation
+        CastingAbilityManager.attackerAnimationManager.IdleTo_MeleeAttacking_Sword_OneHanded();
+
+        //Activate Ability
+        StartCoroutine(ActivateAbilityAfterAnimation());
+    }
+
+    IEnumerator ActivateAbilityAfterAnimation()
+    {
+        //Wait for the animation to end
+        float secsForAnimationToRegister = 0.4f;
+        yield return new WaitForSeconds(secsForAnimationToRegister);
+        yield return new WaitForSeconds(CastingAbilityManager.attackerAnimationManager.GetCurrentAnimationDuration() - secsForAnimationToRegister);
+
+        //Switch Back to Idle Animation
+        CastingAbilityManager.attackerAnimationManager.MeleeAttacking_Sword_OneHandedTo_Idle();
+        
+        //Cast Ability
+        CastingAbilityManager.ActivateAttackerAbility();
+
+        //Clean manager state
+        CastingAbilityManager.CleanState();
+
+        //Spawn the window that displays the abilities
+        FindAnyObjectByType<CharacterAbilityButtons>(FindObjectsInactive.Include).Activate();
     }
 }

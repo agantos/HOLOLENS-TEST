@@ -16,9 +16,11 @@ public class CastingAbilityManager : MonoBehaviour
     //Variables for casting the ability
     public static bool SelectAbility;
     public static Character attacker;
+    public static AnimationManager attackerAnimationManager;
 
     public static List<Character> defendersCharacter = new List<Character>();
     public static List<GameObject> defendersGameObject = new List<GameObject>();
+    public static List<AnimationManager> defendersAnimationManager = new List<AnimationManager>();
     public static Ability abilityToCast;
 
     public static AbilitySelectType CurrentSelectionType = AbilitySelectType.INACTIVE;
@@ -28,9 +30,10 @@ public class CastingAbilityManager : MonoBehaviour
     public bool ActivateSelection(Ability ability, Character attacker)
     {
         //Check if the ability can be cast
-        if (AbilityManager.Activate_CheckCost(ability.name, attacker))
+        if (true/**AbilityManager.Activate_CheckCost(ability.name, attacker)**/)
         {
             //Set the parameters for the casting of the ability
+            CastingAbilityManager.attackerAnimationManager = GameManager.characterGameObjects[attacker.name].GetComponent<AnimationManager>();
             CastingAbilityManager.attacker = attacker;
             CastingAbilityManager.abilityToCast = ability;
 
@@ -80,19 +83,9 @@ public class CastingAbilityManager : MonoBehaviour
         }            
     }
 
-    public static void ActivateAbility()
+    public static void ActivateAttackerAbility()
     {
-        //Activate the ability
         attacker.ActivateOwnedAbility(abilityToCast.name, defendersCharacter, attacker);
-        
-        //Deactivate any spawned objects related to the activation of the ability
-        DeactivateAbilityActivationObjects();
-
-        //Clean manager state
-        CleanState();
-
-        //Spawn the window that displays the abilities
-        FindAnyObjectByType<CharacterAbilityButtons>(FindObjectsInactive.Include).Activate();
     }
 
     public static void DeactivateAbility()
@@ -104,7 +97,7 @@ public class CastingAbilityManager : MonoBehaviour
     }
 
     //Deactivate Spawned Objects
-    static void DeactivateAbilityActivationObjects()
+    public static void DeactivateAbilityActivationObjects()
     {
         //Objects searched with ANYobjecttype are singletons
         FindAnyObjectByType<AbilityRangeDisplay>().Deactivate();
@@ -125,7 +118,7 @@ public class CastingAbilityManager : MonoBehaviour
     }
 
     //Cleans Manager State
-    static void CleanState()
+    public static void CleanState()
     {
         abilityToCast = null;
         attacker = null;

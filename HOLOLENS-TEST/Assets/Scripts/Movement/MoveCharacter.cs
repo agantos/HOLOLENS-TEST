@@ -72,7 +72,7 @@ public class MoveCharacter : MonoBehaviour, IMixedRealityPointerHandler, IMixedR
         c.GetStat("Speed").CalculateCurrentValue();
 
         //Start Moving Animation
-        movee.GetComponent<AnimationManager>().IdleToMoving();
+        movee.GetComponent<AnimationManager>().IdleTo_Moving();
     }
     public void CancelMove()
     {
@@ -95,7 +95,7 @@ public class MoveCharacter : MonoBehaviour, IMixedRealityPointerHandler, IMixedR
 
             //Move back to Idle animation
             if (movee.GetComponent<AnimationManager>().GetHasMovingAnimation())
-                movee.GetComponent<AnimationManager>().MovingToIdle();
+                movee.GetComponent<AnimationManager>().MovingTo_Idle();
         }
     }
     void DrawPath()
