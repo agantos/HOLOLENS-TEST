@@ -4,6 +4,7 @@
       "name": "Strength Ranged Attack",
       "description": "A ranged Strength attack made with a Bow, Crossbow or different Strength ranged weapon",
       "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
+      "animationType": "Attack_Ranged_Weapon",
       "effects": [
         {
           "isPrimary": true,
@@ -47,6 +48,7 @@
       "name": "Strength Melee Attack",
       "description": "A melee Strength attack made with a dagger, rapier or different Strength weapon",
       "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
+      "animationType": "Attack_Melee_Weapon",
       "effects": [
         {
           "isPrimary": true,
@@ -90,6 +92,7 @@
       "name": "Finesse Ranged Attack",
       "description": "A ranged finesse attack made with a Bow, Crossbow or different finesse ranged weapon",
       "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
+      "animationType": "Attack_Ranged_Weapon",
       "effects": [
         {
           "isPrimary": true,
@@ -133,6 +136,7 @@
       "name": "Finesse Melee Attack",
       "description": "A melee finesse attack made with a dagger, rapier or different finesse weapon",
       "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
+      "animationType": "Attack_Melee_Weapon",
       "effects": [
         {
           "isPrimary": true,
@@ -177,6 +181,7 @@
       "description": "An explosion of fire",
       "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
       "statCost": [{ "name": "Magic_Points", "cost": 3 }],
+      "animationType": "Spell_Cast_Area",
       "effects": [
         {
           "isPrimary": true,

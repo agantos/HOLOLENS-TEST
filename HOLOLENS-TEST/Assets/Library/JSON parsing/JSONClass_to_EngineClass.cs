@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using System;
 
 //A singleton class that takes JSONClasses and forms the engine classes
 public class JSONClass_to_EngineClass
@@ -171,8 +172,12 @@ public class JSONClass_to_EngineClass
 
     public static Ability CreateAbility(JSONAbility jsonAbility)
     {
-        Ability toReturn = new Ability(jsonAbility.name, jsonAbility.description, CreatePrimaryEffects(jsonAbility.effects));
-
+        AnimationType type;
+        if (Enum.TryParse(jsonAbility.animationType, out type) == false)
+            Assert.IsFalse(true);
+           
+        Ability toReturn = new Ability(jsonAbility.name, jsonAbility.description, type, CreatePrimaryEffects(jsonAbility.effects));
+       
         toReturn.turnEconomyCost = new Dictionary<string, int>();
         if (jsonAbility.turnEconomyCost != null)
         {            

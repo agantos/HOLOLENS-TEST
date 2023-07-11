@@ -46,7 +46,7 @@ public class ActivateAbilityButton : Button
         CastingAbilityManager.DeactivateAbilityActivationObjects();
 
         //Start Animation
-        CastingAbilityManager.attackerAnimationManager.IdleTo_MeleeAttacking_Sword_OneHanded();
+        CastingAbilityManager.attackerAnimationManager.IdleTo_Animation(CastingAbilityManager.abilityToCast.animationType);
 
         //Activate Ability
         StartCoroutine(ActivateAbilityAfterAnimation());
@@ -60,7 +60,7 @@ public class ActivateAbilityButton : Button
         yield return new WaitForSeconds(CastingAbilityManager.attackerAnimationManager.GetCurrentAnimationDuration() - secsForAnimationToRegister);
 
         //Switch Back to Idle Animation
-        CastingAbilityManager.attackerAnimationManager.MeleeAttacking_Sword_OneHandedTo_Idle();
+        CastingAbilityManager.attackerAnimationManager.Animation_ToIdle(AnimationType.Attack_Melee_Spell);
         
         //Cast Ability
         CastingAbilityManager.ActivateAttackerAbility();

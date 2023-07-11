@@ -6,14 +6,16 @@ public class Ability
 {
     public string name;
     public string description;
+    public AnimationType animationType;
     public List<PrimaryEffectStats> effects;
     public Dictionary<string, int> turnEconomyCost;
     public Dictionary<string, int> statCost;
 
-    public Ability(string name, string description, List<PrimaryEffectStats> effects)
+    public Ability(string name, string description, AnimationType animationType, List<PrimaryEffectStats> effects)
     {
         this.name = name;
         this.description = description;
+        this.animationType = animationType;
         this.effects = effects;
     }
 
