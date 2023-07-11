@@ -172,13 +172,20 @@ public class JSONClass_to_EngineClass
 
     public static Ability CreateAbility(JSONAbility jsonAbility)
     {
-        AnimationType type;
-        if (Enum.TryParse(jsonAbility.animationType, out type) == false)
-            Assert.IsFalse(true);
+        JSONAbilityAnimationTypes jsonAnimTypes = jsonAbility.animationTypes;
+        AbilityAnimationTypes animTypes = new AbilityAnimationTypes(jsonAnimTypes.GetAttackerAnimationType(), 
+                                                                    jsonAnimTypes.GetDefender_AbilitySucceeds(), 
+                                                                    jsonAnimTypes.GetDefender_AbilityFails()
+        );
            
-        Ability toReturn = new Ability(jsonAbility.name, jsonAbility.description, type, CreatePrimaryEffects(jsonAbility.effects));
+        Ability toReturn = new Ability( jsonAbility.name, 
+                                        jsonAbility.description, 
+                                        animTypes, 
+                                        CreatePrimaryEffects(jsonAbility.effects)
+        );
        
         toReturn.turnEconomyCost = new Dictionary<string, int>();
+        
         if (jsonAbility.turnEconomyCost != null)
         {            
             foreach (JSONCost turnEconomyCost in jsonAbility.turnEconomyCost)

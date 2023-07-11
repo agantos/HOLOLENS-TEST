@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Assertions;
 
 
 public enum AbilitySelectType { SHAPE, SELECT, INACTIVE }
@@ -18,8 +19,9 @@ public class CastingAbilityManager : MonoBehaviour
     public static Character attacker;
     public static AnimationManager attackerAnimationManager;
 
-    public static List<Character> defendersCharacter = new List<Character>();
+    public static List<Character> defenderCharacters = new List<Character>();
     public static List<GameObject> defendersGameObject = new List<GameObject>();
+    public static List<bool> abilitySuccessList = new List<bool>();
     public static List<AnimationManager> defendersAnimationManager = new List<AnimationManager>();
     public static Ability abilityToCast;
 
@@ -85,7 +87,7 @@ public class CastingAbilityManager : MonoBehaviour
 
     public static void ActivateAttackerAbility()
     {
-        attacker.ActivateOwnedAbility(abilityToCast.name, defendersCharacter, attacker);
+        attacker.ActivateOwnedAbility(abilityToCast.name, out abilitySuccessList, defenderCharacters, attacker);
     }
 
     public static void DeactivateAbility()
@@ -117,13 +119,55 @@ public class CastingAbilityManager : MonoBehaviour
         }
     }
 
+    public static void ReturnAttackerToIdleAnimation()
+    {
+        attackerAnimationManager.Animation_ToIdle(abilityToCast.animationTypes.attacker);
+    }
+
+    public static void ActivateDefenderAnimations()
+    {
+        Assert.AreEqual(abilitySuccessList.Count, defendersGameObject.Count);
+        for (int i = 0; i < abilitySuccessList.Count; i++)
+        {
+            if (abilitySuccessList[i])
+            {
+                defendersGameObject[i].GetComponent<AnimationManager>()
+                    .IdleTo_Animation(abilityToCast.animationTypes.defender_AbilitySucceeds);
+            }
+            else
+            {
+                defendersGameObject[i].GetComponent<AnimationManager>()
+                    .IdleTo_Animation(abilityToCast.animationTypes.defender_AbilityFails);
+            }
+        }
+    }
+
+    public static void ReturnDefendersToIdleAnimation()
+    {
+        Assert.AreEqual(abilitySuccessList.Count, defendersGameObject.Count);
+        for (int i = 0; i < abilitySuccessList.Count; i++)
+        {
+            if (abilitySuccessList[i])
+            {
+                defendersGameObject[i].GetComponent<AnimationManager>()
+                    .Animation_ToIdle(abilityToCast.animationTypes.defender_AbilitySucceeds);
+            }
+            else
+            {
+                defendersGameObject[i].GetComponent<AnimationManager>()
+                    .Animation_ToIdle(abilityToCast.animationTypes.defender_AbilityFails);
+            }
+        }
+    }
+
     //Cleans Manager State
     public static void CleanState()
     {
         abilityToCast = null;
         attacker = null;
-        defendersCharacter.Clear();
+        defenderCharacters.Clear();
         defendersGameObject.Clear();
+        abilitySuccessList.Clear();
         CurrentSelectionType = AbilitySelectType.INACTIVE;
     }
 }

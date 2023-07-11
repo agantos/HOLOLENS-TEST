@@ -60,13 +60,13 @@ public class RadiusSelectScript : MonoBehaviour
     }
 
     void SelectTarget(GameObject target) {
-        CastingAbilityManager.defendersCharacter.Add(target.GetComponent<CharacterScript>().GetCharacter());
+        CastingAbilityManager.defenderCharacters.Add(target.GetComponent<CharacterScript>().GetCharacter());
         CastingAbilityManager.defendersGameObject.Add(target);
     }
 
     void UnselectTarget(GameObject target)
     {
-        CastingAbilityManager.defendersCharacter.Remove(target.GetComponent<CharacterScript>().GetCharacter());
+        CastingAbilityManager.defenderCharacters.Remove(target.GetComponent<CharacterScript>().GetCharacter());
         CastingAbilityManager.defendersGameObject.Remove(target);
     }
 

@@ -91,7 +91,7 @@ public class SelectUnitManager : MonoBehaviour, IMixedRealityPointerHandler, IMi
                 if (!isSelected)
                 {
                     //Abide by the number of selectable characters
-                    if (CastingAbilityManager.defendersCharacter.Count < CastingAbilityManager.abilityToCast.effects[0].targetting.numberOfTargets)
+                    if (CastingAbilityManager.defenderCharacters.Count < CastingAbilityManager.abilityToCast.effects[0].targetting.numberOfTargets)
                     {
                         SpawnToken();
                         SelectCharacter();
@@ -141,13 +141,13 @@ public class SelectUnitManager : MonoBehaviour, IMixedRealityPointerHandler, IMi
 
     private void SelectCharacter()
     {
-        CastingAbilityManager.defendersCharacter.Add(gameObject.GetComponent<CharacterScript>().GetCharacter());
+        CastingAbilityManager.defenderCharacters.Add(gameObject.GetComponent<CharacterScript>().GetCharacter());
         CastingAbilityManager.defendersGameObject.Add(gameObject);
     }
 
     private void UnselectCharacter()
     {
-        CastingAbilityManager.defendersCharacter.Remove(gameObject.GetComponent<CharacterScript>().GetCharacter());
+        CastingAbilityManager.defenderCharacters.Remove(gameObject.GetComponent<CharacterScript>().GetCharacter());
         CastingAbilityManager.defendersGameObject.Remove(gameObject);
     }
 }

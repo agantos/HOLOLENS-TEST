@@ -46,7 +46,7 @@ public class ActivateAbilityButton : Button
         CastingAbilityManager.DeactivateAbilityActivationObjects();
 
         //Start Animation
-        CastingAbilityManager.attackerAnimationManager.IdleTo_Animation(CastingAbilityManager.abilityToCast.animationType);
+        CastingAbilityManager.attackerAnimationManager.IdleTo_Animation(CastingAbilityManager.abilityToCast.animationTypes.attacker);
 
         //Activate Ability
         StartCoroutine(ActivateAbilityAfterAnimation());
@@ -54,16 +54,23 @@ public class ActivateAbilityButton : Button
 
     IEnumerator ActivateAbilityAfterAnimation()
     {
-        //Wait for the animation to end
+        //Wait for the animation to register
         float secsForAnimationToRegister = 0.4f;
         yield return new WaitForSeconds(secsForAnimationToRegister);
-        yield return new WaitForSeconds(CastingAbilityManager.attackerAnimationManager.GetCurrentAnimationDuration() - secsForAnimationToRegister);
+        float animationEnds = CastingAbilityManager.attackerAnimationManager.GetCurrentAnimationDuration() 
+                                - secsForAnimationToRegister;
+        
+        //Wait for the Impact point of the animation to activate the ability
+        yield return new WaitForSeconds(animationEnds-animationEnds*3/8);
+        CastingAbilityManager.ActivateAttackerAbility();
+        CastingAbilityManager.ActivateDefenderAnimations();
+
+        //Wait for the animation to end
+        yield return new WaitForSeconds(animationEnds-animationEnds*5/8);
 
         //Switch Back to Idle Animation
-        CastingAbilityManager.attackerAnimationManager.Animation_ToIdle(AnimationType.Attack_Melee_Spell);
-        
-        //Cast Ability
-        CastingAbilityManager.ActivateAttackerAbility();
+        CastingAbilityManager.ReturnAttackerToIdleAnimation();
+        CastingAbilityManager.ReturnDefendersToIdleAnimation();
 
         //Clean manager state
         CastingAbilityManager.CleanState();

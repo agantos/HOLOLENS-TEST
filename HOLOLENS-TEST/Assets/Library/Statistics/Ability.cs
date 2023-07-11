@@ -2,20 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class AbilityAnimationTypes
+{
+    public AnimationType attacker;
+    public AnimationType defender_AbilitySucceeds;
+    public AnimationType defender_AbilityFails;
+
+    public AbilityAnimationTypes(AnimationType att, AnimationType def_succ, AnimationType def_fail)
+    {
+        attacker = att;
+        defender_AbilityFails = def_fail;
+        defender_AbilitySucceeds = def_succ;
+    }
+}
+
 public class Ability
 {
     public string name;
     public string description;
-    public AnimationType animationType;
+    public AbilityAnimationTypes animationTypes;
+
     public List<PrimaryEffectStats> effects;
     public Dictionary<string, int> turnEconomyCost;
     public Dictionary<string, int> statCost;
 
-    public Ability(string name, string description, AnimationType animationType, List<PrimaryEffectStats> effects)
+    public Ability(string name, string description, AbilityAnimationTypes animationTypes, List<PrimaryEffectStats> effects)
     {
         this.name = name;
         this.description = description;
-        this.animationType = animationType;
+        this.animationTypes = animationTypes;
         this.effects = effects;
     }
 
@@ -117,20 +132,21 @@ public class AbilityManager
     }
 
     //Calculates success of an ability and applies its damage to a character.
-    public static void Activate_PerformEffect(string name, Character defender = null, Character attacker = null)
+    public static void Activate_PerformEffect(string name, out bool effectSucceeds, Character defender = null,  Character attacker = null)
     {        
         Ability toActivate = abilityPool[name];
+        effectSucceeds = false;
 
         foreach (PrimaryEffectStats primaryEffect in toActivate.effects)
         {
             //Calculate primary success and damage
-            bool primarySucceeds = EffectSucceedsChecker.GetSuccess(primaryEffect, defender, attacker);
-            primaryEffect.DealDamage(primarySucceeds, defender, attacker);
+            effectSucceeds = EffectSucceedsChecker.GetSuccess(primaryEffect, defender, attacker);
+            primaryEffect.DealDamage(effectSucceeds, defender, attacker);
             
             //Calculate only the appropriate follow-up effects' success and damage
             foreach (FollowupEffectStats followup in primaryEffect.followUpEffects)
             {
-                if (primarySucceeds || followup.appliesIfPrimaryFailed)
+                if (effectSucceeds || followup.appliesIfPrimaryFailed)
                 {
                     followup.DealDamage(EffectSucceedsChecker.GetSuccess(followup, defender, attacker), defender, attacker);
                 }
