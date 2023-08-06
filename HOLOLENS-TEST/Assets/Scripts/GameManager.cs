@@ -26,8 +26,7 @@ public class GameManager : MonoBehaviour
 
         //Start Counting Turns
         turnManager = new TurnManager(characterPool);
-        //Invoke("FirstTurn", 2.0f);
-
+        Invoke("FirstTurn", 2.0f);
     }
 
     void InitializeSingletons()
@@ -68,6 +67,17 @@ public class GameManager : MonoBehaviour
     public void FirstTurn()
     {
         turnManager.FirstTurn();
+        CharacterUIManager.GiveTurnToPlayingCharacter();
+    }
+
+    public static Character GetCurrentPlayer_Character()
+    {
+        return characterPool[turnManager.GetCurrentTurn_Name()];
+    }
+
+    public static string GetCurrentPlayer_Name()
+    {
+        return turnManager.GetCurrentTurn_Name();
     }
 }
 

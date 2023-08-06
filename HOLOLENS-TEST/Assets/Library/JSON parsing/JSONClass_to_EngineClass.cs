@@ -181,7 +181,8 @@ public class JSONClass_to_EngineClass
         Ability toReturn = new Ability( jsonAbility.name, 
                                         jsonAbility.description, 
                                         animTypes, 
-                                        CreatePrimaryEffects(jsonAbility.effects)
+                                        CreatePrimaryEffects(jsonAbility.effects),
+                                        jsonAbility.tags
         );
        
         toReturn.turnEconomyCost = new Dictionary<string, int>();

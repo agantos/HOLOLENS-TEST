@@ -19,11 +19,11 @@ public class BeginAbilityActivationButton : Button
 
         onClick.AddListener(delegate {
             if (spawnRadius.GetComponent<CastingAbilityManager>().
-                    ActivateSelection(AbilityManager.abilityPool[abilityName], GameManager.characterPool[attackerName])
+                    BeginCasting(AbilityManager.abilityPool[abilityName], GameManager.characterPool[attackerName])
             )
             {
                 //Despawn window that displays the abilities
-                FindAnyObjectByType<CharacterAbilityButtons>(FindObjectsInactive.Include).Deactivate();
+                FindAnyObjectByType<AbilityTabManager>(FindObjectsInactive.Include).Deactivate();
 
                 //Spawn the buttons for activation and canceling of the ability
                 FindAnyObjectByType<ActivateAbilityButton>(FindObjectsInactive.Include).Activate();

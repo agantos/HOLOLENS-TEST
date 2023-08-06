@@ -34,7 +34,7 @@ public class TurnManager
         enumerator.MoveNext();
         currentInitiative = enumerator.Current;
     }
-    public string GetCurrentTurn()
+    public string GetCurrentTurn_Name()
     {
         return initiativeOrder[currentInitiative];
     }
@@ -92,18 +92,18 @@ public class TurnManager
 
         //Change UI to play the selected character
         MonoBehaviour.FindAnyObjectByType<MoveCharacter>().OnChangeTurn(name);
-        MonoBehaviour.FindAnyObjectByType<CharacterAbilityButtons>().OnChangeTurn(name);
+        CharacterUIManager.GiveTurnToPlayingCharacter();
     }
 
     public void NextTurn()
     {
         AdvanceInitiative();
-        GiveTurnToCharacter(GetCurrentTurn());
+        GiveTurnToCharacter(GetCurrentTurn_Name());
     }
 
     public void FirstTurn()
     {
-        GiveTurnToCharacter(GetCurrentTurn());
+        GiveTurnToCharacter(GetCurrentTurn_Name());
     }
 
     public string ToString()

@@ -76,6 +76,6 @@ public class ActivateAbilityButton : Button
         CastingAbilityManager.CleanState();
 
         //Spawn the window that displays the abilities
-        FindAnyObjectByType<CharacterAbilityButtons>(FindObjectsInactive.Include).Activate();
+        FindAnyObjectByType<AbilityTabManager>(FindObjectsInactive.Include).Activate();
     }
 }

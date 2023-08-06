@@ -52,6 +52,7 @@ public class JSONAbility
     public JSONCost[] turnEconomyCost;
     public JSONCost[] statCost;
     public JSONEffect[] effects;
+    public string[] tags;
 }
 
 public class JSONAbilities

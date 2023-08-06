@@ -29,7 +29,8 @@ public class CastingAbilityManager : MonoBehaviour
 
     GameObject spawned;
 
-    public bool ActivateSelection(Ability ability, Character attacker)
+    //Spawns the necessary objects for selecting targets for an ability
+    public bool BeginCasting(Ability ability, Character attacker)
     {
         //Check if the ability can be cast
         if (true/**AbilityManager.Activate_CheckCost(ability.name, attacker)**/)
@@ -95,7 +96,7 @@ public class CastingAbilityManager : MonoBehaviour
         DeactivateAbilityActivationObjects();
         CleanState();
 
-        FindAnyObjectByType<CharacterAbilityButtons>(FindObjectsInactive.Include).Activate();
+        FindAnyObjectByType<AbilityTabManager>(FindObjectsInactive.Include).Activate();
     }
 
     //Deactivate Spawned Objects

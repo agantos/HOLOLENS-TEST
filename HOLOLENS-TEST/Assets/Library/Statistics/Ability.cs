@@ -25,13 +25,20 @@ public class Ability
     public List<PrimaryEffectStats> effects;
     public Dictionary<string, int> turnEconomyCost;
     public Dictionary<string, int> statCost;
+    public List<string> tags;
 
-    public Ability(string name, string description, AbilityAnimationTypes animationTypes, List<PrimaryEffectStats> effects)
+    public Ability(string name, string description, AbilityAnimationTypes animationTypes, List<PrimaryEffectStats> effects, string[] tags)
     {
         this.name = name;
         this.description = description;
         this.animationTypes = animationTypes;
         this.effects = effects;
+
+        this.tags = new List<string>();
+        foreach(string tag in tags)
+        {
+            this.tags.Add(tag);
+        }
     }
 
     public string ToString(string prevTab)

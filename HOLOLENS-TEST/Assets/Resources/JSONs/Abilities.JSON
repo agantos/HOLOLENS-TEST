@@ -3,6 +3,7 @@
     {
       "name": "Strength Ranged Attack",
       "description": "A ranged Strength attack made with a Bow, Crossbow or different Strength ranged weapon",
+      "tags": ["Ranged Attacks"],
       "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
       "animationTypes": {
         "attacker": "Attack_Ranged_Weapon",
@@ -51,6 +52,7 @@
     {
       "name": "Strength Melee Attack",
       "description": "A melee Strength attack made with a dagger, rapier or different Strength weapon",
+      "tags": ["Melee Attacks"],
       "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
       "animationTypes": {
         "attacker": "Attack_Melee_Weapon",
@@ -100,6 +102,7 @@
       "name": "Finesse Ranged Attack",
       "description": "A ranged finesse attack made with a Bow, Crossbow or different finesse ranged weapon",
       "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
+      "tags": ["Ranged Attacks"],
       "animationTypes": {
         "attacker": "Attack_Ranged_Weapon",
         "defender_AbilitySucceeds": "TakeHit",
@@ -147,6 +150,7 @@
     {
       "name": "Finesse Melee Attack",
       "description": "A melee finesse attack made with a dagger, rapier or different finesse weapon",
+      "tags": ["Melee Attacks"],
       "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
       "animationTypes": {
         "attacker": "Attack_Melee_Weapon",
@@ -195,6 +199,7 @@
     {
       "name": "Fireball",
       "description": "An explosion of fire",
+      "tags": ["3rd Level Spells"],
       "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
       "statCost": [{ "name": "Magic_Points", "cost": 3 }],
       "animationTypes": {
