@@ -91,8 +91,7 @@ public class TurnManager
         GameManager.characterPool[name].OnStartTurn();      
 
         //Change UI to play the selected character
-        MonoBehaviour.FindAnyObjectByType<MoveCharacter>().OnChangeTurn(name);
-        CharacterUIManager.GiveTurnToPlayingCharacter();
+        
     }
 
     public void NextTurn()

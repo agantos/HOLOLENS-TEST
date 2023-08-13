@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 
 enum EffectType { INDEPENDENT, DEPENDENT}
-enum TargetType { SELF, ALLY, ENEMY, ALL, ALL_NOT_SELF, AREA, TYPED}
+enum TargetType { SELF, ALLY, ENEMY, ALL, ALL_NOT_SELF, AREA, TYPED }
 enum TargetNumber {NUMBERED, IN_RADIUS}
 public enum AreaShape { CUBE, CONE, SPHERE, LINE, SELECT, CIRCLE }
 public enum EffectSuccessCondition {AUTOMATIC, ATTACKER_ROLLS, DEFENDER_ROLLS, COMPARISON}

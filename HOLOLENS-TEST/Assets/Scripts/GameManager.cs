@@ -62,6 +62,8 @@ public class GameManager : MonoBehaviour
     public void NextTurn()
     {
         turnManager.NextTurn();
+        MonoBehaviour.FindAnyObjectByType<MoveCharacter>().OnChangeTurn(GetCurrentPlayer_Name());
+        CharacterUIManager.GiveTurnToPlayingCharacter();
     }
 
     public void FirstTurn()

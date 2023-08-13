@@ -31,13 +31,11 @@ public class ActivateAbilityButton : Button
     public void Deactivate()
     {
         gameObject.transform.localScale = new Vector3(0, 0, 0);
-        //gameObject.SetActive(false);
     }
 
     public void Activate()
     {
         gameObject.transform.localScale = new Vector3(1, 1, 1);
-        //gameObject.SetActive(true);
     }
 
     public void ActivateAbility()
@@ -76,6 +74,6 @@ public class ActivateAbilityButton : Button
         CastingAbilityManager.CleanState();
 
         //Spawn the window that displays the abilities
-        FindAnyObjectByType<AbilityTabManager>(FindObjectsInactive.Include).Activate();
+        CharacterUIManager.GiveTurnToPlayingCharacter();
     }
 }
