@@ -21,7 +21,7 @@ public class AbilityDisplayManager : MonoBehaviour
     }
 
     void CreateUI() {
-        displayingAbility = AbilitiesManager.abilityPool["Finesse Ranged Attack"];
+        displayingAbility = AbilitiesManager.abilityPool["Fireball"];
         title.text = displayingAbility.name;
     }
 

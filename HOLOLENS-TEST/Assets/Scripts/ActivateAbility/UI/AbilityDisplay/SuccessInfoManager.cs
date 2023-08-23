@@ -63,7 +63,7 @@ public class SuccessInfoManager : MonoBehaviour
     {
         string text = "";
         if (damageStats.onSavedMultiplier == 0)
-            text += "Defenders that save against the ability do not take any damage";
+            text += "No Damage";
         else
         {
             text += "Defenders take ";
