@@ -212,7 +212,7 @@ public class JSONClass_to_EngineClass
         foreach (JSONAbility jsonAbility in jsonAbilities.abilities)
         {
             Ability tempAbility = CreateAbility(jsonAbility);
-            AbilityManager.abilityPool.Add(tempAbility.name, tempAbility);
+            AbilitiesManager.abilityPool.Add(tempAbility.name, tempAbility);
         }
     }
 

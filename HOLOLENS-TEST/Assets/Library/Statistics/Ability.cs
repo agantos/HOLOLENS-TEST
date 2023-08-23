@@ -65,22 +65,22 @@ public class Ability
     }
 }
 
-public class AbilityManager
+public class AbilitiesManager
 {
 
-    private static AbilityManager instance = null;
+    private static AbilitiesManager instance = null;
     public static Dictionary<string, Ability> abilityPool;
 
-    private AbilityManager()
+    private AbilitiesManager()
     {
         abilityPool = new Dictionary<string, Ability>();
     }
 
-    public static AbilityManager GetInstance()
+    public static AbilitiesManager GetInstance()
     {
         if(instance == null)
         {
-            instance = new AbilityManager();
+            instance = new AbilitiesManager();
         }
         return instance;
     }

@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         JSONClass_to_EngineClass fromJSONtoEngineInstance = JSONClass_to_EngineClass.GetInstance();
         JSONFile_to_JSONClass JSONParserInstance = JSONFile_to_JSONClass.GetInstance();
         EffectSucceedsChecker effectSuccessChecker = EffectSucceedsChecker.GetInstance();
-        AbilityManager abilityManager = AbilityManager.GetInstance();
+        AbilitiesManager abilityManager = AbilitiesManager.GetInstance();
     }
 
     void LoadFromJsons()

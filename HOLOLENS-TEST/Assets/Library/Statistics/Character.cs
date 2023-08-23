@@ -35,12 +35,12 @@ public class Character
             foreach(Character defender in defenders)
             {
                 bool succeeds;
-                AbilityManager.Activate_PerformEffect(abilityName, out succeeds, defender, attacker);
+                AbilitiesManager.Activate_PerformEffect(abilityName, out succeeds, defender, attacker);
                 abilitySuccessList.Add(succeeds);
             }
                 
 
-            AbilityManager.Activate_ApplyCost(abilityName, attacker);
+            AbilitiesManager.Activate_ApplyCost(abilityName, attacker);
         }
         else
         {
@@ -80,7 +80,7 @@ public class Character
     }
     public Ability GetCharacterAbility(string name)
     {
-        return AbilityManager.abilityPool[name];
+        return AbilitiesManager.abilityPool[name];
     }
 
     //Misc Methods

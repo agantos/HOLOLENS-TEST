@@ -198,7 +198,7 @@
     },
     {
       "name": "Fireball",
-      "description": "An explosion of fire",
+      "description": "Shoot a bright flame from your fingers that explodes upon contact, torching everything in its vicinity.",
       "tags": ["3rd Level Spells"],
       "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
       "statCost": [{ "name": "Magic_Points", "cost": 3 }],

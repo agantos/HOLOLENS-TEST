@@ -19,7 +19,7 @@ public class BeginAbilityActivationButton : Button
 
         onClick.AddListener(delegate {
             if (spawnRadius.GetComponent<CastingAbilityManager>().
-                    BeginCasting(AbilityManager.abilityPool[abilityName], GameManager.characterPool[attackerName])
+                    BeginCasting(AbilitiesManager.abilityPool[abilityName], GameManager.characterPool[attackerName])
             )
             {
                 //Despawn window that displays the abilities

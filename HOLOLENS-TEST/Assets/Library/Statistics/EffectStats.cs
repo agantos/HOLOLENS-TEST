@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 
 enum EffectType { INDEPENDENT, DEPENDENT}
-enum TargetType { SELF, ALLY, ENEMY, ALL, ALL_NOT_SELF, AREA, TYPED }
+public enum TargetType { SELF, ALLY, ENEMY, ALL, ALL_NOT_SELF, AREA, TYPED }
 enum TargetNumber {NUMBERED, IN_RADIUS}
 public enum AreaShape { CUBE, CONE, SPHERE, LINE, SELECT, CIRCLE }
 public enum EffectSuccessCondition {AUTOMATIC, ATTACKER_ROLLS, DEFENDER_ROLLS, COMPARISON}
@@ -14,7 +14,7 @@ public enum EffectSuccessCondition {AUTOMATIC, ATTACKER_ROLLS, DEFENDER_ROLLS, C
 public class TargettingStats
 {
     TargetNumber numberType;
-    TargetType targetType;
+    public TargetType targetType;
     public int numberOfTargets;
 
     public TargettingStats(string type, int targets)
@@ -198,8 +198,8 @@ public class EffectSucceedsStats
 public class EffectDamageStats
 {
     public string damagedStatName;
-    string baseValue;
-    List<string> statsAffecting;
+    public string baseValue;
+    public List<string> statsAffecting;
     public float onSavedMultiplier;
 
     public EffectDamageStats(string baseAmount, string[] statsAffecting, string damagedStat, float onSavedMultiplier)
@@ -221,7 +221,6 @@ public class EffectDamageStats
         int diceRoll = GameplayCalculatorFunctions.CalculateDiceRoll(baseValue);
         sum += diceRoll;
        
-
         return sum;
     }
 
@@ -274,6 +273,7 @@ public class EffectStats
 {
     public EffectSucceedsStats effectSucceedsStats;
     public EffectDamageStats damageStats;
+    public int duration = 0;
 
     public bool EffectSucceeds(Character defender = null, Character attacker = null)
     {
