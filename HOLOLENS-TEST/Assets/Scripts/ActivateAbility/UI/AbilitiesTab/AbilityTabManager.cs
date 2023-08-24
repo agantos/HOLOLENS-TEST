@@ -21,23 +21,25 @@ public class AbilityTabManager : MonoBehaviour
 
     void Start()
     {
-        BackButton.GetComponent<Button>().onClick.AddListener(CharacterUIManager.OnClick_BackButton_AbilityTab);
+        BackButton.GetComponent<Button>().onClick.AddListener(SelectAbilityUIManager.OnClick_BackButton_AbilityTab);
         scale = gameObject.transform.localScale;
     }
 
     void CreateUI()
     {
-        title.SetText(CharacterUIManager.UI_Info.currentTag);
+        title.SetText(SelectAbilityUIManager.UI_Info.currentTag);
 
         foreach(string abilityName in character.abilities.Values)
         {
             Ability ability = character.GetCharacterAbility(abilityName);
-            if (ability.turnEconomyCost.ContainsKey(CharacterUIManager.UI_Info.currentTurnEconomy))
+            if (ability.turnEconomyCost.ContainsKey(SelectAbilityUIManager.UI_Info.currentTurnEconomy))
             {
-                if (ability.tags.Contains(CharacterUIManager.UI_Info.currentTag)) {
+                if (ability.tags.Contains(SelectAbilityUIManager.UI_Info.currentTag)) {
                     GameObject instance = Instantiate(BeginActivationButtonPrefab, Content.transform);
                     instance.name = abilityName + "_Button";
-                    instance.GetComponentInChildren<BeginAbilityActivationButton>().Initialize(abilityName, CharacterUIManager.UI_Info.currentPlayer, SpawnRadius);
+                    instance.GetComponentInChildren<BeginAbilityActivationButton>().Initialize(abilityName, SelectAbilityUIManager.UI_Info.currentPlayer, SpawnRadius);
+                    instance.GetComponentInChildren<BeginAbilityActivationButton>().SetButtonOnClick(SelectAbilityUIManager.OnClick_AbilityButton);
+                    
                     UIelementList.Add(instance);
                 }
             }
@@ -56,7 +58,7 @@ public class AbilityTabManager : MonoBehaviour
 
     public void Activate()
     {
-        character = GameManager.characterPool[CharacterUIManager.UI_Info.currentPlayer];
+        character = GameManager.characterPool[SelectAbilityUIManager.UI_Info.currentPlayer];
         CreateUI();
 
         //"Spawn" object

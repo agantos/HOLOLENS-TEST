@@ -63,13 +63,13 @@ public class GameManager : MonoBehaviour
     {
         turnManager.NextTurn();
         MonoBehaviour.FindAnyObjectByType<MoveCharacter>().OnChangeTurn(GetCurrentPlayer_Name());
-        CharacterUIManager.GiveTurnToPlayingCharacter();
+        SelectAbilityUIManager.GiveTurnToPlayingCharacter();
     }
 
     public void FirstTurn()
     {
         turnManager.FirstTurn();
-        CharacterUIManager.GiveTurnToPlayingCharacter();
+        SelectAbilityUIManager.GiveTurnToPlayingCharacter();
     }
 
     public static Character GetCurrentPlayer_Character()

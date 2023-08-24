@@ -25,7 +25,7 @@ public class Character
     public void AddStat(CharacterStat stat) { stats.GetStatistics().Add(stat.GetName(), stat); }   
    
     //Ability Activation Methods
-    public void ActivateOwnedAbility(string abilityName, out List<bool> abilitySuccessList, List<Character> defenders = null, Character attacker = null)
+    public void ActivateAbility(string abilityName, out List<bool> abilitySuccessList, List<Character> defenders = null, Character attacker = null)
     {
 
         abilitySuccessList = new List<bool>();
@@ -35,12 +35,12 @@ public class Character
             foreach(Character defender in defenders)
             {
                 bool succeeds;
-                AbilitiesManager.Activate_PerformEffect(abilityName, out succeeds, defender, attacker);
+                AbilitiesManager.ApplyAbilityEffect(abilityName, out succeeds, defender, attacker);
                 abilitySuccessList.Add(succeeds);
             }
                 
 
-            AbilitiesManager.Activate_ApplyCost(abilityName, attacker);
+            AbilitiesManager.ApplyAbilityCost(abilityName, attacker);
         }
         else
         {

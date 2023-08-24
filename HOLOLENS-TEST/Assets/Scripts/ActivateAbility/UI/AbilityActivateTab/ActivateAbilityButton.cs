@@ -8,26 +8,6 @@ using UnityEngine.EventSystems;
 //Singleton Button that activates current selected ability
 public class ActivateAbilityButton : Button
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        #if UNITY_EDITOR
-                if (!UnityEditor.EditorApplication.isPlaying)
-                    return;
-        #endif
-
-        onClick.AddListener(delegate {
-            ActivateAbility();
-        });
-        
-        Deactivate();
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        ActivateAbility();
-    }
-
     public void Deactivate()
     {
         gameObject.transform.localScale = new Vector3(0, 0, 0);
@@ -74,6 +54,6 @@ public class ActivateAbilityButton : Button
         CastingAbilityManager.CleanState();
 
         //Spawn the window that displays the abilities
-        CharacterUIManager.GiveTurnToPlayingCharacter();
+        SelectAbilityUIManager.GiveTurnToPlayingCharacter();
     }
 }

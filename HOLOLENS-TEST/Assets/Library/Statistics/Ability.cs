@@ -118,9 +118,9 @@ public class AbilitiesManager
     }
 
     //Apply the cost of an ability
-    public static void Activate_ApplyCost(string name, Character attacker)
+    public static void ApplyAbilityCost(string abilityName, Character attacker)
     {
-        Ability toActivate = abilityPool[name];
+        Ability toActivate = abilityPool[abilityName];
         
         //Apply Turn Economy Cost
         foreach (string costName in toActivate.turnEconomyCost.Keys)
@@ -139,9 +139,9 @@ public class AbilitiesManager
     }
 
     //Calculates success of an ability and applies its damage to a character.
-    public static void Activate_PerformEffect(string name, out bool effectSucceeds, Character defender = null,  Character attacker = null)
+    public static void ApplyAbilityEffect(string abilityName, out bool effectSucceeds, Character defender = null,  Character attacker = null)
     {        
-        Ability toActivate = abilityPool[name];
+        Ability toActivate = abilityPool[abilityName];
         effectSucceeds = false;
 
         foreach (PrimaryEffectStats primaryEffect in toActivate.effects)

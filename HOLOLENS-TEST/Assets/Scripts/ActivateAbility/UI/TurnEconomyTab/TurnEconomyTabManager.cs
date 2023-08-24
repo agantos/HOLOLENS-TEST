@@ -18,7 +18,7 @@ public class TurnEconomyTabManager : MonoBehaviour
 
     public void Activate()
     {
-        character = GameManager.characterPool[CharacterUIManager.UI_Info.currentPlayer];
+        character = GameManager.characterPool[SelectAbilityUIManager.UI_Info.currentPlayer];
         CreateUI();
 
         //"Spawn" object
@@ -41,7 +41,7 @@ public class TurnEconomyTabManager : MonoBehaviour
             turnEconomyUIElement.SetNameGameobject(name);
             turnEconomyUIElement.SetUses(currentValue, maxValue);
             turnEconomyUIElement.turnEconomyName = turnEconomyName;
-            turnEconomyUIElement.SetButtonOnClick(() => { CharacterUIManager.OnClick_TurnEconomyButton(turnEconomyUIElement); });
+            turnEconomyUIElement.SetButtonOnClick(() => { SelectAbilityUIManager.OnClick_TurnEconomyButton(turnEconomyUIElement); });
         }
     }
 

@@ -5,31 +5,21 @@ using UnityEngine.UI;
 
 public class BeginAbilityActivationButton : Button
 {
-    public GameObject spawnRadius;
-
-    public string abilityName;
-    public string attackerName;
-
     public void Initialize(string abilityName, string attackerName, GameObject spawnRadius)
     {
-        this.abilityName = abilityName;
-        this.attackerName = attackerName;
-
         gameObject.GetComponentInChildren<Text>().text = abilityName;
 
-        onClick.AddListener(delegate {
-            if (spawnRadius.GetComponent<CastingAbilityManager>().
-                    BeginCasting(AbilitiesManager.abilityPool[abilityName], GameManager.characterPool[attackerName])
-            )
-            {
-                //Despawn window that displays the abilities
-                FindAnyObjectByType<AbilityTabManager>(FindObjectsInactive.Include).Deactivate();
+        SetButtonOnClick(delegate {
+            CastingAbilityManager.instance.
+                BeginAbilityActivation( AbilitiesManager.abilityPool[abilityName], 
+                                        GameManager.characterPool[attackerName]
+                );
+            });
+    }
 
-                //Spawn the buttons for activation and canceling of the ability
-                FindAnyObjectByType<ActivateAbilityButton>(FindObjectsInactive.Include).Activate();
-                FindAnyObjectByType<CancelAbilityButton>(FindObjectsInactive.Include).Activate();
-            }
-        });
+    public void SetButtonOnClick(UnityEngine.Events.UnityAction method)
+    {
+        onClick.AddListener(method);
     }
 }
 

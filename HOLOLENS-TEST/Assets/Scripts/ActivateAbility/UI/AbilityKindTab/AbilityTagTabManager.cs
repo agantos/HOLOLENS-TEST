@@ -18,18 +18,18 @@ public class AbilityTagTabManager : MonoBehaviour
 
     void Start()
     {
-        BackButton.GetComponent<Button>().onClick.AddListener(CharacterUIManager.OnClick_BackButton_AbilityTagTab);
+        BackButton.GetComponent<Button>().onClick.AddListener(SelectAbilityUIManager.OnClick_BackButton_AbilityTagTab);
         scale = gameObject.transform.localScale;
     }
 
     public void Activate()
     {
-        character = GameManager.characterPool[CharacterUIManager.UI_Info.currentPlayer];
+        character = GameManager.characterPool[SelectAbilityUIManager.UI_Info.currentPlayer];
 
         //"Spawn" object
         gameObject.transform.localScale = scale;
 
-        SetTitle(CharacterUIManager.UI_Info.currentTurnEconomy);
+        SetTitle(SelectAbilityUIManager.UI_Info.currentTurnEconomy);
         CreateUI();        
     }
 
@@ -41,7 +41,7 @@ public class AbilityTagTabManager : MonoBehaviour
         foreach(string abilityName in character.abilities.Values)
         {
             Ability ability = character.GetCharacterAbility(abilityName);
-            if (ability.turnEconomyCost.ContainsKey(CharacterUIManager.UI_Info.currentTurnEconomy))
+            if (ability.turnEconomyCost.ContainsKey(SelectAbilityUIManager.UI_Info.currentTurnEconomy))
             {
                 foreach (string tag in ability.tags)
                 {
@@ -61,7 +61,7 @@ public class AbilityTagTabManager : MonoBehaviour
 
             abilityTagElementUI.SetNameGameobject(tag);
             abilityTagElementUI.abilityTag = tag;
-            abilityTagElementUI.SetButtonOnClick(() => { CharacterUIManager.OnClick_AbilityTagButton(abilityTagElementUI); });
+            abilityTagElementUI.SetButtonOnClick(() => { SelectAbilityUIManager.OnClick_AbilityTagButton(abilityTagElementUI); });
         }
     }
 

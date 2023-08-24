@@ -72,7 +72,6 @@ public class MinimizeAndMaximize : MonoBehaviour
         float x = canvasRect.width / 2 + buttonRect.width / 2 + 10;
         float y = canvasRect.height / 2 - buttonRect.height / 2;
         float z = minimizeButtonInstance.GetComponent<RectTransform>().localPosition.z;
-        Debug.Log(new Vector3(x, y, z));
 
         buttonInstance.GetComponent<RectTransform>().localPosition = new Vector3(x, y, z);
     }

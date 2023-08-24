@@ -29,8 +29,15 @@ public class CastingAbilityManager : MonoBehaviour
 
     GameObject spawned;
 
+    public static CastingAbilityManager instance;
+
+    private void Start()
+    {
+        instance = this;
+    }
+
     //Spawns the necessary objects for selecting targets for an ability
-    public bool BeginCasting(Ability ability, Character attacker)
+    public bool BeginAbilityActivation(Ability ability, Character attacker)
     {
         //Check if the ability can be cast
         if (true/**AbilityManager.Activate_CheckCost(ability.name, attacker)**/)
@@ -86,12 +93,25 @@ public class CastingAbilityManager : MonoBehaviour
         }            
     }
 
+    //TO DO: DEPRECATE
     public static void ActivateAttackerAbility()
     {
-        attacker.ActivateOwnedAbility(abilityToCast.name, out abilitySuccessList, defenderCharacters, attacker);
+        attacker.ActivateAbility(abilityToCast.name, out abilitySuccessList, defenderCharacters, attacker);
     }
 
-    public static void DeactivateAbility()
+    public static void ActivateAbility()
+    {
+        //Deactivate any spawned objects related to the activation of the ability
+        DeactivateAbilityActivationObjects();
+
+        //Start Animation
+        attackerAnimationManager.IdleTo_Animation(CastingAbilityManager.abilityToCast.animationTypes.attacker);
+
+        //Activate Ability
+        instance.StartCoroutine(ActivationSyncAbility());
+    }
+
+    public static void CancelActivation()
     {
         DeactivateAbilityActivationObjects();
         CleanState();
@@ -104,14 +124,12 @@ public class CastingAbilityManager : MonoBehaviour
     {
         //Objects searched with ANYobjecttype are singletons
         FindAnyObjectByType<AbilityRangeDisplay>().Deactivate();
-        FindAnyObjectByType<CancelAbilityButton>().Deactivate();
-        FindAnyObjectByType<ActivateAbilityButton>().Deactivate();
 
-        if (CastingAbilityManager.CurrentSelectionType == AbilitySelectType.SHAPE)
+        if (CurrentSelectionType == AbilitySelectType.SHAPE)
         {
             FindAnyObjectByType<RadiusSelectScript>().OnAbilityActivate();
         }
-        else if (CastingAbilityManager.CurrentSelectionType == AbilitySelectType.SELECT)
+        else if (CurrentSelectionType == AbilitySelectType.SELECT)
         {
             foreach (GameObject defender in defendersGameObject)
             {
@@ -170,5 +188,32 @@ public class CastingAbilityManager : MonoBehaviour
         defendersGameObject.Clear();
         abilitySuccessList.Clear();
         CurrentSelectionType = AbilitySelectType.INACTIVE;
+    }
+
+    static IEnumerator ActivationSyncAbility()
+    {
+        //Wait for the animation to register
+        float secsForAnimationToRegister = 0.4f;
+        yield return new WaitForSeconds(secsForAnimationToRegister);
+        float animationEnds = CastingAbilityManager.attackerAnimationManager.GetCurrentAnimationDuration()
+                                - secsForAnimationToRegister;
+
+        //Wait for the Impact point of the animation to activate the ability
+        yield return new WaitForSeconds(animationEnds - animationEnds * 3 / 8);
+        attacker.ActivateAbility(abilityToCast.name, out abilitySuccessList, defenderCharacters, attacker);
+        ActivateDefenderAnimations();
+
+        //Wait for the animation to end
+        yield return new WaitForSeconds(animationEnds - animationEnds * 5 / 8);
+
+        //Switch Back to Idle Animation
+        ReturnAttackerToIdleAnimation();
+        ReturnDefendersToIdleAnimation();
+
+        //Clean manager state
+        CastingAbilityManager.CleanState();
+
+        //Spawn the window that displays the abilities
+        SelectAbilityUIManager.GiveTurnToPlayingCharacter();
     }
 }

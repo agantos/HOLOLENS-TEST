@@ -8,27 +8,28 @@ public class CharacterUI_Info
     public string currentPlayer, currentTurnEconomy, currentTag;
 }
 
-public class CharacterUIManager : MonoBehaviour
+public class SelectAbilityUIManager : MonoBehaviour
 {
     public static TurnEconomyTabManager turnEconomyTabManager;
     public static AbilityTagTabManager abilityTagTabManager;
     public static AbilityTabManager abilityTabManager;
+    public static ActivateAbilityUIManager activateAbilityUIManager;
 
     public static CharacterUI_Info UI_Info = new CharacterUI_Info();
-    public static CharacterUIManager instance;
+    public static SelectAbilityUIManager instance;
 
-    public static CharacterUIManager GetInstance
+    public static SelectAbilityUIManager GetInstance
     {
         get
         {
             if (instance == null)
             {
-                instance = FindObjectOfType<CharacterUIManager>();
+                instance = FindObjectOfType<SelectAbilityUIManager>();
 
                 if (instance == null)
                 {
                     GameObject singletonObject = new GameObject("SingletonMonoBehaviour");
-                    instance = singletonObject.AddComponent<CharacterUIManager>();
+                    instance = singletonObject.AddComponent<SelectAbilityUIManager>();
                 }
             }
 
@@ -53,7 +54,8 @@ public class CharacterUIManager : MonoBehaviour
     {
         turnEconomyTabManager = FindAnyObjectByType<TurnEconomyTabManager>();
         abilityTagTabManager = FindAnyObjectByType<AbilityTagTabManager>();
-        abilityTabManager = FindAnyObjectByType<AbilityTabManager>();      
+        abilityTabManager = FindAnyObjectByType<AbilityTabManager>();
+        activateAbilityUIManager = FindAnyObjectByType<ActivateAbilityUIManager>();
     }
 
     static public void GiveTurnToPlayingCharacter()
@@ -65,7 +67,10 @@ public class CharacterUIManager : MonoBehaviour
         turnEconomyTabManager.Activate();
 
         abilityTagTabManager.Deactivate();
+
         abilityTabManager.Deactivate();
+
+        activateAbilityUIManager.Deactivate();
     }
 
     public static void OnClick_TurnEconomyButton(TurnEconomyUIElement element)
@@ -84,6 +89,13 @@ public class CharacterUIManager : MonoBehaviour
         abilityTabManager.Activate();
     }
 
+    //New
+    public static void OnClick_AbilityButton()
+    {
+        abilityTabManager.Deactivate();
+        activateAbilityUIManager.Activate();
+    }
+
     public static void OnClick_BackButton_AbilityTagTab()
     {
         abilityTagTabManager.Deactivate();
@@ -95,6 +107,8 @@ public class CharacterUIManager : MonoBehaviour
         abilityTabManager.Deactivate();
         abilityTagTabManager.Activate();
     }
+
+    
 
 
 }
