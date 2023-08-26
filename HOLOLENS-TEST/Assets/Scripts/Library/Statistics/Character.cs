@@ -38,7 +38,7 @@ public class Character
             basePresetsPool[presetName].AddPresetToCharacter(this);
         }
     }
-    //TODO make clone stat
+
     public void AddStat(CharacterStat stat) { 
         stats.GetStatistics().Add(stat.GetName(), stat.Clone()); 
     }   

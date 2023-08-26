@@ -3,75 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-
-public class StatTemporalEffect
+public class CharacterStat
 {
-    public int value, duration;
-    public string name;
-
-    public StatTemporalEffect(string name, int value, int duration)
-    {
-        this.value = value;
-        this.name = name;
-        this.duration = duration;
-    }
-}
-
-public class StatFunctor{
-    public string op;
-    public float value;
-
-    public StatFunctor(string type, float operand)
-    {
-        this.op = type;
-        this.value = operand;
-    }
-}
-
-public class CharacterStatRelation
-{
-    public CharacterStat stat;
-    public StatFunctor fun;
-
-    public CharacterStatRelation(CharacterStat stat, StatFunctor fun)
-    {
-        this.stat = stat;
-        this.fun = fun;
-    }
-
-    public int CalculateRelation()
-    {
-        float relationAdd = 0;      
-        switch (fun.op)
-        {
-            case "+":
-                relationAdd += fun.value * stat.GetCurrentValue();
-                break;
-            case "-":
-                relationAdd -= fun.value * stat.GetCurrentValue();    
-                break;
-            default:
-                Assert.IsTrue(false, "Invalid Operand");
-                break;
-
-        }
-        return (int)relationAdd;
-    }
-
-    public override string ToString()
-    {
-        string s = "";
-        s += fun.op + " | ";
-        s += fun.value.ToString()+" | ";
-        return s;
-    }
-}
-public class CharacterStat {
     string name;
     //A stat is given by the formula:
     //currentValue = staticValue + statRelations + permanentEffects + currentEffect - currentDamage 
     int staticValue = 0;
-    int damage = 0;    
+    int damage = 0;
 
     Dictionary<string, CharacterStatRelation> statRelations;
     Dictionary<string, int> permanentEffects;
@@ -79,7 +17,8 @@ public class CharacterStat {
 
     int currentValue;
 
-    public CharacterStat() {
+    public CharacterStat()
+    {
         statRelations = new Dictionary<string, CharacterStatRelation>();
         permanentEffects = new Dictionary<string, int>();
         temporalEffects = new Dictionary<string, StatTemporalEffect>();
@@ -116,8 +55,9 @@ public class CharacterStat {
 
     //Stat Damage
     //  -damage is a seperate counter that gets added to the stats current value
-    public void DealDamage(int damage) { 
-        this.damage += damage; 
+    public void DealDamage(int damage)
+    {
+        this.damage += damage;
     }
 
     public void HealDamage(int damage)
@@ -136,7 +76,7 @@ public class CharacterStat {
     int CalculateStatRelations()
     {
         int sum = 0;
-        if (statRelations != null && statRelations.Count > 0 )
+        if (statRelations != null && statRelations.Count > 0)
         {
             foreach (CharacterStatRelation relation in statRelations.Values)
             {
@@ -228,12 +168,12 @@ public class CharacterStat {
         //Remove expired effects
         foreach (string effectName in to_remove)
             temporalEffects.Remove(effectName);
-        
+
         //Recalculate stat if needed
         if (shouldRecalculate)
         {
             CalculateCurrentValue();
-        }            
+        }
 
         noTemporalEffects = temporalEffects.Count == 0;
     }
@@ -282,20 +222,20 @@ public class CharacterStat {
         string currTab = tab + prevTab;
 
         string s = currTab + name + ": {\n";
-        
+
         //Static Value
         s += currTab + tab + "staticValue: " + staticValue + "\n";
-        
+
         //Stat Relations
         s += currTab + tab + "statRelations: [ ";
         if (statRelations.Count != 0)
         {
-            foreach(string name in statRelations.Keys)
+            foreach (string name in statRelations.Keys)
             {
                 s += "  '";
-                s += statRelations[name].ToString() + name ;
+                s += statRelations[name].ToString() + name;
                 s += "'";
-            }            
+            }
         }
         s += " ]\n";
 
@@ -305,107 +245,4 @@ public class CharacterStat {
         s += currTab + "}\n";
         return s;
     }
-} 
-public class CharacterStats
-{
-    Dictionary<string, CharacterStat> statistics = new Dictionary<string, CharacterStat>();
-    private HashSet<string> statsWithTemporalEffects = new HashSet<string>();
-
-    public void AddTemporalEffect(string statName, string effectName, int duration, int value)
-    {
-        statistics[statName].AddTemporalEffect(effectName, duration, value);
-        statsWithTemporalEffects.Add(statName);
-
-        statistics[statName].CalculateCurrentValue();
-        RecalculateStatsAfterChange(statName);
-    }
-
-    //O(n) n === the stats with temporal effects
-    public void UpdateTemporalEffects()
-    {
-        List<string> to_remove = new List<string>();
-
-        foreach(string statName in statsWithTemporalEffects)
-        {
-            bool noTemporalEffects;
-            statistics[statName].UpdateTemporalEffects(out noTemporalEffects);           
-
-            if (noTemporalEffects)
-                to_remove.Add(statName);
-        }
-
-        foreach(string stat in to_remove)
-            statsWithTemporalEffects.Remove(stat);
-    }
-
-    public void RemoveTemporalEffect(string statName, string effectName, int duration, int value)
-    {
-        statistics[statName].RemoveTemporalEffect(effectName);
-        RecalculateStatsAfterChange(statName);
-    }
-
-    public void AddPermanentEffect(string statName, string effectName, int value)
-    {
-        statistics[statName].AddPermanentEffect(effectName, value);
-    }
-    
-    public void AddStat(string name, int staticValue)
-    {
-        statistics.Add(name, new CharacterStat(name, staticValue));
-    }
-
-    public void AddStatRelation(string affectedStatName, string affectorStatName, StatFunctor fun)
-    {
-        if (GetStat(affectorStatName) != null)
-            statistics[affectedStatName].AddStatRelation(GetStat(affectorStatName), fun);
-        else
-            Assert.IsTrue(false, "The stat you are trying to relate to does not exist.");
-    }
-
-    public void CalculateAllStats()
-    {
-        foreach (CharacterStat stat in statistics.Values)
-        {
-            stat.CalculateCurrentValue();
-        }
-    }
-    public string ToString(string prevTab)
-    {
-        string tab = "  ";
-        string currTab = tab + prevTab;
-        string s = prevTab + "statList: [ \n";
-
-        foreach (CharacterStat stat in statistics.Values)
-        {
-            s += stat.ToString(currTab);
-        }
-        s += prevTab + "]";
-        return s;
-    }
-
-    public Dictionary<string, CharacterStat> GetStatistics() { return statistics; }
-
-    //Returns a stat with name = name or null if it doesn't exist in statistics
-    public CharacterStat GetStat(string name)
-    {
-        CharacterStat stat;
-        if (statistics.TryGetValue(name, out stat))
-            return stat;
-        else
-            return null;
-    }
-
-    //After a stat change all related stats should be updated
-    void RecalculateStatsAfterChange(string statName)
-    {
-        foreach (string name in statistics.Keys)
-        {
-            if (statistics[name].HasStatRelationWith(statName))
-            {
-                statistics[name].CalculateCurrentValue();
-                RecalculateStatsAfterChange(name);
-            }
-        }
-    }
 }
-
