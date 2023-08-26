@@ -91,6 +91,23 @@ public class JSONClass_to_EngineClass
     {
         PrimaryEffectStats effect = new PrimaryEffectStats();
 
+        //Effect Type
+        switch (jsonEffect.type)
+        {
+            case "Damage":
+                effect.type = EffectType.DAMAGE;
+                break;
+            case "Healing":
+                effect.type = EffectType.HEALING;
+                break;
+            case "Temporal":
+                effect.type = EffectType.TEMPORAL;
+                break;
+        }
+
+        //Duration
+        effect.duration = jsonEffect.duration;
+
         //Targetting statistics
         if (jsonEffect.targetting != null)
             effect.CreateTargetting(jsonEffect.targetting.type, jsonEffect.targetting.number);
@@ -129,6 +146,20 @@ public class JSONClass_to_EngineClass
     public static FollowupEffectStats CreateFollowUpEffect(JSONEffect jsonEffect)
     {
         FollowupEffectStats effect = new FollowupEffectStats();
+
+        //Effect Type
+        switch (jsonEffect.type)
+        {
+            case "Damage":
+                effect.type = EffectType.DAMAGE;
+                break;
+            case "Healing":
+                effect.type = EffectType.HEALING;
+                break;
+            case "Temporal":
+                effect.type = EffectType.TEMPORAL;
+                break;
+        }
 
         //Success Statistics
         JSONEffectComparisonStat jsonAttacker;

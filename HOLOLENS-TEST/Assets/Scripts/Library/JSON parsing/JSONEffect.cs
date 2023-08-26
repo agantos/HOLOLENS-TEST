@@ -59,6 +59,8 @@ public class JSONEffectDamage
 [System.Serializable]
 public class JSONEffect
 {
+    public string type;
+    public int duration;
     public bool isPrimary;
     public bool appliesIfPrimaryFailed;
     public JSONEffectTargetting targetting;

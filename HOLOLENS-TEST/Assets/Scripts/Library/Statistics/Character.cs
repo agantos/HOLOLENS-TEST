@@ -3,16 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class Character
+public class OngoingEffect
 {
     public string name;
+    public int duration;
+    public EffectStats effect;
+    public Character attacker;
+}
+
+public class Character
+{
+    //Basics
+    public string name;
+    CharacterStats stats = new CharacterStats();
+
+    //Presets
+    public List<string> basePresets = new List<string>();
+    public List<string> additionalPresets = new List<string>();
+
+    //TurnEconomy
     public Dictionary<string, int> turnEconomy;
     public Dictionary<string, int> currentTurnEconomy;
 
+    //Ability Related
     public Dictionary<string, string> abilities = new Dictionary<string, string>();
-    public List<string> basePresets = new List<string>();
-    public List<string> additionalPresets = new List<string>();
-    CharacterStats stats = new CharacterStats();
+    public List<OngoingEffect> ongoingEffects = new List<OngoingEffect>();
+    
 
     //Loading Character Methods
     public void LoadCharacterBasicPresetsFromPool(Dictionary<string, BaseCharacterPreset> basePresetsPool)
@@ -22,7 +38,10 @@ public class Character
             basePresetsPool[presetName].AddPresetToCharacter(this);
         }
     }
-    public void AddStat(CharacterStat stat) { stats.GetStatistics().Add(stat.GetName(), stat); }   
+    //TODO make clone stat
+    public void AddStat(CharacterStat stat) { 
+        stats.GetStatistics().Add(stat.GetName(), stat.Clone()); 
+    }   
    
     //Ability Activation Methods
     public void ActivateAbility(string abilityName, out List<bool> abilitySuccessList, List<Character> defenders = null, Character attacker = null)
@@ -59,6 +78,8 @@ public class Character
 
     public void OnStartTurn()
     {
+        Debug.Log("Defense of " + name + " is " + GetStat("Defense").GetCurrentValue());
+
         //Refresh the turn economy
         RefreshTurnEconomy();
 
@@ -67,8 +88,21 @@ public class Character
         speed.HealDamage(speed.GetDamage());
         speed.CalculateCurrentValue();
 
-        Debug.Log("Speed is " + speed.GetCurrentValue());
+        //Apply Ongoing Effects
+        foreach(OngoingEffect ongoing in ongoingEffects)
+        {
+            ongoing.effect.ApplyEffect(true, this, ongoing.attacker);
+
+            ongoing.duration -= 1;            
+            if(ongoing.duration == 0)
+                ongoingEffects.Remove(ongoing);
+        }
+
+        //Temporal Effects
+        stats.UpdateTemporalEffects();
     }
+
+
 
     //Get Methods
     public CharacterStats GetStats() { return stats; }

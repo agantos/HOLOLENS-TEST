@@ -16,7 +16,7 @@
           "number": 1
         }
       ],
-      "abilities": [],
+      "abilities": ["Blind"],
       "basePresets": ["Human"],
       "additionalPresets": []
     },

@@ -94,7 +94,7 @@ public class MoveCharacter : MonoBehaviour, IMixedRealityPointerHandler, IMixedR
                 DestinationToken.SetActive(false);
 
             //Move back to Idle animation
-            if (movee.GetComponent<AnimationManager>().GetHasMovingAnimation())
+            if (movee.GetComponent<AnimationManager>() && movee.GetComponent<AnimationManager>().GetHasMovingAnimation())
                 movee.GetComponent<AnimationManager>().MovingTo_Idle();
         }
     }

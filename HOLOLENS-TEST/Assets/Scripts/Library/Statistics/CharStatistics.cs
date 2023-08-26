@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-//TODO MAKE STAT EFFECTS INTO A CLASS
 
-class StatEffects
+public class StatTemporalEffect
 {
-    Dictionary<string, (string statName, int value)> effects;
+    public int value, duration;
+    public string name;
 
-    public void AddEffect(string effectName, string statName, int value)
+    public StatTemporalEffect(string name, int value, int duration)
     {
-        effects.Add(effectName, (statName, value));
+        this.value = value;
+        this.name = name;
+        this.duration = duration;
     }
 }
 
@@ -73,9 +75,15 @@ public class CharacterStat {
 
     Dictionary<string, CharacterStatRelation> statRelations;
     Dictionary<string, int> permanentEffects;
-    Dictionary<string, int> temporalEffects;
+    Dictionary<string, StatTemporalEffect> temporalEffects;
 
     int currentValue;
+
+    public CharacterStat() {
+        statRelations = new Dictionary<string, CharacterStatRelation>();
+        permanentEffects = new Dictionary<string, int>();
+        temporalEffects = new Dictionary<string, StatTemporalEffect>();
+    }
 
     public CharacterStat(string name, int staticValue)
     {
@@ -84,10 +92,33 @@ public class CharacterStat {
 
         statRelations = new Dictionary<string, CharacterStatRelation>();
         permanentEffects = new Dictionary<string, int>();
-        temporalEffects = new Dictionary<string, int>();
+        temporalEffects = new Dictionary<string, StatTemporalEffect>();
+    }
+    //Clone Stat;
+    public CharacterStat Clone()
+    {
+        CharacterStat clone = new CharacterStat
+        {
+            name = this.name,
+            staticValue = this.staticValue,
+            damage = this.damage,
+            currentValue = this.currentValue
+        };
+
+        //Stat relation are shared between different character stats.
+        clone.statRelations = new Dictionary<string, CharacterStatRelation>(this.statRelations);
+        clone.permanentEffects = new Dictionary<string, int>(this.permanentEffects);
+        clone.temporalEffects = new Dictionary<string, StatTemporalEffect>(this.temporalEffects);
+
+        return clone;
     }
 
-    public void DealDamage(int damage) { this.damage += damage; }
+
+    //Stat Damage
+    //  -damage is a seperate counter that gets added to the stats current value
+    public void DealDamage(int damage) { 
+        this.damage += damage; 
+    }
 
     public void HealDamage(int damage)
     {
@@ -140,6 +171,17 @@ public class CharacterStat {
         }
         return sum;
     }
+    private int AssertandGetPermanentEffect(string name)
+    {
+        int value;
+        if (permanentEffects.TryGetValue(name, out value))
+            return value;
+        else
+        {
+            Assert.IsTrue(false);
+            return 0;
+        }
+    }
 
     //Temporal Effects:
     //  -Represent abilities or other effects that affect a specific statistic.
@@ -151,32 +193,60 @@ public class CharacterStat {
         {
             foreach (string effectName in temporalEffects.Keys)
             {
-                currentValue += temporalEffects[effectName];
+                sum += temporalEffects[effectName].value;
             }
         }
         return sum;
     }
-    public void AddTemporalEffect(string effectName, int value)
+    public void AddTemporalEffect(string effectName, int duration, int value)
     {
-        temporalEffects.Add(effectName, value);
-        currentValue += AssertandGetTemporalEffect(effectName);
+        temporalEffects.Add(effectName, new StatTemporalEffect(effectName, value, duration));
     }
 
     public void RemoveTemporalEffect(string effectName)
     {
-        currentValue -= AssertandGetTemporalEffect(effectName);
         temporalEffects.Remove(effectName);
     }
 
-    private int AssertandGetTemporalEffect(string name)
+    //Moves the duration of all temporal effects in a stat.
+    public void UpdateTemporalEffects(out bool noTemporalEffects)
     {
-        int value;
-        if (temporalEffects.TryGetValue(name, out value))
-            return value;
+        bool shouldRecalculate = false;
+        List<string> to_remove = new List<string>();
+
+        foreach (StatTemporalEffect temp in temporalEffects.Values)
+        {
+            //Advance duration and add effects for removal 
+            temp.duration -= 1;
+            if (temp.duration == 0)
+            {
+                to_remove.Add(temp.name);
+                shouldRecalculate = true;
+            }
+        }
+
+        //Remove expired effects
+        foreach (string effectName in to_remove)
+            temporalEffects.Remove(effectName);
+        
+        //Recalculate stat if needed
+        if (shouldRecalculate)
+        {
+            CalculateCurrentValue();
+        }            
+
+        noTemporalEffects = temporalEffects.Count == 0;
+    }
+
+    private StatTemporalEffect AssertandGetTemporalEffect(string name)
+    {
+        StatTemporalEffect temp;
+        if (temporalEffects.TryGetValue(name, out temp))
+            return temp;
         else
         {
             Assert.IsTrue(false);
-            return 0;
+            return null;
         }
     }
 
@@ -185,6 +255,7 @@ public class CharacterStat {
         currentValue = staticValue + CalculateStatRelations() + CalculatePermanentEffects() + CalculateTemporalEffects() - damage;
     }
 
+    //Getters
     public int GetCurrentValue()
     {
         return currentValue;
@@ -203,18 +274,6 @@ public class CharacterStat {
     public void AddToStaticValue(int val)
     {
         staticValue += val;
-    }
-
-    private int AssertandGetPermanentEffect(string name)
-    {
-        int value;
-        if (permanentEffects.TryGetValue(name, out value))
-            return value;
-        else
-        {
-            Assert.IsTrue(false);
-            return 0;
-        }      
     }
 
     public string ToString(string prevTab)
@@ -247,51 +306,41 @@ public class CharacterStat {
         return s;
     }
 } 
-//Formulas are statistics that combine various stats but are universal and many 
-//abilities may require their entry. For example, spell bonus, attack bonus, spell DC
-class Formula
-{
-    private int staticValue { get; set; } = 0;
-    private string name { get; set; }
-    private List<CharacterStat> formulaParts;
-
-    public int CalculateFormula()
-    {
-        int sum = staticValue;
-        Assert.IsFalse(formulaParts == null);
-        foreach (CharacterStat formulaPart in formulaParts)
-        {
-            sum += formulaPart.GetCurrentValue();
-        }
-        return sum;
-    }
-
-    public void AddPart(CharacterStat part)
-    {
-        formulaParts.Add(part);
-    }
-
-    public void SetStaticValue(int value) { staticValue = value; }
-}
 public class CharacterStats
 {
     Dictionary<string, CharacterStat> statistics = new Dictionary<string, CharacterStat>();
+    private HashSet<string> statsWithTemporalEffects = new HashSet<string>();
 
-    void RecalculateStatsAfterChange(string statName)
+    public void AddTemporalEffect(string statName, string effectName, int duration, int value)
     {
-        foreach (string name in statistics.Keys)
-        {
-            if (statistics[name].HasStatRelationWith(statName))
-            {
-                statistics[name].CalculateCurrentValue();
-                RecalculateStatsAfterChange(name);
-            }
-        }
+        statistics[statName].AddTemporalEffect(effectName, duration, value);
+        statsWithTemporalEffects.Add(statName);
+
+        statistics[statName].CalculateCurrentValue();
+        RecalculateStatsAfterChange(statName);
     }
 
-    public void AddTemporalEffect(string statName, string effectName, int value)
+    //O(n) n === the stats with temporal effects
+    public void UpdateTemporalEffects()
     {
-        statistics[statName].AddTemporalEffect(effectName, value);
+        List<string> to_remove = new List<string>();
+
+        foreach(string statName in statsWithTemporalEffects)
+        {
+            bool noTemporalEffects;
+            statistics[statName].UpdateTemporalEffects(out noTemporalEffects);           
+
+            if (noTemporalEffects)
+                to_remove.Add(statName);
+        }
+
+        foreach(string stat in to_remove)
+            statsWithTemporalEffects.Remove(stat);
+    }
+
+    public void RemoveTemporalEffect(string statName, string effectName, int duration, int value)
+    {
+        statistics[statName].RemoveTemporalEffect(effectName);
         RecalculateStatsAfterChange(statName);
     }
 
@@ -299,16 +348,7 @@ public class CharacterStats
     {
         statistics[statName].AddPermanentEffect(effectName, value);
     }
-    public Dictionary<string, CharacterStat> GetStatistics() { return statistics; }
-
-    //Returns a stat with name = name or null if it doesn't exist in statistics
-    public CharacterStat GetStat(string name) {
-        CharacterStat stat;
-        if (statistics.TryGetValue(name, out stat))
-            return stat;
-        else
-            return null;
-    }
+    
     public void AddStat(string name, int staticValue)
     {
         statistics.Add(name, new CharacterStat(name, staticValue));
@@ -341,6 +381,31 @@ public class CharacterStats
         }
         s += prevTab + "]";
         return s;
+    }
+
+    public Dictionary<string, CharacterStat> GetStatistics() { return statistics; }
+
+    //Returns a stat with name = name or null if it doesn't exist in statistics
+    public CharacterStat GetStat(string name)
+    {
+        CharacterStat stat;
+        if (statistics.TryGetValue(name, out stat))
+            return stat;
+        else
+            return null;
+    }
+
+    //After a stat change all related stats should be updated
+    void RecalculateStatsAfterChange(string statName)
+    {
+        foreach (string name in statistics.Keys)
+        {
+            if (statistics[name].HasStatRelationWith(statName))
+            {
+                statistics[name].CalculateCurrentValue();
+                RecalculateStatsAfterChange(name);
+            }
+        }
     }
 }
 

@@ -148,14 +148,14 @@ public class AbilitiesManager
         {
             //Calculate primary success and damage
             effectSucceeds = EffectSucceedsChecker.GetSuccess(primaryEffect, defender, attacker);
-            primaryEffect.DealDamage(effectSucceeds, defender, attacker);
+            primaryEffect.ApplyEffect(effectSucceeds, defender, attacker);
             
             //Calculate only the appropriate follow-up effects' success and damage
             foreach (FollowupEffectStats followup in primaryEffect.followUpEffects)
             {
                 if (effectSucceeds || followup.appliesIfPrimaryFailed)
                 {
-                    followup.DealDamage(EffectSucceedsChecker.GetSuccess(followup, defender, attacker), defender, attacker);
+                    followup.ApplyEffect(EffectSucceedsChecker.GetSuccess(followup, defender, attacker), defender, attacker);
                 }
             }
         }

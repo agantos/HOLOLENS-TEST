@@ -5,11 +5,12 @@ using System;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-enum EffectType { INDEPENDENT, DEPENDENT}
 public enum TargetType { SELF, ALLY, ENEMY, ALL, ALL_NOT_SELF, AREA, TYPED }
 enum TargetNumber {NUMBERED, IN_RADIUS}
 public enum AreaShape { CUBE, CONE, SPHERE, LINE, SELECT, CIRCLE }
 public enum EffectSuccessCondition {AUTOMATIC, ATTACKER_ROLLS, DEFENDER_ROLLS, COMPARISON}
+
+public enum EffectType { DAMAGE, HEALING, TEMPORAL }
 
 public class TargettingStats
 {
@@ -273,6 +274,7 @@ public class EffectStats
 {
     public EffectSucceedsStats effectSucceedsStats;
     public EffectDamageStats damageStats;
+    public EffectType type;
     public int duration = 0;
 
     public bool EffectSucceeds(Character defender = null, Character attacker = null)
@@ -295,6 +297,29 @@ public class EffectStats
         CharacterStat damagedStat = defender.GetStats().GetStat(damageStats.damagedStatName);
         damagedStat.DealDamage(CalculateEffectDamage(effectSucceeds, defender, attacker));
         damagedStat.CalculateCurrentValue();
+    }
+
+    public void HealDamage(bool effectSucceeds, Character defender, Character attacker)
+    {
+        CharacterStat healedStat = defender.GetStats().GetStat(damageStats.damagedStatName);
+        healedStat.HealDamage(CalculateEffectDamage(effectSucceeds, defender, attacker));
+        healedStat.CalculateCurrentValue();
+    }
+
+    public void ApplyEffect(bool effectSucceeds, Character defender, Character attacker, string abilityName = "")
+    {
+        CharacterStat affectedStat = defender.GetStats().GetStat(damageStats.damagedStatName);
+        if(type == EffectType.DAMAGE)
+            affectedStat.DealDamage(CalculateEffectDamage(effectSucceeds, defender, attacker));
+        else if(type == EffectType.HEALING)
+            affectedStat.HealDamage(CalculateEffectDamage(effectSucceeds, defender, attacker));
+        else if(type == EffectType.TEMPORAL)
+        {
+            if(effectSucceeds)
+                defender.GetStats().AddTemporalEffect(affectedStat.GetName(), abilityName, duration, CalculateEffectDamage(effectSucceeds, defender, attacker));
+        }
+
+        affectedStat.CalculateCurrentValue();
     }
 
     private int CalculateEffectDamage(bool effectSucceeds, Character defender = null, Character attacker = null)

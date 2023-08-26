@@ -61,7 +61,6 @@ public class SelectAbilityUIManager : MonoBehaviour
     static public void GiveTurnToPlayingCharacter()
     {
         UI_Info.currentPlayer = GameManager.GetCurrentPlayer_Name();
-        Debug.Log(GameManager.GetCurrentPlayer_Name());
 
         turnEconomyTabManager.Deactivate();
         turnEconomyTabManager.Activate();
