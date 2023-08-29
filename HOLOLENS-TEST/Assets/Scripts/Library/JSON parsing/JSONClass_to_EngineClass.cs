@@ -309,4 +309,19 @@ public class JSONClass_to_EngineClass
             GameManager.characterPool.Add(temp.name, temp);
         }
     }
+
+    //Create a dictionary of CharacterUIInformation from the parsed JSON
+    //NOTE: JSON CLASS IS THE SAME AS THE CLASS USED IN THE GAME
+    public static Dictionary<string, CharacterInformationUI> CreateCharacter_UI_Information(CharacterInformationUI_Table table)
+    {
+        Dictionary<string, CharacterInformationUI> dic = new Dictionary<string, CharacterInformationUI>();
+
+        foreach(CharacterInformationUI info in table.UIInfo)
+        {
+            dic.Add(info.preset, info);
+        }
+
+        return dic;
+    }
+
 }

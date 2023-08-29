@@ -1,0 +1,30 @@
+{
+  "UIInfo": [
+    {
+      "preset": "Human",
+      "bars": [
+        { "color": "red", "statName": "HP" },
+        { "color": "green", "statName": "HP" }
+      ],
+      "baseStats": ["Strength", "Finesse", "Magic", "Defense", "Speed"],
+      "keyAbilities": ["Fireball", "Finesse Ranged Attack"],
+      "statCategories": [
+        { "categoryName": "Magic", "statNames": ["Magic", "Magic_Damage", "Magic_Power", "Magic_Points"] },
+        { "categoryName": "Defense", "statNames": ["Defense", "Magic_Resistance", "Speed"] }
+      ]
+    },
+    {
+      "preset": "Dwarf",
+      "bars": [
+        { "color": "red", "statName": "HP" },
+        { "color": "green", "statName": "HP" }
+      ],
+      "baseStats": ["Strength", "Finesse", "Magic", "Defense", "Speed"],
+      "keyAbilities": ["Fireball", "Finesse Ranged Attack"],
+      "statCategories": [
+        { "categoryName": "Magic", "statNames": ["Magic", "Magic_Damage", "Magic_Power", "Magic_Points"] },
+        { "categoryName": "Defense", "statNames": ["Defense", "Magic_Resistance", "Speed"] }
+      ]
+    }
+  ]
+}

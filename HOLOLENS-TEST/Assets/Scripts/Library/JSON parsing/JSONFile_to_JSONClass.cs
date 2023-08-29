@@ -43,5 +43,13 @@ public class JSONFile_to_JSONClass
         wrapper = JsonUtility.FromJson<JSONCharacters>(jsonFile.text);
         return wrapper;
     }
+
+    public static CharacterInformationUI_Table ParseCharacterInformationUI(string jsonPath)
+    {
+        CharacterInformationUI_Table wrapper;
+        TextAsset jsonFile = Resources.Load<TextAsset>(jsonPath);
+        wrapper = JsonUtility.FromJson<CharacterInformationUI_Table>(jsonFile.text);
+        return wrapper;
+    }
 }
 

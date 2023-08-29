@@ -20,7 +20,8 @@ public class CharacterPreset
     protected void AddAbilitiesToCharacter(Character character){
         foreach(string ability in presetAbilities)
         {
-            character.abilities.Add(ability, ability);
+            if(!character.abilities.ContainsKey(ability))
+                character.abilities.Add(ability, ability);
         }
     }
 
@@ -28,6 +29,7 @@ public class CharacterPreset
 
 //BaseCharacterPreset
 //  add their statistics to the character statitstics
+//      **if the same stat exists in both presets keep the first
 //  add their abilities to the character abilities
 public class BaseCharacterPreset : CharacterPreset
 {
@@ -43,7 +45,12 @@ public class BaseCharacterPreset : CharacterPreset
         if (stats.GetStatistics() != null)
         {
             foreach (string statName in stats.GetStatistics().Keys)
-                character.AddStat(stats.GetStatistics()[statName]);
+            {
+                //Add the stat if it isno already contained in the dictionary.
+                if(!character.GetStats().GetStatistics().ContainsKey(statName))
+                   character.AddStat(stats.GetStatistics()[statName]);
+            }
+                
         }
     }
 

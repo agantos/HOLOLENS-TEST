@@ -56,8 +56,8 @@
           "number": 1
         }
       ],
-      "abilities": ["Fireball"],
-      "basePresets": ["Dwarf"],
+      "abilities": [],
+      "basePresets": ["Dwarf", "Human"],
       "additionalPresets": []
     }
   ]

@@ -16,6 +16,7 @@ public class CharacterStat
     Dictionary<string, StatTemporalEffect> temporalEffects;
 
     int currentValue;
+    int maxValue;
 
     public CharacterStat()
     {
@@ -195,10 +196,20 @@ public class CharacterStat
         currentValue = staticValue + CalculateStatRelations() + CalculatePermanentEffects() + CalculateTemporalEffects() - damage;
     }
 
+    public void CalculateMaxValue()
+    {
+        maxValue = staticValue + CalculateStatRelations() + CalculatePermanentEffects() + CalculateTemporalEffects();
+    }
+
     //Getters
     public int GetCurrentValue()
     {
         return currentValue;
+    }
+
+    public int GetMaxValue()
+    {
+        return maxValue;
     }
 
     public string GetName()
