@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class BaseStat : MonoBehaviour
+public class UI_Stat : MonoBehaviour
 {
     public TMP_Text statName;
     public TMP_Text value;

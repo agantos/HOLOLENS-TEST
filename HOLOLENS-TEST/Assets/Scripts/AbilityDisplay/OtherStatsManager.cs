@@ -45,7 +45,7 @@ public class OtherStatsManager : MonoBehaviour
         int range = abilityAOEInfo.range;
         string text = range + " feet";
 
-        CreateStatInfo(text, "UI/Ability Images/Range/Range");
+        CreateStatInfo(text, "UI/AbilityDisplayImages/Range/Range");
     }
 
     void CreateDuration()
@@ -56,7 +56,7 @@ public class OtherStatsManager : MonoBehaviour
         else
             text = abilityDuration + "Rounds";
 
-        CreateStatInfo(text, "UI/Ability Images/Duration/Duration");
+        CreateStatInfo(text, "UI/AbilityDisplayImages/Duration/Duration");
     }
 
     void CreateTargets()
@@ -67,22 +67,22 @@ public class OtherStatsManager : MonoBehaviour
         {
             case TargetType.SELF:
                 text = "Self";
-                path = "UI/Ability Images/Target/Target_Self";
+                path = "UI/AbilityDisplayImages/Target/Target_Self";
                 break;
 
             case TargetType.ALLY:
                 text = "Allies";
-                path = "UI/Ability Images/Target/Target_Allies";
+                path = "UI/AbilityDisplayImages/Target/Target_Allies";
                 break;
 
             case TargetType.ENEMY:
                 text = "Enemies";
-                path = "UI/Ability Images/Target/Target_Enemies";
+                path = "UI/AbilityDisplayImages/Target/Target_Enemies";
                 break;
 
             case TargetType.ALL:
                 text = "Any Creature";
-                path = "UI/Ability Images/Target/Target_Any";
+                path = "UI/AbilityDisplayImages/Target/Target_Any";
                 break;
 
             case TargetType.ALL_NOT_SELF:
@@ -91,7 +91,7 @@ public class OtherStatsManager : MonoBehaviour
 
             case TargetType.AREA:
                 text = "Area";
-                path = "UI/Ability Images/Target/Target_Self";
+                path = "UI/AbilityDisplayImages/Target/Target_Self";
                 break;
 
             case TargetType.TYPED:
@@ -116,32 +116,32 @@ public class OtherStatsManager : MonoBehaviour
         {
             case AreaShape.CUBE:
                 text = radius + "feet";
-                path = "UI/Ability Images/Shape/Cube";
+                path = "UI/AbilityDisplayImages/Shape/Cube";
                 break;
 
             case AreaShape.CONE:
                 text = radius + "feet";
-                path = "UI/Ability Images/Shape/Cone";
+                path = "UI/AbilityDisplayImages/Shape/Cone";
                 break;
 
             case AreaShape.SPHERE:
                 text = radius + "feet";
-                path = "UI/Ability Images/Shape/Sphere";
+                path = "UI/AbilityDisplayImages/Shape/Sphere";
                 break;
 
             case AreaShape.LINE:
                 text = radius + "feet";
-                path = "UI/Ability Images/Shape/Line";
+                path = "UI/AbilityDisplayImages/Shape/Line";
                 break;
 
             case AreaShape.SELECT:
                 text = "Select";
-                path = "UI/Ability Images/Shape/Select";
+                path = "UI/AbilityDisplayImages/Shape/Select";
                 break;
 
             case AreaShape.CIRCLE:
                 text = radius + "feet";
-                path = "UI/Ability Images/Shape/Sphere";
+                path = "UI/AbilityDisplayImages/Shape/Sphere";
                 break;
 
             default:

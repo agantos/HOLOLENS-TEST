@@ -9,11 +9,10 @@ public class BaseStatsManager : MonoBehaviour
     public GameObject BaseStatsRowPrefab;
     
     List<GameObject> baseStatsList = new List<GameObject>();
-    List<GameObject> containersList = new List<GameObject>();
+    List<GameObject> rowList = new List<GameObject>();
     GameObject currentRow;
 
     //Base stats are created in rows of max 5 stats
-    //Each Container is a row
     public void CreateUI(Character displayingCharacter)
     {
         int counter = 0;
@@ -23,15 +22,33 @@ public class BaseStatsManager : MonoBehaviour
             if(counter % 5 == 0)
             {
                 currentRow = Instantiate(BaseStatsRowPrefab, gameObject.transform);
-                containersList.Add(currentRow);
+                rowList.Add(currentRow);
             }
 
             // Add Stat to current row
             GameObject instance = Instantiate(BaseStatPrefab, currentRow.transform);
-            instance.GetComponent<BaseStat>().SetStatName(stat);
-            instance.GetComponent<BaseStat>().SetValue(displayingCharacter.GetStat(stat).GetCurrentValue());
+            instance.GetComponent<UI_Stat>().SetStatName(stat);
+            instance.GetComponent<UI_Stat>().SetValue(displayingCharacter.GetStat(stat).GetCurrentValue());
+            baseStatsList.Add(instance);
 
             counter++;
         }
+    }
+
+    public void ClearUI()
+    {
+        foreach(GameObject obj in baseStatsList)
+        {
+            Destroy(obj);
+        }
+
+        foreach (GameObject obj in rowList)
+        {
+            Destroy(obj);
+        }
+
+        baseStatsList.Clear();
+        rowList.Clear();
+
     }
 }

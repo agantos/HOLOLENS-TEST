@@ -84,7 +84,7 @@ public class CostInfoManager : MonoBehaviour
         textElement.GetComponent<TMP_Text>().text = text;
     }
 
-    void Clear()
+    void DestroyUI()
     {
         foreach(CostDisplayTextRow row in rowList)
         {

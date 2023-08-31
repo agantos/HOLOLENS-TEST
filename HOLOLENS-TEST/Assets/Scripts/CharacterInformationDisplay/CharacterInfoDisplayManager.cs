@@ -8,6 +8,8 @@ public class CharacterInfoDisplayManager : MonoBehaviour
     //Other Managers
     public BarsInfoDisplayManager barsInfoDisplayManager;
     public BaseStatsManager baseStatsManager;
+    public KeyAbilitiesManager keyAbilitiesManager;
+    public StatCategoriesManager statCategoriesManager;
 
     //UI Elements
     public TMP_Text title;
@@ -30,11 +32,7 @@ public class CharacterInfoDisplayManager : MonoBehaviour
 
         barsInfoDisplayManager.CreateUI(displayingCharacter);
         baseStatsManager.CreateUI(displayingCharacter);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        keyAbilitiesManager.CreateUI(displayingCharacter);
+        statCategoriesManager.CreateUI(displayingCharacter);
     }
 }

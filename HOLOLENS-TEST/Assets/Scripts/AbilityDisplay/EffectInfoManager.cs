@@ -87,5 +87,15 @@ public class EffectInfoManager : MonoBehaviour
         instance.GetComponent<TMP_Text>().text = t;
     }
 
+    public void DestroyUI()
+    {
+        foreach(GameObject obj in rollExplainedTextList)
+        {
+            Destroy(obj);
+        }
+
+        rollExplainedTextList.Clear();
+    }
+
 
 }

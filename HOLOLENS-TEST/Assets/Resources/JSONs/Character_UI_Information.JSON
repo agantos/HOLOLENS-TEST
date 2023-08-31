@@ -7,7 +7,7 @@
         { "color": "blue", "statName": "MAG_Points" }
       ],
       "baseStats": ["FIN", "MAG"],
-      "keyAbilities": ["Fireball", "Finesse Ranged Attack"],
+      "keyAbilities": ["Fireball", "FIN Ranged Attack"],
       "statCategories": [
         { "categoryName": "Magic", "statNames": ["MAG", "MAG_Damage", "MAG_Power", "MAG_Points"] },
         { "categoryName": "Defense", "statNames": ["DEF", "MAG_Resistance", "Speed"] }
