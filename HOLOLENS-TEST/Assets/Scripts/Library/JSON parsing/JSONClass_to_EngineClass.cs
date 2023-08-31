@@ -312,11 +312,11 @@ public class JSONClass_to_EngineClass
 
     //Create a dictionary of CharacterUIInformation from the parsed JSON
     //NOTE: JSON CLASS IS THE SAME AS THE CLASS USED IN THE GAME
-    public static Dictionary<string, CharacterInformationUI> CreateCharacter_UI_Information(CharacterInformationUI_Table table)
+    public static Dictionary<string, Preset_UI_Information> CreateCharacter_UI_Information(Preset_UI_InformationTable table)
     {
-        Dictionary<string, CharacterInformationUI> dic = new Dictionary<string, CharacterInformationUI>();
+        Dictionary<string, Preset_UI_Information> dic = new Dictionary<string, Preset_UI_Information>();
 
-        foreach(CharacterInformationUI info in table.UIInfo)
+        foreach(Preset_UI_Information info in table.UIInfo)
         {
             dic.Add(info.preset, info);
         }

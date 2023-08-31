@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public static Dictionary<string, BaseCharacterPreset> basePresetPool;
     public static Dictionary<string, Character> characterPool;
     public static Dictionary<string, GameObject> characterGameObjects = new Dictionary<string, GameObject>();
-    public static Dictionary<string, CharacterInformationUI> character_UI_Info;
+    public static Dictionary<string, Preset_UI_Information> presets_UI_Info;
 
     public static TurnManager turnManager;
     
@@ -50,13 +50,8 @@ public class GameManager : MonoBehaviour
         JSONCharacters JSONcharacters = JSONFile_to_JSONClass.ParseCharacters("JSONs/CharacterExample");
         JSONClass_to_EngineClass.FillCharacterPool(JSONcharacters);
 
-        CharacterInformationUI_Table JSONcharacter_UI_Information = JSONFile_to_JSONClass.ParseCharacterInformationUI("JSONs/Character_UI_Information");
-        character_UI_Info = JSONClass_to_EngineClass.CreateCharacter_UI_Information(JSONcharacter_UI_Information);
-        
-        foreach(CharacterInformationUI preset in character_UI_Info.Values)
-        {
-            Debug.Log("UI of preset " + preset.preset);
-        }
+        Preset_UI_InformationTable JSONcharacter_UI_Information = JSONFile_to_JSONClass.ParseCharacterInformationUI("JSONs/Character_UI_Information");
+        presets_UI_Info = JSONClass_to_EngineClass.CreateCharacter_UI_Information(JSONcharacter_UI_Information);
     
     }
 
@@ -66,6 +61,7 @@ public class GameManager : MonoBehaviour
         {
             c.LoadCharacterBasicPresetsFromPool(basePresetPool);
             c.GetStats().CalculateAllStats();
+            c.CreateCharacter_UI_Info();
         }
     }    
 

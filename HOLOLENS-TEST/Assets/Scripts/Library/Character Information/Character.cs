@@ -28,7 +28,9 @@ public class Character
     //Ability Related
     public Dictionary<string, string> abilities = new Dictionary<string, string>();
     public List<OngoingEffect> ongoingEffects = new List<OngoingEffect>();
-    
+
+    //UI Related
+    public Character_UI_Information character_UI_info;
 
     //Loading Character Methods
     public void LoadCharacterBasicPresetsFromPool(Dictionary<string, BaseCharacterPreset> basePresetsPool)
@@ -78,7 +80,7 @@ public class Character
 
     public void OnStartTurn()
     {
-        Debug.Log("Defense of " + name + " is " + GetStat("Defense").GetCurrentValue());
+        Debug.Log("Defense of " + name + " is " + GetStat("DEF").GetCurrentValue());
 
         //Refresh the turn economy
         RefreshTurnEconomy();
@@ -102,7 +104,15 @@ public class Character
         stats.UpdateTemporalEffects();
     }
 
-
+    //Create character UI information
+    public void CreateCharacter_UI_Info()
+    {
+        character_UI_info = new Character_UI_Information();
+        foreach (string preset in basePresets)
+        {
+            character_UI_info.AddPresetInformation(GameManager.presets_UI_Info[preset]);
+        }
+    }
 
     //Get Methods
     public CharacterStats GetStats() { return stats; }

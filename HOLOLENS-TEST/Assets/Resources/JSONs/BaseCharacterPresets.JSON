@@ -14,57 +14,57 @@
           "statRelations": []
         },
         {
-          "name": "Defense",
+          "name": "DEF",
           "staticValue": 18,
           "statRelations": []
         },
         {
-          "name": "Strength",
+          "name": "STR",
           "staticValue": 5,
           "statRelations": []
         },
         {
-          "name": "Finesse",
+          "name": "FIN",
           "staticValue": 4,
           "statRelations": []
         },
         {
-          "name": "Magic",
+          "name": "MAG",
           "staticValue": 4,
           "statRelations": []
         },
         {
-          "name": "Strength_Damage",
+          "name": "STR_Damage",
           "staticValue": 0,
-          "statRelations": ["+ | 2 | Strength"]
+          "statRelations": ["+ | 2 | STR"]
         },
         {
-          "name": "Finesse_Damage",
+          "name": "FIN_Damage",
           "staticValue": 0,
-          "statRelations": ["+ | 2 | Finesse"]
+          "statRelations": ["+ | 2 | FIN"]
         },
         {
-          "name": "Magic_Damage",
+          "name": "MAG_Damage",
           "staticValue": 0,
-          "statRelations": ["+ | 2 | Magic"]
+          "statRelations": ["+ | 2 | MAG"]
         },
         {
-          "name": "Magic_Power",
+          "name": "MAG_Power",
           "staticValue": 2,
-          "statRelations": ["+ | 4 | Magic"]
+          "statRelations": ["+ | 4 | MAG"]
         },
         {
-          "name": "Magic_Resistance",
+          "name": "MAG_Resistance",
           "staticValue": 2,
-          "statRelations": ["+ | 0,5 | Magic"]
+          "statRelations": ["+ | 0,5 | MAG"]
         },
         {
-          "name": "Magic_Points",
+          "name": "MAG_Points",
           "staticValue": 3,
-          "statRelations": ["+ | 1 | Magic"]
+          "statRelations": ["+ | 1 | MAG"]
         }
       ],
-      "abilities": ["Strength Ranged Attack", "Strength Melee Attack"]
+      "abilities": ["STR Ranged Attack", "STR Melee Attack"]
     },
     {
       "name": "Human",
@@ -80,57 +80,57 @@
           "statRelations": []
         },
         {
-          "name": "Defense",
+          "name": "DEF",
           "staticValue": 14,
           "statRelations": []
         },
         {
-          "name": "Strength",
+          "name": "STR",
           "staticValue": 3,
           "statRelations": []
         },
         {
-          "name": "Finesse",
+          "name": "FIN",
           "staticValue": 6,
           "statRelations": []
         },
         {
-          "name": "Magic",
+          "name": "MAG",
           "staticValue": 6,
           "statRelations": []
         },
         {
-          "name": "Strength_Damage",
+          "name": "STR_Damage",
           "staticValue": 0,
-          "statRelations": ["+ | 2 | Strength"]
+          "statRelations": ["+ | 2 | STR"]
         },
         {
-          "name": "Finesse_Damage",
+          "name": "FIN_Damage",
           "staticValue": 0,
-          "statRelations": ["+ | 2 | Finesse"]
+          "statRelations": ["+ | 2 | FIN"]
         },
         {
-          "name": "Magic_Damage",
+          "name": "MAG_Damage",
           "staticValue": 0,
-          "statRelations": ["+ | 2 | Magic"]
+          "statRelations": ["+ | 2 | MAG"]
         },
         {
-          "name": "Magic_Power",
+          "name": "MAG_Power",
           "staticValue": 3,
-          "statRelations": ["+ | 2,5 | Magic"]
+          "statRelations": ["+ | 2,5 | MAG"]
         },
         {
-          "name": "Magic_Resistance",
+          "name": "MAG_Resistance",
           "staticValue": 3,
-          "statRelations": ["+ | 0,5 | Magic"]
+          "statRelations": ["+ | 0,5 | MAG"]
         },
         {
-          "name": "Magic_Points",
+          "name": "MAG_Points",
           "staticValue": 3,
-          "statRelations": ["+ | 1 | Magic"]
+          "statRelations": ["+ | 1 | MAG"]
         }
       ],
-      "abilities": ["Finesse Ranged Attack", "Finesse Melee Attack", "Fireball"]
+      "abilities": ["FIN Ranged Attack", "FIN Melee Attack", "Fireball"]
     }
   ]
 }

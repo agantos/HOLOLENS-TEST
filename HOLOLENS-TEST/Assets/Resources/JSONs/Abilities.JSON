@@ -29,12 +29,12 @@
             "againstStatic": "",
             "comparisonStats": {
               "defenderStat": {
-                "name": "Defense",
+                "name": "DEF",
                 "multiplier": 1,
                 "bonus": "0"
               },
               "attackerStat": {
-                "name": "Strength",
+                "name": "STR",
                 "multiplier": 1,
                 "bonus": "1d20"
               }
@@ -44,7 +44,7 @@
             "damagedStat": "HP",
             "amount": {
               "baseAmount": "1d8",
-              "statsAffecting": ["Strength_Damage"]
+              "statsAffecting": ["STR_Damage"]
             },
             "onSavedMultiplier": 0
           }
@@ -80,12 +80,12 @@
             "againstStatic": "",
             "comparisonStats": {
               "defenderStat": {
-                "name": "Defense",
+                "name": "DEF",
                 "multiplier": 1,
                 "bonus": "0"
               },
               "attackerStat": {
-                "name": "Strength",
+                "name": "STR",
                 "multiplier": 1,
                 "bonus": "1d20"
               }
@@ -95,7 +95,7 @@
             "damagedStat": "HP",
             "amount": {
               "baseAmount": "1d8",
-              "statsAffecting": ["Strength_Damage"]
+              "statsAffecting": ["STR_Damage"]
             },
             "onSavedMultiplier": 0
           }
@@ -131,12 +131,12 @@
             "againstStatic": "",
             "comparisonStats": {
               "defenderStat": {
-                "name": "Defense",
+                "name": "DEF",
                 "multiplier": 1,
                 "bonus": "0"
               },
               "attackerStat": {
-                "name": "Finesse",
+                "name": "FIN",
                 "multiplier": 1,
                 "bonus": "1d20"
               }
@@ -146,7 +146,7 @@
             "damagedStat": "HP",
             "amount": {
               "baseAmount": "1d8",
-              "statsAffecting": ["Finesse_Damage"]
+              "statsAffecting": ["FIN_Damage"]
             },
             "onSavedMultiplier": 0
           }
@@ -182,12 +182,12 @@
             "againstStatic": "",
             "comparisonStats": {
               "defenderStat": {
-                "name": "Defense",
+                "name": "DEF",
                 "multiplier": 1,
                 "bonus": "0"
               },
               "attackerStat": {
-                "name": "Finesse",
+                "name": "FIN",
                 "multiplier": 1,
                 "bonus": "1d20"
               }
@@ -197,7 +197,7 @@
             "damagedStat": "HP",
             "amount": {
               "baseAmount": "1d8",
-              "statsAffecting": ["Finesse_Damage"]
+              "statsAffecting": ["FIN_Damage"]
             },
             "onSavedMultiplier": 0
           }
@@ -234,12 +234,12 @@
             "againstStatic": "",
             "comparisonStats": {
               "defenderStat": {
-                "name": "Magic_Resistance",
+                "name": "MAG_Resistance",
                 "multiplier": 1,
                 "bonus": "1d20"
               },
               "attackerStat": {
-                "name": "Magic_Power",
+                "name": "MAG_Power",
                 "multiplier": 1,
                 "bonus": "0"
               }
@@ -249,7 +249,7 @@
             "damagedStat": "HP",
             "amount": {
               "baseAmount": "10d6",
-              "statsAffecting": ["Magic Power"]
+              "statsAffecting": ["MAG_Power"]
             },
             "onSavedMultiplier": 0.5
           }
@@ -286,19 +286,19 @@
             "againstStatic": "",
             "comparisonStats": {
               "defenderStat": {
-                "name": "Defense",
+                "name": "DEF",
                 "multiplier": 1,
                 "bonus": "0"
               },
               "attackerStat": {
-                "name": "Finesse",
+                "name": "FIN",
                 "multiplier": 1,
                 "bonus": "1d20"
               }
             }
           },
           "damage": {
-            "damagedStat": "Defense",
+            "damagedStat": "DEF",
             "amount": {
               "baseAmount": "-5",
               "statsAffecting": []

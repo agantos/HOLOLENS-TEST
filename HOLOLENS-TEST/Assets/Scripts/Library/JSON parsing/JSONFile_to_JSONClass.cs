@@ -44,11 +44,11 @@ public class JSONFile_to_JSONClass
         return wrapper;
     }
 
-    public static CharacterInformationUI_Table ParseCharacterInformationUI(string jsonPath)
+    public static Preset_UI_InformationTable ParseCharacterInformationUI(string jsonPath)
     {
-        CharacterInformationUI_Table wrapper;
+        Preset_UI_InformationTable wrapper;
         TextAsset jsonFile = Resources.Load<TextAsset>(jsonPath);
-        wrapper = JsonUtility.FromJson<CharacterInformationUI_Table>(jsonFile.text);
+        wrapper = JsonUtility.FromJson<Preset_UI_InformationTable>(jsonFile.text);
         return wrapper;
     }
 }
