@@ -103,7 +103,7 @@
       ]
     },
     {
-      "name": "Finesse Ranged Attack",
+      "name": "FIN Ranged Attack",
       "description": "A ranged finesse attack made with a Bow, Crossbow or different finesse ranged weapon",
       "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
       "tags": ["Ranged Attacks"],
@@ -154,7 +154,7 @@
       ]
     },
     {
-      "name": "Finesse Melee Attack",
+      "name": "FIN Melee Attack",
       "description": "A melee finesse attack made with a dagger, rapier or different finesse weapon",
       "tags": ["Melee Attacks"],
       "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
@@ -209,7 +209,7 @@
       "description": "Shoot a bright flame from your fingers that explodes upon contact, torching everything in its vicinity.",
       "tags": ["3rd Level Spells"],
       "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
-      "statCost": [{ "name": "Magic_Points", "cost": 3 }],
+      "statCost": [{ "name": "MAG_Points", "cost": 3 }],
       "animationTypes": {
         "attacker": "Spell_Cast_Area",
         "defender_AbilitySucceeds": "TakeHit",
