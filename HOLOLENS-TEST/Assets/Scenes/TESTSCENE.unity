@@ -1089,6 +1089,10 @@ MonoBehaviour:
   movee: {fileID: 2095897223}
   lineMaterial: {fileID: 2100000, guid: 4e7efd468ef796b4cbdefce6c9b071f9, type: 2}
   DestinationToken: {fileID: 1598461}
+  confirmMoveUI: {fileID: 0}
+  animationManager: {fileID: 0}
+  newPosition: {x: 0, y: 0, z: 0}
+  distance: 0
 --- !u!1 &241635206
 GameObject:
   m_ObjectHideFlags: 0
