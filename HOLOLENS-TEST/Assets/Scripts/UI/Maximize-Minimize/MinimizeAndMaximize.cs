@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class MinimizeAndMaximize : MonoBehaviour
 {
     string labelText = "Not set yet";
     
-    public GameObject minimizeButtonPrefab;
-    public GameObject MinimizedContentPrefab;
+    public GameObject   minimizeButtonPrefab;
+    public GameObject   MinimizedContentPrefab;
+    public TMP_Text     title;
 
     Vector3 currentScale;
 
@@ -44,7 +46,9 @@ public class MinimizeAndMaximize : MonoBehaviour
         //Spawn minimized view
         PositionTopOfCanvas(minimizedContentInstance);
         PositionMinimizedContentHorizontal();
+        
         minimizedContentInstance.GetComponent<MinimizedContent>().Spawn(labelText);
+        minimizedContentInstance.GetComponent<MinimizedContent>().SetTitle(title.text);
     }
 
     public void SpawnMaximizedView()
