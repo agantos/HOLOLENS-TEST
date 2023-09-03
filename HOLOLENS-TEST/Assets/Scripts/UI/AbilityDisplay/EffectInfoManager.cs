@@ -15,36 +15,26 @@ public class EffectInfoManager : MonoBehaviour
 
     List<GameObject> rollExplainedTextList = new List<GameObject>();
 
-    Ability displayingAbility;
-    EffectDamageStats damageStats;
-
-    // Start is called before the first frame update
-    void Start()
+    public void CreateUI(Ability displayingAbility)
     {
-        displayingAbility = AbilityDisplayManager.displayingAbility;
-        damageStats = displayingAbility.effects[0].damageStats;
-
-        CreateUI();
+        CreateDamageText(displayingAbility);
+        CreateRollExplained(displayingAbility);
+        CreateDescription(displayingAbility);
     }
 
-    void CreateUI()
-    {
-        CreateDamageText();
-        CreateRollExplained();
-        CreateDescription();
-    }
-
-    void CreateDescription()
+    void CreateDescription(Ability displayingAbility)
     {
         DescriptionText.text = displayingAbility.description;
     }
 
-    void CreateDamageText()
+    void CreateDamageText(Ability displayingAbility)
     {
         string text = "";
         int minDamage = 0, maxDamage = 0;
 
         int diceNumber, diceSides, staticValue;
+
+        EffectDamageStats damageStats = displayingAbility.effects[0].damageStats;
         GameplayCalculatorFunctions.ParseDiceString(damageStats.baseValue, out diceNumber, out diceSides, out staticValue);
 
         minDamage += 1 * diceNumber + staticValue;
@@ -63,8 +53,9 @@ public class EffectInfoManager : MonoBehaviour
 
     }
 
-    void CreateRollExplained()
+    void CreateRollExplained(Ability displayingAbility)
     {
+        EffectDamageStats damageStats = displayingAbility.effects[0].damageStats;
         string baseDamage = "";
         baseDamage += AbilityDisplayManager.ColorString(damageStats.baseValue, AbiltyDisplayColors.DAMAGE);
         baseDamage += " (Base)";

@@ -1,7 +1,7 @@
 {
   "abilities": [
     {
-      "name": "Strength Ranged Attack",
+      "name": "STR Ranged Attack",
       "description": "A ranged Strength attack made with a Bow, Crossbow or different Strength ranged weapon",
       "tags": ["Ranged Attacks"],
       "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
@@ -52,7 +52,7 @@
       ]
     },
     {
-      "name": "Strength Melee Attack",
+      "name": "STR Melee Attack",
       "description": "A melee Strength attack made with a dagger, rapier or different Strength weapon",
       "tags": ["Melee Attacks"],
       "turnEconomyCost": [{ "name": "Action", "cost": 1 }],

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-public class KeyAbilityInfo : MonoBehaviour
+using UnityEngine.Events;
+public class KeyAbilityInfo : Button
 {
 
     public RawImage image;
@@ -21,4 +22,8 @@ public class KeyAbilityInfo : MonoBehaviour
         abilityName.text = s;
     }
 
+    public void SetOnClick(UnityAction action)
+    {
+        onClick.AddListener(action);
+    }
 }

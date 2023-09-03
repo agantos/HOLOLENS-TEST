@@ -25,16 +25,7 @@ public class CostInfoManager : MonoBehaviour
 
     List<CostDisplayTextRow> rowList = new List<CostDisplayTextRow>();
 
-    //Information relevant to the ability
-    Ability displayingAbility;
-
-    void Start()
-    {
-        displayingAbility = AbilityDisplayManager.displayingAbility;
-        CreateUI();
-    }
-
-    void CreateUI()
+    public void CreateUI(Ability displayingAbility)
     {
         int count = 0;
 
@@ -84,7 +75,7 @@ public class CostInfoManager : MonoBehaviour
         textElement.GetComponent<TMP_Text>().text = text;
     }
 
-    void DestroyUI()
+    public void DestroyUI()
     {
         foreach(CostDisplayTextRow row in rowList)
         {

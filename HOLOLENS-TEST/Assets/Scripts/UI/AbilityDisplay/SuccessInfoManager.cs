@@ -7,34 +7,18 @@ using TMPro;
 public class SuccessInfoManager : MonoBehaviour
 {
     public TMP_Text OnSaveText;
-    public TMP_Text RollExplainedText;
-    Ability displayingAbility;
-    EffectSucceedsStats succeedStats;
-    EffectDamageStats damageStats;
+    public TMP_Text RollExplainedText;    
 
-    // Start is called before the first frame update
-    void Start()
+    public void CreateUI(Ability displayingAbility)
     {
-        displayingAbility = AbilityDisplayManager.displayingAbility;
-        succeedStats = displayingAbility.effects[0].effectSucceedsStats;
-        damageStats = displayingAbility.effects[0].damageStats;
-
-        CreateUI();
+        CreateInfoText(displayingAbility);
+        CreateOnSaveText(displayingAbility);
     }
 
-    void Update()
-    {
-    }
-
-    void CreateUI()
-    {
-        CreateInfoText();
-        CreateOnSaveText();
-    }
-
-    void CreateInfoText()
+    void CreateInfoText(Ability displayingAbility)
     {
         string text = "";
+        EffectSucceedsStats succeedStats = displayingAbility.effects[0].effectSucceedsStats;
 
         switch (succeedStats.onCondition)
         {
@@ -59,8 +43,10 @@ public class SuccessInfoManager : MonoBehaviour
         RollExplainedText.text = text;           
     }
 
-    void CreateOnSaveText()
+    void CreateOnSaveText(Ability displayingAbility)
     {
+        EffectDamageStats damageStats = displayingAbility.effects[0].damageStats;
+
         string text = "";
         if (damageStats.onSavedMultiplier == 0)
             text += "No Damage";
@@ -73,5 +59,7 @@ public class SuccessInfoManager : MonoBehaviour
 
         OnSaveText.text = text;            
     }
+
+    public void DestroyUI() { /*Empty, exists for symmetry*/ }
     
 }

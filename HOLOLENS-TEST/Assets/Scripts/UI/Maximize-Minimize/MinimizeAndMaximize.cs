@@ -32,8 +32,7 @@ public class MinimizeAndMaximize : MonoBehaviour
         //Create maximize button and disable it
         minimizedContentInstance = Instantiate(MinimizedContentPrefab, parentCanvas.transform);
         minimizedContentInstance.GetComponent<MinimizedContent>().AddButtonFunction(SpawnMaximizedView);
-        minimizedContentInstance.GetComponent<MinimizedContent>().Despawn();
-        
+        minimizedContentInstance.GetComponent<MinimizedContent>().Despawn();        
     }
 
     public void SpawnMinimizedView()

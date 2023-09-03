@@ -12,6 +12,7 @@ public class CharacterMover : MonoBehaviour, IMixedRealityPointerHandler, IMixed
     public Material lineMaterial;
     public GameObject DestinationToken;
     public ConfirmMoveCanvas confirmMoveUI;
+    public bool allowDestinationSelection = true;
 
     AnimationManager animationManager;
 
@@ -28,21 +29,25 @@ public class CharacterMover : MonoBehaviour, IMixedRealityPointerHandler, IMixed
     {
         if (movee != null)
         {
-            //Find Selected Table Position
-            FindPointPosition(eventData);
+            if (allowDestinationSelection)
+            {
+                //Find Selected Table Position
+                FindPointPosition(eventData);
 
-            // If the new position is legal display interface to perform the move
-            if (MoveRequirements())
-            {
-                movee.SetDestination(newPosition);
-                SpawnMoveMenu();
-                SpawnDestinationToken();
-                movee.isStopped = true;
+                // If the new position is legal display interface to perform the move
+                if (MoveRequirements())
+                {
+                    movee.SetDestination(newPosition);
+                    SpawnMoveMenu();
+                    SpawnDestinationToken();
+                    movee.isStopped = true;
+                }
+                else
+                {
+                    Debug.Log("Character does not have enough speed to move there");
+                }
             }
-            else
-            {
-                Debug.Log("Character does not have enough speed to move there");
-            }
+            
         }
     }
 
@@ -60,6 +65,9 @@ public class CharacterMover : MonoBehaviour, IMixedRealityPointerHandler, IMixed
 
     public void PerformMove()
     {
+        //Disable Movement Selection until movement stops
+        allowDestinationSelection = false;
+
         //Do the movement
         FaceDirection();
         movee.isStopped = false;
@@ -116,6 +124,9 @@ public class CharacterMover : MonoBehaviour, IMixedRealityPointerHandler, IMixed
             //Move back to Idle animation
             if (movee.GetComponent<AnimationManager>() && movee.GetComponent<AnimationManager>().GetHasMovingAnimation())
                 movee.GetComponent<AnimationManager>().MovingTo_Idle();
+
+            //Allow Selection of new Destination
+            allowDestinationSelection = true;
         }
     }
         

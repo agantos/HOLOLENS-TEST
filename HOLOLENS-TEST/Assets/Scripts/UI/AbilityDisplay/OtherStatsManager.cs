@@ -7,30 +7,14 @@ using TMPro;
 public class OtherStatsManager : MonoBehaviour
 {
     public GameObject OtherStatsInfoPrefab;
-    
-    //Information relevant to the ability
-    Ability displayingAbility;
-    AreaOfEffectStats abilityAOEInfo;
-    TargettingStats abilityTargetting;
-    int abilityDuration;
 
-
-    // Start is called before the first frame update
-    void Start()
+    List<GameObject> spawnedObjectsList = new List<GameObject>();
+    public void CreateUI(Ability displayingAbility)
     {
-        displayingAbility = AbilityDisplayManager.displayingAbility;
-        abilityAOEInfo = displayingAbility.effects[0].areaOfEffect;
-        abilityDuration = displayingAbility.effects[0].duration;
-        abilityTargetting = displayingAbility.effects[0].targetting;
-
-        CreateUI();
-    }
-    void CreateUI()
-    {
-        CreateDuration();
-        CreateRange();
-        CreateShape();
-        CreateTargets();
+        CreateDuration(displayingAbility);
+        CreateRange(displayingAbility);
+        CreateShape(displayingAbility);
+        CreateTargets(displayingAbility);
     }
 
     void CreateStatInfo(string text, string imagePath)
@@ -38,19 +22,25 @@ public class OtherStatsManager : MonoBehaviour
         GameObject element = Instantiate(OtherStatsInfoPrefab, gameObject.transform);
         element.GetComponentInChildren<RawImage>().texture = Resources.Load<Texture2D>(imagePath);
         element.GetComponentInChildren<TMP_Text>().text = text;
+
+        spawnedObjectsList.Add(element);
     }
 
-    void CreateRange()
+    void CreateRange(Ability displayingAbility)
     {
+        AreaOfEffectStats abilityAOEInfo = displayingAbility.effects[0].areaOfEffect;
+
         int range = abilityAOEInfo.range;
         string text = range + " feet";
 
         CreateStatInfo(text, "UI/AbilityDisplayImages/Range/Range");
     }
 
-    void CreateDuration()
+    void CreateDuration(Ability displayingAbility)
     {
+        int abilityDuration = displayingAbility.effects[0].duration;
         string text;
+        
         if (abilityDuration == 0)
             text = "Instantaneous";
         else
@@ -59,10 +49,13 @@ public class OtherStatsManager : MonoBehaviour
         CreateStatInfo(text, "UI/AbilityDisplayImages/Duration/Duration");
     }
 
-    void CreateTargets()
+    void CreateTargets(Ability displayingAbility)
     {
+        TargettingStats abilityTargetting = displayingAbility.effects[0].targetting;
+
         string text = "";
         string path = "";
+
         switch (abilityTargetting.targetType)
         {
             case TargetType.SELF:
@@ -105,8 +98,10 @@ public class OtherStatsManager : MonoBehaviour
         CreateStatInfo(text, path);
     }
 
-    void CreateShape()
+    void CreateShape(Ability displayingAbility)
     {
+        AreaOfEffectStats abilityAOEInfo = displayingAbility.effects[0].areaOfEffect;
+
         string text = "";
         string path = "";
 
@@ -148,8 +143,17 @@ public class OtherStatsManager : MonoBehaviour
                 Debug.Log("Unknown area shape");
                 break;
         }
+
         CreateStatInfo(text, path);
     }
 
-    
+    public void DestroyUI() { 
+        
+        foreach(GameObject obj in spawnedObjectsList)
+        {
+            Destroy(obj);
+        }
+
+        spawnedObjectsList.Clear();
+    }
 }

@@ -28,6 +28,7 @@ public class KeyAbilitiesManager : MonoBehaviour
             // Add KeyAbility to current row
             GameObject instance = Instantiate(KeyAbilityPrefab, currentRow.transform);
             instance.GetComponent<KeyAbilityInfo>().SetName(ability);
+            instance.GetComponent<KeyAbilityInfo>().SetOnClick(delegate { FindAnyObjectByType<AbilityDisplayManager>().CreateUI(ability); });
             keyAbilitiesList.Add(instance);
 
             counter++;
