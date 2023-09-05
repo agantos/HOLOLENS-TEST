@@ -189,7 +189,7 @@ public class CharacterMover : MonoBehaviour, IMixedRealityPointerHandler, IMixed
 
     public void OnChangeTurn(string newCharName)
     {
-        movee = GameManager.characterGameObjects[newCharName].GetComponent<NavMeshAgent>();
+        movee = GameManager.playingCharacterGameObjects[newCharName].GetComponent<NavMeshAgent>();
     }
 
     public void Enable()

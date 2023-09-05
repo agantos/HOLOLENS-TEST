@@ -23,7 +23,7 @@ public class ActivateAbilityUIManager : MonoBehaviour
     public void CancelActivation()
     {
         CastingAbilityManager.CancelActivation();
-        Activate();
+        Deactivate();
     }
 
     public void Activate()

@@ -14,7 +14,8 @@ public class CharacterScript : MonoBehaviour
         character = GameManager.characterPool[charName];
 
         //Character registers itself in the GameManager list.
-        GameManager.characterGameObjects.Add(character.name, gameObject);
+        GameManager.playingCharacterGameObjects.Add(character.name, gameObject);
+        GameManager.playingCharacterPool.Add(character.name, character);
     }
 
     // Update is called once per frame

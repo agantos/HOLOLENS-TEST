@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     //Variables
     public static Dictionary<string, BaseCharacterPreset> basePresetPool;
     public static Dictionary<string, Character> characterPool;
-    public static Dictionary<string, GameObject> characterGameObjects = new Dictionary<string, GameObject>();
+    public static Dictionary<string, Character> playingCharacterPool = new Dictionary<string, Character>();
+    public static Dictionary<string, GameObject> playingCharacterGameObjects = new Dictionary<string, GameObject>();
     public static Dictionary<string, Preset_UI_Information> presets_UI_Info;
 
     public static TurnManager turnManager;
@@ -26,7 +27,6 @@ public class GameManager : MonoBehaviour
         CreateCharacters();
 
         //Start Counting Turns
-        turnManager = new TurnManager(characterPool);
         Invoke("FirstTurn", 2.0f);
     }
 
@@ -74,6 +74,7 @@ public class GameManager : MonoBehaviour
 
     public void FirstTurn()
     {
+        turnManager = new TurnManager(playingCharacterPool);
         turnManager.FirstTurn();
         SelectAbilityUIManager.GiveTurnToPlayingCharacter();
     }

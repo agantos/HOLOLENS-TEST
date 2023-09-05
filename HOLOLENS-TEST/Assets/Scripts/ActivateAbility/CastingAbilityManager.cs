@@ -43,7 +43,7 @@ public class CastingAbilityManager : MonoBehaviour
         if (true/**AbilityManager.Activate_CheckCost(ability.name, attacker)**/)
         {
             //Set the parameters for the casting of the ability
-            CastingAbilityManager.attackerAnimationManager = GameManager.characterGameObjects[attacker.name].GetComponent<AnimationManager>();
+            CastingAbilityManager.attackerAnimationManager = GameManager.playingCharacterGameObjects[attacker.name].GetComponent<AnimationManager>();
             CastingAbilityManager.attacker = attacker;
             CastingAbilityManager.abilityToCast = ability;
 

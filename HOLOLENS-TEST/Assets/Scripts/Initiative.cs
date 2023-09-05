@@ -61,7 +61,7 @@ public class TurnManager
     {
         if (initiativeOrder.ContainsKey(initiative))
         {
-            float newPosition = SolveTie(character, GameManager.characterPool[initiativeOrder[initiative]], initiative);
+            float newPosition = SolveTie(character, GameManager.playingCharacterPool[initiativeOrder[initiative]], initiative);
             AddToDictionary(newPosition, character);
         }
         else
@@ -88,7 +88,7 @@ public class TurnManager
         Debug.Log("It's " + name + "'s turn");
 
         //Refresh character as needed at the start of the turn
-        GameManager.characterPool[name].OnStartTurn();      
+        GameManager.playingCharacterPool[name].OnStartTurn();      
 
         //Change UI to play the selected character
         

@@ -33,8 +33,8 @@ public class AbilityRangeDisplay : MonoBehaviour
 
     void SetPosition()
     {
-        Vector3 attackerPosition = GameManager.characterGameObjects[CastingAbilityManager.attacker.name].transform.localPosition;
-        float bottomOfAttacker = attackerPosition.y - GameManager.characterGameObjects[CastingAbilityManager.attacker.name].transform.localScale.y;
+        Vector3 attackerPosition = GameManager.playingCharacterGameObjects[CastingAbilityManager.attacker.name].transform.localPosition;
+        float bottomOfAttacker = attackerPosition.y - GameManager.playingCharacterGameObjects[CastingAbilityManager.attacker.name].transform.localScale.y;
         gameObject.transform.localPosition = new Vector3(attackerPosition.x, bottomOfAttacker + 1f, attackerPosition.z);
     }
 

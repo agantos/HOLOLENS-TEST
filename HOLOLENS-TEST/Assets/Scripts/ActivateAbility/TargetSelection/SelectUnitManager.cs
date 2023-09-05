@@ -41,7 +41,7 @@ public class SelectUnitManager : MonoBehaviour, IMixedRealityPointerHandler, IMi
         {
 
             float defenderDistance = GameplayCalculatorFunctions.CalculateDistanceInFeet(
-                GameManager.characterGameObjects[CastingAbilityManager.attacker.name].transform.position,
+                GameManager.playingCharacterGameObjects[CastingAbilityManager.attacker.name].transform.position,
                 gameObject.transform.position
             );
 
@@ -77,7 +77,7 @@ public class SelectUnitManager : MonoBehaviour, IMixedRealityPointerHandler, IMi
         if (CastingAbilityManager.CurrentSelectionType == AbilitySelectType.SELECT)
         {
             float defenderDistance = GameplayCalculatorFunctions.CalculateDistanceInFeet(
-                GameManager.characterGameObjects[CastingAbilityManager.attacker.name].transform.position,
+                GameManager.playingCharacterGameObjects[CastingAbilityManager.attacker.name].transform.position,
                 gameObject.transform.position
             );
 
