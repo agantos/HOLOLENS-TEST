@@ -105,9 +105,5 @@ public class SelectAbilityUIManager : MonoBehaviour
     {
         abilityTabManager.Deactivate();
         abilityTagTabManager.Activate();
-    }
-
-    
-
-
+    }    
 }

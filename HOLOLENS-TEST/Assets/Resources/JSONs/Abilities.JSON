@@ -6,7 +6,7 @@
       "tags": ["Ranged Attacks"],
       "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
       "animationTypes": {
-        "attacker": "Attack_Ranged_Weapon",
+        "attacker": "Attack_Ranged_Spell",
         "defender_AbilitySucceeds": "TakeHit",
         "defender_AbilityFails": "Dodge"
       },
@@ -108,7 +108,7 @@
       "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
       "tags": ["Ranged Attacks"],
       "animationTypes": {
-        "attacker": "Attack_Ranged_Weapon",
+        "attacker": "Attack_Ranged_Spell",
         "defender_AbilitySucceeds": "TakeHit",
         "defender_AbilityFails": "Dodge"
       },

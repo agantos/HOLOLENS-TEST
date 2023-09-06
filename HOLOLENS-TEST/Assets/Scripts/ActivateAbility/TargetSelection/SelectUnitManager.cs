@@ -16,7 +16,8 @@ public class SelectUnitManager : MonoBehaviour, IMixedRealityPointerHandler, IMi
     {
         if(CastingAbilityManager.CurrentSelectionType == AbilitySelectType.SELECT)
             PerformAbilitySelection();
-   
+        else
+            CharacterInfoObjectsManager.instance.CreateCharacterInfo(GetComponent<CharacterScript>().charName);
     }
    
     //Selection with point ray
@@ -47,8 +48,8 @@ public class SelectUnitManager : MonoBehaviour, IMixedRealityPointerHandler, IMi
                 //Abide by the number of selectable characters
                 if (CastingAbilityManager.defenderCharacters.Count < CastingAbilityManager.abilityToCast.effects[0].targetting.numberOfTargets)
                 {
-                    SpawnToken();
-                    SelectCharacter();
+                    SpawnSelectionToken();
+                    SelectCharacter_AbilityTarget();
                 }
                 else
                 {
@@ -59,17 +60,17 @@ public class SelectUnitManager : MonoBehaviour, IMixedRealityPointerHandler, IMi
             else
             {
                 Destroy(token);
-                UnselectCharacter();
+                UnselectCharacter_AbilityTarget();
             }
         }
         else
             Debug.Log("Subject is too far away");
     }
     
-    private void SpawnToken()
+    private void SpawnSelectionToken()
     {
         //Spawn selection token.
-        token = Object.Instantiate(selectToken);
+        token = Instantiate(selectToken);
         token.transform.SetParent(gameObject.transform, false);
 
         //Models may be rescaled but the scale will be uniform. Remove this scale from the token.
@@ -85,14 +86,14 @@ public class SelectUnitManager : MonoBehaviour, IMixedRealityPointerHandler, IMi
         isSelected = false;
     }
 
-    private void SelectCharacter()
+    private void SelectCharacter_AbilityTarget()
     {
         isSelected = true;
         CastingAbilityManager.defenderCharacters.Add(gameObject.GetComponent<CharacterScript>().GetCharacter());
         CastingAbilityManager.defendersGameObject.Add(gameObject);
     }
 
-    private void UnselectCharacter()
+    private void UnselectCharacter_AbilityTarget()
     {
         isSelected = false;
         CastingAbilityManager.defenderCharacters.Remove(gameObject.GetComponent<CharacterScript>().GetCharacter());
@@ -100,6 +101,10 @@ public class SelectUnitManager : MonoBehaviour, IMixedRealityPointerHandler, IMi
     }
 
     /* CHARACTER MENU SELECTION METHODS */
+    private void SelectCharacter_SpawnMenu()
+    {
+
+    }
 
     /* INTERFACE METHODS THAT ARE NOT USED */
     public void OnPointerDown(MixedRealityPointerEventData eventData)  {
