@@ -21,18 +21,25 @@ public class CharacterInfoDisplayManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CreateUI();        
+    
     }
 
-    public void CreateUI()
+    public void CreateUI(string characterName)
     {
-        string character = "Vanoth";
-        displayingCharacter = GameManager.characterPool[character];
-        title.text = character;
+        displayingCharacter = GameManager.characterPool[characterName];
+        title.text = characterName;
 
         barsInfoDisplayManager.CreateUI(displayingCharacter);
         baseStatsManager.CreateUI(displayingCharacter);
         keyAbilitiesManager.CreateUI(displayingCharacter);
         statCategoriesManager.CreateUI(displayingCharacter);
+    }
+
+    public void ClearUI()
+    {
+        barsInfoDisplayManager.ClearUI();
+        baseStatsManager.ClearUI();
+        keyAbilitiesManager.ClearUI();
+        statCategoriesManager.ClearUI();
     }
 }

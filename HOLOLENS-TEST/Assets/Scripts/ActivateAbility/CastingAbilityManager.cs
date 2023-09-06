@@ -133,8 +133,8 @@ public class CastingAbilityManager : MonoBehaviour
         {
             foreach (GameObject defender in defendersGameObject)
             {
-                defender.GetComponent<SelectUnitManager>().OnAbilityActivate();
-            }
+                defender.GetComponent<SelectUnitManager>().OnAbilityResolved();
+            }            
         }
     }
 

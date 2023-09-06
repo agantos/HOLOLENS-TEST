@@ -16,6 +16,7 @@ public class BarsInfoDisplayManager : MonoBehaviour
             BarInfo barInfo = instance.GetComponent<BarInfo>();
 
             barInfo.SetStatName(bar.statName);
+            barInfo.SetColor(bar.color);
             barInfo.SetValue(
                 displayingCharacter.GetStat(bar.statName).GetCurrentValue(),
                 displayingCharacter.GetStat(bar.statName).GetMaxValue()
@@ -25,7 +26,7 @@ public class BarsInfoDisplayManager : MonoBehaviour
         }
     }
 
-    public void DestroyUI()
+    public void ClearUI()
     {
         foreach(GameObject bar in barsList)
         {

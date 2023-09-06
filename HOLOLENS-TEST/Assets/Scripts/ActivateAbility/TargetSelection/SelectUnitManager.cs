@@ -11,111 +11,61 @@ public class SelectUnitManager : MonoBehaviour, IMixedRealityPointerHandler, IMi
     private bool isSelected;
     private GameObject token;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void OnPointerDown(MixedRealityPointerEventData eventData)
-    {
-
-    }
-
-    public void OnPointerClicked(MixedRealityPointerEventData eventData) { }
-
-    public void OnTouchStarted(HandTrackingInputEventData eventData) { }
-    public void OnTouchUpdated(HandTrackingInputEventData eventData) { }
-    public void OnPointerDragged(MixedRealityPointerEventData eventData) { }
-
     //Selection with touch
     public void OnTouchCompleted(HandTrackingInputEventData eventData)
     {
         if(CastingAbilityManager.CurrentSelectionType == AbilitySelectType.SELECT)
-        {
-
-            float defenderDistance = GameplayCalculatorFunctions.CalculateDistanceInFeet(
-                GameManager.playingCharacterGameObjects[CastingAbilityManager.attacker.name].transform.position,
-                gameObject.transform.position
-            );
-
-            Debug.Log("defender distance is" + defenderDistance);
-
-            int abilityRange = CastingAbilityManager.abilityToCast.effects[0].areaOfEffect.range;
-            if (abilityRange > defenderDistance)
-            {
-                if (!isSelected)
-                {
-                    SpawnToken();
-                    SelectCharacter();
-                    isSelected = true;
-                }
-                else
-                {
-                    Destroy(token);
-                    UnselectCharacter();
-                    isSelected = false;
-                }
-            }
-            else
-            {
-                Debug.Log("Defender " + gameObject.GetComponent<CharacterScript>().charName +
-                    " is too far away from " + CastingAbilityManager.attacker.name
-                );
-            }
-        }    
+            PerformAbilitySelection();
+   
     }
    
     //Selection with point ray
     public void OnPointerUp(MixedRealityPointerEventData eventData) {
         if (CastingAbilityManager.CurrentSelectionType == AbilitySelectType.SELECT)
-        {
-            float defenderDistance = GameplayCalculatorFunctions.CalculateDistanceInFeet(
+            PerformAbilitySelection();
+        else
+            CharacterInfoObjectsManager.instance.CreateCharacterInfo(GetComponent<CharacterScript>().charName);
+    }
+
+    /*SELECTION FOR ABILITY METHODS */
+    private void PerformAbilitySelection()
+    {
+        float defenderDistance = GameplayCalculatorFunctions.CalculateDistanceInFeet(
                 GameManager.playingCharacterGameObjects[CastingAbilityManager.attacker.name].transform.position,
                 gameObject.transform.position
             );
 
-            Debug.Log("Defender distance is" + defenderDistance);
+        Debug.Log("Defender distance is" + defenderDistance);
 
-            int abilityRange = CastingAbilityManager.abilityToCast.effects[0].areaOfEffect.range;
+        int abilityRange = CastingAbilityManager.abilityToCast.effects[0].areaOfEffect.range;
 
-            //(Un)Select a character only if they are within range
-            if (abilityRange > defenderDistance)
+        //(Un)Select a character only if they are within range
+        if (abilityRange > defenderDistance)
+        {
+            if (!isSelected)
             {
-                if (!isSelected)
+                //Abide by the number of selectable characters
+                if (CastingAbilityManager.defenderCharacters.Count < CastingAbilityManager.abilityToCast.effects[0].targetting.numberOfTargets)
                 {
-                    //Abide by the number of selectable characters
-                    if (CastingAbilityManager.defenderCharacters.Count < CastingAbilityManager.abilityToCast.effects[0].targetting.numberOfTargets)
-                    {
-                        SpawnToken();
-                        SelectCharacter();
-                        isSelected = true;
-                    }
-                    else
-                    {
-                        Debug.Log("Max number of selectable characters for these effect is " +
-                            CastingAbilityManager.abilityToCast.effects[0].targetting.numberOfTargets.ToString());
-                    }
+                    SpawnToken();
+                    SelectCharacter();
                 }
                 else
                 {
-                    Destroy(token);
-                    UnselectCharacter();
-                    isSelected = false;
+                    Debug.Log("Max number of selectable characters for these effect is " +
+                        CastingAbilityManager.abilityToCast.effects[0].targetting.numberOfTargets.ToString());
                 }
             }
             else
-                Debug.Log("Subject is too far away");
-                       
+            {
+                Destroy(token);
+                UnselectCharacter();
+            }
         }
+        else
+            Debug.Log("Subject is too far away");
     }
-
+    
     private void SpawnToken()
     {
         //Spawn selection token.
@@ -129,25 +79,35 @@ public class SelectUnitManager : MonoBehaviour, IMixedRealityPointerHandler, IMi
         token.transform.localPosition += new Vector3(0, playerHeight + 0.1f, 0);
     }
 
-    public void OnAbilityActivate()
+    public void OnAbilityResolved()
     {
         Destroy(token);
-    }
-
-    public void OnAbilityDeActivate()
-    {
-        Destroy(token);
+        isSelected = false;
     }
 
     private void SelectCharacter()
     {
+        isSelected = true;
         CastingAbilityManager.defenderCharacters.Add(gameObject.GetComponent<CharacterScript>().GetCharacter());
         CastingAbilityManager.defendersGameObject.Add(gameObject);
     }
 
     private void UnselectCharacter()
     {
+        isSelected = false;
         CastingAbilityManager.defenderCharacters.Remove(gameObject.GetComponent<CharacterScript>().GetCharacter());
         CastingAbilityManager.defendersGameObject.Remove(gameObject);
     }
+
+    /* CHARACTER MENU SELECTION METHODS */
+
+    /* INTERFACE METHODS THAT ARE NOT USED */
+    public void OnPointerDown(MixedRealityPointerEventData eventData)  {
+        
+    }
+    public void OnPointerClicked(MixedRealityPointerEventData eventData) { }
+
+    public void OnTouchStarted(HandTrackingInputEventData eventData) { }
+    public void OnTouchUpdated(HandTrackingInputEventData eventData) { }
+    public void OnPointerDragged(MixedRealityPointerEventData eventData) { }
 }

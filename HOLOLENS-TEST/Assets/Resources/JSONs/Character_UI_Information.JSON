@@ -3,8 +3,8 @@
     {
       "preset": "Human",
       "bars": [
-        { "color": "red", "statName": "HP" },
-        { "color": "blue", "statName": "MAG_Points" }
+        { "color": "9E0000", "statName": "HP" },
+        { "color": "00488A", "statName": "MAG_Points" }
       ],
       "baseStats": ["FIN", "MAG"],
       "keyAbilities": ["Fireball", "FIN Ranged Attack"],
@@ -15,7 +15,7 @@
     },
     {
       "preset": "Dwarf",
-      "bars": [{ "color": "red", "statName": "HP" }],
+      "bars": [{ "color": "9E0000", "statName": "HP" }],
       "baseStats": ["STR", "DEF", "FIN"],
       "keyAbilities": ["Fireball", "STR Melee Attack"],
       "statCategories": [
