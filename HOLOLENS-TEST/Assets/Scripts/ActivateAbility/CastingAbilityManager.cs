@@ -105,6 +105,9 @@ public class CastingAbilityManager : MonoBehaviour
         DeactivateAbilityActivationObjects();
 
         //Start Animation
+        if(defenderCharacters.Count > 0)
+            FaceDirection();
+
         attackerAnimationManager.IdleTo_Animation(CastingAbilityManager.abilityToCast.animationTypes.attacker);
 
         //Activate Ability
@@ -138,6 +141,7 @@ public class CastingAbilityManager : MonoBehaviour
         }
     }
 
+    //Methods for Animation
     public static void ReturnAttackerToIdleAnimation()
     {
         attackerAnimationManager.Animation_ToIdle(abilityToCast.animationTypes.attacker);
@@ -177,6 +181,20 @@ public class CastingAbilityManager : MonoBehaviour
                     .Animation_ToIdle(abilityToCast.animationTypes.defender_AbilityFails);
             }
         }
+    }
+
+    static void FaceDirection()
+    {
+        float rotSpeed = 360f;
+        Transform attackerTransform = GameManager.playingCharacterGameObjects[attacker.name].transform;
+        Transform defenderTransform = defendersGameObject[0].transform;
+
+        //When on target -> dont rotate!
+        if ((defenderTransform.position - attackerTransform.position).magnitude < 0.1f) return;
+
+        Vector3 direction = (defenderTransform.position - attackerTransform.transform.position).normalized;
+        Quaternion qDir = Quaternion.LookRotation(direction);
+        attackerTransform.transform.rotation = Quaternion.Slerp(attackerTransform.transform.rotation, qDir, Time.deltaTime * rotSpeed);
     }
 
     //Cleans Manager State

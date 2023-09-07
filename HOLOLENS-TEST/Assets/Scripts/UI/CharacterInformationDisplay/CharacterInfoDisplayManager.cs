@@ -5,7 +5,10 @@ using TMPro;
 
 public class CharacterInfoDisplayManager : MonoBehaviour
 {
-    //Other Managers
+    //Parent Root GameObject
+    public GameObject root;
+
+    //Content Managers set in UnityEditor
     public BarsInfoDisplayManager barsInfoDisplayManager;
     public BaseStatsManager baseStatsManager;
     public KeyAbilitiesManager keyAbilitiesManager;
@@ -41,5 +44,20 @@ public class CharacterInfoDisplayManager : MonoBehaviour
         baseStatsManager.ClearUI();
         keyAbilitiesManager.ClearUI();
         statCategoriesManager.ClearUI();
+    }
+
+    public void OnDestroy()
+    {
+        ClearUI();
+    }
+
+    public void DestroyPage()
+    {
+        foreach (Transform child in root.transform)
+        {
+            CharacterInfoObjectsManager.instance.DestroyCharacterInfo(displayingCharacter.name);
+            Destroy(child.gameObject);
+            Destroy(this.gameObject);
+        }
     }
 }

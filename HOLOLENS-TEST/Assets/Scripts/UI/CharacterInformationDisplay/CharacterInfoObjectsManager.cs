@@ -23,12 +23,18 @@ public class CharacterInfoObjectsManager : MonoBehaviour
         {
             GameObject instance = Instantiate(CharacterDisplayInfoPrefab, transform);
             instances.Add(characterName, instance);
-            managers.Add(characterName, instance.GetComponentInChildren<CharacterInfoDisplayManager>());
+            managers.Add(characterName, instance.GetComponentInChildren<CharacterInfoDisplayManager>());            
             
         }
         else
             managers[characterName].ClearUI();
 
         managers[characterName].CreateUI(characterName);
+    }
+
+    public void DestroyCharacterInfo(string name)
+    {
+        instances.Remove(name);
+        managers.Remove(name);
     }
 }

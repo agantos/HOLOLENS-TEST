@@ -40,9 +40,9 @@ public class EffectInfoManager : MonoBehaviour
         minDamage += 1 * diceNumber + staticValue;
         maxDamage += diceSides * diceNumber + staticValue; 
 
-        text = AbilityDisplayManager.BoldString(AbilityDisplayManager.ColorString(minDamage.ToString(), AbiltyDisplayColors.DAMAGE))
+        text = AbilityDisplayGeneralMethods.BoldString(AbilityDisplayGeneralMethods.ColorString(minDamage.ToString(), AbilityDisplayColors.DAMAGE))
                 + " - " 
-                + AbilityDisplayManager.BoldString(AbilityDisplayManager.ColorString(maxDamage.ToString(), AbiltyDisplayColors.DAMAGE))
+                + AbilityDisplayGeneralMethods.BoldString(AbilityDisplayGeneralMethods.ColorString(maxDamage.ToString(), AbilityDisplayColors.DAMAGE))
                 + " Damage**";
 
         DamageText.text = text;
@@ -57,14 +57,14 @@ public class EffectInfoManager : MonoBehaviour
     {
         EffectDamageStats damageStats = displayingAbility.effects[0].damageStats;
         string baseDamage = "";
-        baseDamage += AbilityDisplayManager.ColorString(damageStats.baseValue, AbiltyDisplayColors.DAMAGE);
+        baseDamage += AbilityDisplayGeneralMethods.ColorString(damageStats.baseValue, AbilityDisplayColors.DAMAGE);
         baseDamage += " (Base)";
         AddToRollExplainedContainer(baseDamage);
 
         foreach (string stat in damageStats.statsAffecting)
         {
             string text = "+ ";
-            text += AbilityDisplayManager.ColorString(stat, AbiltyDisplayColors.CHARACTER_STAT);
+            text += AbilityDisplayGeneralMethods.ColorString(stat, AbilityDisplayColors.CHARACTER_STAT);
 
             AddToRollExplainedContainer(text);
         }
@@ -78,7 +78,7 @@ public class EffectInfoManager : MonoBehaviour
         instance.GetComponent<TMP_Text>().text = t;
     }
 
-    public void DestroyUI()
+    public void ClearUI()
     {
         foreach(GameObject obj in rollExplainedTextList)
         {

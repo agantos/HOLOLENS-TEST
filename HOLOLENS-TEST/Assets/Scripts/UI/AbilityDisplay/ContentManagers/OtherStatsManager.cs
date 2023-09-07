@@ -147,7 +147,7 @@ public class OtherStatsManager : MonoBehaviour
         CreateStatInfo(text, path);
     }
 
-    public void DestroyUI() { 
+    public void ClearUI() { 
         
         foreach(GameObject obj in spawnedObjectsList)
         {
