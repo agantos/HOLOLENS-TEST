@@ -52,4 +52,17 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LeaveRoom();
     }
 
+    [PunRPC]
+    public void PrintSomething()
+    {
+        if (CastingAbilityManager.attacker != null)
+            Debug.Log(CastingAbilityManager.attacker.name);
+        else
+            Debug.Log("Attacker = null");
+    }
+
+    public void CallRPCPrint()
+    {
+        photonView.RPC("PrintSomething", RpcTarget.All);
+    }
 }
