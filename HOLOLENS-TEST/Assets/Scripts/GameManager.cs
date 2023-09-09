@@ -17,9 +17,7 @@ public class GameManager : MonoBehaviour
     public static Dictionary<string, GameObject> playingCharacterGameObjects = new Dictionary<string, GameObject>();
     public static Dictionary<string, Preset_UI_Information> presets_UI_Info;
 
-    public static TurnManager turnManager;
-    
-
+    public static TurnManager turnManager;    
     void Start()
     {
         InitializeSingletons();

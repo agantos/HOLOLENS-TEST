@@ -67,7 +67,6 @@ public class Ability
 
 public class AbilitiesManager
 {
-
     private static AbilitiesManager instance = null;
     public static Dictionary<string, Ability> abilityPool;
 
