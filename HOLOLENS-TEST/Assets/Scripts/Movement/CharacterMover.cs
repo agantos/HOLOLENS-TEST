@@ -72,7 +72,7 @@ public class CharacterMover : MonoBehaviour, IMixedRealityPointerHandler, IMixed
         FaceDirection();
         movee.isStopped = false;
 
-        Character c = GameManager.characterPool[movee.gameObject.GetComponent<CharacterScript>().name];
+        Character c = GameManager.GetInstance().characterPool[movee.gameObject.GetComponent<CharacterScript>().name];
 
         //Subtract the speed.
         c.GetStat("Speed").DealDamage((int)distance);
@@ -189,7 +189,7 @@ public class CharacterMover : MonoBehaviour, IMixedRealityPointerHandler, IMixed
 
     public void OnChangeTurn(string newCharName)
     {
-        movee = GameManager.playingCharacterGameObjects[newCharName].GetComponent<NavMeshAgent>();
+        movee = GameManager.GetInstance().playingCharacterGameObjects[newCharName].GetComponent<NavMeshAgent>();
     }
 
     public void Enable()

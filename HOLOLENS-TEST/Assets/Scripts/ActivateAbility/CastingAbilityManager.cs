@@ -43,7 +43,7 @@ public class CastingAbilityManager : MonoBehaviour
         if (true/**AbilityManager.Activate_CheckCost(ability.name, attacker)**/)
         {
             //Set the parameters for the casting of the ability
-            CastingAbilityManager.attackerAnimationManager = GameManager.playingCharacterGameObjects[attacker.name].GetComponent<AnimationManager>();
+            CastingAbilityManager.attackerAnimationManager = GameManager.GetInstance().playingCharacterGameObjects[attacker.name].GetComponent<AnimationManager>();
             CastingAbilityManager.attacker = attacker;
             CastingAbilityManager.abilityToCast = ability;
 
@@ -186,7 +186,7 @@ public class CastingAbilityManager : MonoBehaviour
     static void FaceDirection()
     {
         float rotSpeed = 360f;
-        Transform attackerTransform = GameManager.playingCharacterGameObjects[attacker.name].transform;
+        Transform attackerTransform = GameManager.GetInstance().playingCharacterGameObjects[attacker.name].transform;
         Transform defenderTransform = defendersGameObject[0].transform;
 
         //When on target -> dont rotate!

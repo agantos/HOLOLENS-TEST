@@ -302,11 +302,11 @@ public class JSONClass_to_EngineClass
 
     public static void FillCharacterPool(JSONCharacters jsonCharacters)
     {
-        GameManager.characterPool = new Dictionary<string, Character>();
+        GameManager.GetInstance().characterPool = new Dictionary<string, Character>();
         foreach (JSONCharacter jsonChar in jsonCharacters.characters)
         {
             Character temp = CreateCharacter(jsonChar);
-            GameManager.characterPool.Add(temp.name, temp);
+            GameManager.GetInstance().characterPool.Add(temp.name, temp);
         }
     }
 

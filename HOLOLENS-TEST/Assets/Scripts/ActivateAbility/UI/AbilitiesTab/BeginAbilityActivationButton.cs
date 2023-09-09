@@ -12,7 +12,7 @@ public class BeginAbilityActivationButton : Button
         SetButtonOnClick(delegate {
             CastingAbilityManager.instance.
                 BeginAbilityActivation( AbilitiesManager.abilityPool[abilityName], 
-                                        GameManager.characterPool[attackerName]
+                                        GameManager.GetInstance().characterPool[attackerName]
                 );
             });
     }

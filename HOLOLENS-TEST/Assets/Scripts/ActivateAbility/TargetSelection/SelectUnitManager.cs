@@ -32,7 +32,7 @@ public class SelectUnitManager : MonoBehaviour, IMixedRealityPointerHandler, IMi
     private void PerformAbilitySelection()
     {
         float defenderDistance = GameplayCalculatorFunctions.CalculateDistanceInFeet(
-                GameManager.playingCharacterGameObjects[CastingAbilityManager.attacker.name].transform.position,
+                GameManager.GetInstance().playingCharacterGameObjects[CastingAbilityManager.attacker.name].transform.position,
                 gameObject.transform.position
             );
 

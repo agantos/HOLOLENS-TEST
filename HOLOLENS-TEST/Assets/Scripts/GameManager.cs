@@ -13,13 +13,36 @@ public class GameManager : MonoBehaviour
     public GameObject gamespace;
 
     //Variables
-    public static Dictionary<string, BaseCharacterPreset> basePresetPool;
-    public static Dictionary<string, Character> characterPool;
-    public static Dictionary<string, Character> playingCharacterPool = new Dictionary<string, Character>();
-    public static Dictionary<string, GameObject> playingCharacterGameObjects = new Dictionary<string, GameObject>();
-    public static Dictionary<string, Preset_UI_Information> presets_UI_Info;
+    public Dictionary<string, BaseCharacterPreset> basePresetPool;
+    public Dictionary<string, Character> characterPool;
+    public Dictionary<string, Character> playingCharacterPool = new Dictionary<string, Character>();
+    public Dictionary<string, GameObject> playingCharacterGameObjects = new Dictionary<string, GameObject>();
+    public Dictionary<string, Preset_UI_Information> presets_UI_Info;
 
-    public static TurnManager turnManager;    
+    public TurnManager turnManager;
+
+    private static GameManager Instance = null;
+
+    private GameManager() { GetInstance(); }
+
+    public static GameManager GetInstance()
+    {
+        return Instance;
+    }
+
+    private void Awake()
+    {
+        // Ensure only one instance of GameManager exists
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject); // Destroy duplicate GameManager objects
+        }
+    }
+
     void Start()
     {
         Debug.Log(PhotonNetwork.IsMasterClient);
@@ -27,9 +50,6 @@ public class GameManager : MonoBehaviour
         InitializeSingletons();
         LoadFromJsons();
         CreateCharacters();
-
-        //Start Counting Turns
-        Invoke("FirstTurn", 2.0f);
     }
 
     void InitializeSingletons()
@@ -84,11 +104,11 @@ public class GameManager : MonoBehaviour
 
     public static Character GetCurrentPlayer_Character()
     {
-        return characterPool[turnManager.GetCurrentTurn_Name()];
+        return GetInstance().characterPool[GetInstance().turnManager.GetCurrentTurn_Name()];
     }
 
     public static string GetCurrentPlayer_Name()
     {
-        return turnManager.GetCurrentTurn_Name();
+        return GetInstance().turnManager.GetCurrentTurn_Name();
     }
 }

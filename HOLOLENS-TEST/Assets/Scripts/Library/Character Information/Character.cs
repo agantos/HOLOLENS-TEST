@@ -110,7 +110,7 @@ public class Character
         character_UI_info = new Character_UI_Information();
         foreach (string preset in basePresets)
         {
-            character_UI_info.AddPresetInformation(GameManager.presets_UI_Info[preset]);
+            character_UI_info.AddPresetInformation(GameManager.GetInstance().presets_UI_Info[preset]);
         }
     }
 

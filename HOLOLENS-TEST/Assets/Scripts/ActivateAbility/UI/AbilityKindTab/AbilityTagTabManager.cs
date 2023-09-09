@@ -24,7 +24,7 @@ public class AbilityTagTabManager : MonoBehaviour
 
     public void Activate()
     {
-        character = GameManager.characterPool[SelectAbilityUIManager.UI_Info.currentPlayer];
+        character = GameManager.GetInstance().characterPool[SelectAbilityUIManager.UI_Info.currentPlayer];
 
         //"Spawn" object
         gameObject.transform.localScale = scale;

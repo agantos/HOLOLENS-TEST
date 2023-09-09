@@ -29,7 +29,7 @@ public class CharacterInfoDisplayManager : MonoBehaviour
 
     public void CreateUI(string characterName)
     {
-        displayingCharacter = GameManager.characterPool[characterName];
+        displayingCharacter = GameManager.GetInstance().characterPool[characterName];
         title.text = characterName;
 
         barsInfoDisplayManager.CreateUI(displayingCharacter);
