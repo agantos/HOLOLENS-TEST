@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.AI;
 
+using Photon.Pun;
+
 public class GameManager : MonoBehaviour
 {
     //Initialize Measurement
@@ -20,6 +22,8 @@ public class GameManager : MonoBehaviour
     public static TurnManager turnManager;    
     void Start()
     {
+        Debug.Log(PhotonNetwork.IsMasterClient);
+
         InitializeSingletons();
         LoadFromJsons();
         CreateCharacters();
@@ -88,5 +92,3 @@ public class GameManager : MonoBehaviour
         return turnManager.GetCurrentTurn_Name();
     }
 }
-
-
