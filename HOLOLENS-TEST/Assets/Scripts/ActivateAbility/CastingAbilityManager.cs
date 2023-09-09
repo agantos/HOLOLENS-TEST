@@ -15,37 +15,54 @@ public class CastingAbilityManager : MonoBehaviour
     public GameObject CircleSelectPrefab;
     
     //Variables for casting the ability
-    public static bool SelectAbility;
-    public static Character attacker;
-    public static AnimationManager attackerAnimationManager;
+    public bool SelectAbility;
+    public Character attacker;
+    public AnimationManager attackerAnimationManager;
 
-    public static List<Character> defenderCharacters = new List<Character>();
-    public static List<GameObject> defendersGameObject = new List<GameObject>();
-    public static List<bool> abilitySuccessList = new List<bool>();
-    public static List<AnimationManager> defendersAnimationManager = new List<AnimationManager>();
-    public static Ability abilityToCast;
+    public List<Character> defenderCharacters = new List<Character>();
+    public List<GameObject> defendersGameObject = new List<GameObject>();
+    
+    public List<bool> abilitySuccessList = new List<bool>();
+    public Ability abilityToCast;
 
-    public static AbilitySelectType CurrentSelectionType = AbilitySelectType.INACTIVE;
+    public AbilitySelectType CurrentSelectionType = AbilitySelectType.INACTIVE;
 
     GameObject spawned;
 
-    public static CastingAbilityManager instance;
+    public static CastingAbilityManager Instance { get; private set; }
 
-    private void Start()
+    public static CastingAbilityManager GetInstance()
     {
-        instance = this;
+        return Instance;
+    }
+
+    private void Awake()
+    {
+        // Ensure only one instance of GameManager exists
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject); // Destroy duplicate GameManager objects
+        }
     }
 
     //Spawns the necessary objects for selecting targets for an ability
-    public bool BeginAbilityActivation(Ability ability, Character attacker)
+    public bool BeginAbilityActivation(string abilityName, string attackerName)
     {
+        Ability ability = AbilitiesManager.abilityPool[abilityName];
+        Character attacker = GameManager.GetInstance().characterPool[attackerName];
+
+
         //Check if the ability can be cast
         if (true/**AbilityManager.Activate_CheckCost(ability.name, attacker)**/)
         {
             //Set the parameters for the casting of the ability
-            CastingAbilityManager.attackerAnimationManager = GameManager.GetInstance().playingCharacterGameObjects[attacker.name].GetComponent<AnimationManager>();
-            CastingAbilityManager.attacker = attacker;
-            CastingAbilityManager.abilityToCast = ability;
+            GetInstance().attacker = attacker;
+            GetInstance().abilityToCast = ability;
+            GetInstance().attackerAnimationManager = GameManager.GetInstance().playingCharacterGameObjects[attacker.name].GetComponent<AnimationManager>();
 
             //Perform the appropriate operations for selection
             switch (ability.effects[0].areaOfEffect.shape)
@@ -93,14 +110,57 @@ public class CastingAbilityManager : MonoBehaviour
         }            
     }
 
-    //TO DO: DEPRECATE
-    public static void ActivateAttackerAbility()
+    // START OF METHODS FOR RPC CALLS
+    public void SyncManagerData(string ablityToCast, string attackerName, string[] defenders)
+    {
+        //Set the parameters for the casting of the ability
+        GetInstance().attacker = GameManager.GetInstance().characterPool[attackerName];
+        GetInstance().abilityToCast = AbilitiesManager.abilityPool[ablityToCast];
+        GetInstance().attackerAnimationManager = GameManager.GetInstance().playingCharacterGameObjects[attackerName].GetComponent<AnimationManager>();
+        
+        foreach(string defender in defenders)
+        {
+            GetInstance().defenderCharacters.Add(GameManager.GetInstance().characterPool[defender]);
+            GetInstance().defendersGameObject.Add(GameManager.GetInstance().playingCharacterGameObjects[defender]);
+        }
+    }
+
+    public string[] GetDefenderNameList()
+    {
+        List<string> list = new List<string>();
+        foreach (Character defender in defenderCharacters)
+        {
+            list.Add(defender.name);
+        }
+
+        return list.ToArray();
+    }
+
+    public void ActivateAbilityRemotely()
+    {
+        //Start Animation
+        if (defenderCharacters.Count > 0)
+            FaceDirection();
+
+        attackerAnimationManager.IdleTo_Animation(abilityToCast.animationTypes.attacker);
+
+        //Activate Ability
+        Instance.StartCoroutine(ActivationSyncAbility());
+    }
+
+    // END
+
+    //DEPRECATE
+    public void ActivateAttackerAbility()
     {
         attacker.ActivateAbility(abilityToCast.name, out abilitySuccessList, defenderCharacters, attacker);
     }
 
-    public static void ActivateAbility()
+    public void ActivateAbility()
     {
+        //Sync AbilityManager with all the others
+        MultiplayerCallsAbilityCast.Instance.Propagate_AbilityManagerSync(abilityToCast.name, attacker.name, GetDefenderNameList());
+
         //Deactivate any spawned objects related to the activation of the ability
         DeactivateAbilityActivationObjects();
 
@@ -108,13 +168,16 @@ public class CastingAbilityManager : MonoBehaviour
         if(defenderCharacters.Count > 0)
             FaceDirection();
 
-        attackerAnimationManager.IdleTo_Animation(CastingAbilityManager.abilityToCast.animationTypes.attacker);
+        attackerAnimationManager.IdleTo_Animation(abilityToCast.animationTypes.attacker);
 
         //Activate Ability
-        instance.StartCoroutine(ActivationSyncAbility());
+        Instance.StartCoroutine(ActivationSyncAbility());
+
+        //Send for other players to Activate
+        MultiplayerCallsAbilityCast.Instance.Propagate_RemoteActivateAbility();
     }
 
-    public static void CancelActivation()
+    public void CancelActivation()
     {
         DeactivateAbilityActivationObjects();
         CleanState();
@@ -123,7 +186,7 @@ public class CastingAbilityManager : MonoBehaviour
     }
 
     //Deactivate Spawned Objects
-    public static void DeactivateAbilityActivationObjects()
+    public void DeactivateAbilityActivationObjects()
     {
         //Objects searched with ANYobjecttype are singletons
         FindAnyObjectByType<AbilityRangeDisplay>().Deactivate();
@@ -142,12 +205,12 @@ public class CastingAbilityManager : MonoBehaviour
     }
 
     //Methods for Animation
-    public static void ReturnAttackerToIdleAnimation()
+    public void ReturnAttackerToIdleAnimation()
     {
         attackerAnimationManager.Animation_ToIdle(abilityToCast.animationTypes.attacker);
     }
 
-    public static void ActivateDefenderAnimations()
+    public void ActivateDefenderAnimations()
     {
         Assert.AreEqual(abilitySuccessList.Count, defendersGameObject.Count);
         for (int i = 0; i < abilitySuccessList.Count; i++)
@@ -165,7 +228,7 @@ public class CastingAbilityManager : MonoBehaviour
         }
     }
 
-    public static void ReturnDefendersToIdleAnimation()
+    public void ReturnDefendersToIdleAnimation()
     {
         Assert.AreEqual(abilitySuccessList.Count, defendersGameObject.Count);
         for (int i = 0; i < abilitySuccessList.Count; i++)
@@ -183,7 +246,7 @@ public class CastingAbilityManager : MonoBehaviour
         }
     }
 
-    static void FaceDirection()
+    void FaceDirection()
     {
         float rotSpeed = 360f;
         Transform attackerTransform = GameManager.GetInstance().playingCharacterGameObjects[attacker.name].transform;
@@ -198,22 +261,25 @@ public class CastingAbilityManager : MonoBehaviour
     }
 
     //Cleans Manager State
-    public static void CleanState()
+    public void CleanState()
     {
         abilityToCast = null;
+
         attacker = null;
+
         defenderCharacters.Clear();
         defendersGameObject.Clear();
+
         abilitySuccessList.Clear();
         CurrentSelectionType = AbilitySelectType.INACTIVE;
     }
 
-    static IEnumerator ActivationSyncAbility()
+    IEnumerator ActivationSyncAbility()
     {
         //Wait for the animation to register
         float secsForAnimationToRegister = 0.4f;
         yield return new WaitForSeconds(secsForAnimationToRegister);
-        float animationEnds = CastingAbilityManager.attackerAnimationManager.GetCurrentAnimationDuration()
+        float animationEnds = attackerAnimationManager.GetCurrentAnimationDuration()
                                 - secsForAnimationToRegister;
 
         //Wait for the Impact point of the animation to activate the ability
@@ -229,7 +295,7 @@ public class CastingAbilityManager : MonoBehaviour
         ReturnDefendersToIdleAnimation();
 
         //Clean manager state
-        CastingAbilityManager.CleanState();
+        CleanState();
 
         //Spawn the window that displays the abilities
         SelectAbilityUIManager.GiveTurnToPlayingCharacter();

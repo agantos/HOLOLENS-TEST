@@ -10,11 +10,8 @@ public class BeginAbilityActivationButton : Button
         gameObject.GetComponentInChildren<Text>().text = abilityName;
 
         SetButtonOnClick(delegate {
-            CastingAbilityManager.instance.
-                BeginAbilityActivation( AbilitiesManager.abilityPool[abilityName], 
-                                        GameManager.GetInstance().characterPool[attackerName]
-                );
-            });
+            CastingAbilityManager.GetInstance().BeginAbilityActivation(abilityName, attackerName);
+        });
     }
 
     public void SetButtonOnClick(UnityEngine.Events.UnityAction method)

@@ -20,6 +20,6 @@ public class CancelAbilityButton : Button
 
     public void DeactivateAbility()
     {
-        CastingAbilityManager.CancelActivation();
+        CastingAbilityManager.GetInstance().CancelActivation();
     }
 }

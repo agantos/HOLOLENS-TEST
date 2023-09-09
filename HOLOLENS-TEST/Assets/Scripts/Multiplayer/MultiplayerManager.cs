@@ -55,14 +55,70 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void PrintSomething()
     {
-        if (CastingAbilityManager.attacker != null)
-            Debug.Log(CastingAbilityManager.attacker.name);
+        if (CastingAbilityManager.GetInstance().attacker != null)
+            Debug.Log(CastingAbilityManager.GetInstance().attacker.name);
         else
             Debug.Log("Attacker = null");
     }
 
     public void CallRPCPrint()
     {
+        string[] array;
         photonView.RPC("PrintSomething", RpcTarget.All);
+    }    
+}
+
+
+public class MultiplayerCallsAbilityCast : MonoBehaviourPunCallbacks
+{
+    public static MultiplayerCallsAbilityCast Instance { get; private set; }
+
+    public static MultiplayerCallsAbilityCast GetInstance()
+    {
+        return Instance;
+    }
+
+    private void Awake()
+    {
+        // Ensure only one instance of GameManager exists
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject); // Destroy duplicate GameManager objects
+        }
+    }
+
+    [PunRPC]
+    void SyncCastingAbilityManagers(string ablityToCast, string attackerName, string[] defenders)
+    {
+        CastingAbilityManager.GetInstance().SyncManagerData(ablityToCast, attackerName, defenders);
+    }
+
+    [PunRPC]
+    void RemoteActivateAbility()
+    {
+        CastingAbilityManager.Instance.ActivateAbilityRemotely();
+    }
+
+    public void Propagate_RemoteActivateAbility()
+    {
+        photonView.RPC(
+            "RemoteActivateAbility",
+            RpcTarget.Others
+       );
+    }
+
+    public void Propagate_AbilityManagerSync(string ablityToCast, string attackerName, string[] defenders)
+    {
+        photonView.RPC(
+            "SyncCastingAbilityManagers",
+            RpcTarget.Others,
+            ablityToCast,
+            attackerName,
+            defenders
+       );
     }
 }

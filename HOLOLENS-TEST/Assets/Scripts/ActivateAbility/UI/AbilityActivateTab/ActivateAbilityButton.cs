@@ -21,10 +21,10 @@ public class ActivateAbilityButton : Button
     public void ActivateAbility()
     {
         //Deactivate any spawned objects related to the activation of the ability
-        CastingAbilityManager.DeactivateAbilityActivationObjects();
+        CastingAbilityManager.GetInstance().DeactivateAbilityActivationObjects();
 
         //Start Animation
-        CastingAbilityManager.attackerAnimationManager.IdleTo_Animation(CastingAbilityManager.abilityToCast.animationTypes.attacker);
+        CastingAbilityManager.GetInstance().attackerAnimationManager.IdleTo_Animation(CastingAbilityManager.GetInstance().abilityToCast.animationTypes.attacker);
 
         //Activate Ability
         StartCoroutine(ActivateAbilityAfterAnimation());
@@ -35,23 +35,23 @@ public class ActivateAbilityButton : Button
         //Wait for the animation to register
         float secsForAnimationToRegister = 0.4f;
         yield return new WaitForSeconds(secsForAnimationToRegister);
-        float animationEnds = CastingAbilityManager.attackerAnimationManager.GetCurrentAnimationDuration() 
+        float animationEnds = CastingAbilityManager.GetInstance().attackerAnimationManager.GetCurrentAnimationDuration() 
                                 - secsForAnimationToRegister;
         
         //Wait for the Impact point of the animation to activate the ability
         yield return new WaitForSeconds(animationEnds-animationEnds*3/8);
-        CastingAbilityManager.ActivateAttackerAbility();
-        CastingAbilityManager.ActivateDefenderAnimations();
+        CastingAbilityManager.GetInstance().ActivateAttackerAbility();
+        CastingAbilityManager.GetInstance().ActivateDefenderAnimations();
 
         //Wait for the animation to end
         yield return new WaitForSeconds(animationEnds-animationEnds*5/8);
 
         //Switch Back to Idle Animation
-        CastingAbilityManager.ReturnAttackerToIdleAnimation();
-        CastingAbilityManager.ReturnDefendersToIdleAnimation();
+        CastingAbilityManager.GetInstance().ReturnAttackerToIdleAnimation();
+        CastingAbilityManager.GetInstance().ReturnDefendersToIdleAnimation();
 
         //Clean manager state
-        CastingAbilityManager.CleanState();
+        CastingAbilityManager.GetInstance().CleanState();
 
         //Spawn the window that displays the abilities
         SelectAbilityUIManager.GiveTurnToPlayingCharacter();

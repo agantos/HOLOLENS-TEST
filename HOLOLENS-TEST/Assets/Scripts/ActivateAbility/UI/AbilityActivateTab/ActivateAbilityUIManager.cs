@@ -16,13 +16,13 @@ public class ActivateAbilityUIManager : MonoBehaviour
 
     public void ActivateAbility()
     {
-        CastingAbilityManager.ActivateAbility();
+        CastingAbilityManager.GetInstance().ActivateAbility();
         Deactivate();
     }
 
     public void CancelActivation()
     {
-        CastingAbilityManager.CancelActivation();
+        CastingAbilityManager.GetInstance().CancelActivation();
         Deactivate();
     }
 
