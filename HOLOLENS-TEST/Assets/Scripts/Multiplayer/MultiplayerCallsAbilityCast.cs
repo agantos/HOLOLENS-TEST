@@ -28,15 +28,19 @@ public class MultiplayerCallsAbilityCast : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    void SyncCastingAbilityManagers(string ablityToCast, string attackerName, string[] defenders)
+    void SyncCastingAbilityManagers(string ablityToCast, string attackerName, string[] defenders,
+                                                string[] applicationData, bool[] abilitySuccessList)
     {
-        CastingAbilityManager.GetInstance().SyncManagerData(ablityToCast, attackerName, defenders);
+        CastingAbilityManager.GetInstance().SyncManagerData(ablityToCast, attackerName, 
+                                                            defenders, applicationData, 
+                                                            abilitySuccessList
+        );
     }
 
     [PunRPC]
     void RemoteActivateAbility()
     {
-        CastingAbilityManager.Instance.ActivateAbilityRemotely();
+        CastingAbilityManager.Instance.ActivateAbility_Remotely();
     }
 
     public void Propagate_RemoteActivateAbility()
@@ -47,14 +51,17 @@ public class MultiplayerCallsAbilityCast : MonoBehaviourPunCallbacks
        );
     }
 
-    public void Propagate_AbilityManagerSync(string ablityToCast, string attackerName, string[] defenders)
+    public void Propagate_AbilityManagerSync(   string ablityToCast, string attackerName, string[] defenders, 
+                                                string[] applicationData, bool[] abilitySuccessList               )
     {
         photonView.RPC(
             "SyncCastingAbilityManagers",
             RpcTarget.Others,
             ablityToCast,
             attackerName,
-            defenders
+            defenders,
+            applicationData,
+            abilitySuccessList
        );
     }
 }

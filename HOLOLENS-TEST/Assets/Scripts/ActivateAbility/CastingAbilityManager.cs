@@ -7,6 +7,100 @@ using UnityEngine.Assertions;
 
 public enum AbilitySelectType { SHAPE, SELECT, INACTIVE }
 
+[System.Serializable]
+public class EffectApplicationData {
+    public EffectType type;
+       
+    public int duration;
+    public int damage;
+
+    public string affectedStat;
+    public bool effectSucceeds;
+
+    public string attacker;
+    public string defender;
+    public string abilityName;
+
+    public EffectApplicationData(EffectType type, int duration, string abilityName,
+                                 int damage, string statAffected, 
+                                 bool effectSucceeds, string attacker, string defender)
+    {
+        this.type = type;
+        this.duration = duration;
+        this.damage = damage;
+        this.affectedStat = statAffected;
+        this.abilityName = abilityName;
+        this.effectSucceeds = effectSucceeds;
+        this.attacker = attacker;
+        this.defender = defender;
+    }
+
+    public void ApplyEffect()
+    {
+        Character defenderCharacter = GameManager.GetInstance().playingCharacterPool[defender];
+        CharacterStat stat = defenderCharacter.GetStat(affectedStat);
+
+        switch (type)
+        {
+            case EffectType.DAMAGE:
+                stat.DealDamage(damage);
+                break;
+            case EffectType.HEALING:
+                stat.HealDamage(damage);
+                break;
+            case EffectType.TEMPORAL:
+                if(effectSucceeds)
+                    defenderCharacter.GetStats().AddTemporalEffect(affectedStat, "", duration, damage);
+                break;
+        }
+
+        stat.CalculateCurrentValue();
+    }
+
+    public void LogApplication()
+    {
+        Character defenderCharacter = GameManager.GetInstance().playingCharacterPool[defender];
+        Character attackerCharacter = GameManager.GetInstance().playingCharacterPool[attacker];
+
+        switch (type)
+        {
+            case EffectType.DAMAGE:
+                Logger.Log_Damage((int)damage, affectedStat, defenderCharacter, attackerCharacter);
+                break;
+            case EffectType.HEALING:
+                Logger.Log_Heal((int)damage, affectedStat, defenderCharacter, attackerCharacter);
+                break;
+            case EffectType.TEMPORAL:
+                Logger.Log_Apply_Temporal((int)damage, affectedStat, duration, defenderCharacter, attackerCharacter);
+                break;
+        }
+    }
+
+    // Serialize the list to a JSON string
+    public string SerializeListToJson()
+    {
+        return JsonUtility.ToJson(this);        
+    }
+
+    // Deserialize the JSON string back to a list
+    public static EffectApplicationData DeserializeJsonToList(string jsonString)
+    {
+        return JsonUtility.FromJson<EffectApplicationData>(jsonString);
+    }
+
+    public override string ToString()
+    {
+        return $"Effect Type: {type}\n" +
+               $"Duration: {duration}\n" +
+               $"Damage: {damage}\n" +
+               $"Affected Stat: {affectedStat}\n" +
+               $"Effect Succeeds: {effectSucceeds}\n" +
+               $"Attacker: {attacker}\n" +
+               $"Defender: {defender}\n" +
+               $"Ability Name: {abilityName}";
+    }
+}
+
 public class CastingAbilityManager : MonoBehaviour
 {
     //Prefabs to set in editor
@@ -18,6 +112,7 @@ public class CastingAbilityManager : MonoBehaviour
     public bool SelectAbility;
     public Character attacker;
     public AnimationManager attackerAnimationManager;
+    public List<EffectApplicationData> applicationData;
 
     public List<Character> defenderCharacters = new List<Character>();
     public List<GameObject> defendersGameObject = new List<GameObject>();
@@ -111,14 +206,28 @@ public class CastingAbilityManager : MonoBehaviour
     }
 
     // START OF METHODS FOR RPC CALLS
-    public void SyncManagerData(string ablityToCast, string attackerName, string[] defenders)
+    public void SyncManagerData(
+        string ablityToCast, string attackerName, 
+        string[] defenders, string[] applicationData, 
+        bool[] abilitySuccessList
+    )
     {
         //Set the parameters for the casting of the ability
         GetInstance().attacker = GameManager.GetInstance().characterPool[attackerName];
         GetInstance().abilityToCast = AbilitiesManager.abilityPool[ablityToCast];
         GetInstance().attackerAnimationManager = GameManager.GetInstance().playingCharacterGameObjects[attackerName].GetComponent<AnimationManager>();
         
-        foreach(string defender in defenders)
+        foreach(string data in applicationData)
+        {
+            GetInstance().applicationData.Add(EffectApplicationData.DeserializeJsonToList(data));
+        }
+
+        foreach(bool b in abilitySuccessList)
+        {
+            GetInstance().abilitySuccessList.Add(b);
+        }
+
+        foreach (string defender in defenders)
         {
             GetInstance().defenderCharacters.Add(GameManager.GetInstance().characterPool[defender]);
             GetInstance().defendersGameObject.Add(GameManager.GetInstance().playingCharacterGameObjects[defender]);
@@ -136,7 +245,18 @@ public class CastingAbilityManager : MonoBehaviour
         return list.ToArray();
     }
 
-    public void ActivateAbilityRemotely()
+    public string[] GetApplicationDataStrings()
+    {
+        List<string> list = new List<string>();
+        foreach(EffectApplicationData data in applicationData)
+        {
+            list.Add(data.SerializeListToJson());
+        }
+
+        return list.ToArray();
+    }
+
+    public void ActivateAbility_Remotely()
     {
         //Start Animation
         if (defenderCharacters.Count > 0)
@@ -145,7 +265,46 @@ public class CastingAbilityManager : MonoBehaviour
         attackerAnimationManager.IdleTo_Animation(abilityToCast.animationTypes.attacker);
 
         //Activate Ability
-        Instance.StartCoroutine(ActivationSyncAbility());
+        Instance.StartCoroutine(ActivationSyncAbility_Remotely());        
+    }
+
+    //The differece is that it does not calculate the ability effects because it receives it remotely
+    IEnumerator ActivationSyncAbility_Remotely()
+    {
+        /*
+         * Wait for the animation to register
+        */
+        float secsForAnimationToRegister = 0.4f;
+        yield return new WaitForSeconds(secsForAnimationToRegister);
+        float animationEnds = attackerAnimationManager.GetCurrentAnimationDuration()
+                                - secsForAnimationToRegister;
+
+        /*
+        * Wait for the Impact point of the animation to activate the ability
+        *      1. Create the data
+        *      2. Send them to other players
+        *      3. Apply the Effects
+        */
+        yield return new WaitForSeconds(animationEnds - animationEnds * 3 / 8);
+
+        ApplyAbilityEffects();
+        ActivateDefenderAnimations();
+
+        /*
+         * Wait for the animation to end
+        */
+        yield return new WaitForSeconds(animationEnds - animationEnds * 5 / 8);
+
+        /*
+         * Switch Back to Idle Animation
+        */
+        ReturnAttackerToIdleAnimation();
+        ReturnDefendersToIdleAnimation();
+
+        /*
+         * Clean manager state
+        */
+        CleanState();
     }
 
     // END
@@ -153,13 +312,25 @@ public class CastingAbilityManager : MonoBehaviour
     //DEPRECATE
     public void ActivateAttackerAbility()
     {
-        attacker.ActivateAbility(abilityToCast.name, out abilitySuccessList, defenderCharacters, attacker);
+        //attacker.ActivateAbility(abilityToCast.name, out abilitySuccessList, defenderCharacters, attacker);
+    }
+
+    public void ApplyAbilityEffects()
+    {
+        foreach(EffectApplicationData appData in applicationData)
+        {
+            appData.ApplyEffect();
+            appData.LogApplication();
+        }
     }
 
     public void ActivateAbility()
     {
+        //Get Data to apply the ability
+        attacker.GetAbilityApplicationData(abilityToCast.name, out abilitySuccessList, out applicationData, defenderCharacters, attacker);
+
         //Sync AbilityManager with all the others
-        MultiplayerCallsAbilityCast.Instance.Propagate_AbilityManagerSync(abilityToCast.name, attacker.name, GetDefenderNameList());
+        MultiplayerCallsAbilityCast.Instance.Propagate_AbilityManagerSync(abilityToCast.name, attacker.name, GetDefenderNameList(), GetApplicationDataStrings(), abilitySuccessList.ToArray());
 
         //Deactivate any spawned objects related to the activation of the ability
         DeactivateAbilityActivationObjects();
@@ -271,33 +442,51 @@ public class CastingAbilityManager : MonoBehaviour
         defendersGameObject.Clear();
 
         abilitySuccessList.Clear();
+        applicationData.Clear();
+
         CurrentSelectionType = AbilitySelectType.INACTIVE;
     }
 
     IEnumerator ActivationSyncAbility()
     {
-        //Wait for the animation to register
+        /*
+         * Wait for the animation to register
+        */
         float secsForAnimationToRegister = 0.4f;
         yield return new WaitForSeconds(secsForAnimationToRegister);
         float animationEnds = attackerAnimationManager.GetCurrentAnimationDuration()
                                 - secsForAnimationToRegister;
 
-        //Wait for the Impact point of the animation to activate the ability
-        yield return new WaitForSeconds(animationEnds - animationEnds * 3 / 8);
-        attacker.ActivateAbility(abilityToCast.name, out abilitySuccessList, defenderCharacters, attacker);
+    /*
+    * Wait for the Impact point of the animation to activate the ability
+    *      1. Create the data
+    *      2. Send them to other players
+    *      3. Apply the Effects
+    */
+        yield return new WaitForSeconds(animationEnds - animationEnds * 3 / 8);        
+        ApplyAbilityEffects();
         ActivateDefenderAnimations();
 
-        //Wait for the animation to end
+
+        /*
+         * Wait for the animation to end
+        */
         yield return new WaitForSeconds(animationEnds - animationEnds * 5 / 8);
 
-        //Switch Back to Idle Animation
+        /*
+         * Switch Back to Idle Animation
+        */
         ReturnAttackerToIdleAnimation();
         ReturnDefendersToIdleAnimation();
 
-        //Clean manager state
+        /*
+         * Clean manager state
+        */
         CleanState();
 
-        //Spawn the window that displays the abilities
+        /*
+         * Spawn the window that displays the abilities
+        */
         SelectAbilityUIManager.GiveTurnToPlayingCharacter();
     }
 }

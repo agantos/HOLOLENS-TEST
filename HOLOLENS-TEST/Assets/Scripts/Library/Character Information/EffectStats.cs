@@ -292,37 +292,17 @@ public class EffectStats
         damageStats = new EffectDamageStats(baseAmount, statsAffecting, damagedStat, onSavedMultiplier);
     }
 
-    public void DealDamage(bool effectSucceeds, Character defender, Character attacker)
-    {
-        CharacterStat damagedStat = defender.GetStats().GetStat(damageStats.damagedStatName);
-        damagedStat.DealDamage(CalculateEffectDamage(effectSucceeds, defender, attacker));
-        damagedStat.CalculateCurrentValue();
-    }
-
-    public void HealDamage(bool effectSucceeds, Character defender, Character attacker)
-    {
-        CharacterStat healedStat = defender.GetStats().GetStat(damageStats.damagedStatName);
-        healedStat.HealDamage(CalculateEffectDamage(effectSucceeds, defender, attacker));
-        healedStat.CalculateCurrentValue();
-    }
-
-    public void ApplyEffect(bool effectSucceeds, Character defender, Character attacker, string abilityName = "")
+    public EffectApplicationData CalculateApplicationData(bool effectSucceeds, Character defender, Character attacker, string abilityName = "")
     {
         CharacterStat affectedStat = defender.GetStats().GetStat(damageStats.damagedStatName);
-        if(type == EffectType.DAMAGE)
-            affectedStat.DealDamage(CalculateEffectDamage(effectSucceeds, defender, attacker));
-        else if(type == EffectType.HEALING)
-            affectedStat.HealDamage(CalculateEffectDamage(effectSucceeds, defender, attacker));
-        else if(type == EffectType.TEMPORAL)
-        {
-            if(effectSucceeds)
-                defender.GetStats().AddTemporalEffect(affectedStat.GetName(), abilityName, duration, CalculateEffectDamage(effectSucceeds, defender, attacker));
-        }
+        int damage = CalculateEffectDamage(effectSucceeds, type, defender, attacker, duration);
 
-        affectedStat.CalculateCurrentValue();
+        return new EffectApplicationData(type, duration, abilityName, 
+                                                                  damage, affectedStat.GetName(), effectSucceeds, 
+                                                                  attacker.name, defender.name);
     }
 
-    private int CalculateEffectDamage(bool effectSucceeds, Character defender = null, Character attacker = null)
+    private int CalculateEffectDamage(bool effectSucceeds, EffectType type, Character defender = null, Character attacker = null, int duration = 0)
     {
         float damage = damageStats.GetBaseDamage(attacker.GetStats());
 
@@ -331,10 +311,7 @@ public class EffectStats
             damage *= damageStats.onSavedMultiplier;
 
         //Include other damage multipliers such as critical, resistance, vulnerabilities etc.
-
-        //Log the damage
-        Logger.Log_Damage((int)damage, damageStats.damagedStatName, defender, attacker);
-
+        
         return (int)damage;
     }
 

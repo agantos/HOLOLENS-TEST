@@ -45,22 +45,25 @@ public class Character
         stats.GetStatistics().Add(stat.GetName(), stat.Clone()); 
     }   
    
-    //Ability Activation Methods
-    public void ActivateAbility(string abilityName, out List<bool> abilitySuccessList, List<Character> defenders = null, Character attacker = null)
+    //Creates the application the data for the ability
+    public void GetAbilityApplicationData(string abilityName, out List<bool> abilitySuccessList, 
+                                out List<EffectApplicationData> applicationDataList, 
+                                List<Character> defenders = null, Character attacker = null
+    )
     {
 
         abilitySuccessList = new List<bool>();
+        applicationDataList = new List<EffectApplicationData>();
 
-        if(abilities.TryGetValue(abilityName, out abilityName))
+        if (abilities.TryGetValue(abilityName, out abilityName))
         {
             foreach(Character defender in defenders)
             {
                 bool succeeds;
-                AbilitiesManager.ApplyAbilityEffect(abilityName, out succeeds, defender, attacker);
+                applicationDataList.AddRange(AbilitiesManager.GetAbilityApplicationData(abilityName, out succeeds, defender, attacker));
                 abilitySuccessList.Add(succeeds);
             }
                 
-
             AbilitiesManager.ApplyAbilityCost(abilityName, attacker);
         }
         else
@@ -93,7 +96,7 @@ public class Character
         //Apply Ongoing Effects
         foreach(OngoingEffect ongoing in ongoingEffects)
         {
-            ongoing.effect.ApplyEffect(true, this, ongoing.attacker);
+            ongoing.effect.CalculateApplicationData(true, this, ongoing.attacker);
 
             ongoing.duration -= 1;            
             if(ongoing.duration == 0)

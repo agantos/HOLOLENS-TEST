@@ -29,7 +29,6 @@ public class Logger : MonoBehaviour
         }
 
         instance = this;
-        DontDestroyOnLoad(this.gameObject); // Keeps the singleton across scenes
     }
 
     // Start is called before the first frame update
@@ -171,6 +170,31 @@ public class Logger : MonoBehaviour
         AddToLine(" damage to ");
         AddToLine(GetColoredString(defender.name, ColorType.CHARACTER_2) + "'s ");
         AddToLine(damagedStatName);
+
+        AddLine();
+    }
+
+    public static void Log_Heal(int damage, string damagedStatName, Character defender, Character attacker)
+    {
+        AddToLine(GetColoredString(attacker.name, ColorType.CHARACTER_1));
+        AddToLine(" Heals ");
+        AddToLine(GetBoldedString(damage.ToString()));
+        AddToLine(" damage to ");
+        AddToLine(GetColoredString(defender.name, ColorType.CHARACTER_2) + "'s ");
+        AddToLine(damagedStatName);
+
+        AddLine();
+    }
+
+    public static void Log_Apply_Temporal(int damage, string damagedStatName, int duration, Character defender, Character attacker)
+    {
+        AddToLine(GetColoredString(attacker.name, ColorType.CHARACTER_1));
+        AddToLine(" deals ");
+        AddToLine(GetBoldedString(damage.ToString()));
+        AddToLine(" damage to ");
+        AddToLine(GetColoredString(defender.name, ColorType.CHARACTER_2) + "'s ");
+        AddToLine(damagedStatName);
+        AddToLine(" for " + duration + " rounds ");
 
         AddLine();
     }

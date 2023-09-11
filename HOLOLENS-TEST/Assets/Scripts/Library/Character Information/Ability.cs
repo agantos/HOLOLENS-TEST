@@ -137,9 +137,11 @@ public class AbilitiesManager
         }
     }
 
-    //Calculates success of an ability and applies its damage to a character.
-    public static void ApplyAbilityEffect(string abilityName, out bool effectSucceeds, Character defender = null,  Character attacker = null)
-    {        
+    //Creates the application data for an ability and a single defender
+    public static List<EffectApplicationData> GetAbilityApplicationData(string abilityName, out bool effectSucceeds, /*out EffectResults effectResults,*/ Character defender = null,  Character attacker = null)
+    {
+        List<EffectApplicationData> applicationDataList = new List<EffectApplicationData>();
+
         Ability toActivate = abilityPool[abilityName];
         effectSucceeds = false;
 
@@ -147,16 +149,23 @@ public class AbilitiesManager
         {
             //Calculate primary success and damage
             effectSucceeds = EffectSucceedsChecker.GetSuccess(primaryEffect, defender, attacker);
-            primaryEffect.ApplyEffect(effectSucceeds, defender, attacker);
+            applicationDataList.Add(primaryEffect.CalculateApplicationData(effectSucceeds, defender, attacker));
             
             //Calculate only the appropriate follow-up effects' success and damage
             foreach (FollowupEffectStats followup in primaryEffect.followUpEffects)
             {
                 if (effectSucceeds || followup.appliesIfPrimaryFailed)
                 {
-                    followup.ApplyEffect(EffectSucceedsChecker.GetSuccess(followup, defender, attacker), defender, attacker);
+                    applicationDataList.Add(
+                        followup.CalculateApplicationData(
+                            EffectSucceedsChecker.GetSuccess(followup, defender, attacker), defender, attacker
+                        )
+                    );
                 }
             }
         }
+
+        return applicationDataList;
     }
 }
+
