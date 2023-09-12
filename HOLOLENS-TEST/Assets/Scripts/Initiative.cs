@@ -37,6 +37,7 @@ public class TurnManager
             }
             Debug.Log(ToString());
         }
+        currentInitiative = initiatives[0];
     }
 
     public void InitializeInitiativeOrder(Dictionary<string, Character> characterPool)
