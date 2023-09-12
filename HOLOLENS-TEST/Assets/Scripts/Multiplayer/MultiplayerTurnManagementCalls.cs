@@ -31,7 +31,21 @@ public class MultiplayerTurnManagementCalls : MonoBehaviourPunCallbacks
         GameManager.GetInstance().FirstTurn_Remotely(initiatives, characters);
     }
 
-    
+    [PunRPC]
+    void NextTurnRemotely()
+    {
+        GameManager.GetInstance().NextTurn_Remotely();
+    }
+
+    public void Propagate_NextTurn()
+    {
+        photonView.RPC(
+            "NextTurnRemotely", 
+            RpcTarget.Others
+        );
+    }
+
+
     public void Propagate_TurnManagerInformation()
     {
         photonView.RPC(

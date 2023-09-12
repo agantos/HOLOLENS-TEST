@@ -24,7 +24,8 @@ public class GameManager : MonoBehaviour
     private static GameManager Instance = null;
 
     //For Multiplayer
-    public bool hasSetInitiative = false; 
+    public bool hasSetInitiative = false;
+    public int player = 0;
 
     private GameManager() { GetInstance(); }
 
@@ -54,7 +55,7 @@ public class GameManager : MonoBehaviour
         LoadFromJsons();
         CreateCharacters();
 
-        //Invoke("FirstTurn", 2);
+        Invoke("FirstTurn", 2);
     }
 
     void InitializeSingletons()
@@ -98,6 +99,17 @@ public class GameManager : MonoBehaviour
         turnManager.NextTurn();
         CharacterMover.Instance.OnChangeTurn(GetCurrentPlayer_Name());
         SelectAbilityUIManager.GiveTurnToPlayingCharacter();
+
+        //Tell the other players to progress in the turn order
+        MultiplayerTurnManagementCalls.Instance.Propagate_NextTurn();
+    }
+
+    //Only difference is that it does not send any message in the network
+    public void NextTurn_Remotely()
+    {
+        turnManager.NextTurn();
+        CharacterMover.Instance.OnChangeTurn(GetCurrentPlayer_Name());
+        SelectAbilityUIManager.GiveTurnToPlayingCharacter();
     }
 
     public void FirstTurn()
@@ -106,6 +118,7 @@ public class GameManager : MonoBehaviour
         turnManager.FirstTurn();
         hasSetInitiative = true;
         SelectAbilityUIManager.GiveTurnToPlayingCharacter();
+        CharacterMover.Instance.OnChangeTurn(GetCurrentPlayer_Name());
     }
 
     public void FirstTurn_Remotely(float[] initiatives, string[] characters)
@@ -115,12 +128,12 @@ public class GameManager : MonoBehaviour
         SelectAbilityUIManager.GiveTurnToPlayingCharacter();
     }
 
-    public static Character GetCurrentPlayer_Character()
+    public Character GetCurrentPlayer_Character()
     {
         return GetInstance().characterPool[GetInstance().turnManager.GetCurrentTurn_Name()];
     }
 
-    public static string GetCurrentPlayer_Name()
+    public string GetCurrentPlayer_Name()
     {
         return GetInstance().turnManager.GetCurrentTurn_Name();
     }

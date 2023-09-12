@@ -18,25 +18,6 @@ public class SelectAbilityUIManager : MonoBehaviour
     public static CharacterUI_Info UI_Info = new CharacterUI_Info();
     public static SelectAbilityUIManager instance;
 
-    public static SelectAbilityUIManager GetInstance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = FindObjectOfType<SelectAbilityUIManager>();
-
-                if (instance == null)
-                {
-                    GameObject singletonObject = new GameObject("SingletonMonoBehaviour");
-                    instance = singletonObject.AddComponent<SelectAbilityUIManager>();
-                }
-            }
-
-            return instance;
-        }
-    }
-
     private void Awake()
     {
         if (instance == null)
@@ -60,16 +41,26 @@ public class SelectAbilityUIManager : MonoBehaviour
 
     static public void GiveTurnToPlayingCharacter()
     {
-        UI_Info.currentPlayer = GameManager.GetCurrentPlayer_Name();
+        if(GameManager.GetInstance().player == GameManager.GetInstance().GetCurrentPlayer_Character().player)
+        {
+            UI_Info.currentPlayer = GameManager.GetInstance().GetCurrentPlayer_Name();
 
-        turnEconomyTabManager.Deactivate();
-        turnEconomyTabManager.Activate();
+            turnEconomyTabManager.Deactivate();
+            turnEconomyTabManager.Activate();
 
-        abilityTagTabManager.Deactivate();
+            abilityTagTabManager.Deactivate();
 
-        abilityTabManager.Deactivate();
+            abilityTabManager.Deactivate();
 
-        activateAbilityUIManager.Deactivate();
+            activateAbilityUIManager.Deactivate();
+        }
+        else
+        {
+            turnEconomyTabManager.Deactivate();
+            abilityTagTabManager.Deactivate();
+            abilityTabManager.Deactivate();
+            activateAbilityUIManager.Deactivate();
+        }
     }
 
     public static void OnClick_TurnEconomyButton(TurnEconomyUIElement element)

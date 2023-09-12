@@ -47,7 +47,12 @@ public class CharacterMover : MonoBehaviour, IMixedRealityPointerHandler, IMixed
     {
         if (movee != null)
         {
-            if (allowDestinationSelection)
+            if (
+                allowDestinationSelection && 
+                GameManager.GetInstance().player == movee.gameObject.
+                                                    GetComponent<CharacterScript>().
+                                                    GetCharacter().player
+            )
             {
                 //Find Selected Table Position
                 FindPointPosition(eventData);

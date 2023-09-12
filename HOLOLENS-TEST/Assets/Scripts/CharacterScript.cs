@@ -8,6 +8,7 @@ public class CharacterScript : MonoBehaviour
     public string charName;
     public string HP;
     public GameObject model;
+
     // Start is called before the first frame update
     void Start()
     {

@@ -32,6 +32,9 @@ public class Character
     //UI Related
     public Character_UI_Information character_UI_info;
 
+    //Multiplayer Related
+    public int player;
+
     //Loading Character Methods
     public void LoadCharacterBasicPresetsFromPool(Dictionary<string, BaseCharacterPreset> basePresetsPool)
     {

@@ -13,6 +13,7 @@ public class JSONTurnEconomy
 public class JSONCharacter
 {
     public string name;
+    public int player;
     public JSONTurnEconomy[] turnEconomy;
     public string[] abilities;
     public string[] basePresets;

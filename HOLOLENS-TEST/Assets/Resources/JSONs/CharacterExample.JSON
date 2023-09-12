@@ -2,6 +2,7 @@
   "characters": [
     {
       "name": "Josh",
+      "player": 0,
       "turnEconomy": [
         {
           "name": "Action",
@@ -22,6 +23,7 @@
     },
     {
       "name": "Jarnathan",
+      "player": 1,
       "turnEconomy": [
         {
           "name": "Action",
@@ -42,6 +44,7 @@
     },
     {
       "name": "Vanoth",
+      "player": 1,
       "turnEconomy": [
         {
           "name": "Action",

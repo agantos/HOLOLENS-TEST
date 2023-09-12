@@ -264,6 +264,7 @@ public class JSONClass_to_EngineClass
         Character character = new Character();
 
         character.name = jsonCharacter.name;
+        character.player = jsonCharacter.player;
         character.turnEconomy = new Dictionary<string, int>();
         character.currentTurnEconomy = new Dictionary<string, int>();
         foreach (JSONTurnEconomy actionEconomy in jsonCharacter.turnEconomy)
