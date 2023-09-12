@@ -142,8 +142,9 @@ public class CharacterMover : MonoBehaviour, IMixedRealityPointerHandler, IMixed
         allowDestinationSelection = false;
 
         //Do the movement
-        FaceDirection();
         movee.SetDestination(newPosition);
+        FaceDirection();
+        
 
         Character c = GameManager.GetInstance().characterPool[movee.gameObject.GetComponent<CharacterScript>().name];
 
