@@ -14,10 +14,28 @@ public class CharacterMover : MonoBehaviour, IMixedRealityPointerHandler, IMixed
     public ConfirmMoveCanvas confirmMoveUI;
     public bool allowDestinationSelection = true;
 
-    AnimationManager animationManager;
-
     Vector3 newPosition;
     float distance;
+
+    public static CharacterMover Instance { get; private set; }
+
+    public static CharacterMover GetInstance()
+    {
+        return Instance;
+    }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Update()
     {
         DrawPath();
@@ -80,6 +98,15 @@ public class CharacterMover : MonoBehaviour, IMixedRealityPointerHandler, IMixed
 
         //Start Moving Animation
         movee.GetComponent<AnimationManager>().IdleTo_Moving();
+
+        //Send to other players to perform the move
+        MultiplayerMovementCalls.Instance.Propagate_Movement(
+            newPosition.x, 
+            newPosition.y, 
+            newPosition.z, 
+            c.name, 
+            distance
+        );
     }
 
     float CalculateDistance(Vector3 newPosition)
@@ -100,6 +127,13 @@ public class CharacterMover : MonoBehaviour, IMixedRealityPointerHandler, IMixed
         movee.ResetPath();
     }
 
+    //FOR MULTIPLAYER
+    public void SyncMovementData(float x, float y, float z, string name, float distance)
+    {
+        newPosition = new Vector3(x, y, z);
+        this.distance = distance;
+        movee = GameManager.GetInstance().playingCharacterGameObjects[name].GetComponent<NavMeshAgent>();
+    }
 
     //Write this function according to the game system
     bool MoveRequirements()

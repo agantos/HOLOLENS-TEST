@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Photon.Pun;
-using Photon.Realtime;
 
 public class MultiplayerCallsAbilityCast : MonoBehaviourPunCallbacks
 {
@@ -16,14 +15,13 @@ public class MultiplayerCallsAbilityCast : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        // Ensure only one instance of GameManager exists
         if (Instance == null)
         {
             Instance = this;
         }
         else
         {
-            Destroy(gameObject); // Destroy duplicate GameManager objects
+            Destroy(gameObject);
         }
     }
 

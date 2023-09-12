@@ -63,7 +63,6 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
 
     public void CallRPCPrint()
     {
-        string[] array;
         photonView.RPC("PrintSomething", RpcTarget.All);
     }    
 }
