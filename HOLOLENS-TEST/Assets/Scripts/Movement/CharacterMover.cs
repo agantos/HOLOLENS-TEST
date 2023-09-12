@@ -127,12 +127,32 @@ public class CharacterMover : MonoBehaviour, IMixedRealityPointerHandler, IMixed
         movee.ResetPath();
     }
 
-    //FOR MULTIPLAYER
+    /* FOR MULTIPLAYER */
     public void SyncMovementData(float x, float y, float z, string name, float distance)
     {
         newPosition = new Vector3(x, y, z);
         this.distance = distance;
         movee = GameManager.GetInstance().playingCharacterGameObjects[name].GetComponent<NavMeshAgent>();
+    }
+
+    //the only different is that it doesn't send a call to other clients
+    public void PerformMoveRemotely()
+    {
+        //Disable Movement Selection until movement stops
+        allowDestinationSelection = false;
+
+        //Do the movement
+        FaceDirection();
+        movee.isStopped = false;
+
+        Character c = GameManager.GetInstance().characterPool[movee.gameObject.GetComponent<CharacterScript>().name];
+
+        //Subtract the speed.
+        c.GetStat("Speed").DealDamage((int)distance);
+        c.GetStat("Speed").CalculateCurrentValue();
+
+        //Start Moving Animation
+        movee.GetComponent<AnimationManager>().IdleTo_Moving();
     }
 
     //Write this function according to the game system
