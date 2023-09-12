@@ -23,6 +23,22 @@ public class TurnManager
         Debug.Log(ToString());
     }
 
+    public TurnManager(float[] initiatives, string[] characters)
+    {
+        if(initiatives.Length != characters.Length)
+        {
+            Debug.LogError("The size of arrays does not match");
+        }
+        else
+        {
+            for(int i = 0; i< initiatives.Length; i++)
+            {
+                initiativeOrder.Add(initiatives[i], characters[i]);
+            }
+            Debug.Log(ToString());
+        }
+    }
+
     public void InitializeInitiativeOrder(Dictionary<string, Character> characterPool)
     {
         foreach (Character c in characterPool.Values)
@@ -34,6 +50,7 @@ public class TurnManager
         enumerator.MoveNext();
         currentInitiative = enumerator.Current;
     }
+    
     public string GetCurrentTurn_Name()
     {
         return initiativeOrder[currentInitiative];
@@ -103,6 +120,30 @@ public class TurnManager
     public void FirstTurn()
     {
         GiveTurnToCharacter(GetCurrentTurn_Name());
+    }
+
+    public float[] GetInitiativeNumbers()
+    {
+        List<float> inits = new List<float>();
+
+        foreach (float init in initiativeOrder.Keys)
+        {
+            inits.Add(init);
+        }
+
+        return inits.ToArray();
+    }
+
+    public string[] GetInitiativeNames()
+    {
+        List<string> names = new List<string>();
+
+        foreach (string name in initiativeOrder.Values)
+        {
+            names.Add(name);
+        }
+
+        return names.ToArray();
     }
 
     public string ToString()

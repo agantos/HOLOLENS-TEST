@@ -9,6 +9,8 @@ using Photon.Realtime;
 
 public class MultiplayerManager : MonoBehaviourPunCallbacks
 {
+    bool firstJoin = false;
+
     void LoadArena()
     {
         if (!PhotonNetwork.IsMasterClient)
@@ -28,7 +30,17 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
         {
             Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom                                                                                                     //Start Counting Turns
 
-            GameManager.GetInstance().FirstTurn();
+            if (!firstJoin)
+            {
+                GameManager.GetInstance().FirstTurn();
+                MultiplayerTurnManagementCalls.Instance.Propagate_TurnManagerInformation();
+            }              
+
+            firstJoin = true;
+        }
+        else
+        {
+            //GameManager.GetInstance().FirstTurn_Remotely();
         }
     }
 

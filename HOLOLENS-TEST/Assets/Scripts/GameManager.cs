@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
 
     private static GameManager Instance = null;
 
+    //For Multiplayer
+    public bool hasSetInitiative = false; 
+
     private GameManager() { GetInstance(); }
 
     public static GameManager GetInstance()
@@ -93,13 +96,21 @@ public class GameManager : MonoBehaviour
     public void NextTurn()
     {
         turnManager.NextTurn();
-        MonoBehaviour.FindAnyObjectByType<CharacterMover>().OnChangeTurn(GetCurrentPlayer_Name());
+        CharacterMover.Instance.OnChangeTurn(GetCurrentPlayer_Name());
         SelectAbilityUIManager.GiveTurnToPlayingCharacter();
     }
 
     public void FirstTurn()
     {
         turnManager = new TurnManager(playingCharacterPool);
+        turnManager.FirstTurn();
+        hasSetInitiative = true;
+        SelectAbilityUIManager.GiveTurnToPlayingCharacter();
+    }
+
+    public void FirstTurn_Remotely(float[] initiatives, string[] characters)
+    {
+        turnManager = new TurnManager(initiatives, characters);
         turnManager.FirstTurn();
         SelectAbilityUIManager.GiveTurnToPlayingCharacter();
     }

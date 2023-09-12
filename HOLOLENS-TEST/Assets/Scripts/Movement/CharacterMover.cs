@@ -64,8 +64,7 @@ public class CharacterMover : MonoBehaviour, IMixedRealityPointerHandler, IMixed
                 {
                     Debug.Log("Character does not have enough speed to move there");
                 }
-            }
-            
+            }            
         }
     }
 
