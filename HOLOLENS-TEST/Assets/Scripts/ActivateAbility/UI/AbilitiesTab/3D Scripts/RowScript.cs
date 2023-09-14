@@ -7,6 +7,7 @@ public class RowScript : MonoBehaviour
     List<GameObject> list = new List<GameObject>();
     float[] positions = new float[3];
     public float x_left= -155, x_middle = -6.9f, x_right = 143.9f;
+    public float yTop, yBottom;
 
     public void Awake()
     {

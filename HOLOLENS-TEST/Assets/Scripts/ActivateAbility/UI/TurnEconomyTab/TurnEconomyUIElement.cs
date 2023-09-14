@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Microsoft.MixedReality.Toolkit.UI;
 
 public class TurnEconomyUIElement : MonoBehaviour
 {
-    public GameObject buttonGameObject;
+    public Interactable button;
     public TMP_Text usesText, nameText;
     public string turnEconomyName;
 
@@ -25,7 +26,7 @@ public class TurnEconomyUIElement : MonoBehaviour
 
     public void SetButtonOnClick(UnityEngine.Events.UnityAction method)
     {
-        buttonGameObject.GetComponent<Button>().onClick.AddListener(method);
+        button.OnClick.AddListener(method);
     }
 
     public void SetNameGameobject(string name)
