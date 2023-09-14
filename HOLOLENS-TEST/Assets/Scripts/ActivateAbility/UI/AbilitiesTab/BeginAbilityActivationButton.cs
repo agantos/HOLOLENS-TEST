@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BeginAbilityActivationButton : Button
+using Microsoft.MixedReality.Toolkit.UI;
+using TMPro;
+
+public class BeginAbilityActivationButton: MonoBehaviour
 {
+    public TextMeshPro text;
+    public Interactable button;
+
     public void Initialize(string abilityName, string attackerName, GameObject spawnRadius)
     {
-        gameObject.GetComponentInChildren<Text>().text = abilityName;
+        
+        text.text = abilityName;
 
         SetButtonOnClick(delegate {
             CastingAbilityManager.GetInstance().BeginAbilityActivation(abilityName, attackerName);
@@ -16,7 +23,7 @@ public class BeginAbilityActivationButton : Button
 
     public void SetButtonOnClick(UnityEngine.Events.UnityAction method)
     {
-        onClick.AddListener(method);
+        button.OnClick.AddListener(method);
     }
 }
 
