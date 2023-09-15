@@ -33,17 +33,15 @@ public class SelectAbilityUIManager : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        activateAbilityUIManager = FindAnyObjectByType<ActivateAbilityUIManager>();
-    }
-
     public void GiveTurnToPlayingCharacter()
     {
         if(GameManager.GetInstance().player == GameManager.GetInstance().GetCurrentPlayer_Character().player)
         {
             UI_Info.currentPlayer = GameManager.GetInstance().GetCurrentPlayer_Name();
+
+            turnEconomyTab.ClearUI();
+            abilitiesTab.ClearUI();
+            abilityTagTab.ClearUI();
 
             turnEconomyTab.CreateUI();
 
@@ -54,9 +52,7 @@ public class SelectAbilityUIManager : MonoBehaviour
 
             abilitiesTab.gameObject.SetActive(false);
 
-            activateAbilityUIManager.gameObject.SetActive(false);
-
-            
+            activateAbilityUIManager.Deactivate();            
         }
         else
         {
@@ -98,13 +94,19 @@ public class SelectAbilityUIManager : MonoBehaviour
 
     public void OnClick_BackButton_AbilityTagTab()
     {
+        abilityTagTab.ClearUI();
         abilityTagTab.gameObject.SetActive(false);
+
         turnEconomyTab.gameObject.SetActive(true);
+        turnEconomyTab.CreateUI();
     }
 
     public void OnClick_BackButton_AbilityTab()
     {
+        abilitiesTab.ClearUI();
         abilitiesTab.gameObject.SetActive(false);
+
         abilityTagTab.gameObject.SetActive(true);
+        abilityTagTab.CreateUI();        
     }    
 }

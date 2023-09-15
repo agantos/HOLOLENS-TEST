@@ -5,11 +5,12 @@ using UnityEngine;
 public class RowScript : MonoBehaviour
 {
     List<GameObject> list = new List<GameObject>();
-    float[] positions = new float[3];
     public float x_left= -155, x_middle = -6.9f, x_right = 143.9f;
-    public float yTop, yBottom;
 
-    public void Awake()
+    bool isInitialized = false;
+    float[] positions = new float[3];
+
+    public void Initialize()
     {
         positions[0] = x_left;
         positions[1] = x_middle;
@@ -18,9 +19,13 @@ public class RowScript : MonoBehaviour
 
     public GameObject AddElement(GameObject Prefab)
     {
+        if (!isInitialized)
+            Initialize();
+
         GameObject instance = Instantiate(Prefab, transform);
         instance.transform.localPosition = new Vector3(positions[list.Count], 0, 0);
         list.Add(instance);
+        Debug.Log(instance.transform.localPosition + " " + positions[0]);
 
         return instance;
     }

@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ActivateAbilityUIManager : MonoBehaviour
-{
-    public GameObject ActivateAbilityButton, CancelAbilityButton;
-    
+{    
     Vector3 scale;
 
     // Start is called before the first frame update

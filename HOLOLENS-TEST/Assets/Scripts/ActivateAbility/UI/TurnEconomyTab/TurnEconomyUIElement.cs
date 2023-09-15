@@ -13,7 +13,7 @@ public class TurnEconomyUIElement : MonoBehaviour
     //Sets the text of the uses text field
     public void SetUses(int current, int max)
     {
-        string display = current + "/" + max;
+        string display = current + " / " + max;
         usesText.text = (display);
     }
 
