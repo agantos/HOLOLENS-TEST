@@ -105,4 +105,15 @@ public class PageManager : MonoBehaviour
     {
         ((GameObject)pageInstances[number]).SetActive(false);
     }
+
+    public void ClearState()
+    {
+        foreach(GameObject pageInstance in pageInstances)
+        {
+            pageInstance.GetComponent<PageScript>().ClearState();
+            Destroy(pageInstance);
+        }
+
+        pageInstances.Clear();
+    }
 }

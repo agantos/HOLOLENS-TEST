@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
     {
         turnManager.NextTurn();
         CharacterMover.Instance.OnChangeTurn(GetCurrentPlayer_Name());
-        SelectAbilityUIManager.GiveTurnToPlayingCharacter();
+        SelectAbilityUIManager.Instance.GiveTurnToPlayingCharacter();
 
         //Tell the other players to progress in the turn order
         MultiplayerTurnManagementCalls.Instance.Propagate_NextTurn();
@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
     {
         turnManager.NextTurn();
         CharacterMover.Instance.OnChangeTurn(GetCurrentPlayer_Name());
-        SelectAbilityUIManager.GiveTurnToPlayingCharacter();
+        SelectAbilityUIManager.Instance.GiveTurnToPlayingCharacter();
     }
 
     public void FirstTurn()
@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
         turnManager = new TurnManager(playingCharacterPool);
         turnManager.FirstTurn();
         hasSetInitiative = true;
-        SelectAbilityUIManager.GiveTurnToPlayingCharacter();
+        SelectAbilityUIManager.Instance.GiveTurnToPlayingCharacter();
         CharacterMover.Instance.OnChangeTurn(GetCurrentPlayer_Name());
     }
 
@@ -125,7 +125,7 @@ public class GameManager : MonoBehaviour
     {
         turnManager = new TurnManager(initiatives, characters);
         turnManager.FirstTurn();
-        SelectAbilityUIManager.GiveTurnToPlayingCharacter();
+        SelectAbilityUIManager.Instance.GiveTurnToPlayingCharacter();
     }
 
     public Character GetCurrentPlayer_Character()

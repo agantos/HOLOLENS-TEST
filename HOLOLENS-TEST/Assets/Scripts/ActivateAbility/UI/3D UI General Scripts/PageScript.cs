@@ -4,21 +4,17 @@ using UnityEngine;
 
 public class PageScript : MonoBehaviour
 {
-    public GameObject topRow, bottomRow;
-    List<GameObject> instances = new List<GameObject>();
-
+    public RowScript topRow, bottomRow;
     public GameObject AddElement(GameObject Prefab)
     {
         GameObject instance;
-        if(instances.Count >= 3)
+        if(topRow.IsFull())
         {
             instance = bottomRow.GetComponent<RowScript>().AddElement(Prefab);
-            instances.Add(instance);
         }
         else
         {
             instance = topRow.GetComponent<RowScript>().AddElement(Prefab);
-            instances.Add(instance);
         }
 
         return instance;
@@ -26,6 +22,15 @@ public class PageScript : MonoBehaviour
 
     public bool IsFull()
     {
-        return instances.Count == 6;
+        return (topRow.IsFull() && bottomRow.IsFull());
+    }
+
+    public void ClearState()
+    {
+        topRow.ClearState();
+        bottomRow.ClearState();
+
+        Destroy(topRow);
+        Destroy(bottomRow);
     }
 }

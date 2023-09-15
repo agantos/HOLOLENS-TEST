@@ -46,6 +46,8 @@ MonoBehaviour:
   x_left: -155
   x_middle: -6.9
   x_right: 143.9
+  yTop: 0
+  yBottom: 0
 --- !u!1 &7866561980047993206
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,6 +94,8 @@ MonoBehaviour:
   x_left: -155
   x_middle: -6.9
   x_right: 143.9
+  yTop: 0
+  yBottom: 0
 --- !u!1 &7866561981203216207
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,5 +146,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d6a706d7747514da9a80770a2d1bbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topRow: {fileID: 7866561979842437266}
-  bottomRow: {fileID: 7866561980047993206}
+  topRow: {fileID: 7866561979842437264}
+  bottomRow: {fileID: 7866561980047993204}

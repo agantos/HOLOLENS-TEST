@@ -4,23 +4,13 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+using Microsoft.MixedReality.Toolkit.UI;
+
 public class AbilityTagElement : MonoBehaviour
 {
-
-    public GameObject buttonGameObject;
+    public Interactable button;
     public TMP_Text nameText;
     public string abilityTag;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void SetNameGameobject(string name)
     {
@@ -29,6 +19,6 @@ public class AbilityTagElement : MonoBehaviour
 
     public void SetButtonOnClick(UnityEngine.Events.UnityAction method)
     {
-        buttonGameObject.GetComponent<Button>().onClick.AddListener(method);
+        button.OnClick.AddListener(method);
     }
 }

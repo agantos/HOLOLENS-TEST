@@ -9,7 +9,6 @@ public class TurnEconomyUIElement : MonoBehaviour
 {
     public Interactable button;
     public TMP_Text usesText, nameText;
-    public string turnEconomyName;
 
     //Sets the text of the uses text field
     public void SetUses(int current, int max)

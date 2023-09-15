@@ -10,91 +10,101 @@ public class CharacterUI_Info
 
 public class SelectAbilityUIManager : MonoBehaviour
 {
-    public static TurnEconomyTabManager turnEconomyTabManager;
-    public static AbilityTagTabManager abilityTagTabManager;
-    public static AbilityTabManager abilityTabManager;
-    public static ActivateAbilityUIManager activateAbilityUIManager;
 
-    public static CharacterUI_Info UI_Info = new CharacterUI_Info();
-    public static SelectAbilityUIManager instance;
+    public ActivateAbilityUIManager activateAbilityUIManager;
+    public TurnEconomyTab turnEconomyTab;
+    public AbilityTagTab abilityTagTab;
+    public AbilitiesTab abilitiesTab;
+
+
+    public CharacterUI_Info UI_Info = new CharacterUI_Info();
+    public static SelectAbilityUIManager Instance { get; private set; }
 
     private void Awake()
     {
-        if (instance == null)
+        // Ensure only one instance of GameManager exists
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(gameObject); // Destroy duplicate GameManager objects
         }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        turnEconomyTabManager = FindAnyObjectByType<TurnEconomyTabManager>();
-        abilityTagTabManager = FindAnyObjectByType<AbilityTagTabManager>();
-        abilityTabManager = FindAnyObjectByType<AbilityTabManager>();
         activateAbilityUIManager = FindAnyObjectByType<ActivateAbilityUIManager>();
     }
 
-    static public void GiveTurnToPlayingCharacter()
+    public void GiveTurnToPlayingCharacter()
     {
         if(GameManager.GetInstance().player == GameManager.GetInstance().GetCurrentPlayer_Character().player)
         {
             UI_Info.currentPlayer = GameManager.GetInstance().GetCurrentPlayer_Name();
 
-            turnEconomyTabManager.Deactivate();
-            turnEconomyTabManager.Activate();
+            turnEconomyTab.CreateUI();
 
-            abilityTagTabManager.Deactivate();
+            turnEconomyTab.gameObject.SetActive(false);
+            turnEconomyTab.gameObject.SetActive(true);
 
-            abilityTabManager.Deactivate();
+            abilityTagTab.gameObject.SetActive(false);
 
-            activateAbilityUIManager.Deactivate();
+            abilitiesTab.gameObject.SetActive(false);
+
+            activateAbilityUIManager.gameObject.SetActive(false);
+
+            
         }
         else
         {
-            turnEconomyTabManager.Deactivate();
-            abilityTagTabManager.Deactivate();
-            abilityTabManager.Deactivate();
+            turnEconomyTab.gameObject.SetActive(false);
+            abilityTagTab.gameObject.SetActive(false);
+            abilitiesTab.gameObject.SetActive(false);
             activateAbilityUIManager.Deactivate();
         }
     }
 
-    public static void OnClick_TurnEconomyButton(TurnEconomyUIElement element)
+    public void OnClick_TurnEconomyButton(TurnEconomyUIElement element)
     {
-        UI_Info.currentTurnEconomy = element.turnEconomyName;
+        UI_Info.currentTurnEconomy = element.nameText.text;
 
-        turnEconomyTabManager.Deactivate();
-        abilityTagTabManager.Activate();
+        turnEconomyTab.gameObject.SetActive(false);
+        turnEconomyTab.ClearUI();
+
+        abilityTagTab.gameObject.SetActive(true);
+        abilityTagTab.CreateUI();
     }
 
-    public static void OnClick_AbilityTagButton(AbilityTagElement element)
+    public void OnClick_AbilityTagButton(AbilityTagElement element)
     {
-        UI_Info.currentTag = element.abilityTag;
+        UI_Info.currentTag = element.nameText.text;
 
-        abilityTagTabManager.Deactivate();
-        abilityTabManager.Activate();
+        abilityTagTab.gameObject.SetActive(false);
+        abilityTagTab.ClearUI();
+
+        abilitiesTab.gameObject.SetActive(true);
+        abilitiesTab.CreateUI();
     }
 
     //New
-    public static void OnClick_AbilityButton()
+    public void OnClick_AbilityButton()
     {
-        abilityTabManager.Deactivate();
+        abilitiesTab.gameObject.SetActive(false);
         activateAbilityUIManager.Activate();
     }
 
-    public static void OnClick_BackButton_AbilityTagTab()
+    public void OnClick_BackButton_AbilityTagTab()
     {
-        abilityTagTabManager.Deactivate();
-        turnEconomyTabManager.Activate();
+        abilityTagTab.gameObject.SetActive(false);
+        turnEconomyTab.gameObject.SetActive(true);
     }
 
-    public static void OnClick_BackButton_AbilityTab()
+    public void OnClick_BackButton_AbilityTab()
     {
-        abilityTabManager.Deactivate();
-        abilityTagTabManager.Activate();
+        abilitiesTab.gameObject.SetActive(false);
+        abilityTagTab.gameObject.SetActive(true);
     }    
 }

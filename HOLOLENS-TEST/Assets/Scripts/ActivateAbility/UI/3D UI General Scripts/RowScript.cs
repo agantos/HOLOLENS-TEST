@@ -25,4 +25,18 @@ public class RowScript : MonoBehaviour
         return instance;
     }
 
+    public bool IsFull()
+    {
+        return list.Count == 3;
+    }
+
+    public void ClearState()
+    {
+        foreach(GameObject obj in list)
+        {
+            Destroy(obj);
+        }
+
+        list.Clear();
+    }
 }

@@ -353,7 +353,7 @@ public class CastingAbilityManager : MonoBehaviour
         DeactivateAbilityActivationObjects();
         CleanState();
 
-        FindAnyObjectByType<AbilityTabManager>(FindObjectsInactive.Include).Activate();
+        SelectAbilityUIManager.Instance.abilitiesTab.gameObject.SetActive(true);
     }
 
     //Deactivate Spawned Objects
@@ -487,6 +487,6 @@ public class CastingAbilityManager : MonoBehaviour
         /*
          * Spawn the window that displays the abilities
         */
-        SelectAbilityUIManager.GiveTurnToPlayingCharacter();
+        SelectAbilityUIManager.Instance.GiveTurnToPlayingCharacter();
     }
 }

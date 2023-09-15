@@ -54,6 +54,6 @@ public class ActivateAbilityButton : Button
         CastingAbilityManager.GetInstance().CleanState();
 
         //Spawn the window that displays the abilities
-        SelectAbilityUIManager.GiveTurnToPlayingCharacter();
+        SelectAbilityUIManager.Instance.GiveTurnToPlayingCharacter();
     }
 }
