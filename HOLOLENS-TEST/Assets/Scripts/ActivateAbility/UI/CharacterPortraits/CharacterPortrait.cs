@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+using Microsoft.MixedReality.Toolkit.UI;
+
 public class CharacterPortrait : MonoBehaviour
 {
     //Set in unity editor
     public TextMeshPro title;
     public MeshRenderer portraitImage;
     public BarInfo bar;
+    public Interactable button;
 
     string characterName;
     Character character;        
@@ -34,8 +37,16 @@ public class CharacterPortrait : MonoBehaviour
         //Set Image
         portraitImage.material = new Material(Shader.Find("Transparent/Diffuse"));
         portraitImage.material.mainTexture = LoadTexture(path + characterName + ".png");
+
+        //Set OnClick
+        button.OnClick.AddListener(OnClick);
     }
 
+    void OnClick()
+    {
+        GameObject cGameObject = GameManager.GetInstance().playingCharacterGameObjects[characterName];
+        cGameObject.GetComponent<SelectUnitManager>().OnTouchCompleted(null);
+    }
     Texture2D LoadTexture(string path)
     {
         // Load the texture as a byte array
