@@ -119,6 +119,7 @@ public class GameManager : MonoBehaviour
         hasSetInitiative = true;
         SelectAbilityUIManager.Instance.GiveTurnToPlayingCharacter();
         CharacterMover.Instance.OnChangeTurn(GetCurrentPlayer_Name());
+        CharacterPortraitManager.Instance.Initialize();
     }
 
     public void FirstTurn_Remotely(float[] initiatives, string[] characters)
@@ -126,6 +127,7 @@ public class GameManager : MonoBehaviour
         turnManager = new TurnManager(initiatives, characters);
         turnManager.FirstTurn();
         SelectAbilityUIManager.Instance.GiveTurnToPlayingCharacter();
+        CharacterPortraitManager.Instance.Initialize();
     }
 
     public Character GetCurrentPlayer_Character()

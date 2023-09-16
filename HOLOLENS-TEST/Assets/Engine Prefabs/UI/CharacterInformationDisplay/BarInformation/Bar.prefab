@@ -248,7 +248,7 @@ MonoBehaviour:
   colorIcon: {fileID: 587329788248492951}
   statName: {fileID: 7597227408222601744}
   value: {fileID: 7597227408125064699}
-  startingWidth: 0
+  startingWidth: 434
 --- !u!1 &7597227408125064677
 GameObject:
   m_ObjectHideFlags: 0

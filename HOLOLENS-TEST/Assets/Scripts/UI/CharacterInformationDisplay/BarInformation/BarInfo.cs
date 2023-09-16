@@ -25,13 +25,15 @@ public class BarInfo : MonoBehaviour
 
     public void SetValue(int minValue, int maxValue)
     {
-        value.text = minValue + "/" + maxValue;
+        if(value)
+            value.text = minValue + "/" + maxValue;
+
         SetColoredSize(minValue, maxValue);
     }
 
     public void SetColoredSize(int minValue, int maxValue)
     {
-        float number = (float)minValue / (float)maxValue * 434;
+        float number = (float)minValue / (float)maxValue * startingWidth;
         colorIcon.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, number);
     }
 
