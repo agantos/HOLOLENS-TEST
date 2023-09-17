@@ -200,6 +200,7 @@ public class CastingAbilityManager : MonoBehaviour
         }
         else
         {
+            ToastMessageManager.Instance.CreateToast(attacker.name + " cannot cast ability " + ability.name);
             Debug.Log(attacker.name + " cannot cast ability " + ability.name);
             return false;
         }            

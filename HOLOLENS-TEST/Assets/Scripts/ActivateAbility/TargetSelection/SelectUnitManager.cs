@@ -53,8 +53,10 @@ public class SelectUnitManager : MonoBehaviour, IMixedRealityPointerHandler, IMi
                 }
                 else
                 {
-                    Debug.Log("Max number of selectable characters for these effect is " +
-                        CastingAbilityManager.GetInstance().abilityToCast.effects[0].targetting.numberOfTargets.ToString());
+                    ToastMessageManager.Instance.CreateToast(
+                        "Max number of selectable characters for these effect is " +
+                        CastingAbilityManager.GetInstance().abilityToCast.effects[0].targetting.numberOfTargets.ToString()
+                    );
                 }
             }
             else
@@ -64,7 +66,7 @@ public class SelectUnitManager : MonoBehaviour, IMixedRealityPointerHandler, IMi
             }
         }
         else
-            Debug.Log("Subject is too far away");
+            ToastMessageManager.Instance.CreateToast("Subject is too far away");
     }
     
     private void SpawnSelectionToken()

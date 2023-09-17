@@ -67,7 +67,8 @@ public class CharacterMover : MonoBehaviour, IMixedRealityPointerHandler, IMixed
                 }
                 else
                 {
-                    Debug.Log("Character does not have enough speed to move there");
+                    string name = movee.gameObject.GetComponent<CharacterScript>().GetCharacter().name;
+                    ToastMessageManager.Instance.CreateToast(name + " Character does not have enough speed to move there");
                 }
             }            
         }

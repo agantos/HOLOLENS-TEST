@@ -86,8 +86,6 @@ public class Character
 
     public void OnStartTurn()
     {
-        Debug.Log("Defense of " + name + " is " + GetStat("DEF").GetCurrentValue());
-
         //Refresh the turn economy
         RefreshTurnEconomy();
 
