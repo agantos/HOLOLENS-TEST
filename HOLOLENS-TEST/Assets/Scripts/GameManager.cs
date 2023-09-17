@@ -54,8 +54,6 @@ public class GameManager : MonoBehaviour
         InitializeSingletons();
         LoadFromJsons();
         CreateCharacters();
-
-        Invoke("FirstTurn", 2);
     }
 
     void InitializeSingletons()
