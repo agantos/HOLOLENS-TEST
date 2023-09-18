@@ -16,7 +16,7 @@ public class CharacterPortrait : MonoBehaviour
     string characterName;
     Character character;        
 
-    string path = "Assets/Resources/UI/CharacterPortraits/Character Art/";
+    string path = "UI/CharacterPortraits/Character Art/";
 
     private void Update()
     {
@@ -36,7 +36,7 @@ public class CharacterPortrait : MonoBehaviour
         
         //Set Image
         portraitImage.material = new Material(Shader.Find("Transparent/Diffuse"));
-        portraitImage.material.mainTexture = LoadTexture(path + characterName + ".png");
+        portraitImage.material.mainTexture = Resources.Load<Texture2D>(path + name);
 
         //Set OnClick
         button.OnClick.AddListener(OnClick);
@@ -47,20 +47,5 @@ public class CharacterPortrait : MonoBehaviour
         GameObject cGameObject = GameManager.GetInstance().playingCharacterGameObjects[characterName];
         cGameObject.GetComponent<SelectUnitManager>().OnTouchCompleted(null);
     }
-    Texture2D LoadTexture(string path)
-    {
-        // Load the texture as a byte array
-        byte[] fileData = System.IO.File.ReadAllBytes(path);
 
-        // Create a new texture
-        Texture2D texture = new Texture2D(2, 2);
-
-        // Load the image data into the texture
-        if (texture.LoadImage(fileData))
-        {
-            return texture;
-        }
-
-        return null;
-    }
 }
