@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class CharacterUI_Info
 {
-    public string currentPlayer, currentTurnEconomy, currentTag;
+    public string currentPlayer, currentTurnEconomy, currentTag, currentAbility;
 }
 
 public class SelectAbilityUIManager : MonoBehaviour
@@ -85,9 +85,10 @@ public class SelectAbilityUIManager : MonoBehaviour
         abilitiesTab.CreateUI();
     }
 
-    //New
-    public void OnClick_AbilityButton()
+    public void OnClick_AbilityButton(string abilityName)
     {
+        UI_Info.currentAbility = abilityName;
+
         abilitiesTab.gameObject.SetActive(false);
         activateAbilityUIManager.Activate();
     }

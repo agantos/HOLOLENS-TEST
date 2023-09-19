@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ActivateAbilityUIManager : MonoBehaviour
-{    
+{
+    public TextMeshPro title;
+
     Vector3 scale;
 
     // Start is called before the first frame update
@@ -28,6 +31,8 @@ public class ActivateAbilityUIManager : MonoBehaviour
     {
         //"Spawn" object
         gameObject.transform.localScale = scale;
+
+        title.text = SelectAbilityUIManager.Instance.UI_Info.currentAbility;
     }
 
     public void Deactivate()
