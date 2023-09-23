@@ -9,6 +9,9 @@ using Photon.Pun;
 
 public class GameManager : MonoBehaviour
 {
+    //Initialize in UnityEditor
+    public GameObject FloatingTextPrefab;
+
     //Initialize Measurement
     public GameObject gamespace;
 

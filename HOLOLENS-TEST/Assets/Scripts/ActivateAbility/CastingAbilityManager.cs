@@ -38,12 +38,19 @@ public class EffectApplicationData {
     public void ApplyEffect()
     {
         Character defenderCharacter = GameManager.GetInstance().playingCharacterPool[defender];
+        GameObject defenderGameObject = GameManager.GetInstance().playingCharacterGameObjects[defender];
         CharacterStat stat = defenderCharacter.GetStat(affectedStat);
 
         switch (type)
         {
             case EffectType.DAMAGE:
+                //Deal damage
                 stat.DealDamage(damage);
+
+                //Spawn Floating Text
+                GameObject text = GameObject.Instantiate(GameManager.GetInstance().FloatingTextPrefab, defenderGameObject.transform);
+                text.GetComponent<FloatingText>().Inititalize(damage.ToString(), true);
+
                 break;
             case EffectType.HEALING:
                 stat.HealDamage(damage);
