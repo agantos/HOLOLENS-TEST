@@ -72,13 +72,13 @@ public class EffectApplicationData {
         switch (type)
         {
             case EffectType.DAMAGE:
-                Logger.Log_Damage((int)damage, affectedStat, defenderCharacter, attackerCharacter);
+                Logger.Instance.Log_Damage((int)damage, affectedStat, defenderCharacter, attackerCharacter);
                 break;
             case EffectType.HEALING:
-                Logger.Log_Heal((int)damage, affectedStat, defenderCharacter, attackerCharacter);
+                Logger.Instance.Log_Heal((int)damage, affectedStat, defenderCharacter, attackerCharacter);
                 break;
             case EffectType.TEMPORAL:
-                Logger.Log_Apply_Temporal((int)damage, affectedStat, duration, defenderCharacter, attackerCharacter);
+                Logger.Instance.Log_Apply_Temporal((int)damage, affectedStat, duration, defenderCharacter, attackerCharacter);
                 break;
         }
     }
@@ -368,10 +368,11 @@ public class CastingAbilityManager : MonoBehaviour
     public void DeactivateAbilityActivationObjects()
     {
         //Objects searched with ANYobjecttype are singletons
-        FindAnyObjectByType<AbilityRangeDisplay>().Deactivate();
+        AbilityRangeDisplay.Instance.Deactivate();
+        //FindAnyObjectByType<AbilityRangeDisplay>().Deactivate();
 
         if (CurrentSelectionType == AbilitySelectType.SHAPE)
-        {
+        {         
             FindAnyObjectByType<RadiusSelectScript>().OnAbilityActivate();
         }
         else if (CurrentSelectionType == AbilitySelectType.SELECT)

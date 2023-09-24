@@ -415,7 +415,7 @@ public class EffectSucceedsChecker
         int attackRoll = (int)((statBonusAttacker + attackerDiceRoll) * effect.effectSucceedsStats.attackerStat.multiplier);
         int passNumber = GameplayCalculatorFunctions.CalculateDiceRoll(effect.effectSucceedsStats.staticNumberToPass);
 
-        Logger.Log_Effect(effect, attacker, attackerDiceRoll, true);
+        Logger.Instance.Log_Effect(effect, attacker, attackerDiceRoll, true);
 
         return (attackRoll > passNumber);
     }
@@ -429,7 +429,7 @@ public class EffectSucceedsChecker
         
         int passNumber = GameplayCalculatorFunctions.CalculateDiceRoll(effect.effectSucceedsStats.staticNumberToPass);
 
-        Logger.Log_Effect(effect, defender, defenderDiceRoll, false);
+        Logger.Instance.Log_Effect(effect, defender, defenderDiceRoll, false);
 
         return (passNumber > defenceRoll);
     }
@@ -445,7 +445,7 @@ public class EffectSucceedsChecker
         int attackRoll = (int)((statBonusAttacker + attackerDiceRollResult) * effect.effectSucceedsStats.attackerStat.multiplier);
         int defenceRoll = (int)((statBonusDefender + defenderDiceRollResult) * effect.effectSucceedsStats.defenderStat.multiplier);
 
-        Logger.Log_EffectComparison(effect, attacker, defender, attackerDiceRollResult, defenderDiceRollResult);
+        Logger.Instance.Log_EffectComparison(effect, attacker, defender, attackerDiceRollResult, defenderDiceRollResult);
 
         return (attackRoll > defenceRoll);
     }

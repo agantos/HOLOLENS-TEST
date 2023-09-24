@@ -15,6 +15,8 @@ MonoBehaviour:
   quadIcons:
   - {fileID: 2800000, guid: ceb7b4806d99bcd49b51f8c364c63a36, type: 3}
   - {fileID: 2800000, guid: 263b0a1370e94f248ad97c8d650b419a, type: 3}
+  - {fileID: 2800000, guid: 97ca1911139b00a46a888b9ce28e8be4, type: 3}
+  - {fileID: 2800000, guid: a401207c6bced8041ab80d86712bccd0, type: 3}
   spriteIcons: []
   charIconFont: {fileID: 0}
   charIcons:

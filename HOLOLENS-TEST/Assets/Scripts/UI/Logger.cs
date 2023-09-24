@@ -7,28 +7,19 @@ using UnityEngine.UI;
 public enum ColorType { CHARACTER_1, CHARACTER_2, SUCCESS, FAILURE, ABILITY, NORMAL}
 public class Logger : MonoBehaviour
 {
-    private static Logger instance;
-    private static TextMeshProUGUI text;
-    private static string line;
-    private static ScrollRect scrollRect;
 
-    private static Dictionary<ColorType, string> colorTypesDictionary = new Dictionary<ColorType, string>();
+    private TextMeshProUGUI text;
+    private string line;
+    private ScrollRect scrollRect;
+
+    private Dictionary<ColorType, string> colorTypesDictionary = new Dictionary<ColorType, string>();
 
 
-    public static Logger Instance
-    {
-        get { return instance; }
-    }
+    public static Logger Instance { get; private set; }
 
     private void Awake()
     {
-        if (instance != null && instance != this)
-        {
-            Destroy(this.gameObject); // Ensures only one instance exists
-            return;
-        }
-
-        instance = this;
+        Instance = this;
     }
 
     // Start is called before the first frame update
@@ -47,7 +38,7 @@ public class Logger : MonoBehaviour
         scrollRect = gameObject.GetComponentInParent<ScrollRect>();
     }
 
-    public static void AddLine()
+    public void AddLine()
     {
         string s = "\n____\n";
         text.text += line + s + "\n";
@@ -55,12 +46,12 @@ public class Logger : MonoBehaviour
         line = "";
     }
 
-    public static void AddToLine(string s)
+    public void AddToLine(string s)
     {
         line += s;
     }
 
-    public static string GetColoredString(string s, ColorType type)
+    public string GetColoredString(string s, ColorType type)
     {
         string coloredString = "<color=" + colorTypesDictionary[type] + ">";
         coloredString += s;
@@ -68,22 +59,38 @@ public class Logger : MonoBehaviour
         return coloredString;
     }
 
-    public static string GetBoldedString(string s)
+    public string GetBoldedString(string s)
     {
         return "<b>" + s + "</b>";
     }
 
-    public static string GetItalicString(string s)
+    public string GetItalicString(string s)
     {
         return "<i>" + s + "</i>";
     }
 
-    static void ScrollToBottom()
+    void ScrollToBottom()
     {        
         scrollRect.verticalNormalizedPosition = 0f;
     }
 
-    public static void Log_Effect(EffectStats effect, Character roller, int rollerResult, bool attack)
+    public void ScrollUp()
+    {
+        if (scrollRect.verticalNormalizedPosition >= 0.8f)
+            scrollRect.verticalNormalizedPosition = 1;
+        else
+            scrollRect.verticalNormalizedPosition += 0.2f;
+    }
+
+    public void ScrollDown()
+    {
+        if(scrollRect.verticalNormalizedPosition >= 0.2f)
+            scrollRect.verticalNormalizedPosition -= 0.2f;
+        else
+            scrollRect.verticalNormalizedPosition = 0f;
+    }
+
+    public void Log_Effect(EffectStats effect, Character roller, int rollerResult, bool attack)
     {
         int statBonus;
         int finalRoll;
@@ -131,7 +138,7 @@ public class Logger : MonoBehaviour
         AddLine();
     }
 
-    public static void Log_EffectComparison(EffectStats effect, Character attacker, Character defender, int attackerResult, int defenderResult)
+    public void Log_EffectComparison(EffectStats effect, Character attacker, Character defender, int attackerResult, int defenderResult)
     {
         int statBonusAttacker = attacker.GetStats().GetStat(effect.effectSucceedsStats.attackerStat.statName).GetCurrentValue();
         int finalAttackRoll = (int)((statBonusAttacker + attackerResult) * effect.effectSucceedsStats.attackerStat.multiplier);
@@ -162,7 +169,7 @@ public class Logger : MonoBehaviour
         AddLine();
     }
 
-    public static void Log_Damage(int damage, string damagedStatName, Character defender, Character attacker)
+    public void Log_Damage(int damage, string damagedStatName, Character defender, Character attacker)
     {
         AddToLine(GetColoredString(attacker.name, ColorType.CHARACTER_1));
         AddToLine(" deals ");
@@ -174,7 +181,7 @@ public class Logger : MonoBehaviour
         AddLine();
     }
 
-    public static void Log_Heal(int damage, string damagedStatName, Character defender, Character attacker)
+    public void Log_Heal(int damage, string damagedStatName, Character defender, Character attacker)
     {
         AddToLine(GetColoredString(attacker.name, ColorType.CHARACTER_1));
         AddToLine(" Heals ");
@@ -186,7 +193,7 @@ public class Logger : MonoBehaviour
         AddLine();
     }
 
-    public static void Log_Apply_Temporal(int damage, string damagedStatName, int duration, Character defender, Character attacker)
+    public void Log_Apply_Temporal(int damage, string damagedStatName, int duration, Character defender, Character attacker)
     {
         AddToLine(GetColoredString(attacker.name, ColorType.CHARACTER_1));
         AddToLine(" deals ");
