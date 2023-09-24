@@ -5,6 +5,7 @@ using TMPro;
 
 public class ActivateAbilityUIManager : MonoBehaviour
 {
+    public AbilityDisplayManager abilityDisplay;
     public TextMeshPro title;
 
     Vector3 scale;
@@ -33,6 +34,7 @@ public class ActivateAbilityUIManager : MonoBehaviour
         gameObject.transform.localScale = scale;
 
         title.text = SelectAbilityUIManager.Instance.UI_Info.currentAbility;
+        abilityDisplay.CreateUI(SelectAbilityUIManager.Instance.UI_Info.currentAbility);
     }
 
     public void Deactivate()

@@ -8,10 +8,12 @@ public class CharacterPortraitManager : MonoBehaviour
 {
     //set in Unity Editor
     public GameObject CharacterPortraitPrefab;
+    public GameObject CrystalPrefab;
 
     public static CharacterPortraitManager Instance { get; private set; }
 
-    List<GameObject> instances = new List<GameObject>();
+    Dictionary<string, GameObject> instances = new Dictionary<string, GameObject>();
+    GameObject crystalInstance;
 
     private void Awake()
     {
@@ -29,27 +31,45 @@ public class CharacterPortraitManager : MonoBehaviour
     public void Initialize()
     {
         string[] names = GameManager.GetInstance().turnManager.GetInitiativeNames();
+        
+        Transform prevPortraitTransform = null;
 
-        foreach(string name in names)
-        {
+        //Create and place portraits
+        foreach (string name in names)
+        {             
             GameObject portrait = Instantiate(CharacterPortraitPrefab, transform);
             portrait.GetComponent<CharacterPortrait>().Initialize(name);
             
-            PlacePortraitNextToLast(portrait);
+            PlacePortraitNextToLast(portrait, prevPortraitTransform);
+
+            prevPortraitTransform = portrait.transform;
             
-            instances.Add(portrait);
+            instances.Add(name, portrait);
         }
+
+        //Create and place Crystal
+        crystalInstance = Instantiate(CrystalPrefab, transform);
+        PlaceCrystal();
     }
 
-    public void PlacePortraitNextToLast(GameObject portrait)
+    void PlacePortraitNextToLast(GameObject portrait, Transform last)
     {
-        if (instances.Count == 0)
+        if (last == null)
             return;
 
-        float x = instances.Last().transform.localPosition.x + 300;
-        float y = instances.Last().transform.localPosition.y;
-        float z = instances.Last().transform.localPosition.z;
+        float x = last.localPosition.x + 300;
+        float y = last.localPosition.y;
+        float z = last.localPosition.z;
 
         portrait.transform.localPosition = new Vector3(x,y,z);
+    }
+
+    public void PlaceCrystal()
+    {
+        //Get Current Character position
+        float x = instances[GameManager.GetInstance().GetCurrentPlayer_Name()].transform.localPosition.x;
+        float y = 235;
+
+        crystalInstance.transform.localPosition = new Vector3(x, y, 0);
     }
 }

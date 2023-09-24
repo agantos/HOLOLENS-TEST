@@ -100,19 +100,27 @@ public class GameManager : MonoBehaviour
     public void NextTurn()
     {
         turnManager.NextTurn();
+
         CharacterMover.Instance.OnChangeTurn(GetCurrentPlayer_Name());
         SelectAbilityUIManager.Instance.GiveTurnToPlayingCharacter();
 
         //Tell the other players to progress in the turn order
         MultiplayerTurnManagementCalls.Instance.Propagate_NextTurn();
+
+        //Move the portrait Crystal
+        CharacterPortraitManager.Instance.PlaceCrystal();
     }
 
     //Only difference is that it does not send any message in the network
     public void NextTurn_Remotely()
     {
         turnManager.NextTurn();
+
         CharacterMover.Instance.OnChangeTurn(GetCurrentPlayer_Name());
         SelectAbilityUIManager.Instance.GiveTurnToPlayingCharacter();
+
+        //Move the portrait Crystal
+        CharacterPortraitManager.Instance.PlaceCrystal();
     }
 
     public void FirstTurn()

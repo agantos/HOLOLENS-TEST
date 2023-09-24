@@ -1,0 +1,178 @@
+fileFormatVersion: 2
+guid: 790ca670532ab4f4d88ebd56dd410136
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: CristalsAllTogether:Cristal3_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_Cristals2__polySurface14
+    100002: CristalsAllTogether:Cristal3_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_Cristals2__polySurface15
+    100004: CristalsAllTogether:Cristal3_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_Cristals2_polySurface11
+    100006: CristalsAllTogether:Cristal3_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_polySurface12_Cristals2
+    100008: CristalsAllTogether:Cristal3_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_polySurface13_Cristals2_
+    100010: CristalsAllTogether:Cristal4_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_Cristal1_
+    100012: IMPORTANT_Cristal5_CristalsAllTogether:polySurface1
+    100014: IMPORTANT_CristalsAllTogether:polySurface1_Cristal1
+    100016: IMPORTANT_CristalsAllTogether:polySurface1_Cristal28
+    100018: IMPORTANT_CristalsAllTogether:polySurface1_Cristal4
+    100020: IMPORTANT_CristalsAllTogether:polySurface1_Cristals2_polySurface4
+    100022: IMPORTANT_CristalsAllTogether:polySurface1_Cristals3_polySurface10
+    100024: IMPORTANT_CristalsAllTogether:polySurface1_Cristals3_polySurface9
+    100026: IMPORTANT_CristalsAllTogether:polySurface1_polySurface8_Cristals3
+    100028: Terrain1_IMPORTANT
+    100030: //RootNode
+    400000: CristalsAllTogether:Cristal3_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_Cristals2__polySurface14
+    400002: CristalsAllTogether:Cristal3_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_Cristals2__polySurface15
+    400004: CristalsAllTogether:Cristal3_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_Cristals2_polySurface11
+    400006: CristalsAllTogether:Cristal3_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_polySurface12_Cristals2
+    400008: CristalsAllTogether:Cristal3_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_polySurface13_Cristals2_
+    400010: CristalsAllTogether:Cristal4_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_Cristal1_
+    400012: IMPORTANT_Cristal5_CristalsAllTogether:polySurface1
+    400014: IMPORTANT_CristalsAllTogether:polySurface1_Cristal1
+    400016: IMPORTANT_CristalsAllTogether:polySurface1_Cristal28
+    400018: IMPORTANT_CristalsAllTogether:polySurface1_Cristal4
+    400020: IMPORTANT_CristalsAllTogether:polySurface1_Cristals2_polySurface4
+    400022: IMPORTANT_CristalsAllTogether:polySurface1_Cristals3_polySurface10
+    400024: IMPORTANT_CristalsAllTogether:polySurface1_Cristals3_polySurface9
+    400026: IMPORTANT_CristalsAllTogether:polySurface1_polySurface8_Cristals3
+    400028: Terrain1_IMPORTANT
+    400030: //RootNode
+    2100000: CristalsAllTogether_Cristal3_CristalsAllTogether_Cristals_IMPORTANT_CristalsAllTogether_polySurface1_Cristals2__polySurface14Mat
+    2100002: CristalsAllTogether_Cristal3_CristalsAllTogether_Cristals_IMPORTANT_CristalsAllTogether_polySurface1_Cristals2__polySurface15Mat
+    2100004: CristalsAllTogether_Cristal3_CristalsAllTogether_Cristals_IMPORTANT_CristalsAllTogether_polySurface1_Cristals2_polySurface11Mat
+    2100006: CristalsAllTogether_Cristal3_CristalsAllTogether_Cristals_IMPORTANT_CristalsAllTogether_polySurface1_polySurface12_Cristals2Mat
+    2100008: CristalsAllTogether_Cristal3_CristalsAllTogether_Cristals_IMPORTANT_CristalsAllTogether_polySurface1_polySurface13_Cristals2_Mat
+    2100010: CristalsAllTogether_Cristal4_CristalsAllTogether_Cristals_IMPORTANT_CristalsAllTogether_polySurface1_Cristal1_Mat
+    2100012: IMPORTANT_Cristal5_CristalsAllTogether_polySurface1Mat
+    2100014: IMPORTANT_CristalsAllTogether_polySurface1_Cristal1Mat
+    2100016: IMPORTANT_CristalsAllTogether_polySurface1_Cristal28Mat
+    2100018: IMPORTANT_CristalsAllTogether_polySurface1_Cristal4Mat
+    2100020: IMPORTANT_CristalsAllTogether_polySurface1_Cristals2_polySurface4Mat
+    2100022: IMPORTANT_CristalsAllTogether_polySurface1_Cristals3_polySurface10Mat
+    2100024: IMPORTANT_CristalsAllTogether_polySurface1_Cristals3_polySurface9Mat
+    2100026: IMPORTANT_CristalsAllTogether_polySurface1_polySurface8_Cristals3Mat
+    2100028: Terrain1_IMPORTANTMat
+    2300000: CristalsAllTogether:Cristal3_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_Cristals2__polySurface14
+    2300002: CristalsAllTogether:Cristal3_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_Cristals2__polySurface15
+    2300004: CristalsAllTogether:Cristal3_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_Cristals2_polySurface11
+    2300006: CristalsAllTogether:Cristal3_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_polySurface12_Cristals2
+    2300008: CristalsAllTogether:Cristal3_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_polySurface13_Cristals2_
+    2300010: CristalsAllTogether:Cristal4_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_Cristal1_
+    2300012: IMPORTANT_Cristal5_CristalsAllTogether:polySurface1
+    2300014: IMPORTANT_CristalsAllTogether:polySurface1_Cristal1
+    2300016: IMPORTANT_CristalsAllTogether:polySurface1_Cristal28
+    2300018: IMPORTANT_CristalsAllTogether:polySurface1_Cristal4
+    2300020: IMPORTANT_CristalsAllTogether:polySurface1_Cristals2_polySurface4
+    2300022: IMPORTANT_CristalsAllTogether:polySurface1_Cristals3_polySurface10
+    2300024: IMPORTANT_CristalsAllTogether:polySurface1_Cristals3_polySurface9
+    2300026: IMPORTANT_CristalsAllTogether:polySurface1_polySurface8_Cristals3
+    2300028: Terrain1_IMPORTANT
+    3300000: CristalsAllTogether:Cristal3_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_Cristals2__polySurface14
+    3300002: CristalsAllTogether:Cristal3_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_Cristals2__polySurface15
+    3300004: CristalsAllTogether:Cristal3_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_Cristals2_polySurface11
+    3300006: CristalsAllTogether:Cristal3_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_polySurface12_Cristals2
+    3300008: CristalsAllTogether:Cristal3_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_polySurface13_Cristals2_
+    3300010: CristalsAllTogether:Cristal4_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_Cristal1_
+    3300012: IMPORTANT_Cristal5_CristalsAllTogether:polySurface1
+    3300014: IMPORTANT_CristalsAllTogether:polySurface1_Cristal1
+    3300016: IMPORTANT_CristalsAllTogether:polySurface1_Cristal28
+    3300018: IMPORTANT_CristalsAllTogether:polySurface1_Cristal4
+    3300020: IMPORTANT_CristalsAllTogether:polySurface1_Cristals2_polySurface4
+    3300022: IMPORTANT_CristalsAllTogether:polySurface1_Cristals3_polySurface10
+    3300024: IMPORTANT_CristalsAllTogether:polySurface1_Cristals3_polySurface9
+    3300026: IMPORTANT_CristalsAllTogether:polySurface1_polySurface8_Cristals3
+    3300028: Terrain1_IMPORTANT
+    4300000: CristalsAllTogether:Cristal3_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_Cristals2__polySurface14
+    4300002: CristalsAllTogether:Cristal3_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_Cristals2__polySurface15
+    4300004: CristalsAllTogether:Cristal3_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_Cristals2_polySurface11
+    4300006: CristalsAllTogether:Cristal3_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_polySurface12_Cristals2
+    4300008: CristalsAllTogether:Cristal3_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_polySurface13_Cristals2_
+    4300010: CristalsAllTogether:Cristal4_CristalsAllTogether:Cristals_IMPORTANT_CristalsAllTogether:polySurface1_Cristal1_
+    4300012: IMPORTANT_Cristal5_CristalsAllTogether:polySurface1
+    4300014: IMPORTANT_CristalsAllTogether:polySurface1_Cristal1
+    4300016: IMPORTANT_CristalsAllTogether:polySurface1_Cristal28
+    4300018: IMPORTANT_CristalsAllTogether:polySurface1_Cristal4
+    4300020: IMPORTANT_CristalsAllTogether:polySurface1_Cristals2_polySurface4
+    4300022: IMPORTANT_CristalsAllTogether:polySurface1_Cristals3_polySurface10
+    4300024: IMPORTANT_CristalsAllTogether:polySurface1_Cristals3_polySurface9
+    4300026: IMPORTANT_CristalsAllTogether:polySurface1_polySurface8_Cristals3
+    4300028: Terrain1_IMPORTANT
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
