@@ -8729,6 +8729,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0e75cc38da74f740be6d24d54aca53b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RotateWithCamera: 0
+  MoveWithCamera: 0
 --- !u!1 &402644523
 GameObject:
   m_ObjectHideFlags: 0
@@ -12387,6 +12389,7 @@ GameObject:
   m_Component:
   - component: {fileID: 681530426}
   - component: {fileID: 681530427}
+  - component: {fileID: 681530428}
   m_Layer: 0
   m_Name: 3D Portrait Container
   m_TagString: Untagged
@@ -12422,6 +12425,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterPortraitPrefab: {fileID: 1161359009849800011, guid: ff1ef7e82b108e34cb4a9c763cf8a352, type: 3}
   CrystalPrefab: {fileID: 8035408672321391413, guid: 349e7bec8912985499e8e7ecc97bef41, type: 3}
+--- !u!114 &681530428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681530425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0e75cc38da74f740be6d24d54aca53b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RotateWithCamera: 1
+  MoveWithCamera: 0
 --- !u!1 &682684027
 GameObject:
   m_ObjectHideFlags: 0
@@ -22066,6 +22083,7 @@ GameObject:
   - component: {fileID: 1192814038}
   - component: {fileID: 1192814037}
   - component: {fileID: 1192814042}
+  - component: {fileID: 1192814043}
   m_Layer: 5
   m_Name: Confirm Move Canvas
   m_TagString: Untagged
@@ -22193,6 +22211,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a4b6a70e54c0f4bbd0a5b9bbfb0bf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1192814043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1192814035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0e75cc38da74f740be6d24d54aca53b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RotateWithCamera: 1
+  MoveWithCamera: 0
 --- !u!1 &1198359188
 GameObject:
   m_ObjectHideFlags: 0

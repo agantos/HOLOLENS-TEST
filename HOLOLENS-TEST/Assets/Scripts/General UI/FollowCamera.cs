@@ -8,6 +8,9 @@ public class FollowCamera : MonoBehaviour
     Vector3 startingPosition;
     Quaternion startingRotation;
 
+    public bool RotateWithCamera = true;
+    public bool MoveWithCamera = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +27,10 @@ public class FollowCamera : MonoBehaviour
 
     private void OnGUI()
     {
-        transform.position = startingPosition + cam.transform.position;
-        transform.rotation = startingRotation * cam.transform.rotation;
+        if(MoveWithCamera )
+            transform.position = startingPosition + cam.transform.position;
+
+        if (RotateWithCamera)
+            transform.rotation = startingRotation * cam.transform.rotation;
     }
 }

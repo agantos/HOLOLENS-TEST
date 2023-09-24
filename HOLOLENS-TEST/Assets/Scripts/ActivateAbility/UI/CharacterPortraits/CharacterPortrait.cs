@@ -35,7 +35,7 @@ public class CharacterPortrait : MonoBehaviour
         bar.SetValue(character.GetStat("HP").GetCurrentValue(), character.GetStat("HP").GetMaxValue());
         
         //Set Image
-        portraitImage.material = new Material(Shader.Find("Transparent/Diffuse"));
+        portraitImage.material = new Material(Shader.Find("UI/Unlit/Transparent"));
         portraitImage.material.mainTexture = Resources.Load<Texture2D>(path + name);
 
         //Set OnClick
