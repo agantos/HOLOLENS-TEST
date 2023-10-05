@@ -25,12 +25,33 @@ public class AnimationManager : MonoBehaviour
 
     private Dictionary<AnimationType, (int hash, int variations)> animatorParameters = new Dictionary<AnimationType, (int hash, int variations)>();
 
+    //Set on Editor
+    public string type;
+
     // Start is called before the first frame update
     void Start()
     {        
         animator = GetComponentInChildren<Animator>(true);
         AnimatorParameter_IsMoving = Animator.StringToHash("IsMoving");
 
+        InitializeAnimatorParameters();
+    }
+
+    void InitializeAnimatorParameters()
+    {
+        switch (type)
+        {
+            case "shield":
+                SwordShieldInit();
+                break;
+            case "sorceress":
+                SorceressInit();
+                break;
+        }
+    }
+
+    void SwordShieldInit()
+    {
         AddAnimatorParameter(AnimationType.Attack_Melee_Weapon, 3);
         AddAnimatorParameter(AnimationType.Attack_Melee_Spell, 1);
         AddAnimatorParameter(AnimationType.Attack_Ranged_Weapon, 1);
@@ -44,7 +65,21 @@ public class AnimationManager : MonoBehaviour
         AddAnimatorParameter(AnimationType.BreakEffect, 1);
     }
 
-    
+    void SorceressInit()
+    {
+        AddAnimatorParameter(AnimationType.Attack_Melee_Weapon, 2);
+        AddAnimatorParameter(AnimationType.Attack_Melee_Spell, 2);
+        AddAnimatorParameter(AnimationType.Attack_Ranged_Weapon, 1);
+        AddAnimatorParameter(AnimationType.Attack_Ranged_Spell, 2);
+        AddAnimatorParameter(AnimationType.Spell_Cast_Area, 3);
+        AddAnimatorParameter(AnimationType.Spell_Cast_Self, 2);
+        AddAnimatorParameter(AnimationType.Spell_Cast_General, 1);
+        AddAnimatorParameter(AnimationType.TakeHit, 2);
+        AddAnimatorParameter(AnimationType.Dodge, 1);
+        AddAnimatorParameter(AnimationType.Block, 1);
+        AddAnimatorParameter(AnimationType.BreakEffect, 1);
+    }
+
 
     //Miscellaneous
     public float GetCurrentAnimationDuration()
