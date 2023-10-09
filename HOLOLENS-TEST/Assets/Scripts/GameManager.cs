@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
     {
         turnManager.NextTurn();
 
-        CharacterMover.Instance.OnChangeTurn(GetCurrentPlayer_Name());
+        CharacterMoveManager.Instance.OnChangeTurn(GetCurrentPlayer_Name());
         SelectAbilityUIManager.Instance.GiveTurnToPlayingCharacter();
 
         //Tell the other players to progress in the turn order
@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour
     {
         turnManager.NextTurn();
 
-        CharacterMover.Instance.OnChangeTurn(GetCurrentPlayer_Name());
+        CharacterMoveManager.Instance.OnChangeTurn(GetCurrentPlayer_Name());
         SelectAbilityUIManager.Instance.GiveTurnToPlayingCharacter();
 
         //Move the portrait Crystal
@@ -129,7 +129,7 @@ public class GameManager : MonoBehaviour
         turnManager.FirstTurn();
         hasSetInitiative = true;
         SelectAbilityUIManager.Instance.GiveTurnToPlayingCharacter();
-        CharacterMover.Instance.OnChangeTurn(GetCurrentPlayer_Name());
+        CharacterMoveManager.Instance.OnChangeTurn(GetCurrentPlayer_Name());
         CharacterPortraitManager.Instance.Initialize();
     }
 

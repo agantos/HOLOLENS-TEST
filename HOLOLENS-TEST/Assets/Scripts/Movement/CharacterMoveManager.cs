@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Microsoft.MixedReality.Toolkit.Input;
 
-public class CharacterMover : MonoBehaviour, IMixedRealityPointerHandler, IMixedRealityTouchHandler
+public class CharacterMoveManager : MonoBehaviour
 {
     public NavMeshAgent movee;
 
@@ -14,12 +14,12 @@ public class CharacterMover : MonoBehaviour, IMixedRealityPointerHandler, IMixed
     public ConfirmMoveCanvas confirmMoveUI;
     public bool allowDestinationSelection = true;
 
-    Vector3 newPosition;
+    public Vector3 newPosition;
     float distance;
 
-    public static CharacterMover Instance { get; private set; }
+    public static CharacterMoveManager Instance { get; private set; }
 
-    public static CharacterMover GetInstance()
+    public static CharacterMoveManager GetInstance()
     {
         return Instance;
     }
@@ -42,46 +42,47 @@ public class CharacterMover : MonoBehaviour, IMixedRealityPointerHandler, IMixed
         WhenMoveeStops();
     }
 
-    /* SELECT DESTINATION */
-    public void OnPointerUp(MixedRealityPointerEventData eventData)
+    public void RecordMovement(Vector3 newPosition)
     {
         if (movee != null)
         {
-            if (
-                allowDestinationSelection && 
-                GameManager.GetInstance().player == movee.gameObject.
-                                                    GetComponent<CharacterScript>().
-                                                    GetCharacter().player
-            )
+            if (IsMovementAllowed())
             {
                 //Find Selected Table Position
-                FindPointPosition(eventData);
+                this.newPosition = newPosition;
 
                 // If the new position is legal display interface to perform the move
                 if (MoveRequirements())
                 {
-                    movee.SetDestination(newPosition);
-                    SpawnMoveMenu();
-                    SpawnDestinationToken();
-                    movee.isStopped = true;
+                    LegalMoveRecorded();
                 }
                 else
                 {
-                    string name = movee.gameObject.GetComponent<CharacterScript>().GetCharacter().name;
-                    ToastMessageManager.Instance.CreateToast(name + " Character does not have enough speed to move there");
+                    IllegalMoveRecorded();
                 }
-            }            
+            }
         }
     }
 
-    void FindPointPosition(MixedRealityPointerEventData eventData)
+    bool IsMovementAllowed()
     {
-        //Touch Pointed
-        if (eventData.Pointer.BaseCursor.Position.y == 0)
-            newPosition = new Vector3(eventData.Pointer.Position.x, movee.transform.position.y, eventData.Pointer.Position.z);
-        //Ray Pointed
-        else
-            newPosition = new Vector3(eventData.Pointer.BaseCursor.Position.x, movee.transform.position.y, eventData.Pointer.BaseCursor.Position.z);
+        return allowDestinationSelection && 
+            GameManager.GetInstance().player == movee.gameObject.GetComponent<CharacterScript>()
+                                                                .GetCharacter().player;
+    }
+
+    void LegalMoveRecorded()
+    {
+        movee.SetDestination(newPosition);
+        SpawnMoveMenu();
+        SpawnDestinationToken();
+        movee.isStopped = true;
+    }
+
+    void IllegalMoveRecorded()
+    {
+        string name = movee.gameObject.GetComponent<CharacterScript>().GetCharacter().name;
+        ToastMessageManager.Instance.CreateToast(name + " Character does not have enough speed to move there");
     }
 
     /* ACCEPT OR DENY MOVE METHODS */
@@ -162,7 +163,7 @@ public class CharacterMover : MonoBehaviour, IMixedRealityPointerHandler, IMixed
     }
 
     //Write this function according to the game system
-    bool MoveRequirements()
+    public bool MoveRequirements()
     {
         float characterSpeed = movee.gameObject.GetComponent<CharacterScript>().GetCharacter().GetStat("Speed").GetCurrentValue();
         distance = CalculateDistance(newPosition);
@@ -262,13 +263,4 @@ public class CharacterMover : MonoBehaviour, IMixedRealityPointerHandler, IMixed
         movee = null;
     }
 
-    /* INTERFACE METHODS */
-    
-    public void OnPointerDown(MixedRealityPointerEventData eventData) { }
-    public void OnPointerClicked(MixedRealityPointerEventData eventData) { }
-    public void OnTouchStarted(HandTrackingInputEventData eventData) { }
-    public void OnTouchUpdated(HandTrackingInputEventData eventData) { }
-    public void OnPointerDragged(MixedRealityPointerEventData eventData) { }
-
-    public void OnTouchCompleted(HandTrackingInputEventData eventData) { }
 }

@@ -11,13 +11,13 @@ public class ConfirmMoveCanvas : MonoBehaviour
 
     public void ConfirmMovement()
     {
-        CharacterMover.Instance.PerformMove();
+        CharacterMoveManager.Instance.PerformMove();
         gameObject.SetActive(false);
     }
 
     public void CancelMovement()
     {
-        CharacterMover.Instance.CancelMove();
+        CharacterMoveManager.Instance.CancelMove();
         gameObject.SetActive(false);
     }
 }

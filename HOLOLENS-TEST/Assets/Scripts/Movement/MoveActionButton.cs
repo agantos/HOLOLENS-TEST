@@ -21,6 +21,6 @@ public class MoveActionButton : MonoBehaviour
 
     public void onClick()
     {
-        CharacterMover.Instance.movee = GameManager.GetInstance().playingCharacterGameObjects[moveeName].GetComponent<NavMeshAgent>();
+        CharacterMoveManager.Instance.movee = GameManager.GetInstance().playingCharacterGameObjects[moveeName].GetComponent<NavMeshAgent>();
     }
 }

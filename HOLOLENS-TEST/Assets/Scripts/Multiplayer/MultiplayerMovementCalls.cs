@@ -28,8 +28,8 @@ public class MultiplayerMovementCalls : MonoBehaviourPunCallbacks
     [PunRPC]
     void PerformRemoteMovement(float x, float y, float z, string name, float distance)
     {
-        CharacterMover.Instance.SyncMovementData(x, y, z, name, distance);
-        CharacterMover.Instance.PerformMoveRemotely();
+        CharacterMoveManager.Instance.SyncMovementData(x, y, z, name, distance);
+        CharacterMoveManager.Instance.PerformMoveRemotely();
     }
 
     public void Propagate_Movement(float x, float y, float z, string name, float distance)
