@@ -47,6 +47,9 @@ public class AnimationManager : MonoBehaviour
             case "sorceress":
                 SorceressInit();
                 break;
+            case "two-handed":
+                TwoHandedSwordInit();
+                break;
         }
     }
 
@@ -77,6 +80,21 @@ public class AnimationManager : MonoBehaviour
         AddAnimatorParameter(AnimationType.TakeHit, 2);
         AddAnimatorParameter(AnimationType.Dodge, 1);
         AddAnimatorParameter(AnimationType.Block, 1);
+        AddAnimatorParameter(AnimationType.BreakEffect, 1);
+    }
+
+    void TwoHandedSwordInit()
+    {
+        AddAnimatorParameter(AnimationType.Attack_Melee_Weapon, 3);
+        AddAnimatorParameter(AnimationType.Attack_Melee_Spell, 1);
+        AddAnimatorParameter(AnimationType.Attack_Ranged_Weapon, 1);
+        AddAnimatorParameter(AnimationType.Attack_Ranged_Spell, 1);
+        AddAnimatorParameter(AnimationType.Spell_Cast_Area, 1);
+        AddAnimatorParameter(AnimationType.Spell_Cast_Self, 2);
+        AddAnimatorParameter(AnimationType.Spell_Cast_General, 1);
+        AddAnimatorParameter(AnimationType.TakeHit, 2);
+        AddAnimatorParameter(AnimationType.Dodge, 1);
+        AddAnimatorParameter(AnimationType.Block, 3);
         AddAnimatorParameter(AnimationType.BreakEffect, 1);
     }
 
