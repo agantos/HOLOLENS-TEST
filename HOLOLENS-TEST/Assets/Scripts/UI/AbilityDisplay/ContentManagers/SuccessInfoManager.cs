@@ -32,10 +32,10 @@ public class SuccessInfoManager : MonoBehaviour
 
                 break;
             case EffectSuccessCondition.COMPARISON:
-                text += AbilityDisplayGeneralMethods.BoldString("Defenders") + " compare ";
-                text += AbilityDisplayGeneralMethods.ColorString(succeedStats.defenderStat.statName, AbilityDisplayColors.CHARACTER_STAT) + " ";
-                text += "against " + AbilityDisplayGeneralMethods.BoldString("Attacker's") + " ";
-                text += AbilityDisplayGeneralMethods.ColorString(succeedStats.attackerStat.statName, AbilityDisplayColors.CHARACTER_STAT) + ". ";
+                text += AbilityDisplayGeneralMethods.Instance.BoldString("Defenders") + " compare ";
+                text += AbilityDisplayGeneralMethods.Instance.ColorString(succeedStats.defenderStat.statName, AbilityDisplayColors.CHARACTER_STAT) + " ";
+                text += "against " + AbilityDisplayGeneralMethods.Instance.BoldString("Attacker's") + " ";
+                text += AbilityDisplayGeneralMethods.Instance.ColorString(succeedStats.attackerStat.statName, AbilityDisplayColors.CHARACTER_STAT) + ". ";
                 text += "Defenders save on bigger roll result.";
                 break;
         }
@@ -53,7 +53,7 @@ public class SuccessInfoManager : MonoBehaviour
         else
         {
             text += "Defenders take ";
-            text += AbilityDisplayGeneralMethods.ColorString(damageStats.onSavedMultiplier.ToString(), AbilityDisplayColors.DAMAGE);
+            text += AbilityDisplayGeneralMethods.Instance.ColorString(damageStats.onSavedMultiplier.ToString(), AbilityDisplayColors.DAMAGE);
             text += " times the damage.";
         }
 

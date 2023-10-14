@@ -50,7 +50,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Canvas
+  m_Name: DamageTextController_Color
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:
@@ -86,7 +86,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 637f27e6b02fe6049ab2d6f0665eab6e, type: 2}
+  m_Motion: {fileID: 7400000, guid: 0e37857862ce9e343866bc40760078a2, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

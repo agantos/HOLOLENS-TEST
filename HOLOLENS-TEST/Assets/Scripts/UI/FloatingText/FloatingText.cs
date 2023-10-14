@@ -31,15 +31,15 @@ public class FloatingText : MonoBehaviour
     void PositionText()
     {
         float x = 0;
-        float y = 1.5f;
+        float y = 2.5f;
         float z = 0;
 
-        gameObject.transform.localPosition = new Vector3(x, y, z);
+        gameObject.GetComponent<RectTransform>().localPosition = new Vector3(x,y,z);
     }
 
     public static string ColorString(string s, AbilityDisplayColors type)
     {
-        string coloredString = "<color=" + AbilityDisplayGeneralMethods.colorTypesDictionary[type] + ">";
+        string coloredString = "<color=" + AbilityDisplayGeneralMethods.Instance.colorTypesDictionary[type] + ">";
         coloredString += s;
         coloredString += "</color>";
         return coloredString;

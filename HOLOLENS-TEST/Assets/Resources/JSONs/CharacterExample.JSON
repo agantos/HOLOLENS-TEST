@@ -1,7 +1,7 @@
 {
   "characters": [
     {
-      "name": "Josh",
+      "name": "Mouse",
       "player": 0,
       "turnEconomy": [
         {
@@ -22,7 +22,7 @@
       "additionalPresets": []
     },
     {
-      "name": "Jarnathan",
+      "name": "Godling",
       "player": 0,
       "turnEconomy": [
         {
@@ -43,8 +43,29 @@
       "additionalPresets": []
     },
     {
-      "name": "Vanoth",
-      "player": 1,
+      "name": "Witch",
+      "player": 0,
+      "turnEconomy": [
+        {
+          "name": "Action",
+          "number": 1
+        },
+        {
+          "name": "Bonus Action",
+          "number": 1
+        },
+        {
+          "name": "Move Action",
+          "number": 1
+        }
+      ],
+      "abilities": [],
+      "basePresets": ["Dwarf", "Human"],
+      "additionalPresets": []
+    },
+    {
+      "name": "Warrior",
+      "player": 0,
       "turnEconomy": [
         {
           "name": "Action",

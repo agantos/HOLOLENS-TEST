@@ -252,7 +252,6 @@ public class JSONClass_to_EngineClass
     {
         foreach(JSONAbilityPresentation jsonPresentation in jsonPresentations.abilitiesPresentation)
         {
-            Debug.Log(jsonPresentation.animations.attacker);
             AbilityPresentation abilityPresentation = new AbilityPresentation(jsonPresentation);
             AbilitiesManager.GetInstance().abilitiesPresentation.Add(jsonPresentation.abilityName, abilityPresentation);
         }

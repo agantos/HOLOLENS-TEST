@@ -39,7 +39,7 @@ public class CostInfoManager : MonoBehaviour
             //Create Text and add to current row
             string text = "";
             text += "(" + displayingAbility.turnEconomyCost[name].ToString() + ") ";
-            text += AbilityDisplayGeneralMethods.ColorString(name, AbilityDisplayColors.TURN_ECONOMY);
+            text += AbilityDisplayGeneralMethods.Instance.ColorString(name, AbilityDisplayColors.TURN_ECONOMY);
             AddToCurrentRow(text);
 
             count++;
@@ -55,7 +55,7 @@ public class CostInfoManager : MonoBehaviour
             //Create Text and add to current row
             string text = "";
             text += "(" + displayingAbility.statCost[name].ToString() + ") ";
-            text += AbilityDisplayGeneralMethods.ColorString(name, AbilityDisplayColors.CHARACTER_STAT);
+            text += AbilityDisplayGeneralMethods.Instance.ColorString(name, AbilityDisplayColors.CHARACTER_STAT);
             AddToCurrentRow(text);
 
             count++;

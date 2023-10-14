@@ -25,7 +25,6 @@ public class RowScript : MonoBehaviour
         GameObject instance = Instantiate(Prefab, transform);
         instance.transform.localPosition = new Vector3(positions[list.Count], 0, 0);
         list.Add(instance);
-        Debug.Log(instance.transform.localPosition + " " + positions[0]);
 
         return instance;
     }

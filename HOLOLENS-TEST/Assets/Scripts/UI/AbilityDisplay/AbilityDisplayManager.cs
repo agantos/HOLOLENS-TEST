@@ -2,47 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-public enum AbilityDisplayColors { CHARACTER_STAT, TURN_ECONOMY, DAMAGE, FAILURE, ABILITY, NORMAL }
-
-public class AbilityDisplayGeneralMethods: MonoBehaviour
-{
-    public static Dictionary<AbilityDisplayColors, string> colorTypesDictionary = new Dictionary<AbilityDisplayColors, string>();
-    
-    private static AbilityDisplayGeneralMethods instance = null;
-    private AbilityDisplayGeneralMethods()
-    {
-        colorTypesDictionary.Add(AbilityDisplayColors.CHARACTER_STAT, "#65FF99");
-        colorTypesDictionary.Add(AbilityDisplayColors.TURN_ECONOMY, "#5BC4FF");
-        colorTypesDictionary.Add(AbilityDisplayColors.DAMAGE, "#E5D32D");   
-    }
-
-    public static AbilityDisplayGeneralMethods GetInstance()
-    {
-        if (instance == null)
-        {
-            instance = new AbilityDisplayGeneralMethods();
-        }
-        return instance;
-    }
-
-    public static string ColorString(string s, AbilityDisplayColors type)
-    {
-        string coloredString = "<color=" + colorTypesDictionary[type] + ">";
-        coloredString += s;
-        coloredString += "</color>";
-        return coloredString;
-    }
-    public static string BoldString(string s)
-    {
-        return "<b>" + s + "</b>";
-    }
-
-    public static string GetItalicString(string s)
-    {
-        return "<i>" + s + "</i>";
-    }
-}
-
 public class AbilityDisplayManager : MonoBehaviour
 {
     //Set in Editor
