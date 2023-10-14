@@ -2,32 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbilityAnimationTypes
-{
-    public AnimationType attacker;
-    public AnimationType defender_AbilitySucceeds;
-    public AnimationType defender_AbilityFails;
-
-    public AbilityAnimationTypes(AnimationType att, AnimationType def_succ, AnimationType def_fail)
-    {
-        attacker = att;
-        defender_AbilityFails = def_fail;
-        defender_AbilitySucceeds = def_succ;
-    }
-}
-
 public class Ability
 {
     public string name;
     public string description;
-    public AbilityAnimationTypes animationTypes;
+    public Animations animationTypes;
 
     public List<PrimaryEffectStats> effects;
     public Dictionary<string, int> turnEconomyCost;
     public Dictionary<string, int> statCost;
     public List<string> tags;
 
-    public Ability(string name, string description, AbilityAnimationTypes animationTypes, List<PrimaryEffectStats> effects, string[] tags)
+    public Ability(string name, string description, Animations animationTypes, List<PrimaryEffectStats> effects, string[] tags)
     {
         this.name = name;
         this.description = description;
@@ -68,11 +54,13 @@ public class Ability
 public class AbilitiesManager
 {
     private static AbilitiesManager instance = null;
-    public static Dictionary<string, Ability> abilityPool;
+    public Dictionary<string, Ability> abilities;
+    public Dictionary<string, AbilityPresentation> abilitiesPresentation;
 
     private AbilitiesManager()
     {
-        abilityPool = new Dictionary<string, Ability>();
+        abilities = new Dictionary<string, Ability>();
+        abilitiesPresentation = new Dictionary<string, AbilityPresentation>();
     }
 
     public static AbilitiesManager GetInstance()
@@ -87,7 +75,7 @@ public class AbilitiesManager
     //Check if a character can pay the cost of an ability
     public static bool Activate_CheckCost(string name, Character attacker)
     {        
-        Ability toActivate = abilityPool[name];
+        Ability toActivate = GetInstance().abilities[name];
         bool canActivate = true;
 
         //Check Turn Economy Cost
@@ -119,7 +107,7 @@ public class AbilitiesManager
     //Apply the cost of an ability
     public static void ApplyAbilityCost(string abilityName, Character attacker)
     {
-        Ability toActivate = abilityPool[abilityName];
+        Ability toActivate = GetInstance().abilities[abilityName];
         
         //Apply Turn Economy Cost
         foreach (string costName in toActivate.turnEconomyCost.Keys)
@@ -142,7 +130,7 @@ public class AbilitiesManager
     {
         List<EffectApplicationData> applicationDataList = new List<EffectApplicationData>();
 
-        Ability toActivate = abilityPool[abilityName];
+        Ability toActivate = GetInstance().abilities[abilityName];
         effectSucceeds = false;
 
         foreach (PrimaryEffectStats primaryEffect in toActivate.effects)

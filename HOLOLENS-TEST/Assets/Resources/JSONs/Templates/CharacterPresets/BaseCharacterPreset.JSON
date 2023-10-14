@@ -1,0 +1,21 @@
+{
+  "name": "Dwarf",
+  "statistics": [
+    {
+      "name": "HP",
+      "staticValue": 50,
+      "statRelations": ["Constitution"]
+    },
+    {
+      "name": "Speed",
+      "staticValue": 30,
+      "statRelations": []
+    },
+    {
+      "name": "DEF",
+      "staticValue": 0,
+      "statRelations": ["+ | 0,2 | Speed", "Constitution"]
+    }
+  ],
+  "abilities": ["Ability Name 1", "Ability Name 2"]
+}

@@ -1,0 +1,38 @@
+{
+  "isPrimary": true,
+  "type": "Damage",
+  "duration": 0,
+  "targetting": {
+    "number": 1,
+    "type": "all"
+  },
+  "areaOfEffect": {
+    "range": 80,
+    "shape": "select",
+    "radius": 0
+  },
+  "succeedsOn": {
+    "type": "comparison",
+    "againstStatic": "",
+    "comparisonStats": {
+      "defenderStat": {
+        "name": "DEF",
+        "multiplier": 1,
+        "bonus": "0"
+      },
+      "attackerStat": {
+        "name": "STR",
+        "multiplier": 1,
+        "bonus": "1d20"
+      }
+    }
+  },
+  "damage": {
+    "damagedStat": "HP",
+    "amount": {
+      "baseAmount": "1d8",
+      "statsAffecting": ["STR_Damage"]
+    },
+    "onSavedMultiplier": 0
+  }
+}

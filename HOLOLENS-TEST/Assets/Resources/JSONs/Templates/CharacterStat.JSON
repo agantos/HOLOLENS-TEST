@@ -1,0 +1,5 @@
+{
+  "name": "Stat Name",
+  "staticValue": 1,
+  "statRelations": ["Stat Name 2", "+ | 0.5 | Stat Name 3"]
+}

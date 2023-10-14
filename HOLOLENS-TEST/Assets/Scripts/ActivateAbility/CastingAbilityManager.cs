@@ -125,11 +125,13 @@ public class CastingAbilityManager : MonoBehaviour
     public List<GameObject> defendersGameObject = new List<GameObject>();
     
     public List<bool> abilitySuccessList = new List<bool>();
-    public Ability abilityToCast;
+    public Ability abilityToCastInformation;
+    public AbilityPresentation abilityToCastPresentation;
 
     public AbilitySelectType CurrentSelectionType = AbilitySelectType.INACTIVE;
 
-    GameObject spawned;
+    GameObject radiusSelect;
+    Vector3 radiusSelectPosition;
 
     public static CastingAbilityManager Instance { get; private set; }
 
@@ -154,7 +156,8 @@ public class CastingAbilityManager : MonoBehaviour
     //Spawns the necessary objects for selecting targets for an ability
     public bool BeginAbilityActivation(string abilityName, string attackerName)
     {
-        Ability ability = AbilitiesManager.abilityPool[abilityName];
+        Ability abilityInformation = AbilitiesManager.GetInstance().abilities[abilityName];
+        AbilityPresentation abilityPresentation = AbilitiesManager.GetInstance().abilitiesPresentation[abilityName];
         Character attacker = GameManager.GetInstance().characterPool[attackerName];
 
 
@@ -163,14 +166,15 @@ public class CastingAbilityManager : MonoBehaviour
         {
             //Set the parameters for the casting of the ability
             GetInstance().attacker = attacker;
-            GetInstance().abilityToCast = ability;
+            GetInstance().abilityToCastInformation = abilityInformation;
+            GetInstance().abilityToCastPresentation = abilityPresentation;
             GetInstance().attackerAnimationManager = GameManager.GetInstance().playingCharacterGameObjects[attacker.name].GetComponent<AnimationManager>();
 
             //Perform the appropriate operations for selection
-            switch (ability.effects[0].areaOfEffect.shape)
+            switch (abilityInformation.effects[0].areaOfEffect.shape)
             {
                 case AreaShape.CUBE:
-                    spawned = Instantiate(CubeSelectPrefab);
+                    radiusSelect = Instantiate(CubeSelectPrefab);
                     CurrentSelectionType = AbilitySelectType.SHAPE;
 
                     break;
@@ -181,34 +185,35 @@ public class CastingAbilityManager : MonoBehaviour
                 case AreaShape.LINE:
                     break;                
                 case AreaShape.CIRCLE:
-                    spawned = Instantiate(CircleSelectPrefab);
+                    radiusSelect = Instantiate(CircleSelectPrefab);
                     CurrentSelectionType = AbilitySelectType.SHAPE;
                     break;
                 case AreaShape.SELECT:
+                    radiusSelect = null;
                     CurrentSelectionType = AbilitySelectType.SELECT;
                     radiusMoveOnTouch.GetComponent<AbilityRangeDisplay>().Activate();
                     return true;
             }       
 
             //Size the spawned selector
-            spawned.GetComponent<RadiusSelectScript>().radius = ability.effects[0].areaOfEffect.radius;
-            spawned.GetComponent<RadiusSelectScript>().SetScale();
+            radiusSelect.GetComponent<RadiusSelectScript>().radius = abilityInformation.effects[0].areaOfEffect.radius;
+            radiusSelect.GetComponent<RadiusSelectScript>().SetScale();
 
             //Set the spawned selector's position
-            spawned.transform.SetParent(this.transform.parent.transform, false);
-            spawned.transform.localPosition = this.transform.localPosition;
+            radiusSelect.transform.SetParent(this.transform.parent.transform, false);
+            radiusSelect.transform.localPosition = this.transform.localPosition;
 
             //Set the AbilityRangeDisplay
             radiusMoveOnTouch.SetActive(true);
-            radiusMoveOnTouch.GetComponent<MoveGameobjectToTouchPoint>().movee = spawned;
+            radiusMoveOnTouch.GetComponent<MoveGameobjectToTouchPoint>().movee = radiusSelect;
             radiusMoveOnTouch.GetComponent<AbilityRangeDisplay>().Activate();
 
             return true;          
         }
         else
         {
-            ToastMessageManager.Instance.CreateToast(attacker.name + " cannot cast ability " + ability.name);
-            Debug.Log(attacker.name + " cannot cast ability " + ability.name);
+            ToastMessageManager.Instance.CreateToast(attacker.name + " cannot cast ability " + abilityInformation.name);
+            Debug.Log(attacker.name + " cannot cast ability " + abilityInformation.name);
             return false;
         }            
     }
@@ -222,7 +227,7 @@ public class CastingAbilityManager : MonoBehaviour
     {
         //Set the parameters for the casting of the ability
         GetInstance().attacker = GameManager.GetInstance().characterPool[attackerName];
-        GetInstance().abilityToCast = AbilitiesManager.abilityPool[ablityToCast];
+        GetInstance().abilityToCastInformation = AbilitiesManager.GetInstance().abilities[ablityToCast];
         GetInstance().attackerAnimationManager = GameManager.GetInstance().playingCharacterGameObjects[attackerName].GetComponent<AnimationManager>();
         
         foreach(string data in applicationData)
@@ -264,13 +269,15 @@ public class CastingAbilityManager : MonoBehaviour
         return list.ToArray();
     }
 
+    /*      MULTIPLAYER     */
+
     public void ActivateAbility_Remotely()
     {
         //Start Animation
         if (defenderCharacters.Count > 0)
             FaceDirection();
 
-        attackerAnimationManager.IdleTo_Animation(abilityToCast.animationTypes.attacker);
+        attackerAnimationManager.IdleTo_Animation(abilityToCastPresentation.animations.attacker);
 
         //Activate Ability
         Instance.StartCoroutine(ActivationSyncAbility_Remotely());        
@@ -297,6 +304,7 @@ public class CastingAbilityManager : MonoBehaviour
 
         ApplyAbilityEffects();
         ActivateDefenderAnimations();
+        PlayImpactVFX();
 
         /*
          * Wait for the animation to end
@@ -335,19 +343,16 @@ public class CastingAbilityManager : MonoBehaviour
     public void ActivateAbility()
     {
         //Get Data to apply the ability
-        attacker.GetAbilityApplicationData(abilityToCast.name, out abilitySuccessList, out applicationData, defenderCharacters, attacker);
+        attacker.GetAbilityApplicationData(abilityToCastInformation.name, out abilitySuccessList, out applicationData, defenderCharacters, attacker);
+        
+        if(radiusSelect)
+            radiusSelectPosition = radiusSelect.transform.localPosition;
 
         //Sync AbilityManager with all the others
-        MultiplayerCallsAbilityCast.Instance.Propagate_AbilityManagerSync(abilityToCast.name, attacker.name, GetDefenderNameList(), GetApplicationDataStrings(), abilitySuccessList.ToArray());
+        MultiplayerCallsAbilityCast.Instance.Propagate_AbilityManagerSync(abilityToCastInformation.name, attacker.name, GetDefenderNameList(), GetApplicationDataStrings(), abilitySuccessList.ToArray());
 
         //Deactivate any spawned objects related to the activation of the ability
-        DeactivateAbilityActivationObjects();
-
-        //Start Animation
-        if(defenderCharacters.Count > 0)
-            FaceDirection();
-
-        attackerAnimationManager.IdleTo_Animation(abilityToCast.animationTypes.attacker);
+        DeactivateAbilityActivationObjects();        
 
         //Activate Ability
         Instance.StartCoroutine(ActivationSyncAbility());
@@ -387,7 +392,7 @@ public class CastingAbilityManager : MonoBehaviour
     //Methods for Animation
     public void ReturnAttackerToIdleAnimation()
     {
-        attackerAnimationManager.Animation_ToIdle(abilityToCast.animationTypes.attacker);
+        attackerAnimationManager.Animation_ToIdle(abilityToCastPresentation.animations.attacker);
     }
 
     public void ActivateDefenderAnimations()
@@ -398,12 +403,12 @@ public class CastingAbilityManager : MonoBehaviour
             if (abilitySuccessList[i])
             {
                 defendersGameObject[i].GetComponent<AnimationManager>()
-                    .IdleTo_Animation(abilityToCast.animationTypes.defender_AbilitySucceeds);
+                    .IdleTo_Animation(abilityToCastPresentation.animations.defender_AbilitySucceeds);
             }
             else
             {
                 defendersGameObject[i].GetComponent<AnimationManager>()
-                    .IdleTo_Animation(abilityToCast.animationTypes.defender_AbilityFails);
+                    .IdleTo_Animation(abilityToCastPresentation.animations.defender_AbilityFails);
             }
         }
     }
@@ -416,12 +421,12 @@ public class CastingAbilityManager : MonoBehaviour
             if (abilitySuccessList[i])
             {
                 defendersGameObject[i].GetComponent<AnimationManager>()
-                    .Animation_ToIdle(abilityToCast.animationTypes.defender_AbilitySucceeds);
+                    .Animation_ToIdle(abilityToCastPresentation.animations.defender_AbilitySucceeds);
             }
             else
             {
                 defendersGameObject[i].GetComponent<AnimationManager>()
-                    .Animation_ToIdle(abilityToCast.animationTypes.defender_AbilityFails);
+                    .Animation_ToIdle(abilityToCastPresentation.animations.defender_AbilityFails);
             }
         }
     }
@@ -443,7 +448,7 @@ public class CastingAbilityManager : MonoBehaviour
     //Cleans Manager State
     public void CleanState()
     {
-        abilityToCast = null;
+        abilityToCastInformation = null;
 
         attacker = null;
 
@@ -458,6 +463,18 @@ public class CastingAbilityManager : MonoBehaviour
 
     IEnumerator ActivationSyncAbility()
     {
+        //Start Animation
+        if (defenderCharacters.Count > 0)
+            FaceDirection();
+
+        attackerAnimationManager.IdleTo_Animation(abilityToCastPresentation.animations.attacker);
+
+        //Play DuringActivationVFX
+        ParticleSystem duringActivation = null;
+
+        if(abilityToCastPresentation.visualEffects.duringActivation != "")
+            duringActivation = PlayVFXBottomOfAttacker(abilityToCastPresentation.visualEffects.duringActivation);
+
         /*
          * Wait for the animation to register
         */
@@ -473,9 +490,15 @@ public class CastingAbilityManager : MonoBehaviour
     *      3. Apply the Effects
     */
         yield return new WaitForSeconds(animationEnds - animationEnds * 3 / 8);        
+    
         ApplyAbilityEffects();
         ActivateDefenderAnimations();
+        
+        //For VFX
+        PlayImpactVFX();
 
+        if(duringActivation != null)
+            VFXManager.Instance.DeactivateVFX(duringActivation);
 
         /*
          * Wait for the animation to end
@@ -497,5 +520,30 @@ public class CastingAbilityManager : MonoBehaviour
          * Spawn the window that displays the abilities
         */
         SelectAbilityUIManager.Instance.GiveTurnToPlayingCharacter();
+    }
+
+    /*VISUAL VIDEO EFFECTS*/
+    public void PlayImpactVFX()
+    {        
+        VFXManager.Instance.ActivateVFX(
+            abilityToCastPresentation.visualEffects.onImpact, 
+            null, 
+            radiusSelectPosition
+        );
+        //Destroy VFX when it stops Playing.
+    }
+
+    //Models are created with their bottom center being (0,0,0)
+    public ParticleSystem PlayVFXBottomOfAttacker(string effectName)
+    {
+        Vector3 LocalPositionBottomOfAttacker = Vector3.zero;
+
+        Transform attackerTransform = GameManager.GetInstance().playingCharacterGameObjects[attacker.name].transform;
+
+        return VFXManager.Instance.ActivateVFX(
+            effectName,
+            attackerTransform,
+            LocalPositionBottomOfAttacker
+        );    
     }
 }

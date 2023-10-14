@@ -51,5 +51,13 @@ public class JSONFile_to_JSONClass
         wrapper = JsonUtility.FromJson<Preset_UI_InformationTable>(jsonFile.text);
         return wrapper;
     }
+
+    public static JSONAbilityPresentations ParseAbilitiesPresentation(string jsonPath)
+    {
+        JSONAbilityPresentations wrapper;
+        TextAsset jsonFile = Resources.Load<TextAsset>(jsonPath);
+        wrapper = JsonUtility.FromJson<JSONAbilityPresentations>(jsonFile.text);
+        return wrapper;
+    }
 }
 

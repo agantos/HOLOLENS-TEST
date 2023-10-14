@@ -54,9 +54,9 @@ public class RadiusSelectScript : MonoBehaviour
     //Set the size the AOE selection
     public void SetScale()
     {
-        int abilityRadiusInFeet = CastingAbilityManager.GetInstance().abilityToCast.effects[0].areaOfEffect.radius;
+        int abilityRadiusInFeet = CastingAbilityManager.GetInstance().abilityToCastInformation.effects[0].areaOfEffect.radius;
         float abilityRadiusUnityScaled = GameplayCalculatorFunctions.FeetToUnityMeasurement(abilityRadiusInFeet);
-        gameObject.transform.localScale = new Vector3(abilityRadiusUnityScaled*2, 0.00005f, abilityRadiusUnityScaled*2);
+        gameObject.transform.localScale = new Vector3(abilityRadiusUnityScaled*2, abilityRadiusUnityScaled * 2, abilityRadiusUnityScaled*2);
     }
 
     void SelectTarget(GameObject target) {

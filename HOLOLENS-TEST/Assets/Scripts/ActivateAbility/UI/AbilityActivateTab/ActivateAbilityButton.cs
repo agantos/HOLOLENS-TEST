@@ -24,7 +24,7 @@ public class ActivateAbilityButton : Button
         CastingAbilityManager.GetInstance().DeactivateAbilityActivationObjects();
 
         //Start Animation
-        CastingAbilityManager.GetInstance().attackerAnimationManager.IdleTo_Animation(CastingAbilityManager.GetInstance().abilityToCast.animationTypes.attacker);
+        CastingAbilityManager.GetInstance().attackerAnimationManager.IdleTo_Animation(CastingAbilityManager.GetInstance().abilityToCastInformation.animationTypes.attacker);
 
         //Activate Ability
         StartCoroutine(ActivateAbilityAfterAnimation());

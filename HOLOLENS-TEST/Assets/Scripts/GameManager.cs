@@ -73,15 +73,23 @@ public class GameManager : MonoBehaviour
 
     void LoadFromJsons()
     {
+        //Load Character Presets
         JSONBaseCharacterPresetsWrapper parsedBasePresets = JSONFile_to_JSONClass.ParseBaseCharacterPresets("JSONs/BaseCharacterPresets");
         basePresetPool = JSONClass_to_EngineClass.CreateBaseCharacterPresetDictionary(parsedBasePresets.baseCharacterPresets);
 
+        //Load Ability Rule-Based Information
         JSONAbilities jsonAbilities = JSONFile_to_JSONClass.ParseAbilities("JSONs/Abilities");
-        JSONClass_to_EngineClass.CreateAbilitiesDictionary(jsonAbilities);
+        JSONClass_to_EngineClass.FillAbilitiesDictionary(jsonAbilities);
 
+        //Load Ability Presentation Information
+        JSONAbilityPresentations jsonAbilitiesPresentation = JSONFile_to_JSONClass.ParseAbilitiesPresentation("JSONs/AbilitiesPresentation");
+        JSONClass_to_EngineClass.CreateAbilityPresentationsDictionary(jsonAbilitiesPresentation);
+
+        //Load Character Information
         JSONCharacters JSONcharacters = JSONFile_to_JSONClass.ParseCharacters("JSONs/CharacterExample");
         JSONClass_to_EngineClass.FillCharacterPool(JSONcharacters);
 
+        //Load Character UI Information
         Preset_UI_InformationTable JSONcharacter_UI_Information = JSONFile_to_JSONClass.ParseCharacterInformationUI("JSONs/Character_UI_Information");
         presets_UI_Info = JSONClass_to_EngineClass.CreateCharacter_UI_Information(JSONcharacter_UI_Information);
     

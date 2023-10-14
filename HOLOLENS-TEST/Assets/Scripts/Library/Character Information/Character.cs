@@ -128,7 +128,7 @@ public class Character
     }
     public Ability GetCharacterAbility(string name)
     {
-        return AbilitiesManager.abilityPool[name];
+        return AbilitiesManager.GetInstance().abilities[name];
     }
 
     //Misc Methods

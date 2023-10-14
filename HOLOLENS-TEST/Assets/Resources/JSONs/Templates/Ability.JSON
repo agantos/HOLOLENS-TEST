@@ -1,0 +1,52 @@
+{
+  "name": "Blind",
+  "description": "Impair the target's eyes giving them -1d8 to Defense.",
+  "tags": ["Ranged Attacks"],
+  "turnEconomyCost": [{ "name": "Bonus Action", "cost": 1 }],
+  "statCost": [],
+  "animationTypes": {
+    "attacker": "Attack_Ranged_Spell",
+    "defender_AbilitySucceeds": "TakeHit",
+    "defender_AbilityFails": "Dodge"
+  },
+  "effects": [
+    {
+      "isPrimary": true,
+      "type": "Temporal",
+      "duration": 2,
+      "targetting": {
+        "number": 1,
+        "type": "all"
+      },
+      "areaOfEffect": {
+        "range": 50,
+        "shape": "select",
+        "radius": 20
+      },
+      "succeedsOn": {
+        "type": "comparison",
+        "againstStatic": "",
+        "comparisonStats": {
+          "defenderStat": {
+            "name": "DEF",
+            "multiplier": 1,
+            "bonus": "0"
+          },
+          "attackerStat": {
+            "name": "FIN",
+            "multiplier": 1,
+            "bonus": "1d20"
+          }
+        }
+      },
+      "damage": {
+        "damagedStat": "DEF",
+        "amount": {
+          "baseAmount": "-5",
+          "statsAffecting": []
+        },
+        "onSavedMultiplier": 0
+      }
+    }
+  ]
+}

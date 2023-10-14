@@ -1,0 +1,70 @@
+{
+  "abilitiesPresentation": [
+    {
+      "abilityName": "STR Ranged Attack",
+      "animations": {
+        "attacker": "Attack_Ranged_Spell",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "Fireball",
+        "duringActivation": "name"
+      },
+      "soundEffects": {
+        "onImpact": "name",
+        "duringActivation": "name"
+      },
+      "characterDialogue": {
+        "onImpact": "name",
+        "duringActivation": "name",
+        "defender_AbilityFails": "name",
+        "defender_AbilitySucceeds": "name"
+      }
+    },
+    {
+      "abilityName": "STR Melee Attack",
+      "animations": {
+        "attacker": "Attack_Melee_Weapon",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Block"
+      },
+      "visualEffects": {
+        "onImpact": "Fireball",
+        "duringActivation": "name"
+      },
+      "soundEffects": {
+        "onImpact": "name",
+        "duringActivation": "name"
+      },
+      "characterDialogue": {
+        "onImpact": "name",
+        "duringActivation": "name",
+        "defender_AbilityFails": "name",
+        "defender_AbilitySucceeds": "name"
+      }
+    },
+    {
+      "abilityName": "Fireball",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "Fireball",
+        "duringActivation": "Fireball_duringActivation"
+      },
+      "soundEffects": {
+        "onImpact": "name",
+        "duringActivation": "name"
+      },
+      "characterDialogue": {
+        "onImpact": "name",
+        "duringActivation": "name",
+        "defender_AbilityFails": "name",
+        "defender_AbilitySucceeds": "name"
+      }
+    }
+  ]
+}

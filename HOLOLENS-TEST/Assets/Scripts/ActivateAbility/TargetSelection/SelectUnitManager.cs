@@ -38,7 +38,7 @@ public class SelectUnitManager : MonoBehaviour, IMixedRealityPointerHandler, IMi
 
         Debug.Log("Defender distance is" + defenderDistance);
 
-        int abilityRange = CastingAbilityManager.GetInstance().abilityToCast.effects[0].areaOfEffect.range;
+        int abilityRange = CastingAbilityManager.GetInstance().abilityToCastInformation.effects[0].areaOfEffect.range;
 
         //(Un)Select a character only if they are within range
         if (abilityRange > defenderDistance)
@@ -46,7 +46,7 @@ public class SelectUnitManager : MonoBehaviour, IMixedRealityPointerHandler, IMi
             if (!isSelected)
             {
                 //Abide by the number of selectable characters
-                if (CastingAbilityManager.GetInstance().defenderCharacters.Count < CastingAbilityManager.GetInstance().abilityToCast.effects[0].targetting.numberOfTargets)
+                if (CastingAbilityManager.GetInstance().defenderCharacters.Count < CastingAbilityManager.GetInstance().abilityToCastInformation.effects[0].targetting.numberOfTargets)
                 {
                     SpawnSelectionToken();
                     SelectCharacter_AbilityTarget();
@@ -55,7 +55,7 @@ public class SelectUnitManager : MonoBehaviour, IMixedRealityPointerHandler, IMi
                 {
                     ToastMessageManager.Instance.CreateToast(
                         "Max number of selectable characters for these effect is " +
-                        CastingAbilityManager.GetInstance().abilityToCast.effects[0].targetting.numberOfTargets.ToString()
+                        CastingAbilityManager.GetInstance().abilityToCastInformation.effects[0].targetting.numberOfTargets.ToString()
                     );
                 }
             }

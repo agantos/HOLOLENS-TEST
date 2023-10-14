@@ -204,7 +204,7 @@ public class JSONClass_to_EngineClass
     public static Ability CreateAbility(JSONAbility jsonAbility)
     {
         JSONAbilityAnimationTypes jsonAnimTypes = jsonAbility.animationTypes;
-        AbilityAnimationTypes animTypes = new AbilityAnimationTypes(jsonAnimTypes.GetAttackerAnimationType(), 
+        Animations animTypes = new Animations(jsonAnimTypes.GetAttackerAnimationType(), 
                                                                     jsonAnimTypes.GetDefender_AbilitySucceeds(), 
                                                                     jsonAnimTypes.GetDefender_AbilityFails()
         );
@@ -238,12 +238,23 @@ public class JSONClass_to_EngineClass
     }
 
     //Create a dictionary of Abilities from the parsed JSON
-    public static void CreateAbilitiesDictionary(JSONAbilities jsonAbilities)
+    public static void FillAbilitiesDictionary(JSONAbilities jsonAbilities)
     {
         foreach (JSONAbility jsonAbility in jsonAbilities.abilities)
         {
             Ability tempAbility = CreateAbility(jsonAbility);
-            AbilitiesManager.abilityPool.Add(tempAbility.name, tempAbility);
+            AbilitiesManager.GetInstance().abilities.Add(tempAbility.name, tempAbility);
+        }
+    }
+
+    //Create a dictionary of Ability Presentations from the parsed JSON
+    public static void CreateAbilityPresentationsDictionary(JSONAbilityPresentations jsonPresentations)
+    {
+        foreach(JSONAbilityPresentation jsonPresentation in jsonPresentations.abilitiesPresentation)
+        {
+            Debug.Log(jsonPresentation.animations.attacker);
+            AbilityPresentation abilityPresentation = new AbilityPresentation(jsonPresentation);
+            AbilitiesManager.GetInstance().abilitiesPresentation.Add(jsonPresentation.abilityName, abilityPresentation);
         }
     }
 

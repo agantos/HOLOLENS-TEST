@@ -1,0 +1,16 @@
+{
+  "isPrimary": false,
+  "succeedsOn": {
+    "type": "automatic"
+  },
+  "damage": {
+    "damagedStat": "HP",
+    "amount": {
+      "baseAmount": "1d8",
+      "statsAffecting": [
+        ""
+      ]
+    },
+    "onSavedMultiplier": 0
+  }
+}

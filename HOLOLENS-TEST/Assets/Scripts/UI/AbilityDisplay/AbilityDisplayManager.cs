@@ -64,7 +64,7 @@ public class AbilityDisplayManager : MonoBehaviour
         transform.localScale = localScale;
 
         //Set ability
-        displayingAbility = AbilitiesManager.abilityPool[abilityName];
+        displayingAbility = AbilitiesManager.GetInstance().abilities[abilityName];
         title.text = displayingAbility.name;
 
         //Clear Existing UI
