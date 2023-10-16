@@ -128,7 +128,14 @@
           "statRelations": []
         }
       ],
-      "abilities": []
+      "abilities": [
+        "Line of Brambles",
+        "Enhance Attack",
+        "Enhance Magic Attack",
+        "Lightning Strike",
+        "Mass Enhance Attack",
+        "Mass Enhance Defense"
+      ]
     },
     {
       "name": "Paladin",

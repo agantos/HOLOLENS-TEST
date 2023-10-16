@@ -65,6 +65,138 @@
         "defender_AbilityFails": "",
         "defender_AbilitySucceeds": ""
       }
+    },
+    {
+      "abilityName": "Line of Brambles",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Enhance Attack",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Enhance Magic Attack",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Lightning Strike",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Mass Enhance Attack",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Mass Enhance Defense",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
     }
   ]
 }

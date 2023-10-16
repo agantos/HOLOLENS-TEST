@@ -11,6 +11,11 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
 {
     bool firstJoin = false;
 
+    void Start()
+    {
+        PhotonNetwork.OfflineMode = true;
+    }
+
     void LoadArena()
     {
         if (!PhotonNetwork.IsMasterClient)

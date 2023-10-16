@@ -21,6 +21,7 @@ public class CharacterStats
     {
         List<string> to_remove = new List<string>();
 
+        //Move the timer of all the Temporal Effects and find which to remove
         foreach(string statName in statsWithTemporalEffects)
         {
             bool noTemporalEffects;
@@ -30,8 +31,15 @@ public class CharacterStats
                 to_remove.Add(statName);
         }
 
+        //Remove the Temporal Effects that expired and recalculate all stats with relations to them.
         foreach(string stat in to_remove)
+        {
             statsWithTemporalEffects.Remove(stat);
+            RecalculateStatsAfterChange(stat);
+        }
+            
+
+
     }
 
     public void RemoveTemporalEffect(string statName, string effectName, int duration, int value)

@@ -202,11 +202,20 @@ public class EffectDamageStats
     public string baseValue;
     public List<string> statsAffecting;
     public float onSavedMultiplier;
+    public bool isNegative = false;
 
     public EffectDamageStats(string baseAmount, string[] statsAffecting, string damagedStat, float onSavedMultiplier)
     {
+        //If the first character of the baseAmount of the stat is negative then all the damage it deals is negative
+        if (baseAmount[0] == '-')
+        {
+            isNegative = true;
+            baseAmount = baseAmount.Substring(1);
+        }            
+
         baseValue = baseAmount;
         damagedStatName = damagedStat;
+
         this.statsAffecting = new List<string>();
         this.onSavedMultiplier = onSavedMultiplier;
 
@@ -219,10 +228,15 @@ public class EffectDamageStats
     public int RollDamage(List<int> statBonuses)
     {
         int sum = 0;
+        
+        //Calculate dice roll
         int diceRoll = GameplayCalculatorFunctions.CalculateDiceRoll(baseValue);
         sum += diceRoll;
+
+        //Add stat bonuses
        
-        return sum;
+        //Return result
+        return isNegative? -sum : sum;
     }
 
     List<int> GetStatBonuses(CharacterStats attackerStats)

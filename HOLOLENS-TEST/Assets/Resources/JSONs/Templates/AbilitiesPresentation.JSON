@@ -52,18 +52,18 @@
         "defender_AbilityFails": "Dodge"
       },
       "visualEffects": {
-        "onImpact": "Fireball",
-        "duringActivation": "Fireball_duringActivation"
+        "onImpact": "",
+        "duringActivation": ""
       },
       "soundEffects": {
-        "onImpact": "FireElemental/Fireball",
-        "duringActivation": "SpellSounds/During Cast"
+        "onImpact": "",
+        "duringActivation": ""
       },
       "characterDialogue": {
-        "onImpact": "name",
-        "duringActivation": "name",
-        "defender_AbilityFails": "name",
-        "defender_AbilitySucceeds": "name"
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
       }
     }
   ]

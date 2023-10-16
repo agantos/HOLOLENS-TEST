@@ -162,6 +162,9 @@ public class JSONClass_to_EngineClass
                 break;
         }
 
+        //Duration
+        effect.duration = jsonEffect.duration;
+
         //Success Statistics
         JSONEffectComparisonStat jsonAttacker;
         JSONEffectComparisonStat jsonDefender;

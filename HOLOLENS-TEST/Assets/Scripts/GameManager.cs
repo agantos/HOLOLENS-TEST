@@ -99,9 +99,6 @@ public class GameManager : MonoBehaviour
         foreach(Character c in characterPool.Values)
         {
             c.Initialize(basePresetPool, additionalPresetPool);
-
-            Debug.Log(c.name);
-            Debug.Log(c.GetStats().ToString(""));
         }
     }    
 
@@ -111,12 +108,16 @@ public class GameManager : MonoBehaviour
 
         CharacterMoveManager.Instance.OnChangeTurn(GetCurrentPlayer_Name());
         SelectAbilityUIManager.Instance.GiveTurnToPlayingCharacter();
+        
+        //Move the portrait Crystal
+        CharacterPortraitManager.Instance.PlaceCrystal();
+
+        //Debug Prints
+        Debug.Log(characterPool[GetCurrentPlayer_Name()].GetStats().ToString(""));
 
         //Tell the other players to progress in the turn order
         MultiplayerTurnManagementCalls.Instance.Propagate_NextTurn();
 
-        //Move the portrait Crystal
-        CharacterPortraitManager.Instance.PlaceCrystal();
     }
 
     //Only difference is that it does not send any message in the network

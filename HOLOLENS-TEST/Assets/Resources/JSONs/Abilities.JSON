@@ -98,11 +98,6 @@
       "tags": ["Special Ability", "Magical Attack"],
       "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
       "statCost": [{ "name": "Power Points", "cost": 2 }],
-      "animationTypes": {
-        "attacker": "Spell_Cast_Area",
-        "defender_AbilitySucceeds": "TakeHit",
-        "defender_AbilityFails": "Dodge"
-      },
       "effects": [
         {
           "isPrimary": true,
@@ -150,11 +145,6 @@
       "tags": ["Special Ability", "Magical Attack"],
       "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
       "statCost": [{ "name": "Power Points", "cost": 2 }],
-      "animationTypes": {
-        "attacker": "Spell_Cast_Area",
-        "defender_AbilitySucceeds": "TakeHit",
-        "defender_AbilityFails": "Dodge"
-      },
       "effects": [
         {
           "isPrimary": true,
@@ -282,6 +272,371 @@
             "amount": {
               "baseAmount": "2d8",
               "statsAffecting": ["Damage"]
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Elemental Heal",
+      "description": "The spirit draws its element from the spirit world to replenish a little health.",
+      "tags": ["Heal Ability"],
+      "turnEconomyCost": [{ "name": "Fast Action Points", "cost": 1 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Heal",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 10,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "automatic",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "",
+                "multiplier": 1,
+                "bonus": ""
+              },
+              "attackerStat": {
+                "name": "",
+                "multiplier": 1,
+                "bonus": ""
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "1d8",
+              "statsAffecting": ["Magic Damage"]
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Line of Brambles",
+      "description": "Brambles sprout out of the earth with deadly thorns that pierce everything on their path",
+      "tags": ["Normal Ability", "Magical Attack"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
+      "statCost": [],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Damage",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 30,
+            "shape": "line",
+            "radius": 7
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Magic Defense",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "Magic Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "3d6",
+              "statsAffecting": ["Magic Damage"]
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Enhance Attack",
+      "description": "A magical blessing that increases the target's Attack for 2 rounds",
+      "tags": ["Normal Ability", "Buff"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
+      "statCost": [],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Temporal",
+          "duration": 2,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 30,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "automatic",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "",
+                "multiplier": 1,
+                "bonus": ""
+              },
+              "attackerStat": {
+                "name": "",
+                "multiplier": 1,
+                "bonus": ""
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "Attack",
+            "amount": {
+              "baseAmount": "2d6",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Enhance Magic Attack",
+      "description": "A magical blessing that increases the target's Magic Attack for 2 rounds",
+      "tags": ["Normal Ability", "Buff"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
+      "statCost": [],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Temporal",
+          "duration": 2,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 30,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "automatic",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "",
+                "multiplier": 1,
+                "bonus": ""
+              },
+              "attackerStat": {
+                "name": "",
+                "multiplier": 1,
+                "bonus": ""
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "Magic Attack",
+            "amount": {
+              "baseAmount": "2d6",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Lightning Strike",
+      "description": "Call upon the powers of the forest to smite your enemies with lighting",
+      "tags": ["Special Ability", "Magical Attack"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
+      "statCost": [{ "name": "Power Points", "cost": 2 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Damage",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 50,
+            "shape": "circle",
+            "radius": 20
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Magic Defense",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "Magic Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "10d6",
+              "statsAffecting": ["Magic Damage"]
+            },
+            "onSavedMultiplier": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mass Enhance Attack",
+      "description": "A strong magical blessing that increases all targets Attack and Magic Attack for 3 rounds",
+      "tags": ["Special Ability", "Buff"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
+      "statCost": [{ "name": "Power Points", "cost": 2 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Temporal",
+          "duration": 3,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 50,
+            "shape": "circle",
+            "radius": 30
+          },
+          "succeedsOn": {
+            "type": "automatic",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "",
+                "multiplier": 1,
+                "bonus": ""
+              },
+              "attackerStat": {
+                "name": "",
+                "multiplier": 1,
+                "bonus": ""
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "Magic Attack",
+            "amount": {
+              "baseAmount": "2d6",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
+          }
+        },
+        {
+          "isPrimary": false,
+          "type": "Temporal",
+          "duration": 3,
+          "succeedsOn": {
+            "type": "automatic"
+          },
+          "damage": {
+            "damagedStat": "Attack",
+            "amount": {
+              "baseAmount": "2d6",
+              "statsAffecting": [""]
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mass Enhance Defense",
+      "description": "A strong magical blessing that increases all targets Defense and Magic Defense for 3 rounds",
+      "tags": ["Special Ability", "Buff"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
+      "statCost": [{ "name": "Power Points", "cost": 2 }],
+      "animationTypes": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Temporal",
+          "duration": 3,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 50,
+            "shape": "circle",
+            "radius": 30
+          },
+          "succeedsOn": {
+            "type": "automatic",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "",
+                "multiplier": 1,
+                "bonus": ""
+              },
+              "attackerStat": {
+                "name": "",
+                "multiplier": 1,
+                "bonus": ""
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "Magic Defense",
+            "amount": {
+              "baseAmount": "2d6",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
+          }
+        },
+        {
+          "isPrimary": false,
+          "type": "Temporal",
+          "duration": 3,
+          "succeedsOn": {
+            "type": "automatic"
+          },
+          "damage": {
+            "damagedStat": "Defense",
+            "amount": {
+              "baseAmount": "2d6",
+              "statsAffecting": [""]
             },
             "onSavedMultiplier": 0
           }

@@ -36,12 +36,15 @@ public class GameplayCalculatorFunctions
     {
         int sum = 0;
         int diceNumber, diceSides, staticValue;
+
         ParseDiceString(value, out diceNumber, out diceSides, out staticValue);
+
         for (int i = 0; i < diceNumber; i++)
         {
             sum += random.Next(1, diceSides);
         }
         sum += staticValue;
+        
         return sum;
     }
     public static void ParseDiceString(string input, out int diceNumber, out int diceSides, out int staticValue)

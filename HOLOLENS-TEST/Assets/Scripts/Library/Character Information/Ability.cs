@@ -145,8 +145,7 @@ public class AbilitiesManager
                 {
                     applicationDataList.Add(
                         followup.CalculateApplicationData(
-                            EffectSucceedsChecker.GetSuccess(followup, defender, attacker), defender, attacker
-                        )
+                            EffectSucceedsChecker.GetSuccess(followup, defender, attacker), defender, attacker)
                     );
                 }
             }
