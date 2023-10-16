@@ -1,10 +1,10 @@
 {
   "abilities": [
     {
-      "name": "STR Ranged Attack",
-      "description": "A ranged Strength attack made with a Bow, Crossbow or different Strength ranged weapon",
-      "tags": ["Ranged Attacks"],
-      "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
+      "name": "Punch",
+      "description": "A punch thrown by a heavy elemental hand. Ouch!",
+      "tags": ["Normal Ability", "Physical Attack"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 1 }],
       "effects": [
         {
           "isPrimary": true,
@@ -15,7 +15,7 @@
             "type": "all"
           },
           "areaOfEffect": {
-            "range": 80,
+            "range": 15,
             "shape": "select",
             "radius": 0
           },
@@ -24,12 +24,12 @@
             "againstStatic": "",
             "comparisonStats": {
               "defenderStat": {
-                "name": "DEF",
+                "name": "Defense",
                 "multiplier": 1,
-                "bonus": "0"
+                "bonus": "1d20"
               },
               "attackerStat": {
-                "name": "STR",
+                "name": "Attack",
                 "multiplier": 1,
                 "bonus": "1d20"
               }
@@ -38,8 +38,8 @@
           "damage": {
             "damagedStat": "HP",
             "amount": {
-              "baseAmount": "1d8",
-              "statsAffecting": ["STR_Damage"]
+              "baseAmount": "2d8",
+              "statsAffecting": ["Damage"]
             },
             "onSavedMultiplier": 0
           }
@@ -47,10 +47,10 @@
       ]
     },
     {
-      "name": "STR Melee Attack",
-      "description": "A melee Strength attack made with a dagger, rapier or different Strength weapon",
-      "tags": ["Melee Attacks"],
-      "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
+      "name": "Slam",
+      "description": "The elemental throws his weight on an opponent trying to crush them with their strength",
+      "tags": ["Normal Ability", "Physical Attack"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
       "effects": [
         {
           "isPrimary": true,
@@ -61,7 +61,7 @@
             "type": "all"
           },
           "areaOfEffect": {
-            "range": 5,
+            "range": 15,
             "shape": "select",
             "radius": 0
           },
@@ -70,12 +70,12 @@
             "againstStatic": "",
             "comparisonStats": {
               "defenderStat": {
-                "name": "DEF",
+                "name": "Defense",
                 "multiplier": 1,
-                "bonus": "0"
+                "bonus": "1d20"
               },
               "attackerStat": {
-                "name": "STR",
+                "name": "Attack",
                 "multiplier": 1,
                 "bonus": "1d20"
               }
@@ -84,100 +84,8 @@
           "damage": {
             "damagedStat": "HP",
             "amount": {
-              "baseAmount": "1d8",
-              "statsAffecting": ["STR_Damage"]
-            },
-            "onSavedMultiplier": 0
-          }
-        }
-      ]
-    },
-    {
-      "name": "FIN Ranged Attack",
-      "description": "A ranged finesse attack made with a Bow, Crossbow or different finesse ranged weapon",
-      "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
-      "tags": ["Ranged Attacks"],
-      "effects": [
-        {
-          "isPrimary": true,
-          "type": "Damage",
-          "duration": 0,
-          "targetting": {
-            "number": 1,
-            "type": "all"
-          },
-          "areaOfEffect": {
-            "range": 80,
-            "shape": "select",
-            "radius": 0
-          },
-          "succeedsOn": {
-            "type": "comparison",
-            "againstStatic": "",
-            "comparisonStats": {
-              "defenderStat": {
-                "name": "DEF",
-                "multiplier": 1,
-                "bonus": "0"
-              },
-              "attackerStat": {
-                "name": "FIN",
-                "multiplier": 1,
-                "bonus": "1d20"
-              }
-            }
-          },
-          "damage": {
-            "damagedStat": "HP",
-            "amount": {
-              "baseAmount": "1d8",
-              "statsAffecting": ["FIN_Damage"]
-            },
-            "onSavedMultiplier": 0
-          }
-        }
-      ]
-    },
-    {
-      "name": "FIN Melee Attack",
-      "description": "A melee finesse attack made with a dagger, rapier or different finesse weapon",
-      "tags": ["Melee Attacks"],
-      "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
-      "effects": [
-        {
-          "isPrimary": true,
-          "type": "Damage",
-          "duration": 0,
-          "targetting": {
-            "number": 1,
-            "type": "all"
-          },
-          "areaOfEffect": {
-            "range": 5,
-            "shape": "select",
-            "radius": 0
-          },
-          "succeedsOn": {
-            "type": "comparison",
-            "againstStatic": "",
-            "comparisonStats": {
-              "defenderStat": {
-                "name": "DEF",
-                "multiplier": 1,
-                "bonus": "0"
-              },
-              "attackerStat": {
-                "name": "FIN",
-                "multiplier": 1,
-                "bonus": "1d20"
-              }
-            }
-          },
-          "damage": {
-            "damagedStat": "HP",
-            "amount": {
-              "baseAmount": "1d8",
-              "statsAffecting": ["FIN_Damage"]
+              "baseAmount": "6d8",
+              "statsAffecting": ["Damage"]
             },
             "onSavedMultiplier": 0
           }
@@ -186,10 +94,15 @@
     },
     {
       "name": "Fireball",
-      "description": "Shoot a bright flame from your fingers that explodes upon contact, torching everything in its vicinity.",
-      "tags": ["3rd Level Spells"],
-      "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
-      "statCost": [{ "name": "MAG_Points", "cost": 3 }],
+      "description": "Flames whoosh and erupt violently burning everything inside the spell's radius",
+      "tags": ["Special Ability", "Magical Attack"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
+      "statCost": [{ "name": "Power Points", "cost": 2 }],
+      "animationTypes": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
       "effects": [
         {
           "isPrimary": true,
@@ -209,22 +122,22 @@
             "againstStatic": "",
             "comparisonStats": {
               "defenderStat": {
-                "name": "MAG_Resistance",
+                "name": "Magic Defense",
                 "multiplier": 1,
                 "bonus": "1d20"
               },
               "attackerStat": {
-                "name": "MAG_Power",
+                "name": "Magic Attack",
                 "multiplier": 1,
-                "bonus": "0"
+                "bonus": "1d20"
               }
             }
           },
           "damage": {
             "damagedStat": "HP",
             "amount": {
-              "baseAmount": "10d6",
-              "statsAffecting": ["MAG_Power"]
+              "baseAmount": "6d6",
+              "statsAffecting": ["Magic Damage"]
             },
             "onSavedMultiplier": 0.5
           }
@@ -232,11 +145,16 @@
       ]
     },
     {
-      "name": "Ice Line",
-      "description": "Shoot a bright flame from your fingers that explodes upon contact, torching everything in its vicinity.",
-      "tags": ["3rd Level Spells"],
-      "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
-      "statCost": [{ "name": "MAG_Points", "cost": 3 }],
+      "name": "Flamethrower",
+      "description": "A steady output of fiery death that is sure to crisp anything unlucky enough to be caught in its radius",
+      "tags": ["Special Ability", "Magical Attack"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
+      "statCost": [{ "name": "Power Points", "cost": 2 }],
+      "animationTypes": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
       "effects": [
         {
           "isPrimary": true,
@@ -247,7 +165,7 @@
             "type": "all"
           },
           "areaOfEffect": {
-            "range": 40,
+            "range": 20,
             "shape": "line",
             "radius": 7
           },
@@ -256,14 +174,14 @@
             "againstStatic": "",
             "comparisonStats": {
               "defenderStat": {
-                "name": "MAG_Resistance",
+                "name": "Magic Defense",
                 "multiplier": 1,
                 "bonus": "1d20"
               },
               "attackerStat": {
-                "name": "MAG_Power",
+                "name": "Magic Attack",
                 "multiplier": 1,
-                "bonus": "0"
+                "bonus": "1d20"
               }
             }
           },
@@ -271,7 +189,7 @@
             "damagedStat": "HP",
             "amount": {
               "baseAmount": "10d6",
-              "statsAffecting": ["MAG_Power"]
+              "statsAffecting": ["Magic Damage"]
             },
             "onSavedMultiplier": 0.5
           }
@@ -279,46 +197,91 @@
       ]
     },
     {
-      "name": "Blind",
-      "description": "Impair the target's eyes giving them -1d8 to Defense.",
-      "tags": ["Ranged Attacks"],
-      "turnEconomyCost": [{ "name": "Bonus Action", "cost": 1 }],
-      "statCost": [],
+      "name": "Flame Slam",
+      "description": "The elemental throws his weight on an opponent trying to crush them with their strength",
+      "tags": ["Special Ability", "Magical Attack"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
       "effects": [
         {
           "isPrimary": true,
-          "type": "Temporal",
-          "duration": 2,
+          "type": "Damage",
+          "duration": 0,
           "targetting": {
             "number": 1,
             "type": "all"
           },
           "areaOfEffect": {
-            "range": 50,
+            "range": 15,
             "shape": "select",
-            "radius": 20
+            "radius": 0
           },
           "succeedsOn": {
             "type": "comparison",
             "againstStatic": "",
             "comparisonStats": {
               "defenderStat": {
-                "name": "DEF",
+                "name": "Magic Defense",
                 "multiplier": 1,
-                "bonus": "0"
+                "bonus": "1d20"
               },
               "attackerStat": {
-                "name": "FIN",
+                "name": "Magic Attack",
                 "multiplier": 1,
                 "bonus": "1d20"
               }
             }
           },
           "damage": {
-            "damagedStat": "DEF",
+            "damagedStat": "HP",
             "amount": {
-              "baseAmount": "-5",
-              "statsAffecting": []
+              "baseAmount": "8d8",
+              "statsAffecting": ["Magic Damage"]
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Quick Punch",
+      "description": "A quick punch thrown by a heavy elemental hand. Ouch!",
+      "tags": ["Normal Ability", "Physical Attack"],
+      "turnEconomyCost": [{ "name": "Fast Action Points", "cost": 1 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Damage",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 15,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Defense",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "2d8",
+              "statsAffecting": ["Damage"]
             },
             "onSavedMultiplier": 0
           }

@@ -42,7 +42,9 @@ public class Character
         LoadBaseCharacterPresets(basePresetPool);
         LoadAdditionalCharacterPresets(additionalPresetPool);
 
-        //Calculate stats
+        // Calculate stats
+        // To do so, first set character relation stats to refer to this character
+        stats.SetCharacterInCharacterRelations(this);
         stats.CalculateAllStats();
 
         //Load UI Information
@@ -144,13 +146,6 @@ public class Character
     {
         CharacterStat stat = stats.GetStat(name);
         Assert.IsNotNull(stat, "No stat with name = " + name + " exists.");
-        return stats.GetStat(name);
-    }
-
-    //As GetStat but returns null incase the stat does not exist
-    public CharacterStat GetStat_NotExists(string name)
-    {
-        CharacterStat stat = stats.GetStat(name);
         return stats.GetStat(name);
     }
 

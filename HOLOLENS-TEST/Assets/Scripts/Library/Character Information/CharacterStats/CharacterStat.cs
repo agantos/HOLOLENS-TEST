@@ -69,10 +69,18 @@ public class CharacterStat
 
     //Stat Relations:
     //  -a stat can be affected by the value of another stat
-    public void AddStatRelation(CharacterStat stat, StatFunctor fun)
+    public void AddStatRelation(Character c, string stat, StatFunctor fun)
     {
-        if(!statRelations.ContainsKey(stat.name))
-            statRelations.Add(stat.name, new CharacterStatRelation(stat, fun));
+        if(!statRelations.ContainsKey(stat))
+            statRelations.Add(stat, new CharacterStatRelation(c, stat, fun));
+    }
+
+    public void SetCharacterInStatRelations(Character c)
+    {
+        foreach(CharacterStatRelation sr in statRelations.Values)
+        {
+            sr.character = c;
+        }
     }
 
     int CalculateStatRelations()
@@ -271,6 +279,19 @@ public class CharacterStat
             {
                 s += "  '";
                 s += statRelations[name].ToString() + name;
+                s += "'";
+            }
+        }
+        s += " ]\n";
+
+        //Permanent Effects
+        s += currTab + tab + "Permanent Effects: [ ";
+        if (permanentEffects.Count != 0)
+        {
+            foreach (string name in permanentEffects.Keys)
+            {
+                s += "  '";
+                s += name;
                 s += "'";
             }
         }

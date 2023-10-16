@@ -103,7 +103,7 @@ public class AdditionalCharacterPreset : CharacterPreset
     {
         foreach(CharacterStat stat in this.stats.GetStatistics().Values)
         {
-            if(character.GetStat_NotExists(name) == null)
+            if(!character.GetStats().GetStatistics().ContainsKey(stat.GetName()))
             {
                 character.AddStat(stat);
             }

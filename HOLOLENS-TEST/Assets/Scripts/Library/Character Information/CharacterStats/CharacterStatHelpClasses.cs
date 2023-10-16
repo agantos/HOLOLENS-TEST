@@ -28,13 +28,15 @@ public class StatFunctor
 }
 public class CharacterStatRelation
 {
-    public CharacterStat stat;
+    public Character character;
+    public string statName;
     public StatFunctor fun;
 
-    public CharacterStatRelation(CharacterStat stat, StatFunctor fun)
+    public CharacterStatRelation(Character c,  string stat,  StatFunctor fun)
     {
-        this.stat = stat;
+        this.statName = stat;
         this.fun = fun;
+        this.character = c;
     }
 
     public int CalculateRelation()
@@ -43,10 +45,10 @@ public class CharacterStatRelation
         switch (fun.op)
         {
             case "+":
-                relationAdd += fun.value * stat.GetCurrentValue();
+                relationAdd += fun.value * character.GetStat(statName).GetCurrentValue();
                 break;
             case "-":
-                relationAdd -= fun.value * stat.GetCurrentValue();
+                relationAdd -= fun.value * character.GetStat(statName).GetCurrentValue();
                 break;
             default:
                 Assert.IsTrue(false, "Invalid Operand");
@@ -62,12 +64,12 @@ public class CharacterStatRelation
         switch (fun.op)
         {
             case "+":
-                stat.CalculateCurrentValue_Pedantically();
-                relationAdd += fun.value * stat.GetCurrentValue();
+                character.GetStat(statName).CalculateCurrentValue_Pedantically();
+                relationAdd += fun.value * character.GetStat(statName).GetCurrentValue();
                 break;
             case "-":
-                stat.CalculateCurrentValue_Pedantically();
-                relationAdd -= fun.value * stat.GetCurrentValue();
+                character.GetStat(statName).CalculateCurrentValue_Pedantically();
+                relationAdd -= fun.value * character.GetStat(statName).GetCurrentValue();
                 break;
             default:
                 Assert.IsTrue(false, "Invalid Operand");

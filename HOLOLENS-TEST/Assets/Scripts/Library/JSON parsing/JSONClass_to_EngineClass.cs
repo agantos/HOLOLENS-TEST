@@ -59,7 +59,7 @@ public class JSONClass_to_EngineClass
                     string affectorStatName;
                     StatFunctor fun;
                     CreateStatRelation(statRelation, out affectorStatName, out fun);
-                    stats.AddStatRelation(stat.name, affectorStatName, fun);
+                    stats.AddStatRelation(null, stat.name, affectorStatName, fun);
                 }
             }
         }

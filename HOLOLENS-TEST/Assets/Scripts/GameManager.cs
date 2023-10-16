@@ -99,6 +99,9 @@ public class GameManager : MonoBehaviour
         foreach(Character c in characterPool.Values)
         {
             c.Initialize(basePresetPool, additionalPresetPool);
+
+            Debug.Log(c.name);
+            Debug.Log(c.GetStats().ToString(""));
         }
     }    
 

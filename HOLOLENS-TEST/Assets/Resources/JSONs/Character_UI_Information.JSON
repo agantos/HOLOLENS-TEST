@@ -1,26 +1,15 @@
 {
   "UIInfo": [
     {
-      "preset": "Human",
+      "preset": "Character",
       "bars": [
         { "color": "9E0000", "statName": "HP" },
-        { "color": "00488A", "statName": "MAG_Points" }
+        { "color": "00488A", "statName": "Power Points" }
       ],
-      "baseStats": ["FIN", "MAG"],
-      "keyAbilities": ["Fireball", "FIN Ranged Attack"],
+      "baseStats": ["Defense", "Magic Defense", "Attack", "Magic Attack"],
+      "keyAbilities": [],
       "statCategories": [
-        { "categoryName": "Magic", "statNames": ["MAG", "MAG_Damage", "MAG_Power", "MAG_Points"] },
-        { "categoryName": "Defense", "statNames": ["DEF", "MAG_Resistance", "Speed"] }
-      ]
-    },
-    {
-      "preset": "Dwarf",
-      "bars": [{ "color": "9E0000", "statName": "HP" }],
-      "baseStats": ["STR", "DEF", "FIN"],
-      "keyAbilities": ["Fireball", "STR Melee Attack"],
-      "statCategories": [
-        { "categoryName": "Strength", "statNames": ["STR", "STR_Damage"] },
-        { "categoryName": "Defense", "statNames": ["DEF", "MAG_Resistance", "Speed"] }
+        { "categoryName": "Defense", "statNames": ["Defense", "Magic Defense", "Physical Negation", "Magic Negation"] }
       ]
     }
   ]

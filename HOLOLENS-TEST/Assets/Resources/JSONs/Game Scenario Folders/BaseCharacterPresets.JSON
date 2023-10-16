@@ -59,7 +59,7 @@
           "statRelations": []
         }
       ],
-      "abilities": ["Gain Power", "Gain Lesser Power"]
+      "abilities": []
     }
   ],
   "additionalCharacterPresets": [
@@ -92,7 +92,7 @@
           "statRelations": []
         }
       ],
-      "abilities": ["Gain Power", "Gain Lesser Power"]
+      "abilities": ["Punch", "Slam", "Quick Punch"]
     },
     {
       "name": "Godling",
@@ -128,7 +128,7 @@
           "statRelations": []
         }
       ],
-      "abilities": ["Gain Power", "Gain Lesser Power"]
+      "abilities": []
     },
     {
       "name": "Paladin",
@@ -164,7 +164,7 @@
           "statRelations": []
         }
       ],
-      "abilities": ["Gain Power", "Gain Lesser Power"]
+      "abilities": []
     },
     {
       "name": "Warrior",
@@ -190,7 +190,7 @@
           "statRelations": []
         }
       ],
-      "abilities": ["Gain Power", "Gain Lesser Power"]
+      "abilities": []
     },
     {
       "name": "Sorcerer",
@@ -221,7 +221,7 @@
           "statRelations": []
         }
       ],
-      "abilities": ["Gain Power", "Gain Lesser Power"]
+      "abilities": []
     },
     {
       "name": "Rogue",
@@ -257,7 +257,7 @@
           "statRelations": []
         }
       ],
-      "abilities": ["Gain Power", "Gain Lesser Power"]
+      "abilities": []
     }
   ]
 }

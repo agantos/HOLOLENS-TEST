@@ -50,12 +50,20 @@ public class CharacterStats
         statistics.Add(name, new CharacterStat(name, staticValue));
     }
 
-    public void AddStatRelation(string affectedStatName, string affectorStatName, StatFunctor fun)
+    public void AddStatRelation(Character c, string affectedStatName, string affectorStatName, StatFunctor fun)
     {
         if (GetStat(affectorStatName) != null)
-            statistics[affectedStatName].AddStatRelation(GetStat(affectorStatName), fun);
+            statistics[affectedStatName].AddStatRelation(c, affectorStatName, fun);
         else
             Assert.IsTrue(false, "The stat you are trying to relate to does not exist.");
+    }
+
+    public void SetCharacterInCharacterRelations(Character c)
+    {
+        foreach(CharacterStat stat in statistics.Values)
+        {
+            stat.SetCharacterInStatRelations(c);
+        }
     }
 
     public void CalculateAllStats()
@@ -85,9 +93,8 @@ public class CharacterStats
     //Returns a stat with name = name or null if it doesn't exist in statistics
     public CharacterStat GetStat(string name)
     {
-        CharacterStat stat;
-        if (statistics.TryGetValue(name, out stat))
-            return stat;
+        if (statistics.ContainsKey(name))
+            return statistics[name];
         else
             return null;
     }

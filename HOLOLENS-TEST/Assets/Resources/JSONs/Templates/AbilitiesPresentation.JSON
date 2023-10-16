@@ -8,18 +8,18 @@
         "defender_AbilityFails": "Dodge"
       },
       "visualEffects": {
-        "onImpact": "",
-        "duringActivation": ""
+        "onImpact": "Fireball",
+        "duringActivation": "name"
       },
       "soundEffects": {
-        "onImpact": "",
-        "duringActivation": ""
+        "onImpact": "FireElemental/Fireball",
+        "duringActivation": "name"
       },
       "characterDialogue": {
-        "onImpact": "",
-        "duringActivation": "",
-        "defender_AbilityFails": "",
-        "defender_AbilitySucceeds": ""
+        "onImpact": "name",
+        "duringActivation": "name",
+        "defender_AbilityFails": "name",
+        "defender_AbilitySucceeds": "name"
       }
     },
     {
@@ -30,18 +30,18 @@
         "defender_AbilityFails": "Block"
       },
       "visualEffects": {
-        "onImpact": "",
-        "duringActivation": ""
+        "onImpact": "Fireball",
+        "duringActivation": "name"
       },
       "soundEffects": {
-        "onImpact": "",
-        "duringActivation": ""
+        "onImpact": "name",
+        "duringActivation": "name"
       },
       "characterDialogue": {
-        "onImpact": "",
-        "duringActivation": "",
-        "defender_AbilityFails": "",
-        "defender_AbilitySucceeds": ""
+        "onImpact": "name",
+        "duringActivation": "name",
+        "defender_AbilityFails": "name",
+        "defender_AbilitySucceeds": "name"
       }
     },
     {
@@ -52,18 +52,18 @@
         "defender_AbilityFails": "Dodge"
       },
       "visualEffects": {
-        "onImpact": "",
-        "duringActivation": ""
+        "onImpact": "Fireball",
+        "duringActivation": "Fireball_duringActivation"
       },
       "soundEffects": {
-        "onImpact": "",
-        "duringActivation": ""
+        "onImpact": "FireElemental/Fireball",
+        "duringActivation": "SpellSounds/During Cast"
       },
       "characterDialogue": {
-        "onImpact": "",
-        "duringActivation": "",
-        "defender_AbilityFails": "",
-        "defender_AbilitySucceeds": ""
+        "onImpact": "name",
+        "duringActivation": "name",
+        "defender_AbilityFails": "name",
+        "defender_AbilitySucceeds": "name"
       }
     }
   ]

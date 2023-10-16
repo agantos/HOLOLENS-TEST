@@ -1,7 +1,70 @@
 {
   "baseCharacterPresets": [
     {
-      "name": "Dwarf",
+      "name": "Character",
+      "statistics": [
+        {
+          "name": "HP",
+          "staticValue": 30,
+          "statRelations": []
+        },
+        {
+          "name": "Speed",
+          "staticValue": 20,
+          "statRelations": []
+        },
+        {
+          "name": "Defense",
+          "staticValue": 10,
+          "statRelations": []
+        },
+        {
+          "name": "Physical Negation",
+          "staticValue": 0,
+          "statRelations": ["+ | 0,2 | Defense"]
+        },
+        {
+          "name": "Magic Defense",
+          "staticValue": 10,
+          "statRelations": []
+        },
+        {
+          "name": "Magic Negation",
+          "staticValue": 0,
+          "statRelations": ["+ | 0,2 | Magic Defense"]
+        },
+        {
+          "name": "Attack",
+          "staticValue": 5,
+          "statRelations": []
+        },
+        {
+          "name": "Damage",
+          "staticValue": 0,
+          "statRelations": ["+ | 0,3 | Attack"]
+        },
+        {
+          "name": "Magic Attack",
+          "staticValue": 5,
+          "statRelations": []
+        },
+        {
+          "name": "Magic Damage",
+          "staticValue": 0,
+          "statRelations": ["+ | 0,3 | Magic Attack"]
+        },
+        {
+          "name": "Power Points",
+          "staticValue": 3,
+          "statRelations": []
+        }
+      ],
+      "abilities": []
+    }
+  ],
+  "additionalCharacterPresets": [
+    {
+      "name": "Elemental",
       "statistics": [
         {
           "name": "HP",
@@ -9,128 +72,192 @@
           "statRelations": []
         },
         {
-          "name": "Speed",
+          "name": "Defense",
+          "staticValue": 10,
+          "statRelations": []
+        },
+        {
+          "name": "Magic Defense",
+          "staticValue": 10,
+          "statRelations": []
+        },
+        {
+          "name": "Attack",
+          "staticValue": 10,
+          "statRelations": []
+        },
+        {
+          "name": "Magic Attack",
+          "staticValue": 10,
+          "statRelations": []
+        }
+      ],
+      "abilities": ["Punch", "Slam", "Quick Punch"]
+    },
+    {
+      "name": "Godling",
+      "statistics": [
+        {
+          "name": "HP",
           "staticValue": 30,
           "statRelations": []
         },
         {
-          "name": "DEF",
-          "staticValue": 18,
+          "name": "Speed",
+          "staticValue": 10,
           "statRelations": []
         },
         {
-          "name": "STR",
+          "name": "Defense",
           "staticValue": 5,
           "statRelations": []
         },
         {
-          "name": "FIN",
-          "staticValue": 4,
+          "name": "Magic Defense",
+          "staticValue": 15,
           "statRelations": []
         },
         {
-          "name": "MAG",
-          "staticValue": 4,
+          "name": "Magic Attack",
+          "staticValue": 15,
           "statRelations": []
         },
         {
-          "name": "STR_Damage",
-          "staticValue": 0,
-          "statRelations": ["+ | 2 | STR"]
-        },
-        {
-          "name": "FIN_Damage",
-          "staticValue": 0,
-          "statRelations": ["+ | 2 | FIN"]
-        },
-        {
-          "name": "MAG_Damage",
-          "staticValue": 0,
-          "statRelations": ["+ | 2 | MAG"]
-        },
-        {
-          "name": "MAG_Power",
-          "staticValue": 2,
-          "statRelations": ["+ | 4 | MAG"]
-        },
-        {
-          "name": "MAG_Resistance",
-          "staticValue": 2,
-          "statRelations": ["+ | 0,5 | MAG"]
-        },
-        {
-          "name": "MAG_Points",
-          "staticValue": 3,
-          "statRelations": ["+ | 1 | MAG"]
+          "name": "Power Points",
+          "staticValue": 1,
+          "statRelations": []
         }
       ],
-      "abilities": ["STR Ranged Attack", "STR Melee Attack"]
+      "abilities": []
     },
     {
-      "name": "Human",
+      "name": "Paladin",
       "statistics": [
         {
           "name": "HP",
-          "staticValue": 40,
+          "staticValue": 20,
           "statRelations": []
         },
         {
           "name": "Speed",
+          "staticValue": 10,
+          "statRelations": []
+        },
+        {
+          "name": "Attack",
+          "staticValue": 5,
+          "statRelations": []
+        },
+        {
+          "name": "Defense",
+          "staticValue": 5,
+          "statRelations": []
+        },
+        {
+          "name": "Magic Attack",
+          "staticValue": 5,
+          "statRelations": []
+        },
+        {
+          "name": "Magic Defense",
+          "staticValue": 5,
+          "statRelations": []
+        }
+      ],
+      "abilities": []
+    },
+    {
+      "name": "Warrior",
+      "statistics": [
+        {
+          "name": "HP",
           "staticValue": 30,
           "statRelations": []
         },
         {
-          "name": "DEF",
-          "staticValue": 14,
+          "name": "Speed",
+          "staticValue": 20,
           "statRelations": []
         },
         {
-          "name": "STR",
-          "staticValue": 3,
+          "name": "Defense",
+          "staticValue": 5,
           "statRelations": []
         },
         {
-          "name": "FIN",
-          "staticValue": 6,
+          "name": "Attack",
+          "staticValue": 10,
           "statRelations": []
-        },
-        {
-          "name": "MAG",
-          "staticValue": 6,
-          "statRelations": []
-        },
-        {
-          "name": "STR_Damage",
-          "staticValue": 0,
-          "statRelations": ["+ | 2 | STR"]
-        },
-        {
-          "name": "FIN_Damage",
-          "staticValue": 0,
-          "statRelations": ["+ | 2 | FIN"]
-        },
-        {
-          "name": "MAG_Damage",
-          "staticValue": 0,
-          "statRelations": ["+ | 2 | MAG"]
-        },
-        {
-          "name": "MAG_Power",
-          "staticValue": 3,
-          "statRelations": ["+ | 2,5 | MAG"]
-        },
-        {
-          "name": "MAG_Resistance",
-          "staticValue": 3,
-          "statRelations": ["+ | 0,5 | MAG"]
-        },
-        {
-          "name": "MAG_Points",
-          "staticValue": 3,
-          "statRelations": ["+ | 1 | MAG"]
         }
       ],
-      "abilities": ["FIN Ranged Attack", "FIN Melee Attack", "Fireball", "Ice Line"]
+      "abilities": []
+    },
+    {
+      "name": "Sorcerer",
+      "statistics": [
+        {
+          "name": "HP",
+          "staticValue": 10,
+          "statRelations": []
+        },
+        {
+          "name": "Speed",
+          "staticValue": 10,
+          "statRelations": []
+        },
+        {
+          "name": "Magic Defense",
+          "staticValue": 10,
+          "statRelations": []
+        },
+        {
+          "name": "Magic Attack",
+          "staticValue": 10,
+          "statRelations": []
+        },
+        {
+          "name": "Power Points",
+          "staticValue": 1,
+          "statRelations": []
+        }
+      ],
+      "abilities": []
+    },
+    {
+      "name": "Rogue",
+      "statistics": [
+        {
+          "name": "HP",
+          "staticValue": 15,
+          "statRelations": []
+        },
+        {
+          "name": "Speed",
+          "staticValue": 20,
+          "statRelations": []
+        },
+        {
+          "name": "Defense",
+          "staticValue": 5,
+          "statRelations": []
+        },
+        {
+          "name": "Magic Defense",
+          "staticValue": 5,
+          "statRelations": []
+        },
+        {
+          "name": "Attack",
+          "staticValue": 10,
+          "statRelations": []
+        },
+        {
+          "name": "Power Points",
+          "staticValue": 1,
+          "statRelations": []
+        }
+      ],
+      "abilities": []
     }
   ]
 }
