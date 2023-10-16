@@ -8,16 +8,21 @@ public class SelectTerrainPosition: MonoBehaviour, IMixedRealityPointerHandler, 
     /* SELECT DESTINATION */
     public void OnPointerUp(MixedRealityPointerEventData eventData)
     {
-        Vector3 newPosition;
+        Vector3 positionSelected;
 
         //Touch Pointed
         if (eventData.Pointer.BaseCursor.Position.y == 0)
-            newPosition = new Vector3(eventData.Pointer.Position.x, CharacterMoveManager.Instance.movee.transform.position.y, eventData.Pointer.Position.z);
+            positionSelected = new Vector3(eventData.Pointer.Position.x, CharacterMoveManager.Instance.movee.transform.position.y, eventData.Pointer.Position.z);
         //Ray Pointed
         else
-            newPosition = new Vector3(eventData.Pointer.BaseCursor.Position.x, CharacterMoveManager.Instance.movee.transform.position.y, eventData.Pointer.BaseCursor.Position.z);
+            positionSelected = new Vector3(eventData.Pointer.BaseCursor.Position.x, CharacterMoveManager.Instance.movee.transform.position.y, eventData.Pointer.BaseCursor.Position.z);
 
-        CharacterMoveManager.Instance.RecordMovement(newPosition);
+        
+
+        if (LineSelectScript.Instance != null)
+            LineSelectScript.Instance.LookAtPosition(positionSelected);
+        else
+            CharacterMoveManager.Instance.RecordMovement(positionSelected);
     }
 
     /* INTERFACE METHODS */

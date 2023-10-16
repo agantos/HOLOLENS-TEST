@@ -21,10 +21,12 @@ public class GameplayCalculatorFunctions
     }
 
     private GameplayCalculatorFunctions(GameObject gamespaceObject) {
+        
         //Set the gamespace Scale
         Assert.AreEqual(gamespaceObject.transform.lossyScale, gamespaceObject.transform.localScale);
         gamespaceScale = gamespaceObject.transform.localScale.x;
         random = new System.Random();
+        
         //Set 1_feet in local scale
         localscale_1feet = 0.3048f;
     }

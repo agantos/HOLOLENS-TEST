@@ -6,6 +6,7 @@ public class CharacterPreset
 {
     protected string name;
     protected List<string> presetAbilities = new List<string>();
+    public CharacterStats stats = new CharacterStats();
 
     public void AddPresetToCharacter(Character character)
     {
@@ -26,25 +27,25 @@ public class CharacterPreset
     }
 
 }
-
-//BaseCharacterPreset
-//  add their statistics to the character statitstics
-//      **if the same stat exists in both presets keep the first
-//  add their abilities to the character abilities
 public class BaseCharacterPreset : CharacterPreset
 {
-    public CharacterStats stats = new CharacterStats();
     public new void AddPresetToCharacter(Character character)
     {
         AddStatisticsToCharacter(character);
         AddAbilitiesToCharacter(character);
     }
 
+
+    //For Statistics: 
+    // - If the statistic of the preset already exists, do not add it
+    //
+    // - If the statistic of the preset does not exist, add it to the stats
+    //   of the character.
     void AddStatisticsToCharacter(Character character)
     {
         if (stats.GetStatistics() != null)
         {
-            foreach (string statName in stats.GetStatistics().Keys)
+            foreach (string statName in this.stats.GetStatistics().Keys)
             {
                 //Add the stat if it isno already contained in the dictionary.
                 if(!character.GetStats().GetStatistics().ContainsKey(statName))
@@ -86,26 +87,37 @@ public class BaseCharacterPreset : CharacterPreset
     }
 }
 
-//AdditionalCharacterPresets
-//  add the values of their statistics to the existing character statitstics
-//  add their abilities to the character abilities
 public class AdditionalCharacterPreset : CharacterPreset
 {
-    Dictionary<string, (string statName, int value)> permanentEffects;
+    public new void AddPresetToCharacter(Character character)
+    {
+        AddStatisticsToCharacter(character);
+        AddAbilitiesToCharacter(character);
+    }
+
+    //For Statistics: 
+    // - If the statistic of the preset already exists,
+    //   just add its static value to the existing stat as a permanent effect.
+    //
+    // - If the statistic of the preset does not exist, add it to the stats
+    //   of the character.
     void AddStatisticsToCharacter(Character character)
     {
-        if (permanentEffects != null)
+        foreach(CharacterStat stat in this.stats.GetStatistics().Values)
         {
-            foreach (string effectName in permanentEffects.Keys)
+            if(character.GetStat_NotExists(name) == null)
             {
-                character.GetStats().
-                    AddPermanentEffect( 
-                        permanentEffects[effectName].statName, 
-                        effectName, 
-                        permanentEffects[effectName].value
-                    );
+                character.AddStat(stat);
             }
-                
+            else
+            {
+                character.GetStats().AddPermanentEffect(
+                    stat.GetName(),
+                    this.name,
+                    stat.GetStaticValue()
+                );
+            }
+
         }
     }
 }

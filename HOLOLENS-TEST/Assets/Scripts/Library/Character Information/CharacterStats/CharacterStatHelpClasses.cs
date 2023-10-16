@@ -56,6 +56,27 @@ public class CharacterStatRelation
         return (int)relationAdd;
     }
 
+    public int CalculateRelation_Pedantically()
+    {
+        float relationAdd = 0;
+        switch (fun.op)
+        {
+            case "+":
+                stat.CalculateCurrentValue_Pedantically();
+                relationAdd += fun.value * stat.GetCurrentValue();
+                break;
+            case "-":
+                stat.CalculateCurrentValue_Pedantically();
+                relationAdd -= fun.value * stat.GetCurrentValue();
+                break;
+            default:
+                Assert.IsTrue(false, "Invalid Operand");
+                break;
+
+        }
+        return (int)relationAdd;
+    }
+
     public override string ToString()
     {
         string s = "";

@@ -130,7 +130,7 @@
           "statRelations": ["+ | 1 | MAG"]
         }
       ],
-      "abilities": ["FIN Ranged Attack", "FIN Melee Attack", "Fireball"]
+      "abilities": ["FIN Ranged Attack", "FIN Melee Attack", "Fireball", "Ice Line"]
     }
   ]
 }

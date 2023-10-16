@@ -1,0 +1,200 @@
+{
+  "abilities": [
+    {
+      "name": "Punch",
+      "description": "A punch thrown by a heavy elemental hand. Ouch!",
+      "tags": ["Normal Abilities"],
+      "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Damage",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 15,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Defense",
+                "multiplier": 1,
+                "bonus": "0"
+              },
+              "attackerStat": {
+                "name": "Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "2d8",
+              "statsAffecting": ["Attack"]
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Slam",
+      "description": "The elemental throws his weight on an opponent trying to crush them with their strength",
+      "tags": ["Normal Abilities"],
+      "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Damage",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 15,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Defense",
+                "multiplier": 1,
+                "bonus": "0"
+              },
+              "attackerStat": {
+                "name": "Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "6d8",
+              "statsAffecting": ["Attack"]
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fireball",
+      "description": "Shoot a bright flame from your fingers that explodes upon contact, torching everything in its vicinity.",
+      "tags": ["3rd Level Spells"],
+      "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
+      "statCost": [{ "name": "MAG_Points", "cost": 3 }],
+      "animationTypes": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Damage",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 50,
+            "shape": "circle",
+            "radius": 20
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "MAG_Resistance",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "MAG_Power",
+                "multiplier": 1,
+                "bonus": "0"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "10d6",
+              "statsAffecting": ["MAG_Power"]
+            },
+            "onSavedMultiplier": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Blind",
+      "description": "Impair the target's eyes giving them -1d8 to Defense.",
+      "tags": ["Ranged Attacks"],
+      "turnEconomyCost": [{ "name": "Bonus Action", "cost": 1 }],
+      "statCost": [],
+      "animationTypes": {
+        "attacker": "Attack_Ranged_Spell",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Temporal",
+          "duration": 2,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 50,
+            "shape": "select",
+            "radius": 20
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "DEF",
+                "multiplier": 1,
+                "bonus": "0"
+              },
+              "attackerStat": {
+                "name": "FIN",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "DEF",
+            "amount": {
+              "baseAmount": "-5",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    }
+  ]
+}

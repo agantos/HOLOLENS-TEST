@@ -5,11 +5,6 @@
       "description": "A ranged Strength attack made with a Bow, Crossbow or different Strength ranged weapon",
       "tags": ["Ranged Attacks"],
       "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
-      "animationTypes": {
-        "attacker": "Attack_Ranged_Spell",
-        "defender_AbilitySucceeds": "TakeHit",
-        "defender_AbilityFails": "Dodge"
-      },
       "effects": [
         {
           "isPrimary": true,
@@ -56,11 +51,6 @@
       "description": "A melee Strength attack made with a dagger, rapier or different Strength weapon",
       "tags": ["Melee Attacks"],
       "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
-      "animationTypes": {
-        "attacker": "Attack_Melee_Weapon",
-        "defender_AbilitySucceeds": "TakeHit",
-        "defender_AbilityFails": "Block"
-      },
       "effects": [
         {
           "isPrimary": true,
@@ -107,11 +97,6 @@
       "description": "A ranged finesse attack made with a Bow, Crossbow or different finesse ranged weapon",
       "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
       "tags": ["Ranged Attacks"],
-      "animationTypes": {
-        "attacker": "Attack_Ranged_Spell",
-        "defender_AbilitySucceeds": "TakeHit",
-        "defender_AbilityFails": "Dodge"
-      },
       "effects": [
         {
           "isPrimary": true,
@@ -158,11 +143,6 @@
       "description": "A melee finesse attack made with a dagger, rapier or different finesse weapon",
       "tags": ["Melee Attacks"],
       "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
-      "animationTypes": {
-        "attacker": "Attack_Melee_Weapon",
-        "defender_AbilitySucceeds": "TakeHit",
-        "defender_AbilityFails": "Dodge"
-      },
       "effects": [
         {
           "isPrimary": true,
@@ -210,11 +190,6 @@
       "tags": ["3rd Level Spells"],
       "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
       "statCost": [{ "name": "MAG_Points", "cost": 3 }],
-      "animationTypes": {
-        "attacker": "Spell_Cast_Area",
-        "defender_AbilitySucceeds": "TakeHit",
-        "defender_AbilityFails": "Dodge"
-      },
       "effects": [
         {
           "isPrimary": true,
@@ -257,16 +232,58 @@
       ]
     },
     {
+      "name": "Ice Line",
+      "description": "Shoot a bright flame from your fingers that explodes upon contact, torching everything in its vicinity.",
+      "tags": ["3rd Level Spells"],
+      "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
+      "statCost": [{ "name": "MAG_Points", "cost": 3 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Damage",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 40,
+            "shape": "line",
+            "radius": 7
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "MAG_Resistance",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "MAG_Power",
+                "multiplier": 1,
+                "bonus": "0"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "10d6",
+              "statsAffecting": ["MAG_Power"]
+            },
+            "onSavedMultiplier": 0.5
+          }
+        }
+      ]
+    },
+    {
       "name": "Blind",
       "description": "Impair the target's eyes giving them -1d8 to Defense.",
       "tags": ["Ranged Attacks"],
       "turnEconomyCost": [{ "name": "Bonus Action", "cost": 1 }],
       "statCost": [],
-      "animationTypes": {
-        "attacker": "Attack_Ranged_Spell",
-        "defender_AbilitySucceeds": "TakeHit",
-        "defender_AbilityFails": "Dodge"
-      },
       "effects": [
         {
           "isPrimary": true,

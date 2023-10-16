@@ -16,7 +16,6 @@ public class JSONAbility
 {
     public string name;
     public string description;
-    public JSONAbilityAnimationTypes animationTypes;
     public JSONCost[] turnEconomyCost;
     public JSONCost[] statCost;
     public JSONEffect[] effects;

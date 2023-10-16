@@ -62,9 +62,10 @@ public class CharacterStats
     {
         foreach (CharacterStat stat in statistics.Values)
         {
-            stat.CalculateCurrentValue();
+            stat.CalculateCurrentValue_Pedantically();
         }
     }
+
     public string ToString(string prevTab)
     {
         string tab = "  ";
@@ -98,7 +99,7 @@ public class CharacterStats
         {
             if (statistics[name].HasStatRelationWith(statName))
             {
-                statistics[name].CalculateCurrentValue();
+                statistics[name].CalculateCurrentValue_Pedantically();
                 RecalculateStatsAfterChange(name);
             }
         }

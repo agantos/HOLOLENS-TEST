@@ -126,6 +126,14 @@ public class Character
         Assert.IsNotNull(stat, "No stat with name = " + name + " exists.");
         return stats.GetStat(name);
     }
+
+    //As GetStat but returns null incase the stat does not exist
+    public CharacterStat GetStat_NotExists(string name)
+    {
+        CharacterStat stat = stats.GetStat(name);
+        return stats.GetStat(name);
+    }
+
     public Ability GetCharacterAbility(string name)
     {
         return AbilitiesManager.GetInstance().abilities[name];

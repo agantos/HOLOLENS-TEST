@@ -5,6 +5,7 @@ using UnityEngine;
 public class RadiusSelectScript : MonoBehaviour
 {
     public GameObject selectToken;
+
     public List<GameObject> tokensCreated;
     public int radius;
     //should represent what 1 feet is in the game
@@ -13,7 +14,7 @@ public class RadiusSelectScript : MonoBehaviour
     //- Adds collided Character to defenders
     //- Creates a token that indicates the collided is selected
     void OnTriggerEnter(Collider other)
-    {
+    {       
         if(other.gameObject.tag == "Player")
         {
             //Spawn selection token.

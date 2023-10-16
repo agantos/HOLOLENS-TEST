@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class VFXManager : MonoBehaviour
 {
+    //Fill in Unity Editor
     public GameObject Environment;
-    public static VFXManager Instance { get; private set; }
+    public AudioSource onImpactSoundEffect;
+    public AudioSource duringActivationSoundEffect;
 
-    private Dictionary<string, GameObject> loadedVFX;
+    public static VFXManager Instance { get; private set; }
 
     private void Awake()
     {
@@ -28,7 +30,7 @@ public class VFXManager : MonoBehaviour
         return fireball.GetComponent<ParticleSystem>();
     }
 
-    void PlaceEffect(string effectName, ParticleSystem effect, Transform parent = null, Vector3 offset = default(Vector3))
+    Vector3 PlaceEffect(string effectName, ParticleSystem effect, Transform parent = null, Vector3 positionOffset = default(Vector3), Vector3 rotationOffset = default(Vector3))
     {
         //Keep original scale on a variable
         Vector3 originalScale = effect.gameObject.transform.localScale;
@@ -44,13 +46,13 @@ public class VFXManager : MonoBehaviour
         effect.gameObject.transform.localPosition = Vector3.zero;
        
         //Place the effect on the spot
-        offset = AddOffset(effectName, offset);
-        effect.gameObject.transform.localPosition += offset;                  
-    }
+        positionOffset = AddOffset(effectName, positionOffset);
+        effect.gameObject.transform.localPosition += positionOffset;
 
-    void PlaceEffectAtBottomOfCharacter(string effectName, ParticleSystem effect, Transform character, Vector3 offset)
-    {
+        //Rotate the effect according to the offset
+        effect.gameObject.transform.Rotate(rotationOffset);
         
+        return effect.gameObject.transform.localPosition;
     }
 
     //Create custom offset for effects if needed
@@ -68,14 +70,35 @@ public class VFXManager : MonoBehaviour
         effect.Play();
     }
 
-    public ParticleSystem ActivateVFX(string name, Transform parent, Vector3 offset = default(Vector3))
+    public ParticleSystem ActivateVFX(string name, Transform parent, out Vector3 position, Vector3 offsetPosition = default(Vector3), Vector3 offsetRotation = default(Vector3))
     {
         ParticleSystem effect = LoadEffect(name);
 
-        PlaceEffect(name, effect, parent, offset);
-        PlayEffect(effect);       
+        position = PlaceEffect(name, effect, parent, offsetPosition, offsetRotation);
+        PlayEffect(effect);        
 
         return effect;
+    }
+
+    public void PlaySoundFX_onImpact(string path, Vector3 position)
+    {
+        path = "SoundFX/" + path;
+        onImpactSoundEffect.gameObject.transform.localPosition = position;
+        onImpactSoundEffect.clip = (AudioClip)Resources.Load(path);
+        onImpactSoundEffect.Play();
+    }
+
+    public void PlaySoundFX_duringActivation(string path, Vector3 position)
+    {    
+        path = "SoundFX/" + path;
+        duringActivationSoundEffect.gameObject.transform.localPosition = position;
+        duringActivationSoundEffect.clip = (AudioClip)Resources.Load(path);
+        duringActivationSoundEffect.Play();
+    }
+
+    public void DeactivateDuringActivationSoundFX()
+    {
+        duringActivationSoundEffect.Stop();
     }
 
     public void DeactivateVFX(ParticleSystem effect)

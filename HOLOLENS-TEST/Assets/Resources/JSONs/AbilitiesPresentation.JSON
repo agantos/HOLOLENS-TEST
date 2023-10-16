@@ -12,7 +12,7 @@
         "duringActivation": "name"
       },
       "soundEffects": {
-        "onImpact": "name",
+        "onImpact": "FireElemental/Fireball",
         "duringActivation": "name"
       },
       "characterDialogue": {
@@ -56,8 +56,30 @@
         "duringActivation": "Fireball_duringActivation"
       },
       "soundEffects": {
+        "onImpact": "FireElemental/Fireball",
+        "duringActivation": "SpellSounds/During Cast"
+      },
+      "characterDialogue": {
         "onImpact": "name",
-        "duringActivation": "name"
+        "duringActivation": "name",
+        "defender_AbilityFails": "name",
+        "defender_AbilitySucceeds": "name"
+      }
+    },
+    {
+      "abilityName": "Ice Line",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "IcePath",
+        "duringActivation": "Fireball_duringActivation"
+      },
+      "soundEffects": {
+        "onImpact": "FireElemental/Fireball",
+        "duringActivation": "SpellSounds/During Cast"
       },
       "characterDialogue": {
         "onImpact": "name",

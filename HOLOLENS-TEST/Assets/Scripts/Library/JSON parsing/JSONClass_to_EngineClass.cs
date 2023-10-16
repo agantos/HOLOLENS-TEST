@@ -202,16 +202,9 @@ public class JSONClass_to_EngineClass
     }
 
     public static Ability CreateAbility(JSONAbility jsonAbility)
-    {
-        JSONAbilityAnimationTypes jsonAnimTypes = jsonAbility.animationTypes;
-        Animations animTypes = new Animations(jsonAnimTypes.GetAttackerAnimationType(), 
-                                                                    jsonAnimTypes.GetDefender_AbilitySucceeds(), 
-                                                                    jsonAnimTypes.GetDefender_AbilityFails()
-        );
-           
+    {      
         Ability toReturn = new Ability( jsonAbility.name, 
-                                        jsonAbility.description, 
-                                        animTypes, 
+                                        jsonAbility.description,
                                         CreatePrimaryEffects(jsonAbility.effects),
                                         jsonAbility.tags
         );
@@ -275,6 +268,8 @@ public class JSONClass_to_EngineClass
 
         character.name = jsonCharacter.name;
         character.player = jsonCharacter.player;
+
+        //Turn Economy
         character.turnEconomy = new Dictionary<string, int>();
         character.currentTurnEconomy = new Dictionary<string, int>();
         foreach (JSONTurnEconomy actionEconomy in jsonCharacter.turnEconomy)

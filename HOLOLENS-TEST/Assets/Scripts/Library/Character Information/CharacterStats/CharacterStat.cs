@@ -71,7 +71,8 @@ public class CharacterStat
     //  -a stat can be affected by the value of another stat
     public void AddStatRelation(CharacterStat stat, StatFunctor fun)
     {
-        statRelations.Add(stat.name, new CharacterStatRelation(stat, fun));
+        if(!statRelations.ContainsKey(stat.name))
+            statRelations.Add(stat.name, new CharacterStatRelation(stat, fun));
     }
 
     int CalculateStatRelations()
@@ -82,6 +83,19 @@ public class CharacterStat
             foreach (CharacterStatRelation relation in statRelations.Values)
             {
                 sum += relation.CalculateRelation();
+            }
+        }
+        return sum;
+    }
+
+    int CalculateStatRelations_Pedantically()
+    {
+        int sum = 0;
+        if (statRelations != null && statRelations.Count > 0)
+        {
+            foreach (CharacterStatRelation relation in statRelations.Values)
+            {
+                sum += relation.CalculateRelation_Pedantically();
             }
         }
         return sum;
@@ -197,6 +211,12 @@ public class CharacterStat
         CalculateMaxValue();
     }
 
+    public void CalculateCurrentValue_Pedantically()
+    {
+        currentValue = staticValue + CalculateStatRelations_Pedantically() + CalculatePermanentEffects() + CalculateTemporalEffects() - damage;
+        CalculateMaxValue();
+    }
+
     public void CalculateMaxValue()
     {
         maxValue = staticValue + CalculateStatRelations() + CalculatePermanentEffects() + CalculateTemporalEffects();
@@ -211,6 +231,11 @@ public class CharacterStat
     public int GetMaxValue()
     {
         return maxValue;
+    }
+
+    public int GetStaticValue()
+    {
+        return staticValue;
     }
 
     public string GetName()
