@@ -41,7 +41,7 @@
         {
           "name": "Damage",
           "staticValue": 0,
-          "statRelations": ["+ | 0,5 | Attack"]
+          "statRelations": ["+ | 0,3 | Attack"]
         },
         {
           "name": "Magic Attack",
@@ -51,7 +51,7 @@
         {
           "name": "Magic Damage",
           "staticValue": 0,
-          "statRelations": ["+ | 0,5 | Damage"]
+          "statRelations": ["+ | 0,3 | Damage"]
         },
         {
           "name": "Power Points",

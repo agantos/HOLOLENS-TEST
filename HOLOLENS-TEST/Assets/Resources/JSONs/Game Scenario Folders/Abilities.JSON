@@ -3,8 +3,8 @@
     {
       "name": "Punch",
       "description": "A punch thrown by a heavy elemental hand. Ouch!",
-      "tags": ["Normal Abilities"],
-      "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
+      "tags": ["Normal Ability", "Physical Attack"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 1 }],
       "effects": [
         {
           "isPrimary": true,
@@ -26,7 +26,7 @@
               "defenderStat": {
                 "name": "Defense",
                 "multiplier": 1,
-                "bonus": "0"
+                "bonus": "1d20"
               },
               "attackerStat": {
                 "name": "Attack",
@@ -39,7 +39,7 @@
             "damagedStat": "HP",
             "amount": {
               "baseAmount": "2d8",
-              "statsAffecting": ["Attack"]
+              "statsAffecting": ["Damage"]
             },
             "onSavedMultiplier": 0
           }
@@ -49,8 +49,8 @@
     {
       "name": "Slam",
       "description": "The elemental throws his weight on an opponent trying to crush them with their strength",
-      "tags": ["Normal Abilities"],
-      "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
+      "tags": ["Normal Ability", "Physical Attack"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
       "effects": [
         {
           "isPrimary": true,
@@ -72,7 +72,7 @@
               "defenderStat": {
                 "name": "Defense",
                 "multiplier": 1,
-                "bonus": "0"
+                "bonus": "1d20"
               },
               "attackerStat": {
                 "name": "Attack",
@@ -85,7 +85,7 @@
             "damagedStat": "HP",
             "amount": {
               "baseAmount": "6d8",
-              "statsAffecting": ["Attack"]
+              "statsAffecting": ["Damage"]
             },
             "onSavedMultiplier": 0
           }
@@ -94,10 +94,10 @@
     },
     {
       "name": "Fireball",
-      "description": "Shoot a bright flame from your fingers that explodes upon contact, torching everything in its vicinity.",
-      "tags": ["3rd Level Spells"],
-      "turnEconomyCost": [{ "name": "Action", "cost": 1 }],
-      "statCost": [{ "name": "MAG_Points", "cost": 3 }],
+      "description": "Flames whoosh and erupt violently burning everything inside the spell's radius",
+      "tags": ["Special Ability", "Magical Attack"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
+      "statCost": [{ "name": "Power Points", "cost": 2 }],
       "animationTypes": {
         "attacker": "Spell_Cast_Area",
         "defender_AbilitySucceeds": "TakeHit",
@@ -122,22 +122,22 @@
             "againstStatic": "",
             "comparisonStats": {
               "defenderStat": {
-                "name": "MAG_Resistance",
+                "name": "Magic Defense",
                 "multiplier": 1,
                 "bonus": "1d20"
               },
               "attackerStat": {
-                "name": "MAG_Power",
+                "name": "Magic Attack",
                 "multiplier": 1,
-                "bonus": "0"
+                "bonus": "1d20"
               }
             }
           },
           "damage": {
             "damagedStat": "HP",
             "amount": {
-              "baseAmount": "10d6",
-              "statsAffecting": ["MAG_Power"]
+              "baseAmount": "6d6",
+              "statsAffecting": ["Magic Damage"]
             },
             "onSavedMultiplier": 0.5
           }
@@ -145,51 +145,143 @@
       ]
     },
     {
-      "name": "Blind",
-      "description": "Impair the target's eyes giving them -1d8 to Defense.",
-      "tags": ["Ranged Attacks"],
-      "turnEconomyCost": [{ "name": "Bonus Action", "cost": 1 }],
-      "statCost": [],
+      "name": "Flamethrower",
+      "description": "A steady output of fiery death that is sure to crisp anything unlucky enough to be caught in its radius",
+      "tags": ["Special Ability", "Magical Attack"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
+      "statCost": [{ "name": "Power Points", "cost": 2 }],
       "animationTypes": {
-        "attacker": "Attack_Ranged_Spell",
+        "attacker": "Spell_Cast_Area",
         "defender_AbilitySucceeds": "TakeHit",
         "defender_AbilityFails": "Dodge"
       },
       "effects": [
         {
           "isPrimary": true,
-          "type": "Temporal",
-          "duration": 2,
+          "type": "Damage",
+          "duration": 0,
           "targetting": {
             "number": 1,
             "type": "all"
           },
           "areaOfEffect": {
-            "range": 50,
-            "shape": "select",
-            "radius": 20
+            "range": 20,
+            "shape": "line",
+            "radius": 7
           },
           "succeedsOn": {
             "type": "comparison",
             "againstStatic": "",
             "comparisonStats": {
               "defenderStat": {
-                "name": "DEF",
+                "name": "Magic Defense",
                 "multiplier": 1,
-                "bonus": "0"
+                "bonus": "1d20"
               },
               "attackerStat": {
-                "name": "FIN",
+                "name": "Magic Attack",
                 "multiplier": 1,
                 "bonus": "1d20"
               }
             }
           },
           "damage": {
-            "damagedStat": "DEF",
+            "damagedStat": "HP",
             "amount": {
-              "baseAmount": "-5",
-              "statsAffecting": []
+              "baseAmount": "10d6",
+              "statsAffecting": ["Magic Damage"]
+            },
+            "onSavedMultiplier": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Flame Slam",
+      "description": "The elemental throws his weight on an opponent trying to crush them with their strength",
+      "tags": ["Special Ability", "Magical Attack"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Damage",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 15,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Magic Defense",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "Magic Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "8d8",
+              "statsAffecting": ["Magic Damage"]
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Quick Punch",
+      "description": "A quick punch thrown by a heavy elemental hand. Ouch!",
+      "tags": ["Normal Ability", "Physical Attack"],
+      "turnEconomyCost": [{ "name": "Fast Action Points", "cost": 1 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Damage",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 15,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Defense",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "2d8",
+              "statsAffecting": ["Damage"]
             },
             "onSavedMultiplier": 0
           }

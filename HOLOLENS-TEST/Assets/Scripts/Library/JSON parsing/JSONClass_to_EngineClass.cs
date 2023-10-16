@@ -67,18 +67,19 @@ public class JSONClass_to_EngineClass
     }
 
     //Create BaseCharacterPreset from the class created from the parsed JSON 
-    public static BaseCharacterPreset CreateBaseCharacterPreset(JSONBaseCharacterPresetWrapper JSONpreset)
+    private static BaseCharacterPreset CreateBaseCharacterPreset(JSONCharacterPreset JSONpreset)
     {
         BaseCharacterPreset preset = new BaseCharacterPreset();
-        preset.SetStats(CreateCharacterStats(JSONpreset.GetStatistics()));
-        preset.SetName(JSONpreset.GetName());
+        preset.SetStats(CreateCharacterStats(JSONpreset.statistics));
+        preset.SetAbilities(JSONpreset.abilities);
+        preset.SetName(JSONpreset.name);
         return preset;
     }
 
     //Create BaseCharacterPreset from the class created from the parsed JSON 
-    private static BaseCharacterPreset CreateBaseCharacterPreset(JSONBaseCharacterPreset JSONpreset)
+    private static AdditionalCharacterPreset CreateAdditionalCharacterPreset(JSONCharacterPreset JSONpreset)
     {
-        BaseCharacterPreset preset = new BaseCharacterPreset();
+        AdditionalCharacterPreset preset = new AdditionalCharacterPreset();
         preset.SetStats(CreateCharacterStats(JSONpreset.statistics));
         preset.SetAbilities(JSONpreset.abilities);
         preset.SetName(JSONpreset.name);
@@ -251,15 +252,30 @@ public class JSONClass_to_EngineClass
     }
 
     //Create a dictionary of BaseCharacterPresets from the parsed JSON 
-    public static Dictionary<string, BaseCharacterPreset> CreateBaseCharacterPresetDictionary(JSONBaseCharacterPreset[] basePresets)
+    public static Dictionary<string, BaseCharacterPreset> CreateBaseCharacterPresetDictionary(JSONCharacterPreset[] basePresets)
     {
-        Dictionary<string, BaseCharacterPreset> list = new Dictionary<string, BaseCharacterPreset>();
-        foreach (JSONBaseCharacterPreset preset in basePresets)
+        Dictionary<string, BaseCharacterPreset> dictionary = new Dictionary<string, BaseCharacterPreset>();
+        foreach (JSONCharacterPreset preset in basePresets)
         {
-            list.Add(preset.name, CreateBaseCharacterPreset(preset));
+            dictionary.Add(preset.name, CreateBaseCharacterPreset(preset));
         }
 
-        return list;
+        return dictionary;
+    }
+
+    public static Dictionary<string, AdditionalCharacterPreset> CreateAdditionalCharacterPresetDictionary(JSONCharacterPreset[] additionalPresets)
+    {
+        Dictionary<string, AdditionalCharacterPreset> dictionary = new Dictionary<string, AdditionalCharacterPreset>();
+        if (additionalPresets != null)
+        {
+            foreach (JSONCharacterPreset preset in additionalPresets)
+            {
+                dictionary.Add(preset.name, CreateAdditionalCharacterPreset(preset));
+            }
+        }
+        
+
+        return dictionary;
     }
 
     public static Character CreateCharacter(JSONCharacter jsonCharacter)

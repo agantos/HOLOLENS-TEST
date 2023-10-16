@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class JSONBaseCharacterPreset
+public class JSONCharacterPreset
 {
     public string name;
     public JSONstat[] statistics;
@@ -13,7 +13,7 @@ public class JSONBaseCharacterPreset
 [System.Serializable]
 public class JSONBaseCharacterPresetWrapper
 {
-    public JSONBaseCharacterPreset baseCharacterPreset;
+    public JSONCharacterPreset baseCharacterPreset;
 
     public JSONstat[] GetStatistics() { return baseCharacterPreset.statistics; }
     public string GetName() { return baseCharacterPreset.name; }
@@ -22,5 +22,6 @@ public class JSONBaseCharacterPresetWrapper
 [System.Serializable]
 public class JSONBaseCharacterPresetsWrapper
 {
-    public JSONBaseCharacterPreset[] baseCharacterPresets;
+    public JSONCharacterPreset[] baseCharacterPresets;
+    public JSONCharacterPreset[] additionalCharacterPresets;
 }

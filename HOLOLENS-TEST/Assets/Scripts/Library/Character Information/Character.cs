@@ -35,12 +35,42 @@ public class Character
     //Multiplayer Related
     public int player;
 
-    //Loading Character Methods
-    public void LoadCharacterBasicPresetsFromPool(Dictionary<string, BaseCharacterPreset> basePresetsPool)
+    //Initialize Character
+    public void Initialize(Dictionary<string, BaseCharacterPreset> basePresetPool, Dictionary<string, AdditionalCharacterPreset> additionalPresetPool)
+    {
+        //Load Presets
+        LoadBaseCharacterPresets(basePresetPool);
+        LoadAdditionalCharacterPresets(additionalPresetPool);
+
+        //Calculate stats
+        stats.CalculateAllStats();
+
+        //Load UI Information
+        CreateCharacter_UI_Info();
+    }
+
+    void LoadBaseCharacterPresets(Dictionary<string, BaseCharacterPreset> presetPool)
     {
         foreach (string presetName in basePresets)
         {
-            basePresetsPool[presetName].AddPresetToCharacter(this);
+            presetPool[presetName].AddPresetToCharacter(this);
+        }
+    }
+
+    void LoadAdditionalCharacterPresets(Dictionary<string, AdditionalCharacterPreset> presetPool)
+    {
+        foreach (string presetName in additionalPresets)
+        {
+            presetPool[presetName].AddPresetToCharacter(this);
+        }
+    }
+
+    public void CreateCharacter_UI_Info()
+    {
+        character_UI_info = new Character_UI_Information();
+        foreach (string preset in basePresets)
+        {
+            character_UI_info.AddPresetInformation(GameManager.GetInstance().presets_UI_Info[preset]);
         }
     }
 
@@ -106,16 +136,6 @@ public class Character
 
         //Temporal Effects
         stats.UpdateTemporalEffects();
-    }
-
-    //Create character UI information
-    public void CreateCharacter_UI_Info()
-    {
-        character_UI_info = new Character_UI_Information();
-        foreach (string preset in basePresets)
-        {
-            character_UI_info.AddPresetInformation(GameManager.GetInstance().presets_UI_Info[preset]);
-        }
     }
 
     //Get Methods

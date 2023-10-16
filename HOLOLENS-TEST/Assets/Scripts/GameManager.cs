@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     //Variables
     public Dictionary<string, BaseCharacterPreset> basePresetPool;
+    public Dictionary<string, AdditionalCharacterPreset> additionalPresetPool;
     public Dictionary<string, Character> characterPool;
     public Dictionary<string, Character> playingCharacterPool = new Dictionary<string, Character>();
     public Dictionary<string, GameObject> playingCharacterGameObjects = new Dictionary<string, GameObject>();
@@ -71,8 +72,9 @@ public class GameManager : MonoBehaviour
     void LoadFromJsons()
     {
         //Load Character Presets
-        JSONBaseCharacterPresetsWrapper parsedBasePresets = JSONFile_to_JSONClass.ParseBaseCharacterPresets("JSONs/BaseCharacterPresets");
-        basePresetPool = JSONClass_to_EngineClass.CreateBaseCharacterPresetDictionary(parsedBasePresets.baseCharacterPresets);
+        JSONBaseCharacterPresetsWrapper parsedPresets = JSONFile_to_JSONClass.ParseBaseCharacterPresets("JSONs/BaseCharacterPresets");
+        basePresetPool = JSONClass_to_EngineClass.CreateBaseCharacterPresetDictionary(parsedPresets.baseCharacterPresets);
+        additionalPresetPool = JSONClass_to_EngineClass.CreateAdditionalCharacterPresetDictionary(parsedPresets.additionalCharacterPresets);
 
         //Load Ability Rule-Based Information
         JSONAbilities jsonAbilities = JSONFile_to_JSONClass.ParseAbilities("JSONs/Abilities");
@@ -96,9 +98,7 @@ public class GameManager : MonoBehaviour
     {
         foreach(Character c in characterPool.Values)
         {
-            c.LoadCharacterBasicPresetsFromPool(basePresetPool);
-            c.GetStats().CalculateAllStats();
-            c.CreateCharacter_UI_Info();
+            c.Initialize(basePresetPool, additionalPresetPool);
         }
     }    
 

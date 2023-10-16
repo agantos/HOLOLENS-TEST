@@ -26,6 +26,36 @@ public class CharacterPreset
         }
     }
 
+    public void SetStats(CharacterStats s) { stats = s; }
+    public void SetName(string name) { this.name = name; }
+
+    public void SetAbilities(string[] abilities)
+    {
+        foreach (string ability in abilities)
+        {
+            presetAbilities.Add(ability);
+        }
+    }
+
+    public void AddAbility(string ability)
+    {
+        presetAbilities.Add(ability);
+    }
+
+    public string ToString(string prevTab)
+    {
+        string tab = "  ";
+        string currTab = tab + prevTab;
+        string s = prevTab + "Preset " + name + "\n";
+        s += stats.ToString(currTab) + "\n";
+        s += prevTab + "Abilities: [  ";
+        foreach (string ability in presetAbilities)
+        {
+            s += ability + "  |  ";
+        }
+        s += "]";
+        return s;
+    }
 }
 public class BaseCharacterPreset : CharacterPreset
 {
@@ -34,7 +64,6 @@ public class BaseCharacterPreset : CharacterPreset
         AddStatisticsToCharacter(character);
         AddAbilitiesToCharacter(character);
     }
-
 
     //For Statistics: 
     // - If the statistic of the preset already exists, do not add it
@@ -53,37 +82,6 @@ public class BaseCharacterPreset : CharacterPreset
             }
                 
         }
-    }
-
-    public void SetStats(CharacterStats s){ stats = s; }
-    public void SetName(string name) { this.name = name; }
-
-    public void SetAbilities(string[] abilities)
-    {
-        foreach(string ability in abilities)
-        {
-            presetAbilities.Add(ability);
-        }
-    }
-
-    public void AddAbility(string ability)
-    {
-        presetAbilities.Add(ability);
-    }
-
-    public string ToString(string prevTab)
-    {
-        string tab = "  ";
-        string currTab = tab + prevTab;
-        string s = prevTab + "Preset " + name + "\n";
-        s += stats.ToString(currTab) + "\n";
-        s += prevTab + "Abilities: [  ";
-        foreach(string ability in presetAbilities)
-        {
-            s += ability + "  |  ";
-        }
-        s += "]";
-        return s;
     }
 }
 
