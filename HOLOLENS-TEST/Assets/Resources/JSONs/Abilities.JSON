@@ -410,7 +410,7 @@
           "damage": {
             "damagedStat": "Attack",
             "amount": {
-              "baseAmount": "2d6",
+              "baseAmount": "2d3",
               "statsAffecting": []
             },
             "onSavedMultiplier": 0
@@ -457,7 +457,7 @@
           "damage": {
             "damagedStat": "Magic Attack",
             "amount": {
-              "baseAmount": "2d6",
+              "baseAmount": "2d3",
               "statsAffecting": []
             },
             "onSavedMultiplier": 0
@@ -551,7 +551,7 @@
           "damage": {
             "damagedStat": "Magic Attack",
             "amount": {
-              "baseAmount": "2d6",
+              "baseAmount": "2d3",
               "statsAffecting": []
             },
             "onSavedMultiplier": 0
@@ -567,8 +567,8 @@
           "damage": {
             "damagedStat": "Attack",
             "amount": {
-              "baseAmount": "2d6",
-              "statsAffecting": [""]
+              "baseAmount": "2d3",
+              "statsAffecting": []
             },
             "onSavedMultiplier": 0
           }
@@ -619,7 +619,735 @@
           "damage": {
             "damagedStat": "Magic Defense",
             "amount": {
-              "baseAmount": "2d6",
+              "baseAmount": "2d3",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
+          }
+        },
+        {
+          "isPrimary": false,
+          "type": "Temporal",
+          "duration": 3,
+          "succeedsOn": {
+            "type": "automatic"
+          },
+          "damage": {
+            "damagedStat": "Defense",
+            "amount": {
+              "baseAmount": "2d3",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Weakening Curse",
+      "description": "A magical curse that decreases the target's Attack and Magic Attack for 2 rounds",
+      "tags": ["Normal Ability", "Debuff"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
+      "statCost": [],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Temporal",
+          "duration": 2,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 50,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Magic Defense",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "Magic Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "Attack",
+            "amount": {
+              "baseAmount": "-2d3",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
+          }
+        },
+        {
+          "isPrimary": false,
+          "type": "Temporal",
+          "duration": 3,
+          "succeedsOn": {
+            "type": "automatic"
+          },
+          "damage": {
+            "damagedStat": "Magic Attack",
+            "amount": {
+              "baseAmount": "2d3",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Curse of Vulnerability",
+      "description": "A magical curse that decreases the target's Defense and Magic Defense for 2 rounds",
+      "tags": ["Normal Ability", "Debuff"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
+      "statCost": [],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Temporal",
+          "duration": 2,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 50,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Magic Defense",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "Magic Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "Defense",
+            "amount": {
+              "baseAmount": "-2d3",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
+          }
+        },
+        {
+          "isPrimary": false,
+          "type": "Temporal",
+          "duration": 3,
+          "succeedsOn": {
+            "type": "automatic"
+          },
+          "damage": {
+            "damagedStat": "Magic Defense",
+            "amount": {
+              "baseAmount": "2d3",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Arcane Blast",
+      "description": "Magical energy causes arcane crystals to erupt from the earth damaging anyone in the vincinity",
+      "tags": ["Normal Ability", "Magical Attack"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
+      "statCost": [],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Damage",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 50,
+            "shape": "circle",
+            "radius": 15
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Magic Defense",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "Magic Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "3d6",
+              "statsAffecting": ["Magic Damage"]
+            },
+            "onSavedMultiplier": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Slash",
+      "description": "A basic sword slash. It is described as basic, but it is made with a heavy two handed weapon wielded by a strong warrior and the damage it deals is not basic at all.",
+      "tags": ["Normal Ability", "Physical Attack"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 1 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Damage",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 10,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Defense",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "2d8",
+              "statsAffecting": ["Damage"]
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Powerful Slash",
+      "description": "A powerful sword slash. If a normal slash hurts this much I don't want to imagine what the powerful variation does.",
+      "tags": ["Normal Ability", "Physical Attack"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 1 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Damage",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 10,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Defense",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "6d8",
+              "statsAffecting": ["Damage"]
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Decimating Slash",
+      "description": "A slash that is more focused on impeding the enemies' defenses rather than dealing damage. It reduces the target's Defense and Magic Defense",
+      "tags": ["Normal Ability", "Physical Attack"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 1 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Damage",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 10,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Defense",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "2d8",
+              "statsAffecting": ["Damage"]
+            },
+            "onSavedMultiplier": 0
+          }
+        },
+        {
+          "isPrimary": false,
+          "type": "Temporal",
+          "duration": 3,
+          "succeedsOn": {
+            "type": "automatic"
+          },
+          "damage": {
+            "damagedStat": "Defense",
+            "amount": {
+              "baseAmount": "2d3",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
+          }
+        },
+        {
+          "isPrimary": false,
+          "type": "Temporal",
+          "duration": 3,
+          "succeedsOn": {
+            "type": "automatic"
+          },
+          "damage": {
+            "damagedStat": "Magic Defense",
+            "amount": {
+              "baseAmount": "2d3",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Inspire!",
+      "description": "An insirational roar that increases the target's Attack for 2 rounds",
+      "tags": ["Normal Ability", "Buff"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
+      "statCost": [],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Temporal",
+          "duration": 2,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 30,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "automatic",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "",
+                "multiplier": 1,
+                "bonus": ""
+              },
+              "attackerStat": {
+                "name": "",
+                "multiplier": 1,
+                "bonus": ""
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "Attack",
+            "amount": {
+              "baseAmount": "2d3",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Free Powerful Slash",
+      "description": "This ability does not cost any action points, only Power Points. The dreaded Powerful Slash in the charming price of only 2 power points!",
+      "tags": ["Special Ability", "Physical Attack"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 0 }],
+      "statCost": [{ "name": "Power Points", "cost": 2 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Damage",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 10,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Defense",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "6d8",
+              "statsAffecting": ["Damage"]
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Powerful Slash Wave",
+      "description": "What is better than Powerful Slash? Powerful Slash that hits many enemies!",
+      "tags": ["Special Ability", "Physical Attack"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 1 }],
+      "statCost": [{ "name": "Power Points", "cost": 2 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Damage",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 40,
+            "shape": "line",
+            "radius": 7
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Defense",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "6d8",
+              "statsAffecting": ["Damage"]
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sword Attack",
+      "description": "A sword attack that does mild damage",
+      "tags": ["Normal Ability", "Physical Attack"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 1 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Damage",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 10,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Defense",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "1d8",
+              "statsAffecting": ["Damage"]
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cure Wounds",
+      "description": "A prayer that restores a small amount of the target's HP",
+      "tags": ["Normal Ability", "Healing"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 1 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Healing",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 30,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "automatic"
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "1d8",
+              "statsAffecting": ["Magic Damage"]
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cure Moderate Wounds",
+      "description": "A prayer that restores a moderate amount of the target's HP",
+      "tags": ["Special Ability", "Healing"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
+      "statCost": [{ "name": "Power Points", "cost": 2 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Healing",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 30,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "automatic"
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "3d8",
+              "statsAffecting": ["Magic Damage"]
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mass Cure Wounds",
+      "description": "A prayer that restores a moderate amount of HP in an area",
+      "tags": ["Special Ability", "Healing"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 1 }],
+      "statCost": [{ "name": "Power Points", "cost": 2 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Healing",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 40,
+            "shape": "circle",
+            "radius": 20
+          },
+          "succeedsOn": {
+            "type": "automatic"
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "3d8",
+              "statsAffecting": ["Magic Damage"]
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Holy Fire",
+      "description": "A prayer brings down the holy flames of the gods to smite the evil",
+      "tags": ["Special Ability", "Magical Attack"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
+      "statCost": [{ "name": "Power Points", "cost": 2 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Damage",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 50,
+            "shape": "circle",
+            "radius": 20
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Magic Defense",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "Magic Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "6d6",
+              "statsAffecting": ["Magic Damage"]
+            },
+            "onSavedMultiplier": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Holy Avenger",
+      "description": "The gods bestow you a great blessing that increases your HP for 20 and Attack, Magic Attack, Defense and Magic Defense for 2d6",
+      "tags": ["Normal Ability", "Physical Attack"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 1 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Temporal",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 2,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "automatic",
+            "againstStatic": ""
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "-20",
               "statsAffecting": []
             },
             "onSavedMultiplier": 0
@@ -636,7 +1364,353 @@
             "damagedStat": "Defense",
             "amount": {
               "baseAmount": "2d6",
-              "statsAffecting": [""]
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
+          }
+        },
+        {
+          "isPrimary": false,
+          "type": "Temporal",
+          "duration": 3,
+          "succeedsOn": {
+            "type": "automatic"
+          },
+          "damage": {
+            "damagedStat": "Magic Defense",
+            "amount": {
+              "baseAmount": "2d6",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
+          }
+        },
+        {
+          "isPrimary": false,
+          "type": "Temporal",
+          "duration": 3,
+          "succeedsOn": {
+            "type": "automatic"
+          },
+          "damage": {
+            "damagedStat": "Attack",
+            "amount": {
+              "baseAmount": "2d6",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
+          }
+        },
+        {
+          "isPrimary": false,
+          "type": "Temporal",
+          "duration": 3,
+          "succeedsOn": {
+            "type": "automatic"
+          },
+          "damage": {
+            "damagedStat": "Magic Attack",
+            "amount": {
+              "baseAmount": "2d6",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sneak Attack",
+      "description": "An attack to the vital points of the targets",
+      "tags": ["Normal Ability", "Physical Attack"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Damage",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 10,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Defense",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "3d8",
+              "statsAffecting": ["Damage"]
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dagger: Impede Attack",
+      "description": "A dagger that with a poison that decreases the target's Attack for 2 rounds.",
+      "tags": ["Normal Ability", "Debuff"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 1 }],
+      "statCost": [],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Damage",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 10,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Defense",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "1d4",
+              "statsAffecting": ["Damage"]
+            },
+            "onSavedMultiplier": 0
+          }
+        },
+        {
+          "isPrimary": false,
+          "type": "Temporal",
+          "duration": 3,
+          "succeedsOn": {
+            "type": "automatic"
+          },
+          "damage": {
+            "damagedStat": "Attack",
+            "amount": {
+              "baseAmount": "2d3",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dagger: Impede Magic Attack",
+      "description": "A dagger that with a poison that decreases the target's Magic Attack for 2 rounds.",
+      "tags": ["Normal Ability", "Debuff"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 1 }],
+      "statCost": [],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Damage",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 10,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Defense",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "1d4",
+              "statsAffecting": ["Damage"]
+            },
+            "onSavedMultiplier": 0
+          }
+        },
+        {
+          "isPrimary": false,
+          "type": "Temporal",
+          "duration": 3,
+          "succeedsOn": {
+            "type": "automatic"
+          },
+          "damage": {
+            "damagedStat": "Magic Attack",
+            "amount": {
+              "baseAmount": "2d3",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dagger: Impede Defense",
+      "description": "A dagger that with a poison that decreases the target's Defense for 2 rounds.",
+      "tags": ["Normal Ability", "Debuff"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 1 }],
+      "statCost": [],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Damage",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 10,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Defense",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "1d4",
+              "statsAffecting": ["Damage"]
+            },
+            "onSavedMultiplier": 0
+          }
+        },
+        {
+          "isPrimary": false,
+          "type": "Temporal",
+          "duration": 3,
+          "succeedsOn": {
+            "type": "automatic"
+          },
+          "damage": {
+            "damagedStat": "Defense",
+            "amount": {
+              "baseAmount": "2d3",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dagger: Impede Magic Defense",
+      "description": "A dagger that with a poison that decreases the target's Magic Defense for 2 rounds.",
+      "tags": ["Normal Ability", "Debuff"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 1 }],
+      "statCost": [],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Damage",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 10,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Defense",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "1d4",
+              "statsAffecting": ["Damage"]
+            },
+            "onSavedMultiplier": 0
+          }
+        },
+        {
+          "isPrimary": false,
+          "type": "Temporal",
+          "duration": 3,
+          "succeedsOn": {
+            "type": "automatic"
+          },
+          "damage": {
+            "damagedStat": "Magic Defense",
+            "amount": {
+              "baseAmount": "2d3",
+              "statsAffecting": []
             },
             "onSavedMultiplier": 0
           }

@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     public bool hasSetInitiative = false;
     public int player = 0;
 
+    //Rules specific methods
+
     private GameManager() { GetInstance(); }
 
     public static GameManager GetInstance()

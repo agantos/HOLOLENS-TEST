@@ -23,7 +23,7 @@ public class LineSelectScript : MonoBehaviour
         }
     }
 
-    List<GameObject> tokensCreated = new List<GameObject>();
+    Dictionary<string, GameObject> tokens = new Dictionary<string, GameObject>();
 
     public void LookAtPosition(Vector3 position) {
         position.y = transform.position.y;
@@ -61,9 +61,12 @@ public class LineSelectScript : MonoBehaviour
                 token.transform.localScale *= 1 / other.transform.localScale.x;
 
                 //Place selection token on top of model.
-                float playerHeight = other.transform.localPosition.y + 0.5f;
+                float playerHeight = other.transform.localPosition.y + other.transform.localScale.y;
+                token.transform.localPosition = Vector3.zero;
                 token.transform.localPosition += new Vector3(0, playerHeight + 0.3f, 0);
-                tokensCreated.Add(token);
+                
+                //Add it to the token's dictionary
+                tokens.Add(other.gameObject.GetComponent<CharacterScript>().charName, token);
 
                 //Add character to the selected characters
                 SelectTarget(other.gameObject);
@@ -84,8 +87,8 @@ public class LineSelectScript : MonoBehaviour
             if (other.gameObject.GetComponent<CharacterScript>().charName != CastingAbilityManager.Instance.attacker.name)
             {
                 //Destroy spawned selection token
-                GameObject obj = other.transform.Find("IsSelected(Clone)").gameObject;
-                tokensCreated.Remove(obj);
+                GameObject obj = tokens[other.GetComponent<CharacterScript>().charName];
+                tokens.Remove(other.GetComponent<CharacterScript>().charName);
                 Destroy(obj);
 
                 //Remove character from the selected characters
@@ -108,27 +111,25 @@ public class LineSelectScript : MonoBehaviour
 
     public void OnAbilityActivate()
     {
-        //Destroy the Line
-        Instance = null;
-        Destroy(gameObject);
-
-        //Despawn select marker
-        foreach (GameObject obj in tokensCreated)
+        //Despawn all selection tokens
+        foreach (GameObject obj in tokens.Values)
         {
             Destroy(obj);
         }
+
+        //Destroy the spawned radius effect
+        Destroy(gameObject);
     }
 
     public void OnAbilityDeActivate()
     {
-        //Destroy the spawned radius effect
-        Instance = null;
-        Destroy(gameObject);
-
-        //Despawn select marker
-        foreach (GameObject obj in tokensCreated)
+        //Despawn all selection tokens
+        foreach (GameObject obj in tokens.Values)
         {
             Destroy(obj);
         }
+
+        //Destroy the spawned radius effect
+        Destroy(gameObject);
     }
 }

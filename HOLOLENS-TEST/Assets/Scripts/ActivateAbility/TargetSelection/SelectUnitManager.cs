@@ -78,8 +78,9 @@ public class SelectUnitManager : MonoBehaviour, IMixedRealityPointerHandler, IMi
         //Models may be rescaled but the scale will be uniform. Remove this scale from the token.
 
         //Place selection token on top of model.
-        float playerHeight = gameObject.GetComponent<CharacterScript>().model.transform.localScale.y + 0.4f;
-        token.transform.localPosition += new Vector3(0, playerHeight + 0.1f, 0);
+        float playerHeight = gameObject.transform.localPosition.y + gameObject.transform.localScale.y;
+        token.transform.localPosition = Vector3.zero;
+        token.transform.localPosition += new Vector3(0, playerHeight + 0.3f, 0);
     }
 
     public void OnAbilityResolved()

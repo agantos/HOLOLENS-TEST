@@ -5,8 +5,8 @@ using UnityEngine;
 public class RadiusSelectScript : MonoBehaviour
 {
     public GameObject selectToken;
+    Dictionary<string, GameObject> tokens = new Dictionary<string, GameObject>();
 
-    public List<GameObject> tokensCreated;
     public int radius;
     //should represent what 1 feet is in the game
     public float baseRadiusX, baseRadiusY, baseRadiusZ;
@@ -19,15 +19,17 @@ public class RadiusSelectScript : MonoBehaviour
         {
             //Spawn selection token.
             GameObject token = Object.Instantiate(selectToken);                      
-            token.transform.SetParent(other.transform, false);
-                        
+            token.transform.SetParent(other.transform, false);           
+
             //Models may be rescaled but the scale will be uniform. Remove this scale from the token.
             token.transform.localScale *= 1 / other.transform.localScale.x;
 
             //Place selection token on top of model.
-            float playerHeight = other.transform.localPosition.y + 0.5f;
+            float playerHeight = other.transform.localPosition.y + other.transform.localScale.y;
+            token.transform.localPosition = Vector3.zero;
             token.transform.localPosition += new Vector3(0, playerHeight + 0.3f, 0);
-            tokensCreated.Add(token);
+
+            tokens.Add(other.gameObject.GetComponent<CharacterScript>().charName, token);
 
             //Add character to the selected characters
             SelectTarget(other.gameObject);
@@ -43,8 +45,8 @@ public class RadiusSelectScript : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             //Destroy spawned selection token
-            GameObject obj = other.transform.Find("IsSelected(Clone)").gameObject;
-            tokensCreated.Remove(obj);
+            GameObject obj = tokens[other.GetComponent<CharacterScript>().charName];
+            tokens.Remove(other.GetComponent<CharacterScript>().charName);
             Destroy(obj);
 
             //Remove character from the selected characters
@@ -55,9 +57,15 @@ public class RadiusSelectScript : MonoBehaviour
     //Set the size the AOE selection
     public void SetScale()
     {
-        int abilityRadiusInFeet = CastingAbilityManager.GetInstance().abilityToCastInformation.effects[0].areaOfEffect.radius;
+        int abilityRadiusInFeet = CastingAbilityManager.GetInstance().
+                                            abilityToCastInformation.effects[0].areaOfEffect.radius;
+        
         float abilityRadiusUnityScaled = GameplayCalculatorFunctions.FeetToUnityMeasurement(abilityRadiusInFeet);
-        gameObject.transform.localScale = new Vector3(abilityRadiusUnityScaled*2, abilityRadiusUnityScaled * 2, abilityRadiusUnityScaled*2);
+        
+        gameObject.transform.localScale = new Vector3(  abilityRadiusUnityScaled*2, 
+                                                        abilityRadiusUnityScaled * 2, 
+                                                        abilityRadiusUnityScaled*2
+        );
     }
 
     void SelectTarget(GameObject target) {
@@ -73,25 +81,25 @@ public class RadiusSelectScript : MonoBehaviour
 
     public void OnAbilityActivate()
     {
-        //Destroy the spawned radius effect
-        Destroy(gameObject);
-
         //Despawn select marker
-        foreach(GameObject obj in tokensCreated)
+        foreach (GameObject obj in tokens.Values)
         {
             Destroy(obj);
         }
+
+        //Destroy the spawned radius effect
+        Destroy(gameObject);        
     }
 
     public void OnAbilityDeActivate()
     {
-        //Destroy the spawned radius effect
-        Destroy(gameObject);
-
         //Despawn select marker
-        foreach (GameObject obj in tokensCreated)
+        foreach (GameObject obj in tokens.Values)
         {
             Destroy(obj);
         }
+
+        //Destroy the spawned radius effect
+        Destroy(gameObject);        
     }
 }

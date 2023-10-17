@@ -45,9 +45,18 @@ public class CharacterStat
             currentValue = this.currentValue
         };
 
-        //Stat relation are shared between different character stats.
-        clone.statRelations = new Dictionary<string, CharacterStatRelation>(this.statRelations);
+        //Each stat relation should also be cloned
+        Dictionary<string, CharacterStatRelation> clonedStatRelations = new Dictionary<string, CharacterStatRelation>();
+        foreach (string statRelationName in statRelations.Keys)
+        {
+            CharacterStatRelation newRelation = new CharacterStatRelation(statRelations[statRelationName]);
+            clonedStatRelations.Add(statRelationName, newRelation);
+        }
+        clone.statRelations = clonedStatRelations;
+
         clone.permanentEffects = new Dictionary<string, int>(this.permanentEffects);
+
+        //Temporal effects are currently shared between cloned instances
         clone.temporalEffects = new Dictionary<string, StatTemporalEffect>(this.temporalEffects);
 
         return clone;
@@ -129,9 +138,10 @@ public class CharacterStat
         {
             foreach (string effectName in permanentEffects.Keys)
             {
-                currentValue += permanentEffects[effectName];
+                sum += permanentEffects[effectName];
             }
         }
+        
         return sum;
     }
     private int AssertandGetPermanentEffect(string name)
@@ -216,13 +226,13 @@ public class CharacterStat
     public void CalculateCurrentValue()
     {
         currentValue = staticValue + CalculateStatRelations() + CalculatePermanentEffects() + CalculateTemporalEffects() - damage;
-        CalculateMaxValue();
+        maxValue = currentValue + damage;
     }
 
     public void CalculateCurrentValue_Pedantically()
     {
         currentValue = staticValue + CalculateStatRelations_Pedantically() + CalculatePermanentEffects() + CalculateTemporalEffects() - damage;
-        CalculateMaxValue();
+        maxValue = currentValue + damage;
     }
 
     public void CalculateMaxValue()

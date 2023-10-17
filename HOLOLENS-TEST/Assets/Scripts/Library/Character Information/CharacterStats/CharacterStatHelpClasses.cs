@@ -39,6 +39,13 @@ public class CharacterStatRelation
         this.character = c;
     }
 
+    //Clone
+    public CharacterStatRelation(CharacterStatRelation cr)
+    {
+        this.statName = cr.statName;
+        this.fun = cr.fun;
+    }
+
     public int CalculateRelation()
     {
         float relationAdd = 0;
@@ -55,6 +62,10 @@ public class CharacterStatRelation
                 break;
 
         }
+
+        if (statName == "Magic Defense")
+            Debug.Log("Normal" + character.name + " " + character.GetStat(statName).GetCurrentValue());
+
         return (int)relationAdd;
     }
 
@@ -76,6 +87,10 @@ public class CharacterStatRelation
                 break;
 
         }
+
+        if (statName == "Magic Defense")
+            Debug.Log(character.name + " " + character.GetStat(statName).GetCurrentValue());
+
         return (int)relationAdd;
     }
 

@@ -234,7 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e252e83adc24c064d9d290ab9567c529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectToken: {fileID: 4701887471863925201, guid: a5064ba5d7220a248907e3406fe50bcd, type: 3}
+  selectToken: {fileID: 1585582155912907161, guid: e3d1a2186ec26c74b95751018f07d3fd, type: 3}
   positionAtEnd: {fileID: 8672300368319238402}
   arrowBody: {fileID: 8672300367659921122}
 --- !u!54 &8672300368422803970
