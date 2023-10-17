@@ -84,13 +84,13 @@ public class Character
     }   
    
     //Creates the application the data for the ability
-    public void GetAbilityApplicationData(string abilityName, out List<bool> abilitySuccessList, 
+    public void GetAbilityApplicationData(string abilityName, out List<bool> abilitySucceedsOnDefendersList, 
                                 out List<EffectApplicationData> applicationDataList, 
                                 List<Character> defenders = null, Character attacker = null
     )
     {
 
-        abilitySuccessList = new List<bool>();
+        abilitySucceedsOnDefendersList = new List<bool>();
         applicationDataList = new List<EffectApplicationData>();
 
         if (abilities.TryGetValue(abilityName, out abilityName))
@@ -99,7 +99,7 @@ public class Character
             {
                 bool succeeds;
                 applicationDataList.AddRange(AbilitiesManager.GetAbilityApplicationData(abilityName, out succeeds, defender, attacker));
-                abilitySuccessList.Add(succeeds);
+                abilitySucceedsOnDefendersList.Add(succeeds);
             }
                 
             AbilitiesManager.ApplyAbilityCost(abilityName, attacker);

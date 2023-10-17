@@ -195,14 +195,27 @@ public class Logger : MonoBehaviour
 
     public void Log_Apply_Temporal(int damage, string damagedStatName, int duration, Character defender, Character attacker)
     {
-        AddToLine(GetColoredString(attacker.name, ColorType.CHARACTER_1));
-        AddToLine(" deals ");
-        AddToLine(GetBoldedString(damage.ToString()));
-        AddToLine(" damage to ");
-        AddToLine(GetColoredString(defender.name, ColorType.CHARACTER_2) + "'s ");
-        AddToLine(damagedStatName);
-        AddToLine(" for " + duration + " rounds ");
-
+        if (damage < 0)
+        {
+            AddToLine(GetColoredString(attacker.name, ColorType.CHARACTER_1));
+            AddToLine(" decreases ");
+            AddToLine(GetColoredString(defender.name, ColorType.CHARACTER_2) + "'s ");
+            AddToLine(damagedStatName);
+            AddToLine(" by ");
+            AddToLine(GetBoldedString((-damage).ToString()));
+            AddToLine(" for " + duration + " rounds ");
+        }
+        else
+        {
+            AddToLine(GetColoredString(attacker.name, ColorType.CHARACTER_1));
+            AddToLine(" enhances ");
+            AddToLine(GetColoredString(defender.name, ColorType.CHARACTER_2) + "'s ");
+            AddToLine(damagedStatName);
+            AddToLine(" by ");
+            AddToLine(GetBoldedString(damage.ToString()));
+            AddToLine(" for " + duration + " rounds ");
+        }
+        
         AddLine();
     }
 

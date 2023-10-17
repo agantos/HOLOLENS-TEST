@@ -57,7 +57,7 @@ public class CharacterStat
         clone.permanentEffects = new Dictionary<string, int>(this.permanentEffects);
 
         //Temporal effects are currently shared between cloned instances
-        clone.temporalEffects = new Dictionary<string, StatTemporalEffect>(this.temporalEffects);
+        clone.temporalEffects = new Dictionary<string, StatTemporalEffect>();
 
         return clone;
     }
@@ -173,12 +173,23 @@ public class CharacterStat
     }
     public void AddTemporalEffect(string effectName, int duration, int value)
     {
+
         temporalEffects.Add(effectName, new StatTemporalEffect(effectName, value, duration));
     }
 
     public void RemoveTemporalEffect(string effectName)
     {
         temporalEffects.Remove(effectName);
+    }
+
+    public bool EffectAlreadyExists(string effectName)
+    {
+        return temporalEffects.ContainsKey(effectName);
+    }
+
+    public void SetTemporalEffectDuration(string effectName, int duration)
+    {
+        temporalEffects[effectName].duration = duration;
     }
 
     //Moves the duration of all temporal effects in a stat.

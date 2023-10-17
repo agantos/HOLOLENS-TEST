@@ -42,6 +42,7 @@ public class JSONVisualEffects
 {
     public string onImpact;
     public string duringActivation;
+    public string onDefender;
 }
 
 [System.Serializable]

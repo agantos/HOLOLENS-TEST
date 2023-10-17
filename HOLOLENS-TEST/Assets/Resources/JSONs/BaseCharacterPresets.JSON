@@ -92,7 +92,7 @@
           "statRelations": []
         }
       ],
-      "abilities": ["Punch", "Slam", "Quick Punch"]
+      "abilities": ["Punch", "Slam", "Quick Punch", "Elemental Heal"]
     },
     {
       "name": "Godling",
@@ -171,7 +171,14 @@
           "statRelations": []
         }
       ],
-      "abilities": []
+      "abilities": [
+        "Sword Attack",
+        "Cure Wounds",
+        "Cure Moderate Wounds",
+        "Mass Cure Wounds",
+        "Holy Fire",
+        "Holy Avenger"
+      ]
     },
     {
       "name": "Warrior",
@@ -197,7 +204,14 @@
           "statRelations": []
         }
       ],
-      "abilities": []
+      "abilities": [
+        "Slash",
+        "Powerful Slash",
+        "Decimating Slash",
+        "Inspire!",
+        "Free Powerful Slash",
+        "Powerful Slash Wave"
+      ]
     },
     {
       "name": "Sorcerer",
@@ -228,7 +242,7 @@
           "statRelations": []
         }
       ],
-      "abilities": []
+      "abilities": ["Weakening Curse", "Curse of Vulnerability", "Arcane Blast"]
     },
     {
       "name": "Rogue",
@@ -264,7 +278,13 @@
           "statRelations": []
         }
       ],
-      "abilities": []
+      "abilities": [
+        "Sneak Attack",
+        "Dagger: Impede Attack",
+        "Dagger: Impede Magic Attack",
+        "Dagger: Impede Defense",
+        "Dagger: Impede Magic Defense"
+      ]
     }
   ]
 }

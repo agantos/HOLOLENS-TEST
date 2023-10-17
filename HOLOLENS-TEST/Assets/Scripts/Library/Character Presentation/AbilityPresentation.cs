@@ -6,11 +6,13 @@ public class VisualEffects
 {
     public string onImpact;
     public string duringActivation;
+    public string onDefender;
 
-    public VisualEffects(string onImpact, string duringActivation)
+    public VisualEffects(string onImpact, string duringActivation, string onDefender)
     {
         this.onImpact = onImpact;
         this.duringActivation = duringActivation;
+        this.onDefender = onDefender;
     }
 }
 
@@ -73,7 +75,8 @@ public class AbilityPresentation
 
         visualEffects = new VisualEffects(
             abilityPresentation.visualEffects.onImpact, 
-            abilityPresentation.visualEffects.duringActivation
+            abilityPresentation.visualEffects.duringActivation,
+            abilityPresentation.visualEffects.onDefender
         );
 
         soundEffects = new SoundEffects(

@@ -21,7 +21,7 @@ public class CastingAbilityManager : MonoBehaviour
     public List<Character> defenderCharacters = new List<Character>();
     public List<GameObject> defendersGameObject = new List<GameObject>();
     
-    public List<bool> abilitySuccessList = new List<bool>();
+    public List<bool> abilitySucceedsOnDefendersList = new List<bool>();
     public Ability abilityToCastInformation;
     public AbilityPresentation abilityToCastPresentation;
 
@@ -155,7 +155,7 @@ public class CastingAbilityManager : MonoBehaviour
         //Play DuringActivationVFX
         ParticleSystem duringActivationVFX = null;
 
-        PlayDuringActivationFX(abilityToCastPresentation.visualEffects.duringActivation, out duringActivationVFX);
+        PlayDuringActivationFX(out duringActivationVFX);
 
         /*
          * Wait for the animation to register
@@ -177,7 +177,8 @@ public class CastingAbilityManager : MonoBehaviour
         ActivateDefenderAnimations();
 
         //For VFX
-        PlayImpactVFX();
+        PlayOnImpactFX();
+        PlayDefendersVFX();
 
         DeactivateDuringActivationFX(duringActivationVFX);
 
@@ -206,7 +207,13 @@ public class CastingAbilityManager : MonoBehaviour
     public void ActivateAbility()
     {
         //Get Data to apply the ability
-        attacker.GetAbilityApplicationData(abilityToCastInformation.name, out abilitySuccessList, out applicationData, defenderCharacters, attacker);
+        attacker.GetAbilityApplicationData(
+            abilityToCastInformation.name, 
+            out abilitySucceedsOnDefendersList, 
+            out applicationData, 
+            defenderCharacters, 
+            attacker
+        );
 
         if (radiusSelect)
         {
@@ -219,7 +226,7 @@ public class CastingAbilityManager : MonoBehaviour
 
 
         //Sync AbilityManager with all the others
-        MultiplayerCallsAbilityCast.Instance.Propagate_AbilityManagerSync(abilityToCastInformation.name, attacker.name, GetDefenderNameList(), GetApplicationDataStrings(), abilitySuccessList.ToArray());
+        MultiplayerCallsAbilityCast.Instance.Propagate_AbilityManagerSync(abilityToCastInformation.name, attacker.name, GetDefenderNameList(), GetApplicationDataStrings(), abilitySucceedsOnDefendersList.ToArray());
 
         //Deactivate any spawned objects related to the activation of the ability
         DeactivateAbilityActivationObjects();
@@ -284,7 +291,7 @@ public class CastingAbilityManager : MonoBehaviour
 
         foreach (bool b in abilitySuccessList)
         {
-            GetInstance().abilitySuccessList.Add(b);
+            GetInstance().abilitySucceedsOnDefendersList.Add(b);
         }
 
         foreach (string defender in defenders)
@@ -349,7 +356,8 @@ public class CastingAbilityManager : MonoBehaviour
 
         ApplyAbilityEffects();
         ActivateDefenderAnimations();
-        PlayImpactVFX();
+        PlayOnImpactFX();
+
 
         /*
          * Wait for the animation to end
@@ -377,10 +385,10 @@ public class CastingAbilityManager : MonoBehaviour
 
     public void ActivateDefenderAnimations()
     {
-        Assert.AreEqual(abilitySuccessList.Count, defendersGameObject.Count);
-        for (int i = 0; i < abilitySuccessList.Count; i++)
+        Assert.AreEqual(abilitySucceedsOnDefendersList.Count, defendersGameObject.Count);
+        for (int i = 0; i < abilitySucceedsOnDefendersList.Count; i++)
         {
-            if (abilitySuccessList[i])
+            if (abilitySucceedsOnDefendersList[i])
             {
                 defendersGameObject[i].GetComponent<AnimationManager>()
                     .IdleTo_Animation(abilityToCastPresentation.animations.defender_AbilitySucceeds);
@@ -395,10 +403,10 @@ public class CastingAbilityManager : MonoBehaviour
 
     public void ReturnDefendersToIdleAnimation()
     {
-        Assert.AreEqual(abilitySuccessList.Count, defendersGameObject.Count);
-        for (int i = 0; i < abilitySuccessList.Count; i++)
+        Assert.AreEqual(abilitySucceedsOnDefendersList.Count, defendersGameObject.Count);
+        for (int i = 0; i < abilitySucceedsOnDefendersList.Count; i++)
         {
-            if (abilitySuccessList[i])
+            if (abilitySucceedsOnDefendersList[i])
             {
                 defendersGameObject[i].GetComponent<AnimationManager>()
                     .Animation_ToIdle(abilityToCastPresentation.animations.defender_AbilitySucceeds);
@@ -441,14 +449,14 @@ public class CastingAbilityManager : MonoBehaviour
         defenderCharacters.Clear();
         defendersGameObject.Clear();
 
-        abilitySuccessList.Clear();
+        abilitySucceedsOnDefendersList.Clear();
         applicationData.Clear();
 
         CurrentSelectionType = AbilitySelectType.INACTIVE;
     }
 
     /*-------------------------- FX --------------------------*/
-    public void PlayImpactVFX()
+    public void PlayOnImpactFX()
     {
         Vector3 effectPosition = Vector3.zero;
          
@@ -498,14 +506,16 @@ public class CastingAbilityManager : MonoBehaviour
         }
     }
 
-    //Models are created with their bottom center being (0,0,0)
-    public void PlayDuringActivationFX(string effectName, out ParticleSystem fx)
+    public void PlayDuringActivationFX(out ParticleSystem fx)
     {
+        //Models are created with their bottom center being (0,0,0)
         Vector3 LocalPositionBottomOfAttacker = Vector3.zero;
         Vector3 effectPosition = Vector3.zero;
 
         Transform attackerTransform = GameManager.GetInstance().playingCharacterGameObjects[attacker.name].transform;
         fx = null;
+
+        string effectName = abilityToCastPresentation.visualEffects.duringActivation;
 
         if (abilityToCastPresentation.visualEffects.duringActivation != "") {
             fx = VFXManager.Instance.ActivateVFX(
@@ -523,6 +533,35 @@ public class CastingAbilityManager : MonoBehaviour
                 effectPosition
             );
         }
+    }
+
+    public void PlayDefendersVFX()
+    {
+        Assert.AreEqual(abilitySucceedsOnDefendersList.Count, defendersGameObject.Count);
+        string effectName = abilityToCastPresentation.visualEffects.onDefender;
+
+        if (effectName != "")
+        {            
+            for (int i = 0; i < abilitySucceedsOnDefendersList.Count; i++)
+            {
+                //Models are created with their bottom center being (0,0,0)
+                Vector3 LocalPositionBottomOfAttacker = Vector3.zero;
+                Vector3 effectPosition = Vector3.zero;
+
+                //foreach defender that the ability succeeded
+                if (abilitySucceedsOnDefendersList[i])
+                {
+                    Transform defenderTransform = defendersGameObject[i].transform;
+                    VFXManager.Instance.ActivateVFX(
+                        effectName,
+                        defenderTransform,
+                        out effectPosition,
+                        LocalPositionBottomOfAttacker
+                    );
+
+                }
+            }
+        }        
     }
 
     void DeactivateDuringActivationFX(ParticleSystem duringActivationVFX)

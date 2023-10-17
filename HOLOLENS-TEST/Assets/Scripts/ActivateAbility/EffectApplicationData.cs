@@ -55,7 +55,11 @@ public class EffectApplicationData
                 break;
             case EffectType.TEMPORAL:
                 if (effectSucceeds)
-                    defenderCharacter.GetStats().AddTemporalEffect(affectedStat, "", duration, damage);
+                {
+                    string effectName = abilityName + " from " + attacker;
+                    defenderCharacter.GetStats().AddTemporalEffect(affectedStat, effectName, duration, damage);
+                }
+                    
                 break;
         }
 

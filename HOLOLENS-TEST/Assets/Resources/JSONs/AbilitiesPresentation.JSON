@@ -9,7 +9,8 @@
       },
       "visualEffects": {
         "onImpact": "",
-        "duringActivation": ""
+        "duringActivation": "",
+        "onDefender": ""
       },
       "soundEffects": {
         "onImpact": "",
@@ -31,7 +32,8 @@
       },
       "visualEffects": {
         "onImpact": "",
-        "duringActivation": ""
+        "duringActivation": "",
+        "onDefender": ""
       },
       "soundEffects": {
         "onImpact": "",
@@ -45,15 +47,85 @@
       }
     },
     {
-      "abilityName": "Quick Punch",
+      "abilityName": "Fireball",
       "animations": {
-        "attacker": "Spell_Cast_Area",
+        "attacker": "Attack_Melee_Weapon",
         "defender_AbilitySucceeds": "TakeHit",
-        "defender_AbilityFails": "Dodge"
+        "defender_AbilityFails": "Block"
       },
       "visualEffects": {
         "onImpact": "",
+        "duringActivation": "",
+        "onDefender": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
         "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Flamethrower",
+      "animations": {
+        "attacker": "Attack_Melee_Weapon",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Block"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": "",
+        "onDefender": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Flame Slam",
+      "animations": {
+        "attacker": "Attack_Melee_Weapon",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Block"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": "",
+        "onDefender": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Elemental Heal",
+      "animations": {
+        "attacker": "Attack_Melee_Weapon",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Block"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": "",
+        "onDefender": ""
       },
       "soundEffects": {
         "onImpact": "",
@@ -75,7 +147,8 @@
       },
       "visualEffects": {
         "onImpact": "",
-        "duringActivation": ""
+        "duringActivation": "",
+        "onDefender": ""
       },
       "soundEffects": {
         "onImpact": "",
@@ -97,7 +170,8 @@
       },
       "visualEffects": {
         "onImpact": "",
-        "duringActivation": ""
+        "duringActivation": "",
+        "onDefender": ""
       },
       "soundEffects": {
         "onImpact": "",
@@ -119,7 +193,8 @@
       },
       "visualEffects": {
         "onImpact": "",
-        "duringActivation": ""
+        "duringActivation": "",
+        "onDefender": ""
       },
       "soundEffects": {
         "onImpact": "",
@@ -141,7 +216,8 @@
       },
       "visualEffects": {
         "onImpact": "",
-        "duringActivation": ""
+        "duringActivation": "",
+        "onDefender": ""
       },
       "soundEffects": {
         "onImpact": "",
@@ -163,7 +239,8 @@
       },
       "visualEffects": {
         "onImpact": "",
-        "duringActivation": ""
+        "duringActivation": "",
+        "onDefender": ""
       },
       "soundEffects": {
         "onImpact": "",
@@ -185,7 +262,468 @@
       },
       "visualEffects": {
         "onImpact": "",
+        "duringActivation": "",
+        "onDefender": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
         "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Weakening Curse",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": "",
+        "onDefender": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Curse of Vulnerability",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": "",
+        "onDefender": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Arcane Blast",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": "",
+        "onDefender": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Slash",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": "",
+        "onDefender": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Powerful Slash",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": "",
+        "onDefender": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Decimating Slash",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": "",
+        "onDefender": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Inspire!",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": "",
+        "onDefender": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Free Powerful Slash",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": "",
+        "onDefender": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Powerful Slash Wave",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": "",
+        "onDefender": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Sword Attack",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": "",
+        "onDefender": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Cure Wounds",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": "",
+        "onDefender": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Cure Moderate Wounds",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": "",
+        "onDefender": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Mass Cure Wounds",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": "",
+        "onDefender": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Holy Fire",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": "",
+        "onDefender": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Holy Avenger",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": "",
+        "onDefender": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Sneak Attack",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": "",
+        "onDefender": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Dagger: Impede Attack",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": "",
+        "onDefender": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Dagger: Impede Magic Attack",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": "",
+        "onDefender": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Dagger: Impede Defense",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": "",
+        "onDefender": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Dagger: Impede Magic Defense",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": "",
+        "onDefender": ""
       },
       "soundEffects": {
         "onImpact": "",

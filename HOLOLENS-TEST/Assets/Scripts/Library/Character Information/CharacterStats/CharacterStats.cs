@@ -9,11 +9,43 @@ public class CharacterStats
 
     public void AddTemporalEffect(string statName, string effectName, int duration, int value)
     {
-        statistics[statName].AddTemporalEffect(effectName, duration, value);
-        statsWithTemporalEffects.Add(statName);
+        bool tempEffectsWithSameNameStack = true;
 
-        statistics[statName].CalculateCurrentValue();
-        RecalculateStatsAfterChange(statName);
+        if (tempEffectsWithSameNameStack)
+        {
+            //apply the effect with a different name
+            if (statistics[statName].EffectAlreadyExists(effectName))
+            {
+                effectName = effectName + "_";
+                AddTemporalEffect(statName, effectName, duration, value);
+                return;
+            }
+
+            //Apply Effect
+            statistics[statName].AddTemporalEffect(effectName, duration, value);
+            statsWithTemporalEffects.Add(statName);
+
+            statistics[statName].CalculateCurrentValue();
+            RecalculateStatsAfterChange(statName);
+        }
+        //Do not apply effect
+        else
+        {
+            //refresh the effect's duration
+            if (statistics[statName].EffectAlreadyExists(effectName))
+            {
+                statistics[statName].SetTemporalEffectDuration(effectName, duration);
+                return;
+            }
+
+            //Apply Effect
+            statistics[statName].AddTemporalEffect(effectName, duration, value);
+            statsWithTemporalEffects.Add(statName);
+
+            statistics[statName].CalculateCurrentValue();
+            RecalculateStatsAfterChange(statName);
+        }
+
     }
 
     //O(n) n === the stats with temporal effects

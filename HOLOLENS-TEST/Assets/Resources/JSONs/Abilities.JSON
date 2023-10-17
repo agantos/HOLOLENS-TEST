@@ -233,60 +233,14 @@
       ]
     },
     {
-      "name": "Quick Punch",
-      "description": "A quick punch thrown by a heavy elemental hand. Ouch!",
-      "tags": ["Normal Ability", "Physical Attack"],
-      "turnEconomyCost": [{ "name": "Fast Action Points", "cost": 1 }],
-      "effects": [
-        {
-          "isPrimary": true,
-          "type": "Damage",
-          "duration": 0,
-          "targetting": {
-            "number": 1,
-            "type": "all"
-          },
-          "areaOfEffect": {
-            "range": 15,
-            "shape": "select",
-            "radius": 0
-          },
-          "succeedsOn": {
-            "type": "comparison",
-            "againstStatic": "",
-            "comparisonStats": {
-              "defenderStat": {
-                "name": "Defense",
-                "multiplier": 1,
-                "bonus": "1d20"
-              },
-              "attackerStat": {
-                "name": "Attack",
-                "multiplier": 1,
-                "bonus": "1d20"
-              }
-            }
-          },
-          "damage": {
-            "damagedStat": "HP",
-            "amount": {
-              "baseAmount": "2d8",
-              "statsAffecting": ["Damage"]
-            },
-            "onSavedMultiplier": 0
-          }
-        }
-      ]
-    },
-    {
       "name": "Elemental Heal",
       "description": "The spirit draws its element from the spirit world to replenish a little health.",
       "tags": ["Heal Ability"],
-      "turnEconomyCost": [{ "name": "Fast Action Points", "cost": 1 }],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 1 }],
       "effects": [
         {
           "isPrimary": true,
-          "type": "Heal",
+          "type": "Healing",
           "duration": 0,
           "targetting": {
             "number": 1,
@@ -761,7 +715,7 @@
           "damage": {
             "damagedStat": "Magic Defense",
             "amount": {
-              "baseAmount": "2d3",
+              "baseAmount": "-2d3",
               "statsAffecting": []
             },
             "onSavedMultiplier": 0
@@ -962,7 +916,7 @@
           "damage": {
             "damagedStat": "Defense",
             "amount": {
-              "baseAmount": "2d3",
+              "baseAmount": "-2d3",
               "statsAffecting": []
             },
             "onSavedMultiplier": 0
@@ -978,7 +932,7 @@
           "damage": {
             "damagedStat": "Magic Defense",
             "amount": {
-              "baseAmount": "2d3",
+              "baseAmount": "-2d3",
               "statsAffecting": []
             },
             "onSavedMultiplier": 0
