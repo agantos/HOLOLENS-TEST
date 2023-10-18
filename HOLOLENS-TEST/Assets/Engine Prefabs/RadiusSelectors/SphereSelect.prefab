@@ -108,7 +108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5540665692472709812}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.19999999, y: 3, z: -0.016000032}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.84921, y: 0.84921, z: 0.84921}
   m_Children:
   - {fileID: 8100999863849292236}
@@ -128,7 +128,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectToken: {fileID: 1585582155912907161, guid: e3d1a2186ec26c74b95751018f07d3fd, type: 3}
-  tokensCreated: []
   radius: 30
   baseRadiusX: 1
   baseRadiusY: 1

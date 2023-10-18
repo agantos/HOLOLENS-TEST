@@ -54,7 +54,7 @@
         "defender_AbilityFails": "Block"
       },
       "visualEffects": {
-        "onImpact": "",
+        "onImpact": "Fireball",
         "duringActivation": "",
         "onDefender": ""
       },
@@ -100,7 +100,7 @@
         "defender_AbilityFails": "Block"
       },
       "visualEffects": {
-        "onImpact": "",
+        "onImpact": "FireSlam",
         "duringActivation": "",
         "onDefender": ""
       },
@@ -123,9 +123,9 @@
         "defender_AbilityFails": "Block"
       },
       "visualEffects": {
-        "onImpact": "",
+        "onImpact": "HealSound",
         "duringActivation": "",
-        "onDefender": ""
+        "onDefender": "Heal"
       },
       "soundEffects": {
         "onImpact": "",
@@ -146,8 +146,8 @@
         "defender_AbilityFails": "Dodge"
       },
       "visualEffects": {
-        "onImpact": "",
-        "duringActivation": "",
+        "onImpact": "BramblesImpact",
+        "duringActivation": "NatureDuringCasting",
         "onDefender": ""
       },
       "soundEffects": {
@@ -171,10 +171,10 @@
       "visualEffects": {
         "onImpact": "",
         "duringActivation": "",
-        "onDefender": ""
+        "onDefender": "BuffCircle"
       },
       "soundEffects": {
-        "onImpact": "",
+        "onImpact": "Spell Buff",
         "duringActivation": ""
       },
       "characterDialogue": {
@@ -194,10 +194,10 @@
       "visualEffects": {
         "onImpact": "",
         "duringActivation": "",
-        "onDefender": ""
+        "onDefender": "BuffCircle"
       },
       "soundEffects": {
-        "onImpact": "",
+        "onImpact": "Spell Buff",
         "duringActivation": ""
       },
       "characterDialogue": {
@@ -215,13 +215,13 @@
         "defender_AbilityFails": "Dodge"
       },
       "visualEffects": {
-        "onImpact": "",
-        "duringActivation": "",
+        "onImpact": "Lightning",
+        "duringActivation": "GainPower",
         "onDefender": ""
       },
       "soundEffects": {
-        "onImpact": "",
-        "duringActivation": ""
+        "onImpact": "Lightning",
+        "duringActivation": "DuringCast3"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -239,11 +239,11 @@
       },
       "visualEffects": {
         "onImpact": "",
-        "duringActivation": "",
-        "onDefender": ""
+        "duringActivation": "NatureDuringCasting",
+        "onDefender": "BuffCircle"
       },
       "soundEffects": {
-        "onImpact": "",
+        "onImpact": "Spell Buff",
         "duringActivation": ""
       },
       "characterDialogue": {
@@ -262,11 +262,11 @@
       },
       "visualEffects": {
         "onImpact": "",
-        "duringActivation": "",
-        "onDefender": ""
+        "duringActivation": "NatureDuringCasting",
+        "onDefender": "BuffCircle"
       },
       "soundEffects": {
-        "onImpact": "",
+        "onImpact": "Spell Buff",
         "duringActivation": ""
       },
       "characterDialogue": {
@@ -286,10 +286,10 @@
       "visualEffects": {
         "onImpact": "",
         "duringActivation": "",
-        "onDefender": ""
+        "onDefender": "DebuffCircle"
       },
       "soundEffects": {
-        "onImpact": "",
+        "onImpact": "Spell Debuff",
         "duringActivation": ""
       },
       "characterDialogue": {
@@ -309,10 +309,10 @@
       "visualEffects": {
         "onImpact": "",
         "duringActivation": "",
-        "onDefender": ""
+        "onDefender": "DebuffCircle"
       },
       "soundEffects": {
-        "onImpact": "",
+        "onImpact": "Spell Debuff",
         "duringActivation": ""
       },
       "characterDialogue": {
@@ -330,13 +330,59 @@
         "defender_AbilityFails": "Dodge"
       },
       "visualEffects": {
-        "onImpact": "",
+        "onImpact": "PurpleCrystalsImpact",
         "duringActivation": "",
         "onDefender": ""
       },
       "soundEffects": {
         "onImpact": "",
         "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Arcane Downpour",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Block"
+      },
+      "visualEffects": {
+        "onImpact": "Magic Downpour",
+        "duringActivation": "ArcaneDuringCasting",
+        "onDefender": ""
+      },
+      "soundEffects": {
+        "onImpact": "Spell Impact",
+        "duringActivation": "DuringCast3"
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Unholy Curse",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Block"
+      },
+      "visualEffects": {
+        "onImpact": "vileCurse",
+        "duringActivation": "ArcaneDuringCasting",
+        "onDefender": "DebuffCircle"
+      },
+      "soundEffects": {
+        "onImpact": "Spell Debuff",
+        "duringActivation": "DuringCast1"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -424,10 +470,10 @@
       "visualEffects": {
         "onImpact": "",
         "duringActivation": "",
-        "onDefender": ""
+        "onDefender": "BuffCircle"
       },
       "soundEffects": {
-        "onImpact": "",
+        "onImpact": "Spell Buff",
         "duringActivation": ""
       },
       "characterDialogue": {
@@ -468,7 +514,7 @@
         "defender_AbilityFails": "Dodge"
       },
       "visualEffects": {
-        "onImpact": "",
+        "onImpact": "SwordLineSlash",
         "duringActivation": "",
         "onDefender": ""
       },
@@ -516,10 +562,10 @@
       "visualEffects": {
         "onImpact": "",
         "duringActivation": "",
-        "onDefender": ""
+        "onDefender": "Heal"
       },
       "soundEffects": {
-        "onImpact": "",
+        "onImpact": "HealSound",
         "duringActivation": ""
       },
       "characterDialogue": {
@@ -539,10 +585,10 @@
       "visualEffects": {
         "onImpact": "",
         "duringActivation": "",
-        "onDefender": ""
+        "onDefender": "Heal"
       },
       "soundEffects": {
-        "onImpact": "",
+        "onImpact": "HealSound",
         "duringActivation": ""
       },
       "characterDialogue": {
@@ -560,13 +606,13 @@
         "defender_AbilityFails": "Dodge"
       },
       "visualEffects": {
-        "onImpact": "",
+        "onImpact": "MassHeal",
         "duringActivation": "",
-        "onDefender": ""
+        "onDefender": "Heal"
       },
       "soundEffects": {
-        "onImpact": "",
-        "duringActivation": ""
+        "onImpact": "MassHeal",
+        "duringActivation": "HealSound"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -611,7 +657,7 @@
         "onDefender": ""
       },
       "soundEffects": {
-        "onImpact": "",
+        "onImpact": "Spell Buff",
         "duringActivation": ""
       },
       "characterDialogue": {

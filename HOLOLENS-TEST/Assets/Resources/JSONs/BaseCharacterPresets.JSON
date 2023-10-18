@@ -242,7 +242,7 @@
           "statRelations": []
         }
       ],
-      "abilities": ["Weakening Curse", "Curse of Vulnerability", "Arcane Blast"]
+      "abilities": ["Weakening Curse", "Curse of Vulnerability", "Arcane Blast", "Arcane Downpour", "Unholy Curse"]
     },
     {
       "name": "Rogue",

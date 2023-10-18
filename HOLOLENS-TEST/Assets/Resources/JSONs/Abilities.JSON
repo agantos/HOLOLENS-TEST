@@ -295,8 +295,8 @@
           },
           "areaOfEffect": {
             "range": 30,
-            "shape": "line",
-            "radius": 7
+            "shape": "circle",
+            "radius": 10
           },
           "succeedsOn": {
             "type": "comparison",
@@ -741,7 +741,7 @@
           "areaOfEffect": {
             "range": 50,
             "shape": "circle",
-            "radius": 15
+            "radius": 10
           },
           "succeedsOn": {
             "type": "comparison",
@@ -766,6 +766,163 @@
               "statsAffecting": ["Magic Damage"]
             },
             "onSavedMultiplier": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Arcane Downpour",
+      "description": "A violent explosion of magic that crackles with arcane energy disintegrating everything on its impact radius",
+      "tags": ["Special Ability", "Magical Attack"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
+      "statCost": [{ "name": "Power Points", "cost": 2 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Damage",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 60,
+            "shape": "circle",
+            "radius": 20
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Magic Defense",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "Magic Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "8d6",
+              "statsAffecting": ["Magic Damage"]
+            },
+            "onSavedMultiplier": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Unholy Curse",
+      "description": "A vile arcane incantation that reduces the afflicted's Defense, Magic Defense, Attack and Magic Attack",
+      "tags": ["Debuff"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 1 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Temporal",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 30,
+            "shape": "circle",
+            "radius": 15
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Magic Defense",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "Magic Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "10",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 1
+          }
+        },
+        {
+          "isPrimary": false,
+          "type": "Temporal",
+          "duration": 3,
+          "succeedsOn": {
+            "type": "automatic"
+          },
+          "damage": {
+            "damagedStat": "Defense",
+            "amount": {
+              "baseAmount": "-2d4",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
+          }
+        },
+        {
+          "isPrimary": false,
+          "type": "Temporal",
+          "duration": 3,
+          "succeedsOn": {
+            "type": "automatic"
+          },
+          "damage": {
+            "damagedStat": "Magic Defense",
+            "amount": {
+              "baseAmount": "-2d4",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
+          }
+        },
+        {
+          "isPrimary": false,
+          "type": "Temporal",
+          "duration": 3,
+          "succeedsOn": {
+            "type": "automatic"
+          },
+          "damage": {
+            "damagedStat": "Attack",
+            "amount": {
+              "baseAmount": "-2d4",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
+          }
+        },
+        {
+          "isPrimary": false,
+          "type": "Temporal",
+          "duration": 3,
+          "succeedsOn": {
+            "type": "automatic"
+          },
+          "damage": {
+            "damagedStat": "Magic Attack",
+            "amount": {
+              "baseAmount": "-2d4",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
           }
         }
       ]
@@ -1163,7 +1320,7 @@
     {
       "name": "Cure Moderate Wounds",
       "description": "A prayer that restores a moderate amount of the target's HP",
-      "tags": ["Special Ability", "Healing"],
+      "tags": ["Normal Ability", "Healing"],
       "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
       "statCost": [{ "name": "Power Points", "cost": 2 }],
       "effects": [
@@ -1278,7 +1435,7 @@
     {
       "name": "Holy Avenger",
       "description": "The gods bestow you a great blessing that increases your HP for 20 and Attack, Magic Attack, Defense and Magic Defense for 2d6",
-      "tags": ["Normal Ability", "Physical Attack"],
+      "tags": ["Special Ability"],
       "turnEconomyCost": [{ "name": "Action Points", "cost": 1 }],
       "effects": [
         {
@@ -1422,7 +1579,7 @@
     {
       "name": "Dagger: Impede Attack",
       "description": "A dagger that with a poison that decreases the target's Attack for 2 rounds.",
-      "tags": ["Normal Ability", "Debuff"],
+      "tags": ["Normal Ability", "Debuff", "Physical Attack"],
       "turnEconomyCost": [{ "name": "Action Points", "cost": 1 }],
       "statCost": [],
       "effects": [
@@ -1485,7 +1642,7 @@
     {
       "name": "Dagger: Impede Magic Attack",
       "description": "A dagger that with a poison that decreases the target's Magic Attack for 2 rounds.",
-      "tags": ["Normal Ability", "Debuff"],
+      "tags": ["Normal Ability", "Debuff", "Physical Attack"],
       "turnEconomyCost": [{ "name": "Action Points", "cost": 1 }],
       "statCost": [],
       "effects": [
@@ -1548,7 +1705,7 @@
     {
       "name": "Dagger: Impede Defense",
       "description": "A dagger that with a poison that decreases the target's Defense for 2 rounds.",
-      "tags": ["Normal Ability", "Debuff"],
+      "tags": ["Normal Ability", "Debuff", "Physical Attack"],
       "turnEconomyCost": [{ "name": "Action Points", "cost": 1 }],
       "statCost": [],
       "effects": [
@@ -1611,7 +1768,7 @@
     {
       "name": "Dagger: Impede Magic Defense",
       "description": "A dagger that with a poison that decreases the target's Magic Defense for 2 rounds.",
-      "tags": ["Normal Ability", "Debuff"],
+      "tags": ["Normal Ability", "Debuff", "Physical Attack"],
       "turnEconomyCost": [{ "name": "Action Points", "cost": 1 }],
       "statCost": [],
       "effects": [
