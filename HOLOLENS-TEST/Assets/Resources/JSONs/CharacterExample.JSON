@@ -18,23 +18,6 @@
       "additionalPresets": ["Paladin"]
     },
     {
-      "name": "Godling",
-      "player": 0,
-      "turnEconomy": [
-        {
-          "name": "Action Points",
-          "number": 2
-        },
-        {
-          "name": "Fast Action Points",
-          "number": 1
-        }
-      ],
-      "abilities": [],
-      "basePresets": ["Character"],
-      "additionalPresets": ["Godling"]
-    },
-    {
       "name": "Josephine",
       "player": 0,
       "turnEconomy": [
@@ -67,6 +50,74 @@
       "abilities": [],
       "basePresets": ["Character"],
       "additionalPresets": ["Warrior"]
+    },
+    {
+      "name": "Amelia",
+      "player": 0,
+      "turnEconomy": [
+        {
+          "name": "Action Points",
+          "number": 2
+        },
+        {
+          "name": "Fast Action Points",
+          "number": 1
+        }
+      ],
+      "abilities": [],
+      "basePresets": ["Character"],
+      "additionalPresets": ["Rogue"]
+    },
+    {
+      "name": "Godling",
+      "player": 0,
+      "turnEconomy": [
+        {
+          "name": "Action Points",
+          "number": 2
+        },
+        {
+          "name": "Fast Action Points",
+          "number": 1
+        }
+      ],
+      "abilities": [],
+      "basePresets": ["Character"],
+      "additionalPresets": ["Godling"]
+    },
+    {
+      "name": "Ifrit",
+      "player": 0,
+      "turnEconomy": [
+        {
+          "name": "Action Points",
+          "number": 2
+        },
+        {
+          "name": "Fast Action Points",
+          "number": 1
+        }
+      ],
+      "abilities": [],
+      "basePresets": ["Character"],
+      "additionalPresets": ["Elemental"]
+    },
+    {
+      "name": "Nesse",
+      "player": 0,
+      "turnEconomy": [
+        {
+          "name": "Action Points",
+          "number": 2
+        },
+        {
+          "name": "Fast Action Points",
+          "number": 1
+        }
+      ],
+      "abilities": [],
+      "basePresets": ["Character"],
+      "additionalPresets": ["Elemental"]
     }
   ]
 }

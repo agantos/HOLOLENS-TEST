@@ -6,7 +6,8 @@ public class BookScript : MonoBehaviour
 {
     public GameObject bookModel;
 
-    AudioClip[] sounds = new AudioClip[10];
+    AudioClip[] narration = new AudioClip[10];
+    AudioClip[] pageChangeSounds = new AudioClip[7];
     Material[] content = new Material[10];
 
     Renderer bookRenderer;
@@ -32,15 +33,30 @@ public class BookScript : MonoBehaviour
     {
         for(int i = 0; i < 10; i++)
         {
-            sounds[i] = (AudioClip)Resources.Load( "Narration Book/Sounds/Page " + (i + 1) );
+            narration[i] = (AudioClip)Resources.Load( "Narration Book/Sounds/Narration/Page " + (i + 1) );
             content[i] = (Material)Resources.Load( "Narration Book/Pages/Page " + (i + 1) );
+
+            if (i < 7)
+                pageChangeSounds[i] = (AudioClip)Resources.Load("Narration Book/Sounds/SFX/open page " + (i + 1));
         }        
     }
 
     public void NextPage()
     {
-        audioSource.Stop();
-        PlayPage(currentPlayingClip + 1);
+        if(currentPlayingClip < 9)
+        {
+            audioSource.Stop();
+            PlayPage(currentPlayingClip + 1);
+        }        
+    }
+
+    public void PreviousPage()
+    {
+        if(currentPlayingClip > 0)
+        {
+            audioSource.Stop();
+            PlayPage(currentPlayingClip - 1);
+        }        
     }
 
     void PlayPage(int i)
@@ -48,12 +64,12 @@ public class BookScript : MonoBehaviour
         currentPlayingClip = i;
         bookRenderer.material = content[i];
 
-        Invoke("ChangeSound", 0.5f);
+        Invoke("ChangeSound", 1f);
     }
 
     void ChangeSound()
     {
-        audioSource.clip = sounds[currentPlayingClip];
+        audioSource.clip = narration[currentPlayingClip];
         audioSource.Play();
     }
 }
