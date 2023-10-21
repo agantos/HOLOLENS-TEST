@@ -102,4 +102,14 @@ public class RadiusSelectScript : MonoBehaviour
         //Destroy the spawned radius effect
         Destroy(gameObject);        
     }
+
+    void Start()
+    {
+        CharacterMoveManager.Instance.isMovementAllowed = false;
+    }
+
+    void OnDestroy()
+    {
+        CharacterMoveManager.Instance.isMovementAllowed = true;
+    }
 }

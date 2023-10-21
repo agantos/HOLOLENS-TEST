@@ -17,15 +17,22 @@ public class SelectUnitManager : MonoBehaviour, IMixedRealityPointerHandler, IMi
         if(CastingAbilityManager.GetInstance().CurrentSelectionType == AbilitySelectType.SELECT)
             PerformAbilitySelection();
         else
-            CharacterInfoObjectsManager.instance.CreateCharacterInfo(GetComponent<CharacterScript>().charName);
+            CharacterInfoObjectsManager.Instance.CreateCharacterInfo(GetComponent<CharacterScript>().charName);
     }
    
     //Selection with point ray
     public void OnPointerUp(MixedRealityPointerEventData eventData) {
         if (CastingAbilityManager.GetInstance().CurrentSelectionType == AbilitySelectType.SELECT)
+        {
+            //Select unit for ability
             PerformAbilitySelection();
+        }
         else
-            CharacterInfoObjectsManager.instance.CreateCharacterInfo(GetComponent<CharacterScript>().charName);
+        {
+            //View unit's information
+            //CharacterInfoObjectsManager.instance.CreateCharacterInfo(GetComponent<CharacterScript>().charName);
+        }
+            
     }
 
     /*SELECTION FOR ABILITY METHODS */

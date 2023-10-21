@@ -21,7 +21,8 @@ public class SelectTerrainPosition: MonoBehaviour, IMixedRealityPointerHandler, 
 
         if (LineSelectScript.Instance != null)
             LineSelectScript.Instance.LookAtPosition(positionSelected);
-        else
+        
+        if(CharacterMoveManager.Instance.isMovementAllowed)
             CharacterMoveManager.Instance.RecordMovement(positionSelected);
     }
 

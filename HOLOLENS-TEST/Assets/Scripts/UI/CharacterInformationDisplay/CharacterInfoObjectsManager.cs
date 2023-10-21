@@ -6,15 +6,26 @@ public class CharacterInfoObjectsManager : MonoBehaviour
 {
     //Set in unity editor
     public  GameObject CharacterDisplayInfoPrefab;
-    public static CharacterInfoObjectsManager instance;
+    public static CharacterInfoObjectsManager Instance { get; private set; }
 
     static Dictionary<string, GameObject> instances = new Dictionary<string, GameObject>();
     static Dictionary<string, CharacterInfoDisplayManager> managers = new Dictionary<string, CharacterInfoDisplayManager>();
 
+    void Awake()
+    {
+        
+    }
+
     void Start()
     {
-        if(instance == null)
-            instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject); // Destroy duplicate GameManager objects
+        }
     }
 
     public void CreateCharacterInfo(string characterName)
@@ -32,7 +43,7 @@ public class CharacterInfoObjectsManager : MonoBehaviour
         managers[characterName].CreateUI(characterName);
     }
 
-    public void DestroyCharacterInfo(string name)
+    public void OnDestroyCharacterInformationObject(string name)
     {
         instances.Remove(name);
         managers.Remove(name);

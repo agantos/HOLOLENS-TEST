@@ -73,7 +73,7 @@ public class CharacterStat
     public void HealDamage(int damage)
     {
         this.damage -= damage;
-        if (damage < 0) damage = 0;
+        if (damage < 0) this.damage = 0;
     }
 
     //Stat Relations:

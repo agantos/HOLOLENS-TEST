@@ -1,7 +1,7 @@
 {
   "characters": [
     {
-      "name": "Mouse",
+      "name": "Tar",
       "player": 0,
       "turnEconomy": [
         {
@@ -35,7 +35,7 @@
       "additionalPresets": ["Godling"]
     },
     {
-      "name": "Witch",
+      "name": "Josephine",
       "player": 0,
       "turnEconomy": [
         {
@@ -52,7 +52,7 @@
       "additionalPresets": ["Sorcerer"]
     },
     {
-      "name": "Warrior",
+      "name": "Dante",
       "player": 0,
       "turnEconomy": [
         {

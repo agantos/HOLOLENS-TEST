@@ -12,7 +12,8 @@ public class CharacterMoveManager : MonoBehaviour
     public Material lineMaterial;
     public GameObject DestinationToken;
     public ConfirmMoveCanvas confirmMoveUI;
-    public bool allowDestinationSelection = true;
+    bool isNotMoving = true;
+    public bool isMovementAllowed = true;
 
     public Vector3 newPosition;
     float distance;
@@ -66,7 +67,8 @@ public class CharacterMoveManager : MonoBehaviour
 
     bool IsMovementAllowed()
     {
-        return allowDestinationSelection && 
+
+        return isNotMoving && 
             GameManager.GetInstance().player == movee.gameObject.GetComponent<CharacterScript>()
                                                                 .GetCharacter().player;
     }
@@ -90,7 +92,7 @@ public class CharacterMoveManager : MonoBehaviour
     public void PerformMove()
     {
         //Disable Movement Selection until movement stops
-        allowDestinationSelection = false;
+        isNotMoving = false;
 
         //Do the movement
         FaceDirection();
@@ -145,7 +147,7 @@ public class CharacterMoveManager : MonoBehaviour
     public void PerformMoveRemotely()
     {
         //Disable Movement Selection until movement stops
-        allowDestinationSelection = false;
+        isNotMoving = false;
 
         //Do the movement
         movee.SetDestination(newPosition);
@@ -187,7 +189,7 @@ public class CharacterMoveManager : MonoBehaviour
                 movee.GetComponent<AnimationManager>().MovingTo_Idle();
 
             //Allow Selection of new Destination
-            allowDestinationSelection = true;
+            isNotMoving = true;
         }
     }
         

@@ -8,7 +8,7 @@ using Microsoft.MixedReality.Toolkit.UI;
 public class CharacterPortrait : MonoBehaviour
 {
     //Set in unity editor
-    public TextMeshPro title;
+    public TextMeshPro frontTitle, backTitle;
     public MeshRenderer portraitImage;
     public BarInfo bar;
     public Interactable button;
@@ -29,7 +29,9 @@ public class CharacterPortrait : MonoBehaviour
         //Set name and character
         characterName = name;
         character = GameManager.GetInstance().playingCharacterPool[characterName];
-        title.text = name;
+        
+        frontTitle.text = name;
+        backTitle.text = name;
 
         //Set HP
         bar.SetValue(character.GetStat("HP").GetCurrentValue(), character.GetStat("HP").GetMaxValue());

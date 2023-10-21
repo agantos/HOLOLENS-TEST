@@ -62,6 +62,15 @@ public class CastingAbilityManager : MonoBehaviour
         //Check if the ability can be cast
         if (true/**AbilityManager.Activate_CheckCost(ability.name, attacker)**/)
         {
+            //Cancel a selection of move if it had happened
+            ConfirmMoveCanvas cm = FindFirstObjectByType<ConfirmMoveCanvas>();
+            if (cm != null)
+                cm.CancelMovement();
+
+            //Disable movements
+            CharacterMoveManager.Instance.isMovementAllowed = false;
+
+
             //Set the parameters for the casting of the ability
             GetInstance().attacker = attacker;
             GetInstance().abilityToCastInformation = abilityInformation;
@@ -228,6 +237,9 @@ public class CastingAbilityManager : MonoBehaviour
         //Sync AbilityManager with all the others
         MultiplayerCallsAbilityCast.Instance.Propagate_AbilityManagerSync(abilityToCastInformation.name, attacker.name, GetDefenderNameList(), GetApplicationDataStrings(), abilitySucceedsOnDefendersList.ToArray());
 
+        //Enable movement again
+        CharacterMoveManager.Instance.isMovementAllowed = true;
+
         //Deactivate any spawned objects related to the activation of the ability
         DeactivateAbilityActivationObjects();
 
@@ -240,6 +252,9 @@ public class CastingAbilityManager : MonoBehaviour
 
     public void CancelActivation()
     {
+        //Enable movement again
+        CharacterMoveManager.Instance.isMovementAllowed = true;
+
         DeactivateAbilityActivationObjects();
         CleanState();
 
