@@ -92,7 +92,7 @@
           "statRelations": []
         }
       ],
-      "abilities": ["Punch", "Slam", "Quick Punch", "Elemental Heal"]
+      "abilities": ["Punch", "Slam", "Elemental Heal"]
     },
     {
       "name": "Godling",
@@ -278,13 +278,7 @@
           "statRelations": []
         }
       ],
-      "abilities": [
-        "Sneak Attack",
-        "Dagger: Impede Attack",
-        "Dagger: Impede Magic Attack",
-        "Dagger: Impede Defense",
-        "Dagger: Impede Magic Defense"
-      ]
+      "abilities": ["Sneak Attack", "Impede Attack", "Impede Magic Attack", "Impede Defense", "Impede Magic Defense"]
     }
   ]
 }

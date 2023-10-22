@@ -46,7 +46,7 @@ public class VFXManager : MonoBehaviour
         effect.gameObject.transform.localPosition = Vector3.zero;
        
         //Place the effect on the spot
-        positionOffset = AddOffset(effectName, positionOffset);
+        positionOffset = AddCustomOffset(effectName, positionOffset);
         effect.gameObject.transform.localPosition += positionOffset;
 
         //Rotate the effect according to the offset
@@ -56,11 +56,15 @@ public class VFXManager : MonoBehaviour
     }
 
     //Create custom offset for effects if needed
-    public Vector3 AddOffset(string effectName, Vector3 offset)
+    public Vector3 AddCustomOffset(string effectName, Vector3 offset)
     {
         if (effectName == "Fireball")
         {
             offset += new Vector3(0, 3f, 0);
+        }
+        if(effectName == "Flamethrower")
+        {
+            offset += new Vector3(0, 1.3f, 0.4f);
         }
         return offset;
     }

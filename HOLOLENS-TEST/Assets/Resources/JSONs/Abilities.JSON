@@ -140,6 +140,85 @@
       ]
     },
     {
+      "name": "Ice Blast",
+      "description": "An ice crystal erupts amidst a blizzard that chills and damages everything caught in its radius. Struck targets get reduced Defense and Magic Defense for 2 rounds.",
+      "tags": ["Special Ability", "Magical Attack"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
+      "statCost": [{ "name": "Power Points", "cost": 2 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Damage",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 50,
+            "shape": "circle",
+            "radius": 20
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Magic Defense",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "Magic Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "3d6",
+              "statsAffecting": ["Magic Damage"]
+            },
+            "onSavedMultiplier": 0.5
+          }
+        },
+        {
+          "isPrimary": false,
+          "type": "Temporal",
+          "duration": 2,
+          "succeedsOn": {
+            "type": "automatic"
+          },
+          "damage": {
+            "damagedStat": "Defense",
+            "amount": {
+              "baseAmount": "-2d3",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
+          }
+        },
+        {
+          "isPrimary": false,
+          "type": "Temporal",
+          "duration": 2,
+          "succeedsOn": {
+            "type": "automatic"
+          },
+          "damage": {
+            "damagedStat": "Magic Defense",
+            "amount": {
+              "baseAmount": "-2d3",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
       "name": "Flamethrower",
       "description": "A steady output of fiery death that is sure to crisp anything unlucky enough to be caught in its radius",
       "tags": ["Special Ability", "Magical Attack"],
@@ -155,7 +234,7 @@
             "type": "all"
           },
           "areaOfEffect": {
-            "range": 20,
+            "range": 30,
             "shape": "line",
             "radius": 7
           },
@@ -178,7 +257,54 @@
           "damage": {
             "damagedStat": "HP",
             "amount": {
-              "baseAmount": "10d6",
+              "baseAmount": "6d6",
+              "statsAffecting": ["Magic Damage"]
+            },
+            "onSavedMultiplier": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ice Line",
+      "description": "Crystals of ice erupt from the earth damaging anything in their path.",
+      "tags": ["Special Ability", "Magical Attack"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
+      "statCost": [{ "name": "Power Points", "cost": 2 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Damage",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 40,
+            "shape": "line",
+            "radius": 4
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Magic Defense",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "Magic Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "6d6",
               "statsAffecting": ["Magic Damage"]
             },
             "onSavedMultiplier": 0.5
@@ -188,7 +314,7 @@
     },
     {
       "name": "Flame Slam",
-      "description": "The elemental throws his weight on an opponent trying to crush them with their strength",
+      "description": "The elemental throws his weight on an opponent trying to crush them with their strength and imbues its flaming nature burning them to a crisp.",
       "tags": ["Special Ability", "Magical Attack"],
       "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
       "effects": [
@@ -226,6 +352,84 @@
             "amount": {
               "baseAmount": "8d8",
               "statsAffecting": ["Magic Damage"]
+            },
+            "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ice Slam",
+      "description": "The elemental throws his weight on an opponent, trying to crush them with their strength and imbues its icy nature in it, making enemies slower weaker decreasing their Attack and Magic Attack for 2 turns.",
+      "tags": ["Special Ability", "Magical Attack"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Damage",
+          "duration": 0,
+          "targetting": {
+            "number": 1,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 15,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Magic Defense",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "Magic Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "4d8",
+              "statsAffecting": ["Magic Damage"]
+            },
+            "onSavedMultiplier": 0
+          }
+        },
+        {
+          "isPrimary": false,
+          "type": "Temporal",
+          "duration": 2,
+          "succeedsOn": {
+            "type": "automatic"
+          },
+          "damage": {
+            "damagedStat": "Attack",
+            "amount": {
+              "baseAmount": "-2d3",
+              "statsAffecting": []
+            },
+            "onSavedMultiplier": 0
+          }
+        },
+        {
+          "isPrimary": false,
+          "type": "Temporal",
+          "duration": 2,
+          "succeedsOn": {
+            "type": "automatic"
+          },
+          "damage": {
+            "damagedStat": "Magic Attack",
+            "amount": {
+              "baseAmount": "-2d3",
+              "statsAffecting": []
             },
             "onSavedMultiplier": 0
           }
@@ -1545,7 +1749,7 @@
             "type": "all"
           },
           "areaOfEffect": {
-            "range": 10,
+            "range": 6,
             "shape": "select",
             "radius": 0
           },
@@ -1577,8 +1781,8 @@
       ]
     },
     {
-      "name": "Dagger: Impede Attack",
-      "description": "A dagger that with a poison that decreases the target's Attack for 2 rounds.",
+      "name": "Impede Attack",
+      "description": "A targeted strike that stops the innate bodily energy. The strike impedes Attack for 2 rounds.",
       "tags": ["Normal Ability", "Debuff", "Physical Attack"],
       "turnEconomyCost": [{ "name": "Action Points", "cost": 1 }],
       "statCost": [],
@@ -1592,7 +1796,7 @@
             "type": "all"
           },
           "areaOfEffect": {
-            "range": 10,
+            "range": 6,
             "shape": "select",
             "radius": 0
           },
@@ -1624,7 +1828,7 @@
         {
           "isPrimary": false,
           "type": "Temporal",
-          "duration": 3,
+          "duration": 2,
           "succeedsOn": {
             "type": "automatic"
           },
@@ -1640,8 +1844,8 @@
       ]
     },
     {
-      "name": "Dagger: Impede Magic Attack",
-      "description": "A dagger that with a poison that decreases the target's Magic Attack for 2 rounds.",
+      "name": "Impede Magic Attack",
+      "description": "A targeted strike that stops the innate bodily energy. The strike impedes Magic Attack for 2 rounds.",
       "tags": ["Normal Ability", "Debuff", "Physical Attack"],
       "turnEconomyCost": [{ "name": "Action Points", "cost": 1 }],
       "statCost": [],
@@ -1655,7 +1859,7 @@
             "type": "all"
           },
           "areaOfEffect": {
-            "range": 10,
+            "range": 6,
             "shape": "select",
             "radius": 0
           },
@@ -1687,7 +1891,7 @@
         {
           "isPrimary": false,
           "type": "Temporal",
-          "duration": 3,
+          "duration": 2,
           "succeedsOn": {
             "type": "automatic"
           },
@@ -1703,8 +1907,8 @@
       ]
     },
     {
-      "name": "Dagger: Impede Defense",
-      "description": "A dagger that with a poison that decreases the target's Defense for 2 rounds.",
+      "name": "Impede Defense",
+      "description": "A targeted strike that stops the innate bodily energy. The strike impedes Defense for 2 rounds.",
       "tags": ["Normal Ability", "Debuff", "Physical Attack"],
       "turnEconomyCost": [{ "name": "Action Points", "cost": 1 }],
       "statCost": [],
@@ -1718,7 +1922,7 @@
             "type": "all"
           },
           "areaOfEffect": {
-            "range": 10,
+            "range": 6,
             "shape": "select",
             "radius": 0
           },
@@ -1750,7 +1954,7 @@
         {
           "isPrimary": false,
           "type": "Temporal",
-          "duration": 3,
+          "duration": 2,
           "succeedsOn": {
             "type": "automatic"
           },
@@ -1766,8 +1970,8 @@
       ]
     },
     {
-      "name": "Dagger: Impede Magic Defense",
-      "description": "A dagger that with a poison that decreases the target's Magic Defense for 2 rounds.",
+      "name": "Impede Magic Defense",
+      "description": "A targeted strike that stops the innate bodily energy. The strike impedes Magic Defense for 2 rounds.",
       "tags": ["Normal Ability", "Debuff", "Physical Attack"],
       "turnEconomyCost": [{ "name": "Action Points", "cost": 1 }],
       "statCost": [],
@@ -1781,7 +1985,7 @@
             "type": "all"
           },
           "areaOfEffect": {
-            "range": 10,
+            "range": 6,
             "shape": "select",
             "radius": 0
           },
@@ -1813,7 +2017,7 @@
         {
           "isPrimary": false,
           "type": "Temporal",
-          "duration": 3,
+          "duration": 2,
           "succeedsOn": {
             "type": "automatic"
           },

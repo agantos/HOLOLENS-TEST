@@ -98,7 +98,7 @@
           "number": 1
         }
       ],
-      "abilities": [],
+      "abilities": ["Fireball", "Flamethrower", "Flame Slam"],
       "basePresets": ["Character"],
       "additionalPresets": ["Elemental"]
     },
@@ -115,7 +115,7 @@
           "number": 1
         }
       ],
-      "abilities": [],
+      "abilities": ["Ice Blast", "Ice Line", "Ice Slam"],
       "basePresets": ["Character"],
       "additionalPresets": ["Elemental"]
     }

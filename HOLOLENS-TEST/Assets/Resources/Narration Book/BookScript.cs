@@ -5,13 +5,17 @@ using UnityEngine;
 public class BookScript : MonoBehaviour
 {
     public GameObject bookModel;
+    public AudioSource pageFlipAudioSource;
+    public AudioSource narrationAudioSource;
+
+    System.Random random;
 
     AudioClip[] narration = new AudioClip[10];
     AudioClip[] pageChangeSounds = new AudioClip[7];
     Material[] content = new Material[10];
 
     Renderer bookRenderer;
-    AudioSource audioSource;
+
 
     int currentPlayingClip = 0;
 
@@ -24,7 +28,7 @@ public class BookScript : MonoBehaviour
     void Start()
     {
         bookRenderer = bookModel.GetComponent<Renderer>();
-        audioSource = GetComponent<AudioSource>();
+        random = new System.Random();
 
         PlayPage(0);
     }
@@ -45,7 +49,7 @@ public class BookScript : MonoBehaviour
     {
         if(currentPlayingClip < 9)
         {
-            audioSource.Stop();
+            narrationAudioSource.Stop();
             PlayPage(currentPlayingClip + 1);
         }        
     }
@@ -54,7 +58,7 @@ public class BookScript : MonoBehaviour
     {
         if(currentPlayingClip > 0)
         {
-            audioSource.Stop();
+            narrationAudioSource.Stop();
             PlayPage(currentPlayingClip - 1);
         }        
     }
@@ -64,12 +68,19 @@ public class BookScript : MonoBehaviour
         currentPlayingClip = i;
         bookRenderer.material = content[i];
 
-        Invoke("ChangeSound", 1f);
+        PlayPageSound();
+        Invoke("ChangeSound", 1.5f);
+    }
+
+    void PlayPageSound()
+    {
+        pageFlipAudioSource.clip = pageChangeSounds[random.Next(0, pageChangeSounds.Length - 1)];
+        pageFlipAudioSource.Play();
     }
 
     void ChangeSound()
     {
-        audioSource.clip = narration[currentPlayingClip];
-        audioSource.Play();
+        narrationAudioSource.clip = narration[currentPlayingClip];
+        narrationAudioSource.Play();
     }
 }

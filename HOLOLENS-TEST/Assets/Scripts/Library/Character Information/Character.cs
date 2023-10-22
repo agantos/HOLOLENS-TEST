@@ -151,6 +151,9 @@ public class Character
 
     public Ability GetCharacterAbility(string name)
     {
+        if (!abilities.ContainsKey(name))
+            Assert.IsFalse(true, name + " was not found");
+
         return AbilitiesManager.GetInstance().abilities[name];
     }
 

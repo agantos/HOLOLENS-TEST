@@ -403,6 +403,11 @@ public class CastingAbilityManager : MonoBehaviour
         Assert.AreEqual(abilitySucceedsOnDefendersList.Count, defendersGameObject.Count);
         for (int i = 0; i < abilitySucceedsOnDefendersList.Count; i++)
         {
+            Transform attackerTransform = GameManager.GetInstance().playingCharacterGameObjects[attacker.name].transform;
+            Transform defenderTransform = defendersGameObject[i].transform;
+
+            FaceDirection(attackerTransform, defenderTransform);
+
             if (abilitySucceedsOnDefendersList[i])
             {
                 defendersGameObject[i].GetComponent<AnimationManager>()
@@ -438,8 +443,6 @@ public class CastingAbilityManager : MonoBehaviour
     {
         float rotSpeed = 360f;
 
-        //When on target -> dont rotate!
-        if ((direction_object.position - turn_object.position).magnitude < 0.1f) return;
 
         Vector3 direction = (direction_object.position - turn_object.transform.position).normalized;
         Quaternion qDir = Quaternion.LookRotation(direction);
@@ -468,6 +471,7 @@ public class CastingAbilityManager : MonoBehaviour
         applicationData.Clear();
 
         CurrentSelectionType = AbilitySelectType.INACTIVE;
+
     }
 
     /*-------------------------- FX --------------------------*/
@@ -505,10 +509,19 @@ public class CastingAbilityManager : MonoBehaviour
                 );
             }
 
-            //Activate the effect for all defenders originating from the middle of their bodies.
+            //Activate the effect originating from the attacker
             else if (CurrentSelectionType == AbilitySelectType.SELECT)
             {
+                Vector3 LocalPositionBottomOfAttacker = Vector3.zero;
+                Transform attackerTransform = GameManager.GetInstance().playingCharacterGameObjects[attacker.name].transform;
 
+                VFXManager.Instance.ActivateVFX(
+                    effectName,
+                    attackerTransform,
+                    out effectPosition,
+                    LocalPositionBottomOfAttacker,
+                    radiusSelectRotation
+                );
             }
         }
         
@@ -532,13 +545,28 @@ public class CastingAbilityManager : MonoBehaviour
 
         string effectName = abilityToCastPresentation.visualEffects.duringActivation;
 
-        if (abilityToCastPresentation.visualEffects.duringActivation != "") {
-            fx = VFXManager.Instance.ActivateVFX(
-                effectName,
-                attackerTransform,
-                out effectPosition,
-                LocalPositionBottomOfAttacker
-            );
+        if (effectName != "") {
+
+            if(CurrentSelectionType == AbilitySelectType.SELF_SHAPE)
+            {
+                fx = VFXManager.Instance.ActivateVFX(
+                    effectName,
+                    attackerTransform,
+                    out effectPosition,
+                    LocalPositionBottomOfAttacker,
+                    radiusSelectRotation
+                );
+            }
+            else
+            {
+                fx = VFXManager.Instance.ActivateVFX(
+                    effectName,
+                    attackerTransform,
+                    out effectPosition,
+                    LocalPositionBottomOfAttacker                    
+                );
+            }
+                
         }
             
         if (abilityToCastPresentation.soundEffects.duringActivation != "")
@@ -560,7 +588,7 @@ public class CastingAbilityManager : MonoBehaviour
             for (int i = 0; i < abilitySucceedsOnDefendersList.Count; i++)
             {
                 //Models are created with their bottom center being (0,0,0)
-                Vector3 LocalPositionBottomOfAttacker = Vector3.zero;
+                Vector3 LocalPositionBottomOfDefender = Vector3.zero;
                 Vector3 effectPosition = Vector3.zero;
 
                 //foreach defender that the ability succeeded
@@ -571,7 +599,7 @@ public class CastingAbilityManager : MonoBehaviour
                         effectName,
                         defenderTransform,
                         out effectPosition,
-                        LocalPositionBottomOfAttacker
+                        LocalPositionBottomOfDefender
                     );
 
                 }

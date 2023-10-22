@@ -197,9 +197,6 @@ public class CharacterMoveManager : MonoBehaviour
     {
         float rotSpeed = 360f;
 
-        //When on target -> dont rotate!
-        if ((movee.destination - movee.transform.position).magnitude < 0.1f) return;
-
         Vector3 direction = (movee.destination - movee.transform.position).normalized;
         Quaternion qDir = Quaternion.LookRotation(direction);
         movee.transform.rotation = Quaternion.Slerp(movee.transform.rotation, qDir, Time.deltaTime * rotSpeed);

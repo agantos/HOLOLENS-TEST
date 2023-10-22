@@ -3,7 +3,7 @@
     {
       "abilityName": "Slam",
       "animations": {
-        "attacker": "Attack_Ranged_Spell",
+        "attacker": "Attack_Ranged_Weapon",
         "defender_AbilitySucceeds": "TakeHit",
         "defender_AbilityFails": "Dodge"
       },
@@ -49,7 +49,7 @@
     {
       "abilityName": "Fireball",
       "animations": {
-        "attacker": "Attack_Melee_Weapon",
+        "attacker": "Spell_Cast_Area",
         "defender_AbilitySucceeds": "TakeHit",
         "defender_AbilityFails": "Block"
       },
@@ -72,13 +72,13 @@
     {
       "abilityName": "Flamethrower",
       "animations": {
-        "attacker": "Attack_Melee_Weapon",
+        "attacker": "Attack_Ranged_Spell",
         "defender_AbilitySucceeds": "TakeHit",
         "defender_AbilityFails": "Block"
       },
       "visualEffects": {
         "onImpact": "",
-        "duringActivation": "",
+        "duringActivation": "Flamethrower",
         "onDefender": ""
       },
       "soundEffects": {
@@ -95,12 +95,35 @@
     {
       "abilityName": "Flame Slam",
       "animations": {
-        "attacker": "Attack_Melee_Weapon",
+        "attacker": "Attack_Melee_Spell",
         "defender_AbilitySucceeds": "TakeHit",
         "defender_AbilityFails": "Block"
       },
       "visualEffects": {
-        "onImpact": "FireSlam",
+        "onImpact": "",
+        "duringActivation": "",
+        "onDefender": "FireSlam"
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Ice Blast",
+      "animations": {
+        "attacker": "Spell_Cast_Area",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Block"
+      },
+      "visualEffects": {
+        "onImpact": "IceBlast",
         "duringActivation": "",
         "onDefender": ""
       },
@@ -116,9 +139,55 @@
       }
     },
     {
+      "abilityName": "Ice Line",
+      "animations": {
+        "attacker": "Attack_Ranged_Spell",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Block"
+      },
+      "visualEffects": {
+        "onImpact": "IcePath",
+        "duringActivation": "",
+        "onDefender": ""
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Ice Slam",
+      "animations": {
+        "attacker": "Attack_Melee_Spell",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Block"
+      },
+      "visualEffects": {
+        "onImpact": "",
+        "duringActivation": "",
+        "onDefender": "Ice Slam"
+      },
+      "soundEffects": {
+        "onImpact": "",
+        "duringActivation": ""
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
       "abilityName": "Elemental Heal",
       "animations": {
-        "attacker": "Attack_Melee_Weapon",
+        "attacker": "Spell_Cast_Self",
         "defender_AbilitySucceeds": "TakeHit",
         "defender_AbilityFails": "Block"
       },
@@ -691,9 +760,9 @@
       }
     },
     {
-      "abilityName": "Dagger: Impede Attack",
+      "abilityName": "Impede Attack",
       "animations": {
-        "attacker": "Spell_Cast_Area",
+        "attacker": "Attack_Melee_Weapon",
         "defender_AbilitySucceeds": "TakeHit",
         "defender_AbilityFails": "Dodge"
       },
@@ -714,9 +783,9 @@
       }
     },
     {
-      "abilityName": "Dagger: Impede Magic Attack",
+      "abilityName": "Impede Magic Attack",
       "animations": {
-        "attacker": "Spell_Cast_Area",
+        "attacker": "Attack_Melee_Weapon",
         "defender_AbilitySucceeds": "TakeHit",
         "defender_AbilityFails": "Dodge"
       },
@@ -737,9 +806,9 @@
       }
     },
     {
-      "abilityName": "Dagger: Impede Defense",
+      "abilityName": "Impede Defense",
       "animations": {
-        "attacker": "Spell_Cast_Area",
+        "attacker": "Attack_Melee_Spell",
         "defender_AbilitySucceeds": "TakeHit",
         "defender_AbilityFails": "Dodge"
       },
@@ -760,9 +829,9 @@
       }
     },
     {
-      "abilityName": "Dagger: Impede Magic Defense",
+      "abilityName": "Impede Magic Defense",
       "animations": {
-        "attacker": "Spell_Cast_Area",
+        "attacker": "Attack_Melee_Spell",
         "defender_AbilitySucceeds": "TakeHit",
         "defender_AbilityFails": "Dodge"
       },
