@@ -278,7 +278,14 @@
           "statRelations": []
         }
       ],
-      "abilities": ["Sneak Attack", "Impede Attack", "Impede Magic Attack", "Impede Defense", "Impede Magic Defense"]
+      "abilities": [
+        "Dance of Death",
+        "Sneak Attack",
+        "Impede Attack",
+        "Impede Magic Attack",
+        "Impede Defense",
+        "Impede Magic Defense"
+      ]
     }
   ]
 }

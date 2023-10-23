@@ -53,6 +53,9 @@ public class AnimationManager : MonoBehaviour
             case "elemental":
                 ElementalInit();
                 break;
+            case "rogue":
+                RogueInit();
+                break;
         }
     }
 

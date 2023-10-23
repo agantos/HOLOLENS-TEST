@@ -10,11 +10,11 @@
       "visualEffects": {
         "onImpact": "",
         "duringActivation": "",
-        "onDefender": ""
+        "onDefender": "ImpactHit"
       },
       "soundEffects": {
-        "onImpact": "",
-        "duringActivation": ""
+        "onImpact": "Slam",
+        "duringActivation": "Slow Build up Rocks"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -33,11 +33,11 @@
       "visualEffects": {
         "onImpact": "",
         "duringActivation": "",
-        "onDefender": ""
+        "onDefender": "ImpactHit"
       },
       "soundEffects": {
-        "onImpact": "",
-        "duringActivation": ""
+        "onImpact": "Rock Hit",
+        "duringActivation": "Slow Build up Rocks"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -59,8 +59,8 @@
         "onDefender": ""
       },
       "soundEffects": {
-        "onImpact": "",
-        "duringActivation": ""
+        "onImpact": "Fireball",
+        "duringActivation": "Slow Build up Rocks"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -83,7 +83,7 @@
       },
       "soundEffects": {
         "onImpact": "",
-        "duringActivation": ""
+        "duringActivation": "Flamethrower"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -105,8 +105,8 @@
         "onDefender": "FireSlam"
       },
       "soundEffects": {
-        "onImpact": "",
-        "duringActivation": ""
+        "onImpact": "Explosion",
+        "duringActivation": "Slow Build up Rocks"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -128,8 +128,8 @@
         "onDefender": ""
       },
       "soundEffects": {
-        "onImpact": "",
-        "duringActivation": ""
+        "onImpact": "Ice Impact big",
+        "duringActivation": "Ice charging"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -151,8 +151,8 @@
         "onDefender": ""
       },
       "soundEffects": {
-        "onImpact": "",
-        "duringActivation": ""
+        "onImpact": "Ice Impact small",
+        "duringActivation": "Ice charging"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -174,8 +174,8 @@
         "onDefender": "Ice Slam"
       },
       "soundEffects": {
-        "onImpact": "",
-        "duringActivation": ""
+        "onImpact": "Ice Impact mid",
+        "duringActivation": "Ice charging"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -192,13 +192,13 @@
         "defender_AbilityFails": "Block"
       },
       "visualEffects": {
-        "onImpact": "HealSound",
+        "onImpact": "",
         "duringActivation": "",
         "onDefender": "Heal"
       },
       "soundEffects": {
-        "onImpact": "",
-        "duringActivation": ""
+        "onImpact": "HealSound",
+        "duringActivation": "DuringCast2"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -217,7 +217,7 @@
       "visualEffects": {
         "onImpact": "BramblesImpact",
         "duringActivation": "NatureDuringCasting",
-        "onDefender": ""
+        "onDefender": "ImpactHit"
       },
       "soundEffects": {
         "onImpact": "",
@@ -307,7 +307,7 @@
         "defender_AbilityFails": "Dodge"
       },
       "visualEffects": {
-        "onImpact": "",
+        "onImpact": "Mass Buff Circle",
         "duringActivation": "NatureDuringCasting",
         "onDefender": "BuffCircle"
       },
@@ -330,7 +330,7 @@
         "defender_AbilityFails": "Dodge"
       },
       "visualEffects": {
-        "onImpact": "",
+        "onImpact": "Mass Buff Circle",
         "duringActivation": "NatureDuringCasting",
         "onDefender": "BuffCircle"
       },
@@ -348,7 +348,7 @@
     {
       "abilityName": "Weakening Curse",
       "animations": {
-        "attacker": "Spell_Cast_Area",
+        "attacker": "Spell_Cast_Self",
         "defender_AbilitySucceeds": "TakeHit",
         "defender_AbilityFails": "Dodge"
       },
@@ -359,7 +359,7 @@
       },
       "soundEffects": {
         "onImpact": "Spell Debuff",
-        "duringActivation": ""
+        "duringActivation": "DuringCast1"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -371,7 +371,7 @@
     {
       "abilityName": "Curse of Vulnerability",
       "animations": {
-        "attacker": "Spell_Cast_Area",
+        "attacker": "Spell_Cast_Self",
         "defender_AbilitySucceeds": "TakeHit",
         "defender_AbilityFails": "Dodge"
       },
@@ -382,7 +382,7 @@
       },
       "soundEffects": {
         "onImpact": "Spell Debuff",
-        "duringActivation": ""
+        "duringActivation": "DuringCast1"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -394,7 +394,7 @@
     {
       "abilityName": "Arcane Blast",
       "animations": {
-        "attacker": "Spell_Cast_Area",
+        "attacker": "Attack_Ranged_Spell",
         "defender_AbilitySucceeds": "TakeHit",
         "defender_AbilityFails": "Dodge"
       },
@@ -404,8 +404,8 @@
         "onDefender": ""
       },
       "soundEffects": {
-        "onImpact": "",
-        "duringActivation": ""
+        "onImpact": "Crystal 2",
+        "duringActivation": "DuringCast3"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -463,18 +463,18 @@
     {
       "abilityName": "Slash",
       "animations": {
-        "attacker": "Spell_Cast_Area",
+        "attacker": "Attack_Melee_Weapon",
         "defender_AbilitySucceeds": "TakeHit",
         "defender_AbilityFails": "Dodge"
       },
       "visualEffects": {
-        "onImpact": "",
+        "onImpact": "ImpactHit",
         "duringActivation": "",
         "onDefender": ""
       },
       "soundEffects": {
-        "onImpact": "",
-        "duringActivation": ""
+        "onImpact": "Slash Wood 2",
+        "duringActivation": "Slash Air 1"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -486,18 +486,18 @@
     {
       "abilityName": "Powerful Slash",
       "animations": {
-        "attacker": "Spell_Cast_Area",
+        "attacker": "Attack_Melee_Weapon",
         "defender_AbilitySucceeds": "TakeHit",
         "defender_AbilityFails": "Dodge"
       },
       "visualEffects": {
-        "onImpact": "",
+        "onImpact": "ImpactHit",
         "duringActivation": "",
         "onDefender": ""
       },
       "soundEffects": {
-        "onImpact": "",
-        "duringActivation": ""
+        "onImpact": "Slash Impact Body 3",
+        "duringActivation": "Slash Air 2"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -509,18 +509,18 @@
     {
       "abilityName": "Decimating Slash",
       "animations": {
-        "attacker": "Spell_Cast_Area",
+        "attacker": "Attack_Melee_Weapon",
         "defender_AbilitySucceeds": "TakeHit",
         "defender_AbilityFails": "Dodge"
       },
       "visualEffects": {
         "onImpact": "",
         "duringActivation": "",
-        "onDefender": ""
+        "onDefender": "ImpactHit"
       },
       "soundEffects": {
-        "onImpact": "",
-        "duringActivation": ""
+        "onImpact": "Slash Critical Point",
+        "duringActivation": "Slash Air 3"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -532,7 +532,7 @@
     {
       "abilityName": "Inspire!",
       "animations": {
-        "attacker": "Spell_Cast_Area",
+        "attacker": "Attack_Ranged_Spell",
         "defender_AbilitySucceeds": "TakeHit",
         "defender_AbilityFails": "Dodge"
       },
@@ -555,18 +555,18 @@
     {
       "abilityName": "Free Powerful Slash",
       "animations": {
-        "attacker": "Spell_Cast_Area",
+        "attacker": "Attack_Melee_Weapon",
         "defender_AbilitySucceeds": "TakeHit",
         "defender_AbilityFails": "Dodge"
       },
       "visualEffects": {
-        "onImpact": "",
+        "onImpact": "ImpactHit",
         "duringActivation": "",
         "onDefender": ""
       },
       "soundEffects": {
-        "onImpact": "",
-        "duringActivation": ""
+        "onImpact": "Slash Impact Body 2",
+        "duringActivation": "Slash Air 2"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -585,11 +585,11 @@
       "visualEffects": {
         "onImpact": "SwordLineSlash",
         "duringActivation": "",
-        "onDefender": ""
+        "onDefender": "ImpactHit"
       },
       "soundEffects": {
-        "onImpact": "",
-        "duringActivation": ""
+        "onImpact": "Impact Earth Falling",
+        "duringActivation": "Slash Air 3"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -601,18 +601,18 @@
     {
       "abilityName": "Sword Attack",
       "animations": {
-        "attacker": "Spell_Cast_Area",
+        "attacker": "Attack_Melee_Weapon",
         "defender_AbilitySucceeds": "TakeHit",
         "defender_AbilityFails": "Dodge"
       },
       "visualEffects": {
         "onImpact": "",
         "duringActivation": "",
-        "onDefender": ""
+        "onDefender": "ImpactHit"
       },
       "soundEffects": {
-        "onImpact": "",
-        "duringActivation": ""
+        "onImpact": "Slash Metal 1",
+        "duringActivation": "Slash Air 1"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -624,7 +624,7 @@
     {
       "abilityName": "Cure Wounds",
       "animations": {
-        "attacker": "Spell_Cast_Area",
+        "attacker": "Attack_Ranged_Spell",
         "defender_AbilitySucceeds": "TakeHit",
         "defender_AbilityFails": "Dodge"
       },
@@ -635,7 +635,7 @@
       },
       "soundEffects": {
         "onImpact": "HealSound",
-        "duringActivation": ""
+        "duringActivation": "DuringCast2"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -647,7 +647,7 @@
     {
       "abilityName": "Cure Moderate Wounds",
       "animations": {
-        "attacker": "Spell_Cast_Area",
+        "attacker": "Attack_Ranged_Spell",
         "defender_AbilitySucceeds": "TakeHit",
         "defender_AbilityFails": "Dodge"
       },
@@ -658,7 +658,7 @@
       },
       "soundEffects": {
         "onImpact": "HealSound",
-        "duringActivation": ""
+        "duringActivation": "DuringCast2"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -676,12 +676,12 @@
       },
       "visualEffects": {
         "onImpact": "MassHeal",
-        "duringActivation": "",
+        "duringActivation": "Fireball_duringActivation",
         "onDefender": "Heal"
       },
       "soundEffects": {
         "onImpact": "MassHeal",
-        "duringActivation": "HealSound"
+        "duringActivation": "DuringCast2"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -698,13 +698,13 @@
         "defender_AbilityFails": "Dodge"
       },
       "visualEffects": {
-        "onImpact": "",
-        "duringActivation": "",
+        "onImpact": "Holy Fire",
+        "duringActivation": "Fireball_duringActivation",
         "onDefender": ""
       },
       "soundEffects": {
-        "onImpact": "",
-        "duringActivation": ""
+        "onImpact": "Flames",
+        "duringActivation": "DuringCast2"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -716,18 +716,18 @@
     {
       "abilityName": "Holy Avenger",
       "animations": {
-        "attacker": "Spell_Cast_Area",
+        "attacker": "Spell_Cast_Self",
         "defender_AbilitySucceeds": "TakeHit",
         "defender_AbilityFails": "Dodge"
       },
       "visualEffects": {
-        "onImpact": "",
-        "duringActivation": "",
+        "onImpact": "Buff Hexagon",
+        "duringActivation": "GainPower Holy",
         "onDefender": ""
       },
       "soundEffects": {
         "onImpact": "Spell Buff",
-        "duringActivation": ""
+        "duringActivation": "DuringCast3"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -746,11 +746,11 @@
       "visualEffects": {
         "onImpact": "",
         "duringActivation": "",
-        "onDefender": ""
+        "onDefender": "ImpactHit"
       },
       "soundEffects": {
-        "onImpact": "",
-        "duringActivation": ""
+        "onImpact": "Slash Critical Point",
+        "duringActivation": "Slash Air 1"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -769,11 +769,11 @@
       "visualEffects": {
         "onImpact": "",
         "duringActivation": "",
-        "onDefender": ""
+        "onDefender": "ImpactHit"
       },
       "soundEffects": {
         "onImpact": "",
-        "duringActivation": ""
+        "duringActivation": "Unarmed Impact 1"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -792,11 +792,11 @@
       "visualEffects": {
         "onImpact": "",
         "duringActivation": "",
-        "onDefender": ""
+        "onDefender": "ImpactHit"
       },
       "soundEffects": {
         "onImpact": "",
-        "duringActivation": ""
+        "duringActivation": "Unarmed Impact 2"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -815,11 +815,11 @@
       "visualEffects": {
         "onImpact": "",
         "duringActivation": "",
-        "onDefender": ""
+        "onDefender": "ImpactHit"
       },
       "soundEffects": {
         "onImpact": "",
-        "duringActivation": ""
+        "duringActivation": "Unarmed Impact 3"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -838,11 +838,34 @@
       "visualEffects": {
         "onImpact": "",
         "duringActivation": "",
-        "onDefender": ""
+        "onDefender": "ImpactHit"
       },
       "soundEffects": {
         "onImpact": "",
-        "duringActivation": ""
+        "duringActivation": "Unarmed Impact 4"
+      },
+      "characterDialogue": {
+        "onImpact": "",
+        "duringActivation": "",
+        "defender_AbilityFails": "",
+        "defender_AbilitySucceeds": ""
+      }
+    },
+    {
+      "abilityName": "Dance of Death",
+      "animations": {
+        "attacker": "Spell_Cast_General",
+        "defender_AbilitySucceeds": "TakeHit",
+        "defender_AbilityFails": "Dodge"
+      },
+      "visualEffects": {
+        "onImpact": "Dance of Death",
+        "duringActivation": "",
+        "onDefender": "ImpactHit"
+      },
+      "soundEffects": {
+        "onImpact": "Slash Flurry",
+        "duringActivation": "Slash Air 1"
       },
       "characterDialogue": {
         "onImpact": "",

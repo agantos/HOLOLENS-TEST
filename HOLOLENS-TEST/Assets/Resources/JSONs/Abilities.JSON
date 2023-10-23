@@ -688,7 +688,7 @@
           "areaOfEffect": {
             "range": 50,
             "shape": "circle",
-            "radius": 30
+            "radius": 20
           },
           "succeedsOn": {
             "type": "automatic",
@@ -756,7 +756,7 @@
           "areaOfEffect": {
             "range": 50,
             "shape": "circle",
-            "radius": 30
+            "radius": 20
           },
           "succeedsOn": {
             "type": "automatic",
@@ -1776,6 +1776,52 @@
               "statsAffecting": ["Damage"]
             },
             "onSavedMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dance of Death",
+      "description": "Amelia select's up to 3 targets and unleashes a tempest of slashes against them cutting them",
+      "tags": ["Special Ability", "Physical Attack"],
+      "turnEconomyCost": [{ "name": "Action Points", "cost": 2 }],
+      "effects": [
+        {
+          "isPrimary": true,
+          "type": "Damage",
+          "duration": 0,
+          "targetting": {
+            "number": 3,
+            "type": "all"
+          },
+          "areaOfEffect": {
+            "range": 15,
+            "shape": "select",
+            "radius": 0
+          },
+          "succeedsOn": {
+            "type": "comparison",
+            "againstStatic": "",
+            "comparisonStats": {
+              "defenderStat": {
+                "name": "Defense",
+                "multiplier": 1,
+                "bonus": "1d20"
+              },
+              "attackerStat": {
+                "name": "Attack",
+                "multiplier": 1,
+                "bonus": "1d20"
+              }
+            }
+          },
+          "damage": {
+            "damagedStat": "HP",
+            "amount": {
+              "baseAmount": "5d8",
+              "statsAffecting": ["Damage"]
+            },
+            "onSavedMultiplier": 0.5
           }
         }
       ]

@@ -62,10 +62,34 @@ public class VFXManager : MonoBehaviour
         {
             offset += new Vector3(0, 3f, 0);
         }
+        
         if(effectName == "Flamethrower")
         {
             offset += new Vector3(0, 1.3f, 0.4f);
         }
+
+        if(effectName == "GainPower Holy")
+        {
+            offset += new Vector3(0, 0.51f, 0);
+        }
+
+        if (effectName == "GainPower")
+        {
+            offset += new Vector3(0, 0.51f, 0);
+        }
+
+        if(effectName == "Buff Hexagon")
+        {
+            offset += new Vector3(0, 0.51f, 0);
+        }
+
+        if(effectName == "Dance of Death")
+        {
+            offset += new Vector3(0, 1.3f, 0);
+        }
+
+
+
         return offset;
     }
 
