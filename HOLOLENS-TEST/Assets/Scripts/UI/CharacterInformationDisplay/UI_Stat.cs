@@ -10,7 +10,19 @@ public class UI_Stat : MonoBehaviour
 
     public void SetStatName(string s)
     {
-        statName.text = s;
+        if (s.Length > 5)
+        {
+            if (s.Contains(" "))
+            {
+                string[] words = s.Split(' ');  // Split the input string by space
+                s = words[0].Substring(0, 3) + " " + words[1].Substring(0, 3);
+                statName.text = s;
+            }
+            else
+                statName.text = s.Substring(0, 3);
+        }            
+        else
+            statName.text = s;
     }
 
     public void SetValue(int i)

@@ -60,7 +60,7 @@ public class CastingAbilityManager : MonoBehaviour
 
 
         //Check if the ability can be cast
-        if (true/**AbilityManager.Activate_CheckCost(ability.name, attacker)**/)
+        if (AbilitiesManager.GetInstance().Activate_CheckCost(abilityInformation.name, attacker))
         {
             //Cancel a selection of move if it had happened
             ConfirmMoveCanvas cm = FindFirstObjectByType<ConfirmMoveCanvas>();
@@ -137,7 +137,6 @@ public class CastingAbilityManager : MonoBehaviour
         else
         {
             ToastMessageManager.Instance.CreateToast(attacker.name + " cannot cast ability " + abilityInformation.name);
-            Debug.Log(attacker.name + " cannot cast ability " + abilityInformation.name);
             return false;
         }            
     }

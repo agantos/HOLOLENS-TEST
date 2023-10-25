@@ -225,7 +225,7 @@ public class EffectDamageStats
         }
     }
 
-    public int RollDamage(List<int> statBonuses)
+    public int RollDamage(CharacterStats attackerStats = null)
     {
         int sum = 0;
         
@@ -234,12 +234,30 @@ public class EffectDamageStats
         sum += diceRoll;
 
         //Add stat bonuses
-       
+        sum += GetStatBonusSum(attackerStats);
+
         //Return result
         return isNegative? -sum : sum;
     }
 
-    List<int> GetStatBonuses(CharacterStats attackerStats)
+    public int GetStatBonusSum(CharacterStats attackerStats)
+    {
+        int sum = 0;
+
+        if (attackerStats == null)
+            return sum;
+
+        List<int> statBonuses = GetStatBonuses(attackerStats);
+
+        foreach(int bonus in statBonuses)
+        {
+            sum += bonus;
+        }
+
+        return sum;
+    }
+
+    public List<int> GetStatBonuses(CharacterStats attackerStats)
     {
         List<int> statBonuses = new List<int>();
         
@@ -256,7 +274,7 @@ public class EffectDamageStats
 
     public int GetBaseDamage(CharacterStats attackerStats)
     {
-        return RollDamage(GetStatBonuses(attackerStats));
+        return RollDamage(attackerStats);
     }
     public string ToString(string prevTab)
     {

@@ -9,13 +9,13 @@ public class SuccessInfoManager : MonoBehaviour
     public TMP_Text OnSaveText;
     public TMP_Text RollExplainedText;    
 
-    public void CreateUI(Ability displayingAbility)
+    public void CreateUI(Ability displayingAbility, Character character = null)
     {
-        CreateInfoText(displayingAbility);
+        CreateInfoText(displayingAbility, character);
         CreateOnSaveText(displayingAbility);
     }
 
-    void CreateInfoText(Ability displayingAbility)
+    void CreateInfoText(Ability displayingAbility, Character c)
     {
         string text = "";
         EffectSucceedsStats succeedStats = displayingAbility.effects[0].effectSucceedsStats;
@@ -35,7 +35,21 @@ public class SuccessInfoManager : MonoBehaviour
                 text += AbilityDisplayGeneralMethods.Instance.BoldString("Defenders") + " compare ";
                 text += AbilityDisplayGeneralMethods.Instance.ColorString(succeedStats.defenderStat.statName, AbilityDisplayColors.CHARACTER_STAT) + " ";
                 text += "against " + AbilityDisplayGeneralMethods.Instance.BoldString("Attacker's") + " ";
-                text += AbilityDisplayGeneralMethods.Instance.ColorString(succeedStats.attackerStat.statName, AbilityDisplayColors.CHARACTER_STAT) + ". ";
+                text += AbilityDisplayGeneralMethods.Instance.ColorString(succeedStats.attackerStat.statName, AbilityDisplayColors.CHARACTER_STAT);
+
+                
+
+                if (c != null)
+                    text += " (= " +
+                        AbilityDisplayGeneralMethods.Instance.ColorString(
+                            c.GetStat(
+                                succeedStats.attackerStat.statName).GetCurrentValue().ToString(),
+                                AbilityDisplayColors.DAMAGE
+                            ) +
+                        ")"
+                    ;
+
+                text+= ". ";
                 text += "Defenders save on bigger roll result.";
                 break;
         }

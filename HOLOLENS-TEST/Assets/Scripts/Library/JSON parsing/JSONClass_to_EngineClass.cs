@@ -289,11 +289,11 @@ public class JSONClass_to_EngineClass
         character.player = jsonCharacter.player;
 
         //Turn Economy
-        character.turnEconomy = new Dictionary<string, int>();
+        character.startingTurnEconomy = new Dictionary<string, int>();
         character.currentTurnEconomy = new Dictionary<string, int>();
         foreach (JSONTurnEconomy actionEconomy in jsonCharacter.turnEconomy)
         {
-            character.turnEconomy.Add(actionEconomy.name, actionEconomy.number);
+            character.startingTurnEconomy.Add(actionEconomy.name, actionEconomy.number);
         }
         character.RefreshTurnEconomy();
 

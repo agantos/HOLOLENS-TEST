@@ -4,11 +4,6 @@
   "tags": ["Ranged Attacks"],
   "turnEconomyCost": [{ "name": "Bonus Action", "cost": 1 }],
   "statCost": [],
-  "animationTypes": {
-    "attacker": "Attack_Ranged_Spell",
-    "defender_AbilitySucceeds": "TakeHit",
-    "defender_AbilityFails": "Dodge"
-  },
   "effects": [
     {
       "isPrimary": true,

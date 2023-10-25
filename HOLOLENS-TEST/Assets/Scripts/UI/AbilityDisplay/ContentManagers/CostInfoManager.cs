@@ -25,7 +25,7 @@ public class CostInfoManager : MonoBehaviour
 
     List<CostDisplayTextRow> rowList = new List<CostDisplayTextRow>();
 
-    public void CreateUI(Ability displayingAbility)
+    public void CreateUI(Ability displayingAbility, Character character = null)
     {
         int count = 0;
 
@@ -36,10 +36,25 @@ public class CostInfoManager : MonoBehaviour
             if (count % 3 == 0)
                 CreateRow();
 
-            //Create Text and add to current row
+            string cost = displayingAbility.turnEconomyCost[name].ToString();
+            
+            string characterCurrent = "";
+            if(character!= null)
+            {
+                characterCurrent = character.currentTurnEconomy[name].ToString();
+            }
+
+            //Create text of base cost
             string text = "";
             text += "(" + displayingAbility.turnEconomyCost[name].ToString() + ") ";
             text += AbilityDisplayGeneralMethods.Instance.ColorString(name, AbilityDisplayColors.TURN_ECONOMY);
+
+            //If a character is passed create text for current turn economy
+            if(character != null)
+            {
+                text += "\n Current: " + AbilityDisplayGeneralMethods.Instance.ColorString(characterCurrent, AbilityDisplayColors.TURN_ECONOMY);
+            }
+
             AddToCurrentRow(text);
 
             count++;

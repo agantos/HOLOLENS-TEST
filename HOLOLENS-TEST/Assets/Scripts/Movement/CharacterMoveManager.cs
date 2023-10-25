@@ -84,7 +84,7 @@ public class CharacterMoveManager : MonoBehaviour
     void IllegalMoveRecorded()
     {
         string name = movee.gameObject.GetComponent<CharacterScript>().GetCharacter().name;
-        ToastMessageManager.Instance.CreateToast(name + " Character does not have enough speed to move there");
+        ToastMessageManager.Instance.CreateToast(name + " does not have enough speed to move there");
     }
 
     /* ACCEPT OR DENY MOVE METHODS */
@@ -172,8 +172,7 @@ public class CharacterMoveManager : MonoBehaviour
 
         Debug.Log("Move Speed is " + movee.gameObject.GetComponent<CharacterScript>().GetCharacter().GetStat("Speed").GetCurrentValue());
 
-        return true;
-        //return characterSpeed >= distance;
+        return characterSpeed >= distance;
     }    
 
     void WhenMoveeStops()

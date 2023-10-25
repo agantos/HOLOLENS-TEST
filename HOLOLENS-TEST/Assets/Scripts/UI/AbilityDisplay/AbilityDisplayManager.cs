@@ -12,12 +12,12 @@ public class AbilityDisplayManager : MonoBehaviour
     public TMP_Text title;
     
     
-    public static Ability displayingAbility;
+    public Ability displayingAbility;
     public static Dictionary<AbilityDisplayColors, string> colorTypesDictionary = new Dictionary<AbilityDisplayColors, string>();
 
     Vector3 localScale = new Vector3(1, 1, 1);
 
-    public void CreateUI(string abilityName) {        
+    public void CreateUI(string abilityName, string characterName = "") {        
         
         //Spawn UI by scaling it
         transform.localScale = localScale;
@@ -26,14 +26,19 @@ public class AbilityDisplayManager : MonoBehaviour
         displayingAbility = AbilitiesManager.GetInstance().abilities[abilityName];
         title.text = displayingAbility.name;
 
+        //Set Character
+        Character referencedCharacter = null;        
+        if(characterName != "")
+            referencedCharacter = GameManager.GetInstance().characterPool[characterName];
+
         //Clear Existing UI
         ClearUI();
 
         //Populate UI Information
-        costInfoManager.CreateUI(displayingAbility);
-        effectInfoManager.CreateUI(displayingAbility);
-        otherStatsManager.CreateUI(displayingAbility);
-        successInfoManager.CreateUI(displayingAbility);
+        costInfoManager.CreateUI(displayingAbility, referencedCharacter);
+        effectInfoManager.CreateUI(displayingAbility, referencedCharacter);
+        otherStatsManager.CreateUI(displayingAbility, referencedCharacter);
+        successInfoManager.CreateUI(displayingAbility, referencedCharacter);
     }
 
     void DespawnUI()

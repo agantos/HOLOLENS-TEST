@@ -22,7 +22,7 @@ public class Character
     public List<string> additionalPresets = new List<string>();
 
     //TurnEconomy
-    public Dictionary<string, int> turnEconomy;
+    public Dictionary<string, int> startingTurnEconomy;
     public Dictionary<string, int> currentTurnEconomy;
 
     //Ability Related
@@ -75,7 +75,14 @@ public class Character
         character_UI_info = new Character_UI_Information();
         foreach (string preset in basePresets)
         {
-            character_UI_info.AddPresetInformation(GameManager.GetInstance().presets_UI_Info[preset]);
+            if (GameManager.GetInstance().presets_UI_Info.ContainsKey(preset))
+                character_UI_info.AddPresetInformation(GameManager.GetInstance().presets_UI_Info[preset]);
+        }
+
+        foreach (string preset in additionalPresets)
+        {
+            if(GameManager.GetInstance().presets_UI_Info.ContainsKey(preset))
+                character_UI_info.AddPresetInformation(GameManager.GetInstance().presets_UI_Info[preset]);
         }
     }
 
@@ -98,11 +105,11 @@ public class Character
             foreach(Character defender in defenders)
             {
                 bool succeeds;
-                applicationDataList.AddRange(AbilitiesManager.GetAbilityApplicationData(abilityName, out succeeds, defender, attacker));
+                applicationDataList.AddRange(AbilitiesManager.GetInstance().GetAbilityApplicationData(abilityName, out succeeds, defender, attacker));
                 abilitySucceedsOnDefendersList.Add(succeeds);
             }
                 
-            AbilitiesManager.ApplyAbilityCost(abilityName, attacker);
+            AbilitiesManager.GetInstance().ApplyAbilityCost(abilityName, attacker);
         }
         else
         {
@@ -113,9 +120,9 @@ public class Character
     //Turn Change Methods
     public void RefreshTurnEconomy()
     {
-        foreach(string name in turnEconomy.Keys)
+        foreach(string name in startingTurnEconomy.Keys)
         {
-            currentTurnEconomy[name] = turnEconomy[name];
+            currentTurnEconomy[name] = startingTurnEconomy[name];
         }
     }
 
@@ -167,8 +174,8 @@ public class Character
         s += stats.ToString(currTab) + "\n";
 
         s += currTab + "TurnEconomy: [  ";
-        foreach (string actionName in turnEconomy.Keys)
-            s += currTab + tab + actionName + " " + turnEconomy[actionName] + "\n";
+        foreach (string actionName in startingTurnEconomy.Keys)
+            s += currTab + tab + actionName + " " + startingTurnEconomy[actionName] + "\n";
 
         s += currTab + "Abilities: [  ";
         foreach (string ability in abilities.Values)

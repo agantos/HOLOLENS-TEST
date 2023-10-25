@@ -72,7 +72,7 @@ public class AbilitiesManager
     }
 
     //Check if a character can pay the cost of an ability
-    public static bool Activate_CheckCost(string name, Character attacker)
+    public bool Activate_CheckCost(string name, Character attacker)
     {        
         Ability toActivate = GetInstance().abilities[name];
         bool canActivate = true;
@@ -104,7 +104,7 @@ public class AbilitiesManager
     }
 
     //Apply the cost of an ability
-    public static void ApplyAbilityCost(string abilityName, Character attacker)
+    public void ApplyAbilityCost(string abilityName, Character attacker)
     {
         Ability toActivate = GetInstance().abilities[abilityName];
         
@@ -125,7 +125,7 @@ public class AbilitiesManager
     }
 
     //Creates the application data for an ability and a single defender
-    public static List<EffectApplicationData> GetAbilityApplicationData(string abilityName, out bool effectSucceeds, /*out EffectResults effectResults,*/ Character defender = null,  Character attacker = null)
+    public List<EffectApplicationData> GetAbilityApplicationData(string abilityName, out bool effectSucceeds, /*out EffectResults effectResults,*/ Character defender = null,  Character attacker = null)
     {
         List<EffectApplicationData> applicationDataList = new List<EffectApplicationData>();
 

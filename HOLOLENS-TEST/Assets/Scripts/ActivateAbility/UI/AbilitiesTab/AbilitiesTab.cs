@@ -27,7 +27,6 @@ public class AbilitiesTab : MonoBehaviour
 
                     instance.name = abilityName + "_Button";
                     instance.GetComponentInChildren<BeginAbilityActivationButton>().Initialize(abilityName, SelectAbilityUIManager.Instance.UI_Info.currentPlayer, SpawnRadius);
-                    instance.GetComponentInChildren<BeginAbilityActivationButton>().SetButtonOnClick(() => {  SelectAbilityUIManager.Instance.OnClick_AbilityButton(abilityName); });
                 }
             }
         }

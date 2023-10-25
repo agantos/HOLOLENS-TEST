@@ -8,6 +8,8 @@ public class FollowCamera : MonoBehaviour
     Vector3 startingPosition;
     Quaternion startingRotation;
 
+    private Vector3 offset;
+
     public bool RotateWithCamera = true;
     public bool MoveWithCamera = true;
 
@@ -15,8 +17,7 @@ public class FollowCamera : MonoBehaviour
     void Start()
     {
         cam = FindAnyObjectByType<Camera>();
-        startingPosition = transform.position;
-        startingRotation = transform.rotation;
+        offset = transform.position - cam.transform.position;
     }
 
     // Update is called once per frame
@@ -28,9 +29,9 @@ public class FollowCamera : MonoBehaviour
     private void OnGUI()
     {
         if(MoveWithCamera )
-            transform.position = startingPosition + cam.transform.position;
+            transform.position = cam.transform.position + offset;
 
         if (RotateWithCamera)
-            transform.rotation = startingRotation * cam.transform.rotation;
+            transform.rotation = cam.transform.rotation;
     }
 }

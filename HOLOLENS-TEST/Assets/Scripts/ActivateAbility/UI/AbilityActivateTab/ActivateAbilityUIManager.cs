@@ -34,7 +34,7 @@ public class ActivateAbilityUIManager : MonoBehaviour
         gameObject.transform.localScale = scale;
 
         title.text = SelectAbilityUIManager.Instance.UI_Info.currentAbility;
-        abilityDisplay.CreateUI(SelectAbilityUIManager.Instance.UI_Info.currentAbility);
+        abilityDisplay.CreateUI(SelectAbilityUIManager.Instance.UI_Info.currentAbility, CastingAbilityManager.Instance.attacker.name);
     }
 
     public void Deactivate()

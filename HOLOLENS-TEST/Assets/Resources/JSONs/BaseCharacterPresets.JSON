@@ -10,7 +10,7 @@
         },
         {
           "name": "Speed",
-          "staticValue": 20,
+          "staticValue": 30,
           "statRelations": []
         },
         {
@@ -286,6 +286,21 @@
         "Impede Defense",
         "Impede Magic Defense"
       ]
+    },
+    {
+      "name": "Magic Fighter",
+      "statistics": [],
+      "abilities": []
+    },
+    {
+      "name": "Physical Fighter",
+      "statistics": [],
+      "abilities": []
+    },
+    {
+      "name": "Hybrid Fighter",
+      "statistics": [],
+      "abilities": []
     }
   ]
 }

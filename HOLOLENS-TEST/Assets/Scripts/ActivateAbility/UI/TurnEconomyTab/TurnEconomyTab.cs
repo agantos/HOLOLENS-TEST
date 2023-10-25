@@ -15,9 +15,9 @@ public class TurnEconomyTab : MonoBehaviour
         title.SetText("Turn Economy");
 
 
-        foreach (string turnEconomyName in character.turnEconomy.Keys)
+        foreach (string turnEconomyName in character.startingTurnEconomy.Keys)
         {
-            int maxValue = character.turnEconomy[turnEconomyName];
+            int maxValue = character.startingTurnEconomy[turnEconomyName];
             int currentValue = character.currentTurnEconomy[turnEconomyName];
 
             GameObject instance = pageManagerInstance.GetComponent<PageManager>().AddElement(ButtonPrefab);

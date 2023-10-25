@@ -17,7 +17,8 @@ public class BeginAbilityActivationButton: MonoBehaviour
         text.text = abilityName;
 
         SetButtonOnClick(delegate {
-            CastingAbilityManager.GetInstance().BeginAbilityActivation(abilityName, attackerName);
+            if(CastingAbilityManager.GetInstance().BeginAbilityActivation(abilityName, attackerName))
+                SelectAbilityUIManager.Instance.OnClick_AbilityButton(abilityName);
         });
     }
 

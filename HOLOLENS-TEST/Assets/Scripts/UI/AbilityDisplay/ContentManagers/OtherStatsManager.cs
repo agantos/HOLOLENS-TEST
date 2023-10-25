@@ -9,7 +9,7 @@ public class OtherStatsManager : MonoBehaviour
     public GameObject OtherStatsInfoPrefab;
 
     List<GameObject> spawnedObjectsList = new List<GameObject>();
-    public void CreateUI(Ability displayingAbility)
+    public void CreateUI(Ability displayingAbility, Character character = null)
     {
         CreateDuration(displayingAbility);
         CreateRange(displayingAbility);

@@ -6,11 +6,54 @@
         { "color": "9E0000", "statName": "HP" },
         { "color": "00488A", "statName": "Power Points" }
       ],
-      "baseStats": ["Defense", "Magic Defense", "Attack", "Magic Attack"],
+      "baseStats": ["Speed"],
+      "keyAbilities": [],
+      "statCategories": []
+    },
+    {
+      "preset": "Magic Fighter",
+      "bars": [],
+      "baseStats": ["Magic Attack", "Magic Damage", "Defense", "Magic Defense"],
       "keyAbilities": [],
       "statCategories": [
-        { "categoryName": "Defense", "statNames": ["Defense", "Magic Defense", "Physical Negation", "Magic Negation"] }
+        { "categoryName": "Magic", "statNames": ["Magic Attack", "Magic Damage", "Magic Defense", "Magic Negation"] }
       ]
+    },
+    {
+      "preset": "Hybrid Fighter",
+      "bars": [],
+      "baseStats": ["Magic Attack", "Attack", "Defense", "Magic Defense"],
+      "keyAbilities": [],
+      "statCategories": [
+        {
+          "categoryName": "Defenses",
+          "statNames": ["Magic Defense", "Magic Negation", "Defense", "Physical Negation"]
+        },
+        { "categoryName": "Magic", "statNames": ["Magic Attack", "Magic Damage", "Magic Defense", "Magic Negation"] }
+      ]
+    },
+    {
+      "preset": "Physical Fighter",
+      "bars": [],
+      "baseStats": ["Attack", "Damage", "Defense", "Magic Defense"],
+      "keyAbilities": [],
+      "statCategories": [
+        { "categoryName": "Defenses", "statNames": ["Magic Defense", "Magic Negation", "Defense", "Physical Negation"] }
+      ]
+    },
+    {
+      "preset": "Godling",
+      "bars": [],
+      "baseStats": [],
+      "keyAbilities": [
+        "Line of Brambles",
+        "Enhance Attack",
+        "Enhance Magic Attack",
+        "Lightning Strike",
+        "Mass Enhance Attack",
+        "Mass Enhance Defense"
+      ],
+      "statCategories": []
     }
   ]
 }

@@ -4,18 +4,30 @@ using UnityEngine;
 
 public class BookScript : MonoBehaviour
 {
+    //Set in Unity Editor
     public GameObject bookModel;
     public AudioSource pageFlipAudioSource;
     public AudioSource narrationAudioSource;
 
-    System.Random random;
+    //UI GameObjects set in editor
+    public GameObject BookControls;
+    public GameObject ConnectionUI;
+    public GameObject StartButton;
+    public GameObject ConnectButton;
+    public GameObject RestartNarrationButton;
 
+    
+    //Resources to Load
     AudioClip[] narration = new AudioClip[10];
     AudioClip[] pageChangeSounds = new AudioClip[7];
     Material[] content = new Material[10];
 
     Renderer bookRenderer;
+    System.Random random;
 
+    //Animation 
+    Animator animator;
+    int startHash, endHash;
 
     int currentPlayingClip = 0;
 
@@ -29,6 +41,31 @@ public class BookScript : MonoBehaviour
     {
         bookRenderer = bookModel.GetComponent<Renderer>();
         random = new System.Random();
+
+        //Animator properties;
+        animator = GetComponent<Animator>();
+        startHash = Animator.StringToHash("Start");
+        endHash = Animator.StringToHash("ShouldClose");
+
+        //Disable Some UI
+        BookControls.SetActive(false);
+        ConnectionUI.SetActive(false);
+        ConnectButton.SetActive(false);
+        RestartNarrationButton.SetActive(false);
+    }
+
+    public void BeginNarration()
+    {
+        //Animations
+        animator.SetBool(startHash, true);
+        animator.SetBool(endHash, false);
+
+        Invoke("PlayFirstPage", 1.2f);
+
+        //UI
+        BookControls.SetActive(true);
+        StartButton.SetActive(false);
+        RestartNarrationButton.SetActive(false);        
 
         PlayPage(0);
     }
@@ -47,11 +84,20 @@ public class BookScript : MonoBehaviour
 
     public void NextPage()
     {
-        if(currentPlayingClip < 9)
+        if(currentPlayingClip < narration.Length - 2)
         {
-            narrationAudioSource.Stop();
+            if(narrationAudioSource.isPlaying)
+                narrationAudioSource.Stop();
+
             PlayPage(currentPlayingClip + 1);
-        }        
+        }
+        else
+        {
+            if (narrationAudioSource.isPlaying)
+                narrationAudioSource.Stop();
+
+            PlayLastPage();
+        }
     }
 
     public void PreviousPage()
@@ -61,6 +107,25 @@ public class BookScript : MonoBehaviour
             narrationAudioSource.Stop();
             PlayPage(currentPlayingClip - 1);
         }        
+    }
+
+    void PlayLastPage()
+    {
+        PlayPage(narration.Length - 1);
+        Invoke("EndNarration", narration[narration.Length - 1].length + 2);
+    }
+
+    public void EndNarration()
+    {
+        //Animations
+        animator.SetBool(endHash, true);
+        animator.SetBool(startHash, false);
+
+        //UI
+        BookControls.SetActive(false);
+        ConnectionUI.SetActive(true);
+        ConnectButton.SetActive(true);
+        RestartNarrationButton.SetActive(true);        
     }
 
     void PlayPage(int i)
