@@ -65,9 +65,7 @@ public class BookScript : MonoBehaviour
         //UI
         BookControls.SetActive(true);
         StartButton.SetActive(false);
-        RestartNarrationButton.SetActive(false);        
-
-        PlayPage(0);
+        RestartNarrationButton.SetActive(false);                
     }
 
     void LoadAssets()
@@ -113,6 +111,11 @@ public class BookScript : MonoBehaviour
     {
         PlayPage(narration.Length - 1);
         Invoke("EndNarration", narration[narration.Length - 1].length + 2);
+    }
+
+    void PlayFirstPage()
+    {
+        PlayPage(0);
     }
 
     public void EndNarration()

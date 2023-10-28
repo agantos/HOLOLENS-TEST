@@ -7,6 +7,7 @@ using Photon.Realtime;
 public class Launcher : MonoBehaviourPunCallbacks
 {
     string gameVersion = "1";
+    public bool offlineMode;
 
     [Tooltip("The Ui Panel to let the user enter name, connect and play")]
     [SerializeField]
@@ -38,15 +39,23 @@ public class Launcher : MonoBehaviourPunCallbacks
         progressLabel.SetActive(true);
         controlPanel.SetActive(false);
 
-        if (PhotonNetwork.IsConnected)
+        if (offlineMode)
         {
-            PhotonNetwork.JoinRandomRoom();
-        }
+            PhotonNetwork.LoadLevel("TESTSCENE");
+        }            
         else
         {
-            PhotonNetwork.ConnectUsingSettings();
-            PhotonNetwork.GameVersion = gameVersion;
+            if (PhotonNetwork.IsConnected)
+            {
+                PhotonNetwork.JoinRandomRoom();
+            }
+            else
+            {
+                PhotonNetwork.ConnectUsingSettings();
+                PhotonNetwork.GameVersion = gameVersion;
+            }
         }
+        
     }
 
     public override void OnConnectedToMaster()
