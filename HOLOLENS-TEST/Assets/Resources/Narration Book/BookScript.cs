@@ -110,7 +110,7 @@ public class BookScript : MonoBehaviour
     void PlayLastPage()
     {
         PlayPage(narration.Length - 1);
-        Invoke("EndNarration", narration[narration.Length - 1].length + 2);
+        Invoke("EndNarration", narration[narration.Length - 1].length + 1);
     }
 
     void PlayFirstPage()
@@ -123,6 +123,10 @@ public class BookScript : MonoBehaviour
         //Animations
         animator.SetBool(endHash, true);
         animator.SetBool(startHash, false);
+
+        //Sounds
+        if (narrationAudioSource.isPlaying)
+            narrationAudioSource.Stop();
 
         //UI
         BookControls.SetActive(false);

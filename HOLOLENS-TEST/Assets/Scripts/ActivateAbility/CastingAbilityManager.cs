@@ -248,7 +248,9 @@ public class CastingAbilityManager : MonoBehaviour
                     GetDefenderNameList(), 
                     GetApplicationDataStrings(), 
                     abilitySucceedsOnDefendersList.ToArray(),
-                    CurrentSelectionType
+                    CurrentSelectionType,
+                    radiusSelectPosition,
+                    radiusSelectRotation
         );
 
         //Enable movement again

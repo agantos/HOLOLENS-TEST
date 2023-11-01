@@ -29,8 +29,8 @@ public class MultiplayerCallsAbilityCast : MonoBehaviourPunCallbacks
     void SyncCastingAbilityManagers(string ablityToCast, string attackerName, string[] defenders,
                                                 string[] applicationData, bool[] abilitySuccessList,
                                                 AbilitySelectType abilitySelectType,
-                                                Vector3 radiusSelectPosition = default(Vector3),
-                                                Vector3 radiusSelectRotation = default(Vector3))
+                                                Vector3 radiusSelectPosition,
+                                                Vector3 radiusSelectRotation)
     {
         CastingAbilityManager.GetInstance().SyncManagerData(ablityToCast, attackerName, 
                                                             defenders, applicationData, 
@@ -57,8 +57,8 @@ public class MultiplayerCallsAbilityCast : MonoBehaviourPunCallbacks
     public void Propagate_AbilityManagerSync(string ablityToCast, string attackerName, string[] defenders,
                                                 string[] applicationData, bool[] abilitySuccessList,
                                                 AbilitySelectType abilitySelectType,
-                                                Vector3 radiusSelectPosition = default(Vector3),
-                                                Vector3 radiusSelectRotation = default(Vector3)
+                                                Vector3 radiusSelectPosition,
+                                                Vector3 radiusSelectRotation
                                                 
     )
     {
@@ -70,9 +70,9 @@ public class MultiplayerCallsAbilityCast : MonoBehaviourPunCallbacks
             defenders,
             applicationData,
             abilitySuccessList,
+            abilitySelectType,
             radiusSelectPosition,
-            radiusSelectRotation,
-            abilitySelectType
+            radiusSelectRotation            
        );
     }
 }
