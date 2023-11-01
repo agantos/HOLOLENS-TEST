@@ -213,16 +213,7 @@ public class CastingAbilityManager : MonoBehaviour
     }
 
     public void ActivateAbility()
-    {
-        //Get Data to apply the ability
-        attacker.GetAbilityApplicationData(
-            abilityToCastInformation.name, 
-            out abilitySucceedsOnDefendersList, 
-            out applicationData, 
-            defenderCharacters, 
-            attacker
-        );
-
+    {        
         if (radiusSelect)
         {
             radiusSelectPosition = radiusSelect.transform.localPosition;
@@ -230,8 +221,25 @@ public class CastingAbilityManager : MonoBehaviour
 
             //Because of Line model Shanenigans
             radiusSelectRotation.y -= 90;
+
+            //Get Data to apply the ability
+            attacker.GetAbilityApplicationData(
+                abilityToCastInformation.name,
+                out abilitySucceedsOnDefendersList,
+                out applicationData,
+                defenderCharacters,
+                attacker
+            );
         }
 
+        //Get Data to apply the ability
+        attacker.GetAbilityApplicationData(
+            abilityToCastInformation.name,
+            out abilitySucceedsOnDefendersList,
+            out applicationData,
+            defenderCharacters,
+            attacker
+        );
 
         //Sync AbilityManager with all the others
         MultiplayerCallsAbilityCast.Instance.Propagate_AbilityManagerSync(abilityToCastInformation.name, attacker.name, GetDefenderNameList(), GetApplicationDataStrings(), abilitySucceedsOnDefendersList.ToArray());
@@ -290,13 +298,16 @@ public class CastingAbilityManager : MonoBehaviour
     public void SyncManagerData(
         string ablityToCast, string attackerName,
         string[] defenders, string[] applicationData,
-        bool[] abilitySuccessList
+        bool[] abilitySuccessList, Vector3 radiusPos, Vector3 radiusRot
     )
     {
         //Set the parameters for the casting of the ability
         GetInstance().attacker = GameManager.GetInstance().characterPool[attackerName];
         GetInstance().abilityToCastInformation = AbilitiesManager.GetInstance().abilities[ablityToCast];
         GetInstance().attackerAnimationManager = GameManager.GetInstance().playingCharacterGameObjects[attackerName].GetComponent<AnimationManager>();
+        GetInstance().radiusSelectPosition = radiusPos;
+        GetInstance().radiusSelectRotation = radiusRot;
+
 
         foreach (string data in applicationData)
         {
@@ -346,7 +357,7 @@ public class CastingAbilityManager : MonoBehaviour
         attackerAnimationManager.IdleTo_Animation(abilityToCastPresentation.animations.attacker);
 
         //Activate Ability
-        Instance.StartCoroutine(ActivationSyncAbility_Remotely());        
+        Instance.StartCoroutine(ActivationSyncAbility());        
     }
 
     //The difference is that it does not calculate the ability effects because it receives it remotely

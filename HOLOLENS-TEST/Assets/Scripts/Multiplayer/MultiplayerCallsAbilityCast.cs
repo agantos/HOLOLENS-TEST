@@ -27,11 +27,14 @@ public class MultiplayerCallsAbilityCast : MonoBehaviourPunCallbacks
 
     [PunRPC]
     void SyncCastingAbilityManagers(string ablityToCast, string attackerName, string[] defenders,
-                                                string[] applicationData, bool[] abilitySuccessList)
+                                                string[] applicationData, bool[] abilitySuccessList, 
+                                                Vector3 radiusSelectPosition = default(Vector3),
+                                                Vector3 radiusSelectRotation = default(Vector3))
     {
         CastingAbilityManager.GetInstance().SyncManagerData(ablityToCast, attackerName, 
                                                             defenders, applicationData, 
-                                                            abilitySuccessList
+                                                            abilitySuccessList, 
+                                                            radiusSelectPosition, radiusSelectRotation
         );
     }
 
@@ -49,8 +52,11 @@ public class MultiplayerCallsAbilityCast : MonoBehaviourPunCallbacks
        );
     }
 
-    public void Propagate_AbilityManagerSync(   string ablityToCast, string attackerName, string[] defenders, 
-                                                string[] applicationData, bool[] abilitySuccessList               )
+    public void Propagate_AbilityManagerSync(string ablityToCast, string attackerName, string[] defenders,
+                                                string[] applicationData, bool[] abilitySuccessList, 
+                                                Vector3 radiusSelectPosition = default(Vector3), 
+                                                Vector3 radiusSelectRotation = default(Vector3)
+    )
     {
         photonView.RPC(
             "SyncCastingAbilityManagers",
@@ -59,7 +65,9 @@ public class MultiplayerCallsAbilityCast : MonoBehaviourPunCallbacks
             attackerName,
             defenders,
             applicationData,
-            abilitySuccessList
+            abilitySuccessList,
+            radiusSelectPosition,
+            radiusSelectRotation
        );
     }
 }

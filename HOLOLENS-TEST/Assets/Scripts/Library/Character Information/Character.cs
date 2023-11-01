@@ -92,7 +92,7 @@ public class Character
    
     //Creates the application the data for the ability
     public void GetAbilityApplicationData(string abilityName, out List<bool> abilitySucceedsOnDefendersList, 
-                                out List<EffectApplicationData> applicationDataList, 
+                                out List<EffectApplicationData> applicationDataList,
                                 List<Character> defenders = null, Character attacker = null
     )
     {
