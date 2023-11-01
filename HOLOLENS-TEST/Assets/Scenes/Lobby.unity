@@ -815,6 +815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56c07a9d422c9bd4aba6bcff57ca6b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offlineMode: 0
   controlPanel: {fileID: 0}
   progressLabel: {fileID: 1433490085}
 --- !u!4 &203265425

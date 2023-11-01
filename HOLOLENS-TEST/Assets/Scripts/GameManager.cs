@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         LoadFromJsons();
         CreateCharacters();
 
-        Invoke("FirstTurn", 2);
+        //Invoke("FirstTurn", 2);
     }
 
     void InitializeSingletons()
