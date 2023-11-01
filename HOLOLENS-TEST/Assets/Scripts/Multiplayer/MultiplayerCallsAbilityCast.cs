@@ -27,13 +27,15 @@ public class MultiplayerCallsAbilityCast : MonoBehaviourPunCallbacks
 
     [PunRPC]
     void SyncCastingAbilityManagers(string ablityToCast, string attackerName, string[] defenders,
-                                                string[] applicationData, bool[] abilitySuccessList, 
+                                                string[] applicationData, bool[] abilitySuccessList,
+                                                AbilitySelectType abilitySelectType,
                                                 Vector3 radiusSelectPosition = default(Vector3),
                                                 Vector3 radiusSelectRotation = default(Vector3))
     {
         CastingAbilityManager.GetInstance().SyncManagerData(ablityToCast, attackerName, 
                                                             defenders, applicationData, 
-                                                            abilitySuccessList, 
+                                                            abilitySuccessList,
+                                                            abilitySelectType,
                                                             radiusSelectPosition, radiusSelectRotation
         );
     }
@@ -53,9 +55,11 @@ public class MultiplayerCallsAbilityCast : MonoBehaviourPunCallbacks
     }
 
     public void Propagate_AbilityManagerSync(string ablityToCast, string attackerName, string[] defenders,
-                                                string[] applicationData, bool[] abilitySuccessList, 
-                                                Vector3 radiusSelectPosition = default(Vector3), 
+                                                string[] applicationData, bool[] abilitySuccessList,
+                                                AbilitySelectType abilitySelectType,
+                                                Vector3 radiusSelectPosition = default(Vector3),
                                                 Vector3 radiusSelectRotation = default(Vector3)
+                                                
     )
     {
         photonView.RPC(
@@ -67,7 +71,8 @@ public class MultiplayerCallsAbilityCast : MonoBehaviourPunCallbacks
             applicationData,
             abilitySuccessList,
             radiusSelectPosition,
-            radiusSelectRotation
+            radiusSelectRotation,
+            abilitySelectType
        );
     }
 }

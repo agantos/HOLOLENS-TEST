@@ -242,7 +242,14 @@ public class CastingAbilityManager : MonoBehaviour
         );
 
         //Sync AbilityManager with all the others
-        MultiplayerCallsAbilityCast.Instance.Propagate_AbilityManagerSync(abilityToCastInformation.name, attacker.name, GetDefenderNameList(), GetApplicationDataStrings(), abilitySucceedsOnDefendersList.ToArray());
+        MultiplayerCallsAbilityCast.Instance.Propagate_AbilityManagerSync(
+                    abilityToCastInformation.name, 
+                    attacker.name, 
+                    GetDefenderNameList(), 
+                    GetApplicationDataStrings(), 
+                    abilitySucceedsOnDefendersList.ToArray(),
+                    CurrentSelectionType
+        );
 
         //Enable movement again
         CharacterMoveManager.Instance.isMovementAllowed = true;
@@ -292,21 +299,25 @@ public class CastingAbilityManager : MonoBehaviour
         }
     }
 
-
     /*-------------------------- MULPTIPLAYER --------------------------*/
 
     public void SyncManagerData(
-        string ablityToCast, string attackerName,
+        string abilityToCast, string attackerName,
         string[] defenders, string[] applicationData,
-        bool[] abilitySuccessList, Vector3 radiusPos, Vector3 radiusRot
+        bool[] abilitySuccessList,
+        AbilitySelectType currentSelectionType,
+        Vector3 radiusPos, Vector3 radiusRot
+        
     )
     {
         //Set the parameters for the casting of the ability
         GetInstance().attacker = GameManager.GetInstance().characterPool[attackerName];
-        GetInstance().abilityToCastInformation = AbilitiesManager.GetInstance().abilities[ablityToCast];
+        GetInstance().abilityToCastInformation = AbilitiesManager.GetInstance().abilities[abilityToCast];
+        GetInstance().abilityToCastPresentation = AbilitiesManager.GetInstance().abilitiesPresentation[abilityToCast];
         GetInstance().attackerAnimationManager = GameManager.GetInstance().playingCharacterGameObjects[attackerName].GetComponent<AnimationManager>();
         GetInstance().radiusSelectPosition = radiusPos;
         GetInstance().radiusSelectRotation = radiusRot;
+        GetInstance().CurrentSelectionType = currentSelectionType;
 
 
         foreach (string data in applicationData)
