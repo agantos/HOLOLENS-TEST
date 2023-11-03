@@ -13,7 +13,7 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        //PhotonNetwork.OfflineMode = true;
+        PhotonNetwork.OfflineMode = true;
     }
 
     void LoadArena()

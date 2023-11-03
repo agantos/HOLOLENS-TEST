@@ -44,7 +44,7 @@ public class TurnManager
     {
         foreach (Character c in characterPool.Values)
         {
-            AddToDictionary(CalculatePosition(c.GetStats()), c);
+            AddToDictionary(CalculateCharacterInitiative(c.GetStats()), c);
         }
 
         var enumerator = initiativeOrder.Keys.GetEnumerator();
@@ -88,8 +88,28 @@ public class TurnManager
         }
     }
 
+    //  Removes character from initiative
+    //  - Returns true if the playing character is removed
+    public bool RemoveFromDictionary(string charName)
+    {
+        float initiativeToRemove = 0;
+
+        foreach(float init in initiativeOrder.Keys)
+        {
+            if (initiativeOrder[init] == charName)
+            {
+                initiativeToRemove = init;
+                break;
+            }                
+        }
+
+        initiativeOrder.Remove(initiativeToRemove);
+
+        return currentInitiative == initiativeToRemove;
+    }
+
     //Change according to ruleset
-    float CalculatePosition(CharacterStats charStats)
+    float CalculateCharacterInitiative(CharacterStats charStats)
     {
         return GameplayCalculatorFunctions.CalculateDiceRoll("1d20");
     }

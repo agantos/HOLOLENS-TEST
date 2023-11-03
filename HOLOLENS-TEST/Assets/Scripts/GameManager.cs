@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         LoadFromJsons();
         CreateCharacters();
 
-        //Invoke("FirstTurn", 2);
+        Invoke("FirstTurn", 2);
     }
 
     void InitializeSingletons()
@@ -102,7 +102,15 @@ public class GameManager : MonoBehaviour
         {
             c.Initialize(basePresetPool, additionalPresetPool);
         }
-    }    
+    }
+
+    public void KillCharacter(string name)
+    {
+        if(turnManager.RemoveFromDictionary(name))
+        {
+            NextTurn(); 
+        }
+    }
 
     public void NextTurn()
     {
@@ -119,7 +127,6 @@ public class GameManager : MonoBehaviour
 
         //Tell the other players to progress in the turn order
         MultiplayerTurnManagementCalls.Instance.Propagate_NextTurn();
-
     }
 
     //Only difference is that it does not send any message in the network

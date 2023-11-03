@@ -14,13 +14,14 @@ public enum AnimationType
     TakeHit,
     Dodge,
     Block,
-    BreakEffect
+    BreakEffect,
+    Death
 }
 
 public class AnimationManager : MonoBehaviour
 {
     Animator animator;
-    int AnimatorParameter_IsMoving;
+    int AnimatorParameter_IsMoving; int AnimatorParameter_IsDead;
     int AnimatorParameter_Attack_Melee_Weapon;
 
     private Dictionary<AnimationType, (int hash, int variations)> animatorParameters = new Dictionary<AnimationType, (int hash, int variations)>();
@@ -33,6 +34,7 @@ public class AnimationManager : MonoBehaviour
     {        
         animator = GetComponentInChildren<Animator>(true);
         AnimatorParameter_IsMoving = Animator.StringToHash("IsMoving");
+        AnimatorParameter_IsDead = Animator.StringToHash("IsDead");
 
         InitializeAnimatorParameters();
     }
@@ -72,6 +74,7 @@ public class AnimationManager : MonoBehaviour
         AddAnimatorParameter(AnimationType.Dodge, 2);
         AddAnimatorParameter(AnimationType.Block, 1);
         AddAnimatorParameter(AnimationType.BreakEffect, 1);
+        AddAnimatorParameter(AnimationType.Death, 1);
     }
 
     void SorceressInit()
@@ -87,6 +90,7 @@ public class AnimationManager : MonoBehaviour
         AddAnimatorParameter(AnimationType.Dodge, 1);
         AddAnimatorParameter(AnimationType.Block, 1);
         AddAnimatorParameter(AnimationType.BreakEffect, 1);
+        AddAnimatorParameter(AnimationType.Death, 1);
     }
 
     void TwoHandedSwordInit()
@@ -102,6 +106,7 @@ public class AnimationManager : MonoBehaviour
         AddAnimatorParameter(AnimationType.Dodge, 1);
         AddAnimatorParameter(AnimationType.Block, 3);
         AddAnimatorParameter(AnimationType.BreakEffect, 1);
+        AddAnimatorParameter(AnimationType.Death, 1);
     }
 
     void ElementalInit()
@@ -117,6 +122,7 @@ public class AnimationManager : MonoBehaviour
         AddAnimatorParameter(AnimationType.Dodge, 1);
         AddAnimatorParameter(AnimationType.Block, 1);
         AddAnimatorParameter(AnimationType.BreakEffect, 1);
+        AddAnimatorParameter(AnimationType.Death, 1);
     }
 
     void RogueInit()
@@ -132,6 +138,7 @@ public class AnimationManager : MonoBehaviour
         AddAnimatorParameter(AnimationType.Dodge, 1);
         AddAnimatorParameter(AnimationType.Block, 1);
         AddAnimatorParameter(AnimationType.BreakEffect, 1);
+        AddAnimatorParameter(AnimationType.Death, 1);
     }
 
     //Miscellaneous
@@ -156,6 +163,11 @@ public class AnimationManager : MonoBehaviour
     public void IdleTo_Animation(AnimationType type)
     {
         animator.SetInteger(GetAnimatorParameter(type), GameplayCalculatorFunctions.random.Next(1, GetAnimationVariations(type) + 1));
+    }
+
+    public void IdleTo_Dying()
+    {
+        animator.SetBool(AnimatorParameter_IsDead, true);
     }
 
     //State ----> Idle
