@@ -195,6 +195,8 @@ public class CastingAbilityManager : MonoBehaviour
         */
         yield return new WaitForSeconds(animationEnds - animationEnds * 5 / 8);
 
+        DialogueManager.Instance.PlayDefenderDialogue(applicationData);
+
         /*
          * Switch Back to Idle Animation
         */
@@ -221,15 +223,6 @@ public class CastingAbilityManager : MonoBehaviour
 
             //Because of Line model Shanenigans
             radiusSelectRotation.y -= 90;
-
-            //Get Data to apply the ability
-            attacker.GetAbilityApplicationData(
-                abilityToCastInformation.name,
-                out abilitySucceedsOnDefendersList,
-                out applicationData,
-                defenderCharacters,
-                attacker
-            );
         }
 
         //Get Data to apply the ability
@@ -240,6 +233,9 @@ public class CastingAbilityManager : MonoBehaviour
             defenderCharacters,
             attacker
         );
+
+        //Pay the Ability's cost
+        AbilitiesManager.GetInstance().ApplyAbilityCost(abilityToCastInformation.name, attacker);
 
         //Sync AbilityManager with all the others
         MultiplayerCallsAbilityCast.Instance.Propagate_AbilityManagerSync(

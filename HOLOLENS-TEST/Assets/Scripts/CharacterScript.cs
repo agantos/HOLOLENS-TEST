@@ -5,6 +5,8 @@ using UnityEngine;
 public class CharacterScript : MonoBehaviour
 {
     Character character;
+    public CharacterDialogue dialogue {get; private set; }
+
     public string charName;
 
     // Start is called before the first frame update
@@ -15,11 +17,15 @@ public class CharacterScript : MonoBehaviour
         //Character registers itself in the GameManager list.
         GameManager.GetInstance().playingCharacterGameObjects.Add(character.name, gameObject);
         GameManager.GetInstance().playingCharacterPool.Add(character.name, character);
+
+        //Initialize Character Dialogue
+        dialogue = new CharacterDialogue(charName);
+        ScenarioSpecificMethods.GetInstance().InitializeCharacterDialog(dialogue);
     }
 
     void Update()
     {
-        if (character.GetStat("HP").GetCurrentValue() <= 0)
+        if (ScenarioSpecificMethods.GetInstance().ShouldDie(character))
         {
             Die();
         }

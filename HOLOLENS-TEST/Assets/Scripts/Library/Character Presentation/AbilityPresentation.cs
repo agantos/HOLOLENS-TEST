@@ -28,14 +28,14 @@ public class SoundEffects
     }
 }
 
-public class CharacterDialogue
+public class CharacterDialogPresentation
 {
     public string onImpact;
     public string duringActivation;
     public string defender_AbilityFails;
     public string defender_AbilitySucceeds;
 
-    public CharacterDialogue(string onImpact, string duringActivation, string def_fail, string def_succ)
+    public CharacterDialogPresentation(string onImpact, string duringActivation, string def_fail, string def_succ)
     {
         this.onImpact = onImpact;
         this.duringActivation = duringActivation;
@@ -63,7 +63,7 @@ public class AbilityPresentation
     public Animations animations;
     public VisualEffects visualEffects;
     public SoundEffects soundEffects;
-    public CharacterDialogue characterDialogue;
+    public CharacterDialogPresentation characterDialogue;
 
     public AbilityPresentation(JSONAbilityPresentation abilityPresentation)
     {
@@ -84,7 +84,7 @@ public class AbilityPresentation
             abilityPresentation.soundEffects.duringActivation
         );
 
-        characterDialogue = new CharacterDialogue(
+        characterDialogue = new CharacterDialogPresentation(
             abilityPresentation.characterDialogue.onImpact,
             abilityPresentation.characterDialogue.duringActivation,
             abilityPresentation.characterDialogue.defender_AbilityFails,

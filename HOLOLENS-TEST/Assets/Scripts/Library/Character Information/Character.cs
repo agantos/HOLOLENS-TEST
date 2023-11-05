@@ -51,7 +51,7 @@ public class Character
         CreateCharacter_UI_Info();
 
         //Injected Rules
-        RulesSpecificMethods.GetInstance().Character_onInitialize(this);
+        ScenarioSpecificMethods.GetInstance().Character_onInitialize(this);
     }
 
     void LoadBaseCharacterPresets(Dictionary<string, BaseCharacterPreset> presetPool)
@@ -107,9 +107,7 @@ public class Character
                 bool succeeds;
                 applicationDataList.AddRange(AbilitiesManager.GetInstance().GetAbilityApplicationData(abilityName, out succeeds, defender, attacker));
                 abilitySucceedsOnDefendersList.Add(succeeds);
-            }
-                
-            AbilitiesManager.GetInstance().ApplyAbilityCost(abilityName, attacker);
+            }                
         }
         else
         {
@@ -131,7 +129,7 @@ public class Character
         //Refresh the turn economy
         RefreshTurnEconomy();
 
-        RulesSpecificMethods.GetInstance().Character_onStartTurn(this);
+        ScenarioSpecificMethods.GetInstance().Character_onStartTurn(this);
 
         //Apply Ongoing Effects
         foreach (OngoingEffect ongoing in ongoingEffects)
@@ -192,46 +190,5 @@ public class Character
         s += "]";
 
         return s;
-    }
-}
-
-
-public class RulesSpecificMethods{
-
-    static RulesSpecificMethods Instance = null;
-    private RulesSpecificMethods(){}
-
-    public static RulesSpecificMethods GetInstance()
-    {
-        if(Instance == null)
-        {
-            Instance = new RulesSpecificMethods();
-        }
-
-        return Instance;
-    }
-
-    // At the start of each turn the characters:
-    //  - Restore 1 power point
-    //  - Gain their speed back
-    public void Character_onStartTurn(Character c)
-    {
-        //Heal speed damage that is applied on movement
-        CharacterStat speed = c.GetStat("Speed");
-        speed.HealDamage(speed.GetDamage());
-        speed.CalculateCurrentValue();
-
-        //Every turn a character gets 1 power point
-        CharacterStat powerPoints = c.GetStat("Power Points");
-        powerPoints.HealDamage(1);
-        powerPoints.CalculateCurrentValue();
-    }
-
-    //At the start of the game the characters have no powerpoints
-    public void Character_onInitialize(Character c)
-    {
-        CharacterStat powerPoints = c.GetStat("Power Points");
-        powerPoints.DealDamage(powerPoints.GetCurrentValue());
-        powerPoints.CalculateCurrentValue();
     }
 }

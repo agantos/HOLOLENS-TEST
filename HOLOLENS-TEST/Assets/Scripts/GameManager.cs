@@ -127,6 +127,9 @@ public class GameManager : MonoBehaviour
 
         //Tell the other players to progress in the turn order
         MultiplayerTurnManagementCalls.Instance.Propagate_NextTurn();
+
+        //Play OnStartTurnLine
+        ScenarioSpecificMethods.GetInstance().PlayDialogueOnStartTurn(GetCurrentPlayer_Name());
     }
 
     //Only difference is that it does not send any message in the network

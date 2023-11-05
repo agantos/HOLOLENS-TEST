@@ -100,12 +100,15 @@ public class CharacterMoveManager : MonoBehaviour
 
         Character c = GameManager.GetInstance().characterPool[movee.gameObject.GetComponent<CharacterScript>().charName];
 
+        //Play Moving Dialogue
+        ScenarioSpecificMethods.GetInstance().PlayDialogueOnMove(c.name, c);
+
         //Subtract the speed.
         c.GetStat("Speed").DealDamage((int)distance);
         c.GetStat("Speed").CalculateCurrentValue();
 
         //Start Moving Animation
-        movee.GetComponent<AnimationManager>().IdleTo_Moving();
+        movee.GetComponent<AnimationManager>().IdleTo_Moving();        
 
         //Send to other players to perform the move
         MultiplayerMovementCalls.Instance.Propagate_Movement(
