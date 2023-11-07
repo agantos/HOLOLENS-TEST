@@ -32,10 +32,13 @@ public class CharacterInfoObjectsManager : MonoBehaviour
     {
         if (!managers.ContainsKey(characterName))
         {
+            //Create panel
             GameObject instance = Instantiate(CharacterDisplayInfoPrefab, transform);
             instances.Add(characterName, instance);
-            managers.Add(characterName, instance.GetComponentInChildren<CharacterInfoDisplayManager>());            
-            
+            managers.Add(characterName, instance.GetComponentInChildren<CharacterInfoDisplayManager>());
+
+            //Play Sound Effect
+            DialogueManager.Instance.PlayDialogue(characterName, "onGettingPeekedOn", 100);
         }
         else
             managers[characterName].ClearUI();

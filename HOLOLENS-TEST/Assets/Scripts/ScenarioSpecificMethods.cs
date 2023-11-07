@@ -45,6 +45,7 @@ public class ScenarioSpecificMethods
     //Initializing Dialog for characters
     public void InitializeCharacterDialog(CharacterDialogue d)
     {
+        //Standards
         d.CreateCategoryFromFolder("onMove", "onMove", 100);
         d.CreateCategoryFromFolder("onStartTurn", "onStartTurn", 100);
         d.CreateCategoryFromFolder("onGettingHit", "onGettingHit", 100);
@@ -56,6 +57,14 @@ public class ScenarioSpecificMethods
         d.CreateCategoryFromFolder("onDeath", "onDeath", 100);
         d.CreateCategoryFromFolder("onMaxSpecialPoints", "onMaxSpecialPoints", 100);
         d.CreateCategoryFromFolder("onKill", "onKill", 100);
+
+        //Abilities
+        d.CreateCategoryFromFolder("onSpecialAbility_1", "onSpecialAbility_1", 100);
+        d.CreateCategoryFromFolder("onSpecialAbility_2", "onSpecialAbility_2", 100);
+        d.CreateCategoryFromFolder("onSpecialAbility_3", "onSpecialAbility_3", 100);
+
+        d.CreateCategoryFromFolder("onNormalAbility_1", "onNormalAbility_1", 100);
+        d.CreateCategoryFromFolder("onNormalAbility_2", "onNormalAbility_2", 100);
     }
 
     //Checking Death condition

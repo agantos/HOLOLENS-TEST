@@ -11,6 +11,9 @@ public class CharacterUI_Info
 public class SelectAbilityUIManager : MonoBehaviour
 {
 
+    //Set in Unity Editor
+    public GameObject tab;
+
     public ActivateAbilityUIManager activateAbilityUIManager;
     public TurnEconomyTab turnEconomyTab;
     public AbilityTagTab abilityTagTab;
@@ -37,13 +40,18 @@ public class SelectAbilityUIManager : MonoBehaviour
     {
         if(GameManager.GetInstance().player == GameManager.GetInstance().GetCurrentPlayer_Character().player)
         {
+            //Activate the tab
+            tab.SetActive(true);
+
             UI_Info.currentPlayer = GameManager.GetInstance().GetCurrentPlayer_Name();
 
+            //Reset the displaying information
             turnEconomyTab.ClearUI();
             abilitiesTab.ClearUI();
             abilityTagTab.ClearUI();
-
             turnEconomyTab.CreateUI();
+
+            //Reset view
 
             turnEconomyTab.gameObject.SetActive(false);
             turnEconomyTab.gameObject.SetActive(true);
@@ -56,6 +64,8 @@ public class SelectAbilityUIManager : MonoBehaviour
         }
         else
         {
+            tab.SetActive(false);
+
             turnEconomyTab.gameObject.SetActive(false);
             abilityTagTab.gameObject.SetActive(false);
             abilitiesTab.gameObject.SetActive(false);

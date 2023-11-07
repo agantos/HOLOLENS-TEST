@@ -162,8 +162,10 @@ public class CastingAbilityManager : MonoBehaviour
 
         //Play DuringActivationVFX
         ParticleSystem duringActivationVFX = null;
-
         PlayDuringActivationFX(out duringActivationVFX);
+
+        //Play DuringActivation Dialogue
+        DialogueManager.Instance.PlayDuringActivationDialogue(attacker.name, abilityToCastPresentation);
 
         /*
          * Wait for the animation to register

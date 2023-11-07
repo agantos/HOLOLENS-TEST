@@ -30,7 +30,7 @@ public class SelectUnitManager : MonoBehaviour, IMixedRealityPointerHandler, IMi
         else
         {
             //View unit's information
-            //CharacterInfoObjectsManager.instance.CreateCharacterInfo(GetComponent<CharacterScript>().charName);
+            CharacterInfoObjectsManager.Instance.CreateCharacterInfo(GetComponent<CharacterScript>().charName);
         }
             
     }

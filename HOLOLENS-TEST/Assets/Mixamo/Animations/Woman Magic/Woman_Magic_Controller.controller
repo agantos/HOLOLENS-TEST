@@ -210,7 +210,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: Attack_Ranged_Spell
+    m_ConditionEvent: Spell_Cast_Self
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2065267992345558234}
@@ -246,7 +246,7 @@ AnimatorStateMachine:
     m_Position: {x: 940, y: 880, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3103258094414132584}
-    m_Position: {x: 1020, y: 830, z: 0}
+    m_Position: {x: 1030, y: 820, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2391942345139707404}
     m_Position: {x: 1620, y: 700, z: 0}
@@ -255,7 +255,7 @@ AnimatorStateMachine:
     m_Position: {x: 1220, y: 910, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5020056732222898816}
-    m_Position: {x: 1460, y: 840, z: 0}
+    m_Position: {x: 1470, y: 850, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5298952224260861255}
     m_Position: {x: 1590, y: 920, z: 0}
@@ -264,7 +264,7 @@ AnimatorStateMachine:
     m_Position: {x: 520, y: 490, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 826329338209915885}
-    m_Position: {x: 1080, y: 440, z: 0}
+    m_Position: {x: 1120, y: 420, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8024696248034970228}
     m_Position: {x: 1310, y: 180, z: 0}
@@ -273,13 +273,13 @@ AnimatorStateMachine:
     m_Position: {x: 1540, y: 460, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8803057105113746423}
-    m_Position: {x: 1630, y: 390, z: 0}
+    m_Position: {x: 1650, y: 380, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2644291384976891356}
-    m_Position: {x: 1320, y: 110, z: 0}
+    m_Position: {x: 1320, y: 100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2944116777961454509}
-    m_Position: {x: 1030, y: 350, z: 0}
+    m_Position: {x: 1010, y: 340, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1768977173543117683}
     m_Position: {x: 590, y: 410, z: 0}
@@ -360,7 +360,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: Attack_Ranged_Spell
+    m_ConditionEvent: Spell_Cast_Self
     m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2944116777961454509}
@@ -371,7 +371,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.9318182
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -606,7 +606,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.9318182
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -750,79 +750,79 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Attack_Ranged_Weapon
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Attack_Melee_Spell
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Attack_Ranged_Spell
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Attack_Melee_Weapon
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Spell_Cast_Area
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Spell_Cast_Self
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Spell_Cast_General
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Dodge
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: TakeHit
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Block
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: BreakEffect
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isDead
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Layer1
@@ -1046,7 +1046,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Run
-  m_Speed: 1
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 2566333957275777501}
@@ -1538,7 +1538,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.9318182
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1

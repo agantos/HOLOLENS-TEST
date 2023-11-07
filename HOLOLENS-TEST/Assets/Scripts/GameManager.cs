@@ -59,7 +59,12 @@ public class GameManager : MonoBehaviour
         LoadFromJsons();
         CreateCharacters();
 
-        Invoke("FirstTurn", 2);
+        PhotonNetwork.OfflineMode = false;
+        if (PhotonNetwork.OfflineMode == true)
+        {
+            Invoke("FirstTurn", 2);
+        }
+        
     }
 
     void InitializeSingletons()

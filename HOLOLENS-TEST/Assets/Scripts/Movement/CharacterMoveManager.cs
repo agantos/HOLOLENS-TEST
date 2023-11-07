@@ -21,7 +21,7 @@ public class CharacterMoveManager : MonoBehaviour
     public static CharacterMoveManager Instance { get; private set; }
 
     public static CharacterMoveManager GetInstance()
-    {
+    {     
         return Instance;
     }
 

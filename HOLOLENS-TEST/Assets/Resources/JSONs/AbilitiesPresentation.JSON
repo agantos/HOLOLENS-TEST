@@ -244,7 +244,7 @@
       },
       "soundEffects": {
         "onImpact": "Spell Buff",
-        "duringActivation": ""
+        "duringActivation": "DuringCast2"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -267,7 +267,7 @@
       },
       "soundEffects": {
         "onImpact": "Spell Buff",
-        "duringActivation": ""
+        "duringActivation": "DuringCast2"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -313,7 +313,7 @@
       },
       "soundEffects": {
         "onImpact": "Spell Buff",
-        "duringActivation": ""
+        "duringActivation": "DuringCast2"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -336,7 +336,7 @@
       },
       "soundEffects": {
         "onImpact": "Spell Buff",
-        "duringActivation": ""
+        "duringActivation": "DuringCast2"
       },
       "characterDialogue": {
         "onImpact": "",
@@ -363,7 +363,7 @@
       },
       "characterDialogue": {
         "onImpact": "",
-        "duringActivation": "",
+        "duringActivation": "onNormalAbility_1",
         "defender_AbilityFails": "",
         "defender_AbilitySucceeds": ""
       }
@@ -386,7 +386,7 @@
       },
       "characterDialogue": {
         "onImpact": "",
-        "duringActivation": "",
+        "duringActivation": "onNormalAbility_1",
         "defender_AbilityFails": "",
         "defender_AbilitySucceeds": ""
       }
@@ -409,7 +409,7 @@
       },
       "characterDialogue": {
         "onImpact": "",
-        "duringActivation": "",
+        "duringActivation": "onNormalAbility_2",
         "defender_AbilityFails": "",
         "defender_AbilitySucceeds": ""
       }
@@ -432,7 +432,7 @@
       },
       "characterDialogue": {
         "onImpact": "",
-        "duringActivation": "",
+        "duringActivation": "onSpecialAbility_1",
         "defender_AbilityFails": "",
         "defender_AbilitySucceeds": ""
       }
@@ -455,7 +455,7 @@
       },
       "characterDialogue": {
         "onImpact": "",
-        "duringActivation": "",
+        "duringActivation": "onSpecialAbility_2",
         "defender_AbilityFails": "",
         "defender_AbilitySucceeds": ""
       }
@@ -478,7 +478,7 @@
       },
       "characterDialogue": {
         "onImpact": "",
-        "duringActivation": "",
+        "duringActivation": "onNormalAbility_1",
         "defender_AbilityFails": "",
         "defender_AbilitySucceeds": ""
       }
@@ -501,7 +501,7 @@
       },
       "characterDialogue": {
         "onImpact": "",
-        "duringActivation": "",
+        "duringActivation": "onSpecialAbility_2",
         "defender_AbilityFails": "",
         "defender_AbilitySucceeds": ""
       }
@@ -524,7 +524,7 @@
       },
       "characterDialogue": {
         "onImpact": "",
-        "duringActivation": "",
+        "duringActivation": "onSpecialAbility_2",
         "defender_AbilityFails": "",
         "defender_AbilitySucceeds": ""
       }
@@ -547,7 +547,7 @@
       },
       "characterDialogue": {
         "onImpact": "",
-        "duringActivation": "",
+        "duringActivation": "onNormalAbility_2",
         "defender_AbilityFails": "",
         "defender_AbilitySucceeds": ""
       }
@@ -570,7 +570,7 @@
       },
       "characterDialogue": {
         "onImpact": "",
-        "duringActivation": "",
+        "duringActivation": "onSpecialAbility_2",
         "defender_AbilityFails": "",
         "defender_AbilitySucceeds": ""
       }
@@ -593,7 +593,7 @@
       },
       "characterDialogue": {
         "onImpact": "",
-        "duringActivation": "",
+        "duringActivation": "onSpecialAbility_3",
         "defender_AbilityFails": "",
         "defender_AbilitySucceeds": ""
       }
@@ -685,7 +685,7 @@
       },
       "characterDialogue": {
         "onImpact": "",
-        "duringActivation": "",
+        "duringActivation": "onSpecialAbility_2",
         "defender_AbilityFails": "",
         "defender_AbilitySucceeds": ""
       }
@@ -708,7 +708,7 @@
       },
       "characterDialogue": {
         "onImpact": "",
-        "duringActivation": "",
+        "duringActivation": "onSpecialAbility_1",
         "defender_AbilityFails": "",
         "defender_AbilitySucceeds": ""
       }

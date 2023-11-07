@@ -84,7 +84,7 @@
           "damage": {
             "damagedStat": "HP",
             "amount": {
-              "baseAmount": "6d8",
+              "baseAmount": "4d8",
               "statsAffecting": ["Damage"]
             },
             "onSavedMultiplier": 0
@@ -134,7 +134,7 @@
               "baseAmount": "6d6",
               "statsAffecting": ["Magic Damage"]
             },
-            "onSavedMultiplier": 0.5
+            "onSavedMultiplier": 0
           }
         }
       ]
@@ -181,7 +181,7 @@
               "baseAmount": "3d6",
               "statsAffecting": ["Magic Damage"]
             },
-            "onSavedMultiplier": 0.5
+            "onSavedMultiplier": 0
           }
         },
         {
@@ -260,7 +260,7 @@
               "baseAmount": "6d6",
               "statsAffecting": ["Magic Damage"]
             },
-            "onSavedMultiplier": 0.5
+            "onSavedMultiplier": 0
           }
         }
       ]
@@ -307,7 +307,7 @@
               "baseAmount": "6d6",
               "statsAffecting": ["Magic Damage"]
             },
-            "onSavedMultiplier": 0.5
+            "onSavedMultiplier": 0
           }
         }
       ]
@@ -662,10 +662,10 @@
           "damage": {
             "damagedStat": "HP",
             "amount": {
-              "baseAmount": "10d6",
+              "baseAmount": "6d6",
               "statsAffecting": ["Magic Damage"]
             },
-            "onSavedMultiplier": 0.5
+            "onSavedMultiplier": 0
           }
         }
       ]
@@ -969,7 +969,7 @@
               "baseAmount": "3d6",
               "statsAffecting": ["Magic Damage"]
             },
-            "onSavedMultiplier": 0.5
+            "onSavedMultiplier": 0
           }
         }
       ]
@@ -1013,10 +1013,10 @@
           "damage": {
             "damagedStat": "HP",
             "amount": {
-              "baseAmount": "8d6",
+              "baseAmount": "6d8",
               "statsAffecting": ["Magic Damage"]
             },
-            "onSavedMultiplier": 0.5
+            "onSavedMultiplier": 0
           }
         }
       ]
@@ -1059,7 +1059,7 @@
           "damage": {
             "damagedStat": "HP",
             "amount": {
-              "baseAmount": "10",
+              "baseAmount": "-10",
               "statsAffecting": []
             },
             "onSavedMultiplier": 1
@@ -1215,7 +1215,7 @@
           "damage": {
             "damagedStat": "HP",
             "amount": {
-              "baseAmount": "6d8",
+              "baseAmount": "4d8",
               "statsAffecting": ["Damage"]
             },
             "onSavedMultiplier": 0
@@ -1387,7 +1387,7 @@
           "damage": {
             "damagedStat": "HP",
             "amount": {
-              "baseAmount": "6d8",
+              "baseAmount": "4d8",
               "statsAffecting": ["Damage"]
             },
             "onSavedMultiplier": 0
@@ -1631,7 +1631,7 @@
               "baseAmount": "6d6",
               "statsAffecting": ["Magic Damage"]
             },
-            "onSavedMultiplier": 0.5
+            "onSavedMultiplier": 0
           }
         }
       ]
@@ -1821,7 +1821,7 @@
               "baseAmount": "5d8",
               "statsAffecting": ["Damage"]
             },
-            "onSavedMultiplier": 0.5
+            "onSavedMultiplier": 0
           }
         }
       ]

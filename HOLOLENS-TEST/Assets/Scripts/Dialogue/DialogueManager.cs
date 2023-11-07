@@ -41,6 +41,11 @@ public class DialogueManager : MonoBehaviour
         PlayDialogue(character, dialogueType, 100);
     }
 
+    public void PlayDuringActivationDialogue(string charName, AbilityPresentation abilityPresentation)
+    {
+        PlayDialogue(charName, abilityPresentation.characterDialogue.duringActivation, 100);
+    }
+
     void GetDefenderDialogueType(EffectApplicationData effect, out string dialogueType, out string character)
     {
         character = effect.defender;
@@ -119,9 +124,7 @@ public class DialogueManager : MonoBehaviour
                 prevAudioSource.Stop();
 
             currentPlayingSource.Play();
-        }
-            
-
+        }            
     }
 
 }
